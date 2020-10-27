@@ -56,10 +56,10 @@ converted_data %>%
 
 converted_data %>%
   group_by(std_eff_name) %>%
-  summarize(Mean = mean(value_consensus_r),
-            SD = sd(value_consensus_r),
-            Min = min(value_consensus_r),
-            Max = max(value_consensus_r)) %>%
+  summarize(Mean = mean(value_consensus_r, na.rm = TRUE),
+            SD = sd(value_consensus_r, na.rm = TRUE),
+            Min = min(value_consensus_r, na.rm = TRUE),
+            Max = max(value_consensus_r, na.rm = TRUE)) %>%
   gt() %>%
   tab_header(
     title = "Effect Size Summary",
@@ -72,6 +72,6 @@ converted_data %>%
 
 # Project Structure
 ```{r}
-targets::tar_glimpse()
+targets::tar_visnetwork()
 ```
 

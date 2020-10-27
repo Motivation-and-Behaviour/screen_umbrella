@@ -18,33 +18,37 @@ regex_data = tidyr::tribble(
 b2r <- function(beta, cutoff = .50){
   #reference DOI 10.1007/s11162-011-9232-5
   if(abs(beta) > cutoff){NA
-    }else{beta}
+  }else if(is.na(beta)){NA
+      }else{beta}
 }
 
 d2r <- function(d, a = 4){
   #assumes equal groups
   #https://www.meta-analysis.com/downloads/Meta-analysis%20Converting%20among%20effect%20sizes.pdf
-  d/(sqrt(d^2+a))
+  if(is.na(d)){NA}else{d/(sqrt(d^2+a))}
 }
 
 z2r <- function(z){
-  tanh(z)
+  if(is.na(z)){NA}else{tanh(z)}
 }
 
 
 od2r <- function(or, method=c("pearson","digby")){
   #DOI:10.1037/0003-066X.62.3.254
-  switch(method,
+  if(is.na(or)){NA
+    }else{switch(method,
          pearson = cos(pi/(1+or^.5)),
          digby = (or^(3/4)-1)/(or^(3/4)+1)
   )
+    }
 }
 
 
 read_sheet <- function(){
   d = googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4/edit#gid=1427279106", sheet = "Effects_Sortable") %>%
     janitor::clean_names() %>%
-    mutate(es = refinr::key_collision_merge(statistical_test_consensus) %>%str_to_lower())
+    mutate(es = refinr::key_collision_merge(statistical_test_consensus) %>%str_to_lower()) %>%
+    mutate(across(where(is.numeric), ~replace(.,. < -900, NA_integer_)))
   
   return(d)
 }
