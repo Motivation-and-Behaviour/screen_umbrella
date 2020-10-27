@@ -1,0 +1,77 @@
+---
+title: "Report on Effect Size Translation"
+ipsum_meta:
+  twitter_card: "Summary info for the Twitter Card"
+  twitter_site: "\\@sitehandle"
+  twitter_creator: "\\@creatorhandle"
+  og_url: "https\\://example.com/open/graph/finalURLfor/this"
+  og_description: "A modest size description of the content"
+  og_image: "https\\://example.com/open/graph/imageURLfor/this"
+output: 
+  hrbrthemes::ipsum:
+    toc: true
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(fig.retina=2, echo=FALSE,message = FALSE,
+                      warnings=FALSE, error = FALSE)
+```
+
+```{r ipsum_setup, message=FALSE, warning=FALSE, cache=FALSE, echo=FALSE}
+library(hrbrthemes)
+library(tidyverse)
+library(targets)
+library(gt)
+
+update_geom_font_defaults(font_rc)
+```
+
+# Assumptions made
+
+I made the following assumptions which may or may not be reasonable:
+
+1.  That $\beta$ is equivilent to $r$ for $\beta < |.5|$ and undefined otherwise (never the case here)
+2.  That, given the large sample sizes involved *Hedge's g* and *Cohen's d* where essentially equivalent and that sample sizes used to make up these effects were approximately equal in treatment and control groups.
+3.  In the absence of information that could be used to construct a 2x2 contingency table that ORs and Relative Risk Ratios were equivalent and thus Relative Risk Ratios were converted to $r$ as if they were Odds ratios.
+4.  External to any other information that all forms of SMD, weighted means etc. were equivilent to Cohen's d.
+
+# Correspondence
+
+```{r}
+targets::tar_load(converted_data)
+
+converted_data %>%
+  group_by(std_eff_name, es) %>%
+  count(sort = TRUE) %>%
+  gt() %>%
+  tab_header(
+    title = "Coversion of effect sizes",
+    subtitle = "New Effect Name - Old Effect Name"
+  )
+```
+
+# Effect Size Summary: Point Estimates
+
+```{r}
+
+converted_data %>%
+  group_by(std_eff_name) %>%
+  summarize(Mean = mean(value_consensus_r),
+            SD = sd(value_consensus_r),
+            Min = min(value_consensus_r),
+            Max = max(value_consensus_r)) %>%
+  gt() %>%
+  tab_header(
+    title = "Effect Size Summary",
+    subtitle = "Descriptives by Effect Size Type"
+  ) %>%
+  fmt_number(columns = 2:5,
+             decimals = 3)
+
+```
+
+# Project Structure
+```{r}
+targets::tar_glimpse()
+```
+
