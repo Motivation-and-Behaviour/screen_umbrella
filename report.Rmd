@@ -43,6 +43,8 @@ targets::tar_load(converted_data)
 converted_data %>%
   group_by(std_eff_name, es) %>%
   count(sort = TRUE) %>%
+  ungroup() %>%
+  set_names(c("New Name", "Old Name", "n")) %>%
   gt() %>%
   tab_header(
     title = "Coversion of effect sizes",

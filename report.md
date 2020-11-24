@@ -366,106 +366,93 @@ I made the following assumptions which may or may not be reasonable:
 <div id="wxxjhffgfp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <th colspan="1" class="gt_heading gt_title gt_font_normal" style>Coversion of effect sizes</th>
+      <th colspan="3" class="gt_heading gt_title gt_font_normal" style>Coversion of effect sizes</th>
     </tr>
     <tr>
-      <th colspan="1" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>New Effect Name - Old Effect Name</th>
+      <th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>New Effect Name - Old Effect Name</th>
     </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">New Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Old Name</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">n</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">r - r</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">r</td>
+      <td class="gt_row gt_left">r</td>
       <td class="gt_row gt_center">62</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">d - cohen's d</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">d</td>
+      <td class="gt_row gt_left">cohen's d</td>
       <td class="gt_row gt_center">26</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">d - g+</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">d</td>
+      <td class="gt_row gt_left">g+</td>
       <td class="gt_row gt_center">13</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">or - or</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">or</td>
+      <td class="gt_row gt_left">or</td>
       <td class="gt_row gt_center">12</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">b - beta</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">b</td>
+      <td class="gt_row gt_left">beta</td>
       <td class="gt_row gt_center">8</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">z - z fisher</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">z</td>
+      <td class="gt_row gt_left">z fisher</td>
       <td class="gt_row gt_center">7</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">d - hedges' g</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">d</td>
+      <td class="gt_row gt_left">hedges' g</td>
       <td class="gt_row gt_center">6</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">or - pooled odds ratio</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">or</td>
+      <td class="gt_row gt_left">pooled odds ratio</td>
       <td class="gt_row gt_center">6</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">or - odds ratio iv</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">or</td>
+      <td class="gt_row gt_left">odds ratio iv</td>
       <td class="gt_row gt_center">3</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">or - pooled fixed effect -odd ratio</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">or</td>
+      <td class="gt_row gt_left">pooled fixed effect -odd ratio</td>
       <td class="gt_row gt_center">3</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">d - adjusted smd</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">d</td>
+      <td class="gt_row gt_left">adjusted smd</td>
       <td class="gt_row gt_center">1</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">d - weighted mean</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">d</td>
+      <td class="gt_row gt_left">weighted mean</td>
       <td class="gt_row gt_center">1</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">or - odd ratio</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">or</td>
+      <td class="gt_row gt_left">odd ratio</td>
       <td class="gt_row gt_center">1</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">or - relative risk</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">or</td>
+      <td class="gt_row gt_left">relative risk</td>
       <td class="gt_row gt_center">1</td>
     </tr>
-    <tr class="gt_group_heading_row">
-      <td colspan="1" class="gt_group_heading">z - z</td>
-    </tr>
     <tr>
+      <td class="gt_row gt_left">z</td>
+      <td class="gt_row gt_left">z</td>
       <td class="gt_row gt_center">1</td>
     </tr>
   </tbody>
