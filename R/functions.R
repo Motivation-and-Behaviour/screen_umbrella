@@ -8,7 +8,7 @@ regex_data = tidyr::tribble(
   "r", "(pearson's r|correlation|^r$)",
   "d", "(hedges' g|g\\+)",
   "d", "(smd|mean difference|Mean|mean)",
-  "or","relative risk",
+  "rr","relative risk",
   "or", "(odds ratio|or|odd ratio)",
   "z", "(Z|z)"
 )
