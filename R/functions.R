@@ -15,11 +15,17 @@ regex_data = tidyr::tribble(
 
 # conversion functions ####
 
-b2r <- function(beta, cutoff = .50){
-  #reference DOI 10.1007/s11162-011-9232-5
-  if(abs(beta) > cutoff |is.na(beta)){NA
-  }else if(is.na(beta)){NA
-      }else{beta}
+#conversion formula from 10.1037/0021-9010.90.1.175
+b2r <- function(beta){
+  #test beta: beta = -.02
+  if(!is.na(beta)){
+    if(beta >= 0){
+      r <- beta * .98 + .05
+    } else {
+      r <- beta * .98
+    }
+    r
+  }
 }
 
 b2r <- Vectorize(b2r)
