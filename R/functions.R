@@ -15,11 +15,17 @@ regex_data = tidyr::tribble(
 
 # conversion functions ####
 
-b2r <- function(beta, cutoff = .50){
-  #reference DOI 10.1007/s11162-011-9232-5
-  if(abs(beta) > cutoff |is.na(beta)){NA
-  }else if(is.na(beta)){NA
-      }else{beta}
+#conversion formula from 10.1037/0021-9010.90.1.175
+b2r <- function(beta){
+  #test beta: beta = -.02
+  if(!is.na(beta)){
+    if(beta >= 0){
+      r <- beta * .98 + .05
+    } else {
+      r <- beta * .98
+    }
+    r
+  }
 }
 
 b2r <- Vectorize(b2r)
@@ -27,12 +33,14 @@ b2r <- Vectorize(b2r)
 d2r <- function(d, a = 4){
   #assumes equal groups
   #https://www.meta-analysis.com/downloads/Meta-analysis%20Converting%20among%20effect%20sizes.pdf
+  #10.1002/jrsm.1218
   if(is.na(d)){NA}else{d/(sqrt(d^2+a))}
 }
 
 d2r <- Vectorize(d2r)
 
 z2r <- function(z){
+  #test z <- 3.4
   if(is.na(z)){NA}else{tanh(z)}
 }
 
