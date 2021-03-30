@@ -11,7 +11,6 @@ raw <- read_sheet()
 simple <- simplify_effects(raw)
 d <- convert_data(simple)
 
-<<<<<<< HEAD
 q <- clean_names(d) %>%
   dplyr::rename(r = value_consensus,
                 outcome_category = outcome_level_1,
@@ -45,36 +44,18 @@ q$outcome_category <- str_to_title(q$outcome_category)
 q$outcome_category <- as.factor(q$outcome_category)
 
 
-=======
-q <- clean_names(d)
-q <- remove_empty(q, which = c("rows", "cols"))
-
-# Relabelling stuff
-q <- filter(q, r < .95)
-q$sig <- ((q$value_ci_lower_bound_consensus_r * q$value_ci_upper_bound_consensus_r) > 0)
-q$sig <- q$sig * .7 + .3
-q$author_year <- paste(q$review_lead_author, ", ", q$review_year, sep = "")
-
-q$outcome_category <- as.factor(q$outcome_category)
-
->>>>>>> 85619bf515f5f6fc764efe43847433401e8e53f7
 q$recoded_exposure <- gsub("_", " ", q$recoded_exposure)
 q$recoded_exposure <- str_to_title(q$recoded_exposure)
 q$recoded_exposure <- fix_acronyms(q$recoded_exposure)
 q$recoded_exposure <- gsub("\nDevice: Computer", "", q$recoded_exposure)
 q$recoded_exposure <- gsub("Content: ", "", q$recoded_exposure)
-<<<<<<< HEAD
 q$recoded_exposure <- gsub("N/A", "Screen Time Exposure", q$recoded_exposure)
-=======
-
->>>>>>> 85619bf515f5f6fc764efe43847433401e8e53f7
 q$recoded_exposure <- as.factor(q$recoded_exposure)
 
 q$outcome <- gsub("_", " ", q$outcome)
 q$outcome <- gsub("^learning ", "", q$outcome)
 q$outcome <- gsub("literacy ", "literacy: ", q$outcome)
 q$outcome <- str_to_title(q$outcome)
-<<<<<<< HEAD
 q$outcome <- gsub("^Health Behaviour ", "", q$outcome)
 q$outcome <- gsub("^Education ", "", q$outcome)
 q$outcome <- gsub("^Psychology ", "", q$outcome)
@@ -90,23 +71,6 @@ q$moderator_level <- fix_acronyms(q$moderator_level)
 
 q$moderator_category <- str_to_title(q$moderator_category)
 
-=======
-q$outcome <- fix_acronyms(q$outcome)
-
-fix_acronyms <- function(chr_vector){
-  chr_vector <- gsub("Tv", "TV", chr_vector)
-  chr_vector <- gsub("Bmi", "BMI", chr_vector)
-  chr_vector <- gsub("Of", "of", chr_vector)
-}
-
-
-
-
-q$moderator_level <- gsub("_", " ", q$moderator_level)
-q$moderator_level <- str_to_title(q$moderator_level)
-q$moderator_level <- fix_acronyms(q$moderator_level)
-
->>>>>>> 85619bf515f5f6fc764efe43847433401e8e53f7
 q$effect_label <- paste(q$outcome, " (", q$moderator_level, ")", sep = "")
 q$effect_label <- gsub(" \\(Overall\\)", "", q$effect_label)
 q$effect_label <- gsub(" \\(Random Effects\\)", "", q$effect_label)
@@ -114,7 +78,6 @@ q <- q[!grepl("Fixed Effects", q$effect_label), ]
 
 alternating <- rep(c("white", "light grey"), 100)
 
-<<<<<<< HEAD
 #q$moderator_level[q$n==4526]
 #### Forest plot for education####
 
@@ -122,19 +85,6 @@ for (i in 1:length(unique(q$outcome_category))) {
   # i <- 2
   edu <- filter(q, as.numeric(outcome_category) == i)
   edu$value_ci_lower_bound_consensus[edu$value_ci_lower_bound_consensus < -.4] <- -.4
-=======
-unique(q$moderator_level)
-
-q$value_ci_lower_bound_consensus_r[q$value_ci_lower_bound_consensus_r < -.4] <- -.4
-
-
-#### Forest plot for education####
-
-for (i in 1:length(unique(q$outcome_category))) {
-  # i <- 1
-  edu <- subset(q, as.numeric(q$outcome_category) == i)
-  edu$value_ci_lower_bound_consensus_r[edu$value_ci_lower_bound_consensus_r < -.4] <- -.4
->>>>>>> 85619bf515f5f6fc764efe43847433401e8e53f7
   plot_title <- paste("Effect on ",
     levels(q$outcome_category)[i],
     " Outcomes (r with 95%CI)",
@@ -143,15 +93,9 @@ for (i in 1:length(unique(q$outcome_category))) {
   # Create a row for labeling the plot
   edu <- rbind(edu, NA)
   last <- nrow(edu)
-<<<<<<< HEAD
   #levels(edu$recoded_exposure)
   edu$recoded_exposure <- forcats::fct_expand(edu$recoded_exposure, "Exposure") %>%
     forcats::fct_relevel("Exposure", "Screen Time Exposure")
-=======
-
-  edu$recoded_exposure <- forcats::fct_expand(edu$recoded_exposure, "Exposure") %>%
-    forcats::fct_relevel("Exposure", "Overall Screentime")
->>>>>>> 85619bf515f5f6fc764efe43847433401e8e53f7
   edu$recoded_exposure[last] <- "Exposure"
   edu$author_year[last] <- "**Study Label**"
 
@@ -159,11 +103,7 @@ for (i in 1:length(unique(q$outcome_category))) {
   edu$combined_n[grepl("NA", edu$combined_n)] <- NA
   edu$combined_n[last] <- "**N**"
   edu$k[last] <- "**K**"
-<<<<<<< HEAD
   edu$i2_calculated[sapply(edu$i2_calculated, is.null)] <- NA
-=======
-
->>>>>>> 85619bf515f5f6fc764efe43847433401e8e53f7
   edu$i2_calculated <- as.character(paste(round(as.numeric(edu$i2_calculated), 0), "%", sep = ""))
   edu$i2_calculated[grepl("NA", edu$i2_calculated)] <- NA
   edu$i2_calculated[last] <- "**I^2**"
@@ -174,28 +114,21 @@ for (i in 1:length(unique(q$outcome_category))) {
   
   edu$outcome[last] <- "**Outcome**"
   edu$moderator_level[last] <- "**Moderator Level**"
-<<<<<<< HEAD
   edu$moderator_category[last] <- "**Moderator Category**"
   edu$rci <- with(edu, paste(round(r,2), " [", round(value_ci_lower_bound_consensus, 2), ", ",
                              round(value_ci_upper_bound_consensus, 2), "]", sep = ""))
   edu$rci[last] <- "**<i>r</i> with 95% CI**"
-=======
->>>>>>> 85619bf515f5f6fc764efe43847433401e8e53f7
   
   edu$outcome[edu$moderator_level=="Overall"&
                 !is.na(edu$moderator_level)] <- paste("**", edu$outcome[edu$moderator_level=="Overall" &
                                                                            !is.na(edu$moderator_level)], "**", sep = "")
-<<<<<<< HEAD
   edu$moderator_category[edu$moderator_level=="Overall"&
                            !is.na(edu$moderator_level)] <- paste("**", edu$moderator_category[edu$moderator_level=="Overall" &
                                                                                                 !is.na(edu$moderator_level)], "**", sep = "")
-=======
->>>>>>> 85619bf515f5f6fc764efe43847433401e8e53f7
   edu$moderator_level[edu$moderator_level=="Overall"&
                 !is.na(edu$moderator_level)] <- paste("**", edu$moderator_level[edu$moderator_level=="Overall" &
                                                                           !is.na(edu$moderator_level)], "**", sep = "")
   
-<<<<<<< HEAD
 
   
   edu$effect_label <- forcats::fct_expand(edu$effect_label, "Outcome (With Moderators)")
@@ -222,22 +155,6 @@ for (i in 1:length(unique(q$outcome_category))) {
       y = r,
       ymin = value_ci_lower_bound_consensus,
       ymax = value_ci_upper_bound_consensus,
-=======
-  edu$effect_label <- forcats::fct_expand(edu$effect_label, "Outcome (With Moderators)")
-  edu$effect_label[last] <- "Outcome (With Moderators)"
-  levels_in_order <- edu$effect_label[with(edu, order(outcome, moderator_level))]
-  levels_in_order <- c(as.character(edu$effect_label[edu$moderator_level=="**Overall**"]),
-                       as.character(levels_in_order))
-  edu$effect_label <- factor(edu$effect_label, levels = unique(levels_in_order))
-  edu$effect_label <- forcats::fct_relevel(edu$effect_label, as.character(unique(edu$effect_label[edu$moderator_level=="**Overall**" & !is.na(edu$moderator_level)])))
-  edu$facet <- as.character(as.numeric(edu$effect_label))
-  p1 <- ggplot(
-    edu,
-    aes(
-      x = facet,
-      y = value_consensus_r,
-      ymin = value_ci_lower_bound_consensus_r,
-      ymax = value_ci_upper_bound_consensus_r,
       label = author_year,
       family = "Times"
     )
@@ -327,7 +244,9 @@ for (i in 1:length(unique(q$outcome_category))) {
         vjust = 0,
         face = "bold"
       ),
-      axis.text.y = element_blank(),
+      axis.text.y = element_blank(
+        #colour = "white"
+      ),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       strip.placement = "outside",
