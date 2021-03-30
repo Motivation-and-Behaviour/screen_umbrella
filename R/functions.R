@@ -60,7 +60,7 @@ od2r <- Vectorize(od2r)
 
 read_sheet <- function(){
   d = googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4/edit#gid=1427279106",
-                                sheet = "Effects_Sortable",
+                                sheet = "EffectSizes",
                                 na = "-999") %>%
     janitor::clean_names() %>%
     set_names(str_remove(names(.), "_[0-9]+")) %>%
@@ -79,7 +79,7 @@ simplify_effects <- function(data, regex = regex_data){
 }
 
 convert_data <- function(data){
-  d = data %>%  
+  d <- data %>%  
     mutate(value_ci_lower_bound_consensus = 
              case_when(
                !is.na(value_raw_se) ~ value_consensus_various_raw+2*value_ci_lower_bound_consensus_various_raw,
@@ -117,3 +117,4 @@ convert_data <- function(data){
   
   return(d)
 }
+
