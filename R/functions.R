@@ -82,16 +82,16 @@ simple$std_eff_name == 'r'
 names(simple)
 convert_data <- function(data){
   d <- data %>%  
-    # mutate(value_ci_lower_bound_consensus = 
-    #          case_when(
-    #            !is.na(value_raw_se) ~ value_consensus+2*value_ci_lower_bound_consensus,
-    #            TRUE ~ value_ci_lower_bound_consensus
-    #          ),
-    #        value_ci_upper_bound_consensus = 
-    #          case_when(
-    #            !is.na(value_raw_se) ~ value_consensus+2*value_ci_upper_bound_consensus,
-    #            TRUE ~ value_ci_upper_bound_consensus
-    #          )) %>%
+    mutate(value_ci_lower_bound_consensus =
+             case_when(
+               !is.na(value_raw_se) ~ value_consensus+2*value_ci_lower_bound_consensus,
+               TRUE ~ value_ci_lower_bound_consensus
+             ),
+           value_ci_upper_bound_consensus =
+             case_when(
+               !is.na(value_raw_se) ~ value_consensus+2*value_ci_upper_bound_consensus,
+               TRUE ~ value_ci_upper_bound_consensus
+             )) %>%
     mutate(value_consensus = case_when(
       is.na(value_consensus) ~ NA_real_,
       std_eff_name == 'r' ~ value_consensus,
