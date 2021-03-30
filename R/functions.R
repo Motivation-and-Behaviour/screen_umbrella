@@ -78,8 +78,7 @@ simplify_effects <- function(data, regex = regex_data){
     fuzzyjoin::regex_inner_join(regex, by = c(es = "regex"))
   return(d)
 }
-simple$std_eff_name == 'r'
-names(simple)
+
 convert_data <- function(data){
   d <- data %>%  
     mutate(value_ci_lower_bound_consensus =
