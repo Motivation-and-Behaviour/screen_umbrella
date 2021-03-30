@@ -18,6 +18,7 @@ regex_data = tidyr::tribble(
 #conversion formula from 10.1037/0021-9010.90.1.175
 b2r <- function(beta){
   #test beta: beta = -.02
+  r <- NA
   if(!is.na(beta)){
     if(beta >= 0){
       r <- beta * .98 + .05
@@ -63,7 +64,7 @@ read_sheet <- function(){
                                 sheet = "EffectSizes",
                                 na = "-999") %>%
     janitor::clean_names() %>%
-    set_names(str_remove(names(.), "_[0-9]+")) %>%
+    #set_names(str_remove(names(.), "_[0-9]+")) %>%
     mutate(es = refinr::key_collision_merge(statistical_test_consensus) %>% str_to_lower()) %>%
     select(-ends_with("_r"))
     
@@ -77,42 +78,43 @@ simplify_effects <- function(data, regex = regex_data){
     fuzzyjoin::regex_inner_join(regex, by = c(es = "regex"))
   return(d)
 }
-
+simple$std_eff_name == 'r'
+names(simple)
 convert_data <- function(data){
   d <- data %>%  
-    mutate(value_ci_lower_bound_consensus = 
-             case_when(
-               !is.na(value_raw_se) ~ value_consensus_various_raw+2*value_ci_lower_bound_consensus_various_raw,
-               TRUE ~ value_ci_lower_bound_consensus_various_raw
-             ),
-           value_ci_upper_bound_consensus = 
-             case_when(
-               !is.na(value_raw_se) ~ value_consensus_various_raw+2*value_ci_upper_bound_consensus_various_raw,
-               TRUE ~ value_ci_upper_bound_consensus_various_raw
-             )) %>%
-    mutate(value_consensus_r = case_when(
-      is.na(value_consensus_various_raw) ~ NA_real_,
-      std_eff_name == 'r' ~ value_consensus_various_raw,
-      std_eff_name == 'b' ~ b2r(value_consensus_various_raw),
-      std_eff_name == 'd' ~ d2r(value_consensus_various_raw),
-      std_eff_name == 'or' ~ od2r(value_consensus_various_raw, method = 'digby'),
-      std_eff_name == 'z' ~ z2r(value_consensus_various_raw)
+    # mutate(value_ci_lower_bound_consensus = 
+    #          case_when(
+    #            !is.na(value_raw_se) ~ value_consensus+2*value_ci_lower_bound_consensus,
+    #            TRUE ~ value_ci_lower_bound_consensus
+    #          ),
+    #        value_ci_upper_bound_consensus = 
+    #          case_when(
+    #            !is.na(value_raw_se) ~ value_consensus+2*value_ci_upper_bound_consensus,
+    #            TRUE ~ value_ci_upper_bound_consensus
+    #          )) %>%
+    mutate(value_consensus = case_when(
+      is.na(value_consensus) ~ NA_real_,
+      std_eff_name == 'r' ~ value_consensus,
+      std_eff_name == 'b' ~ b2r(value_consensus),
+      std_eff_name == 'd' ~ d2r(value_consensus),
+      std_eff_name == 'or' ~ od2r(value_consensus, method = 'digby'),
+      std_eff_name == 'z' ~ z2r(value_consensus)
     ),
-    value_ci_lower_bound_consensus_r = case_when(
-      is.na(value_ci_lower_bound_consensus_various_raw) ~ NA_real_,
-      std_eff_name == 'r' ~ value_ci_lower_bound_consensus_various_raw,
-      std_eff_name == 'b' ~ b2r(value_ci_lower_bound_consensus_various_raw),
-      std_eff_name == 'd' ~ d2r(value_ci_lower_bound_consensus_various_raw),
-      std_eff_name == 'or' ~ od2r(value_ci_lower_bound_consensus_various_raw, method = 'digby'),
-      std_eff_name == 'z' ~ z2r(value_ci_lower_bound_consensus_various_raw)
+    value_ci_lower_bound_consensus = case_when(
+      is.na(value_ci_lower_bound_consensus) ~ NA_real_,
+      std_eff_name == 'r' ~ value_ci_lower_bound_consensus,
+      std_eff_name == 'b' ~ b2r(value_ci_lower_bound_consensus),
+      std_eff_name == 'd' ~ d2r(value_ci_lower_bound_consensus),
+      std_eff_name == 'or' ~ od2r(value_ci_lower_bound_consensus, method = 'digby'),
+      std_eff_name == 'z' ~ z2r(value_ci_lower_bound_consensus)
     ),
-    value_ci_upper_bound_consensus_r = case_when(
-      is.na(value_ci_upper_bound_consensus_various_raw) ~ NA_real_,
-      std_eff_name == 'r' ~ value_ci_upper_bound_consensus_various_raw,
-      std_eff_name == 'b' ~ b2r(value_ci_upper_bound_consensus_various_raw),
-      std_eff_name == 'd' ~ d2r(value_ci_upper_bound_consensus_various_raw),
-      std_eff_name == 'or' ~ od2r(value_ci_upper_bound_consensus_various_raw, method = 'digby'),
-      std_eff_name == 'z' ~ z2r(value_ci_upper_bound_consensus_various_raw)
+    value_ci_upper_bound_consensus = case_when(
+      is.na(value_ci_upper_bound_consensus) ~ NA_real_,
+      std_eff_name == 'r' ~ value_ci_upper_bound_consensus,
+      std_eff_name == 'b' ~ b2r(value_ci_upper_bound_consensus),
+      std_eff_name == 'd' ~ d2r(value_ci_upper_bound_consensus),
+      std_eff_name == 'or' ~ od2r(value_ci_upper_bound_consensus, method = 'digby'),
+      std_eff_name == 'z' ~ z2r(value_ci_upper_bound_consensus)
     ))
   
   return(d)
