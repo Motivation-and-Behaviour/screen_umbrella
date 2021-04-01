@@ -1,4 +1,3 @@
-library(googlesheets4)
 library(tidyverse)
 library(janitor)
 library(ggtext)
@@ -11,6 +10,16 @@ raw <- read_sheet()
 simple <- simplify_effects(raw)
 d <- convert_data(simple)
 
+plain_language_outcomes <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1P54V0aXlF5neoVIwViK-zAqFijYHLFFtXIBAK_2xkII/edit#gid=464363801",
+                                sheet = "Outcomes",
+                                na = "-999") %>% janitor::clean_names()
+
+plain_language_exposures <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1P54V0aXlF5neoVIwViK-zAqFijYHLFFtXIBAK_2xkII/edit#gid=464363801",
+                                                     sheet = "Exposures",
+                                                     na = "-999") %>% janitor::clean_names()  
+
+# Clean the names of the datafile, rename to something more meaningful, 
+# remove empty stuff, then cut small studies or  rubbish
 q <- clean_names(d) %>%
   dplyr::rename(r = value_consensus,
                 outcome_category = outcome_level_1,
@@ -19,152 +28,144 @@ q <- clean_names(d) %>%
                 moderator_level = moderator_level_recoded,
                 moderator_category = moderator_category_recoded,
                 k = k_number_of_studies_for_this_effect_consensus,
-                n = n_combined_sample_across_studies_examining_this_effect_consensus
+                n = combined_n,
+                cilb = value_ci_lower_bound_consensus,
+                ciub = value_ci_upper_bound_consensus,
+                i2 = i2_calculated
                 ) %>%
   remove_empty(which = c("rows", "cols")) %>%
   filter(usable_effect_size == TRUE,
          r < .99,
-         n >= 1000,
-         outcome_category != "N/A")
-  
-# Relabelling stuff
-q$sig <- ((q$value_ci_lower_bound_consensus * q$value_ci_upper_bound_consensus) > 0)
+         n >= 1000) 
+
+# Merge in the plain language exposures and outcomes
+
+q <- left_join(q,
+               select(plain_language_outcomes,
+                      outcome_consensus,
+                      plain_language_descriptor_for_level_3)) %>%
+     rename(plain_language_outcome = plain_language_descriptor_for_level_3) %>%
+     select(-plain_language_exposure)
+q <- left_join(q, select(plain_language_exposures,
+                      recoded_content_6,
+                      plain_language_exposure) %>%
+                 rename(recoded_exposure = recoded_content_6))
+
+# Add significance and labels
+q$sig <- ((q$cilb * q$ciub) > 0)
 q$sig <- q$sig * .7 + .3
 q$author_year <- paste(q$first_author, ", ", q$year_of_publication, sep = "")
 
-fix_acronyms <- function(chr_vector){
-  chr_vector <- gsub("Tv", "TV", chr_vector)
-  chr_vector <- gsub("Bmi", "BMI", chr_vector)
-  chr_vector <- gsub("Of", "of", chr_vector)
-  chr_vector <- gsub("<", "&lt;", chr_vector)
-  chr_vector <- gsub(">", "&gt;", chr_vector)
-}
+#if one effect from this review, keep or select "overall"
+# group by study_id and exposure and outcome, pick max K
+q <- group_by(q,
+              covidence_review_id,
+              plain_language_outcome,
+              plain_language_exposure) %>% slice_max(k,
+                                                     with_ties = TRUE) %>%
+    select(author_year, covidence_review_id,
+           outcome_category,
+           plain_language_outcome,
+           plain_language_exposure,
+           k, n, r, cilb, ciub, i2, sig) %>%
+    distinct()
+  
+# Take overall outcome into a variable and remove that from the sub-variable
+q$outcome_lvl_1 <- factor(gsub(":.*", "", q$plain_language_outcome))
+q$plain_language_outcome <- factor(gsub(".*: ", "", q$plain_language_outcome))
+q$outcome_category <- factor(str_to_title(q$outcome_category))
+q$plain_language_exposure <- factor(q$plain_language_exposure)
 
-q$outcome_category <- str_to_title(q$outcome_category)
-q$outcome_category <- as.factor(q$outcome_category)
+#convert funny lists to numeric vectors
+q$n <- as.numeric(q$n)
+q$k <- as.numeric(q$k)
+q$i2 <- as.numeric(sapply(q$i2, as.numeric))
 
+# Cleaning data before plotting
+q$i2[is.null(q$i2)] <- NA
+q$i2 <- as.character(paste(round(as.numeric(q$i2), 0), "%", sep = ""))
+q$i2[grepl("NA", q$i2)] <- NA
 
-q$recoded_exposure <- gsub("_", " ", q$recoded_exposure)
-q$recoded_exposure <- str_to_title(q$recoded_exposure)
-q$recoded_exposure <- fix_acronyms(q$recoded_exposure)
-q$recoded_exposure <- gsub("\nDevice: Computer", "", q$recoded_exposure)
-q$recoded_exposure <- gsub("Content: ", "", q$recoded_exposure)
-q$recoded_exposure <- gsub("N/A", "Screen Time Exposure", q$recoded_exposure)
-q$recoded_exposure <- as.factor(q$recoded_exposure)
+q$rci <- with(q, paste(format(round(r,2), nsmall = 2),
+                       " [", format(round(cilb, 2), nsmall = 2), ", ",
+                       format(round(ciub, 2), nsmall = 2), "]", sep = ""))
 
-q$outcome <- gsub("_", " ", q$outcome)
-q$outcome <- gsub("^learning ", "", q$outcome)
-q$outcome <- gsub("literacy ", "literacy: ", q$outcome)
-q$outcome <- str_to_title(q$outcome)
-q$outcome <- gsub("^Health Behaviour ", "", q$outcome)
-q$outcome <- gsub("^Education ", "", q$outcome)
-q$outcome <- gsub("^Psychology ", "", q$outcome)
-q$outcome <- gsub("^Physical Health ", "", q$outcome)
-q$outcome <- gsub("^Cardiometabolic Health ", "", q$outcome)
-q$outcome <- fix_acronyms(q$outcome)
-
-q$moderator_level <- gsub("_", " ", q$moderator_level)
-q$moderator_level <- str_to_title(q$moderator_level)
-q$moderator_level <- gsub("^Health Behaviour ", "", q$moderator_level)
-q$moderator_level <- gsub("^Physical Activity ", "", q$moderator_level)
-q$moderator_level <- fix_acronyms(q$moderator_level)
-
-q$moderator_category <- str_to_title(q$moderator_category)
-
-q$effect_label <- paste(q$outcome, " (", q$moderator_level, ")", sep = "")
-q$effect_label <- gsub(" \\(Overall\\)", "", q$effect_label)
-q$effect_label <- gsub(" \\(Random Effects\\)", "", q$effect_label)
-q <- q[!grepl("Fixed Effects", q$effect_label), ]
-
-alternating <- rep(c("white", "light grey"), 100)
-
-#q$moderator_level[q$n==4526]
+q$n <- format(q$n, big.mark = ",")
+q$n[grepl("NA", q$n)] <- NA
+q <- ungroup(q)
+write.csv(q, "data_to_plot.csv")
 #### Forest plot for education####
 
 for (i in 1:length(unique(q$outcome_category))) {
   # i <- 2
   edu <- filter(q, as.numeric(outcome_category) == i)
-  edu$value_ci_lower_bound_consensus[edu$value_ci_lower_bound_consensus < -.4] <- -.4
+  
   plot_title <- paste("Effect on ",
     levels(q$outcome_category)[i],
     " Outcomes (r with 95%CI)",
     sep = ""
   )
   # Create a row for labeling the plot
-  edu <- rbind(edu, NA)
+  edu <- add_row(edu)
   last <- nrow(edu)
   #levels(edu$recoded_exposure)
-  edu$recoded_exposure <- forcats::fct_expand(edu$recoded_exposure, "Exposure") %>%
-    forcats::fct_relevel("Exposure", "Screen Time Exposure")
-  edu$recoded_exposure[last] <- "Exposure"
+  edu$plain_language_exposure <- forcats::fct_expand(edu$plain_language_exposure, "**Exposure**") %>%
+    forcats::fct_relevel("**Exposure**", "Screen use: General")
+  edu$plain_language_exposure[last] <- "**Exposure**"
+  
   edu$author_year[last] <- "**Study Label**"
 
-  edu$combined_n <- format(edu$combined_n, big.mark = ",")
-  edu$combined_n[grepl("NA", edu$combined_n)] <- NA
-  edu$combined_n[last] <- "**N**"
+  edu$n[last] <- "**N**"
   edu$k[last] <- "**K**"
-  edu$i2_calculated[sapply(edu$i2_calculated, is.null)] <- NA
-  edu$i2_calculated <- as.character(paste(round(as.numeric(edu$i2_calculated), 0), "%", sep = ""))
-  edu$i2_calculated[grepl("NA", edu$i2_calculated)] <- NA
-  edu$i2_calculated[last] <- "**I^2**"
+  edu$i2[last] <- "**I^2**"
 
-  edu$effect_label <- factor(edu$effect_label,
-    levels = unique(edu$effect_label[order(edu$effect_label)])
-  )
+  edu$plain_language_outcome <- forcats::fct_expand(edu$plain_language_outcome, "**Specific Outcome**") %>%
+    forcats::fct_relevel("**Specific Outcome**")
+  edu$plain_language_outcome[last] <- "**Specific Outcome**"
   
-  edu$outcome[last] <- "**Outcome**"
-  edu$moderator_level[last] <- "**Moderator Level**"
-  edu$moderator_category[last] <- "**Moderator Category**"
-  edu$rci <- with(edu, paste(round(r,2), " [", round(value_ci_lower_bound_consensus, 2), ", ",
-                             round(value_ci_upper_bound_consensus, 2), "]", sep = ""))
+  edu$outcome_lvl_1 <- forcats::fct_expand(edu$outcome_lvl_1, "Outcome") %>%
+    forcats::fct_relevel("Outcome")
+  edu$outcome_lvl_1[last] <- "Outcome"
+  
+  
   edu$rci[last] <- "**<i>r</i> with 95% CI**"
   
-  edu$outcome[edu$moderator_level=="Overall"&
-                !is.na(edu$moderator_level)] <- paste("**", edu$outcome[edu$moderator_level=="Overall" &
-                                                                           !is.na(edu$moderator_level)], "**", sep = "")
-  edu$moderator_category[edu$moderator_level=="Overall"&
-                           !is.na(edu$moderator_level)] <- paste("**", edu$moderator_category[edu$moderator_level=="Overall" &
-                                                                                                !is.na(edu$moderator_level)], "**", sep = "")
-  edu$moderator_level[edu$moderator_level=="Overall"&
-                !is.na(edu$moderator_level)] <- paste("**", edu$moderator_level[edu$moderator_level=="Overall" &
-                                                                          !is.na(edu$moderator_level)], "**", sep = "")
+  edu <- arrange(edu,
+                 outcome_lvl_1, 
+                 plain_language_outcome,
+                 plain_language_exposure,
+                 k)
+  edu$row_num <- as.factor(1:nrow(edu))
+
+  edu$shape <- 18
+
+  edu$cilb[edu$cilb < -.4] <- -.4
+  edu$ciub[edu$ciub < -.4] <- -.4
+  edu$r[edu$r < -.4] <- -.39
+  edu$shape[edu$r == -.39] <- 60
   
-
-  
-  edu$effect_label <- forcats::fct_expand(edu$effect_label, "Outcome (With Moderators)")
-  edu$effect_label[last] <- "Outcome (With Moderators)"
-
-  edu$effect_label <- factor(edu$effect_label, levels = unique(levels_in_order))
-  # edu$effect_label <- forcats::fct_relevel(edu$effect_label,
-  #                                          as.character(unique(edu$effect_label[edu$moderator_level=="**Overall**" & !is.na(edu$moderator_level)])))
-  edu <- edu[(with(edu, order(recoded_exposure,
-                                      outcome,
-                                      moderator_category,
-                                      moderator_level))), ]
-  edu$row_num <- as.character(1:nrow(edu))
-
-
-  edu$value_ci_lower_bound_consensus[edu$value_ci_lower_bound_consensus < -.4] <- -.4
-  edu$value_ci_upper_bound_consensus[edu$value_ci_upper_bound_consensus < -.4] <- -.4
-  edu$r[edu$r < -.4] <- -.4
+  edu$cilb[edu$cilb > .4] <- .4
+  edu$ciub[edu$ciub > .4] <- .4
+  edu$r[edu$r > .4] <- .39
+  edu$shape[edu$r == .39] <- 62
   
   p1 <- ggplot(
     edu,
     aes(
       x = row_num,
       y = r,
-      ymin = value_ci_lower_bound_consensus,
-      ymax = value_ci_upper_bound_consensus,
+      ymin = cilb,
+      ymax = ciub,
       label = author_year,
-      family = "Times"
+      family = "Times",
+      shape = shape,
     )
   ) +
     geom_pointrange(
-      shape = 18,
       alpha = edu$sig
     ) +
     geom_richtext(
-      y = -.5, label = edu$combined_n,
+      y = -.5, label = edu$n,
       vjust = 0.5, hjust = 0.5,
       stat = "identity",
       size = 2.5,
@@ -178,7 +179,7 @@ for (i in 1:length(unique(q$outcome_category))) {
       label.size = NA
     ) +
     geom_richtext(
-      y = -.8, label = edu$i2_calculated,
+      y = -.8, label = edu$i2,
       vjust = 0.5, hjust = 0.5,
       stat = "identity",
       size = 2.5,
@@ -199,24 +200,17 @@ for (i in 1:length(unique(q$outcome_category))) {
       label.size = NA
     ) +
     geom_richtext(
-      y = -3, label = edu$outcome,
+      y = -2.1, label = edu$plain_language_exposure,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
       label.size = NA
     ) +
     geom_richtext(
-      y = -2, label = edu$moderator_level,
+      y = -3, label = edu$plain_language_outcome,
       vjust = 0.5, hjust = 0,
       stat = "identity",
-      size = 2.5, 
-      label.size = NA
-    ) +
-    geom_richtext(
-      y = -2.5, label = edu$moderator_category,
-      vjust = 0.5, hjust = 0,
-      stat = "identity",
-      size = 2.5, 
+      size = 2.5,
       label.size = NA
     ) +
     geom_hline(yintercept = 0) +
@@ -225,13 +219,14 @@ for (i in 1:length(unique(q$outcome_category))) {
       y = plot_title
     ) +
     facet_grid(
-      rows = vars(recoded_exposure),
+      rows = vars(outcome_lvl_1),
       scales = "free",
       space = "free",
       drop = T,
       switch = "both"
     ) +
     coord_flip(ylim = c(-3, .4)) +
+    scale_shape_identity() +
     scale_x_discrete(limits=rev) + 
     scale_y_continuous(breaks = c(-.4, -.2, 0, .2, .4)) +
     tidyMB::theme_mb() %+replace% theme(
