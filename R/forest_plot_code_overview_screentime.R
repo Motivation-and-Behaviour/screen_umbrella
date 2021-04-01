@@ -209,7 +209,7 @@ for (i in 1:length(unique(q$outcome_category))) {
       label.size = NA
     ) +
     geom_richtext(
-      y = -3.1, label = edu$plain_language_outcome,
+      y = -3.17, label = edu$plain_language_outcome,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
