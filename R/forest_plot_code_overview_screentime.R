@@ -7,6 +7,7 @@ library(tidyMB)
 #rm(list = ls())
 
 raw <- read_sheet() 
+#simple[simple$covidence_review_id=="47429",]
 simple <- simplify_effects(raw)
 d <- convert_data(simple)
 
@@ -16,10 +17,13 @@ plain_language_outcomes <- googlesheets4::read_sheet("https://docs.google.com/sp
 
 plain_language_exposures <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1P54V0aXlF5neoVIwViK-zAqFijYHLFFtXIBAK_2xkII/edit#gid=464363801",
                                                      sheet = "Exposures",
-                                                     na = "-999") %>% janitor::clean_names()  
+                                                     na = "-999") %>% janitor::clean_names()
 
+continuous_effects <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1P54V0aXlF5neoVIwViK-zAqFijYHLFFtXIBAK_2xkII/edit#gid=464363801",
+                                                      sheet = "Moderators",
+                                                      na = "-999") %>% janitor::clean_names() 
 # Clean the names of the datafile, rename to something more meaningful, 
-# remove empty stuff, then cut small studies or  rubbish
+# remove empty stuff, then cut small studies or rubbish
 q <- clean_names(d) %>%
   dplyr::rename(r = value_consensus,
                 outcome_category = outcome_level_1,
@@ -34,16 +38,20 @@ q <- clean_names(d) %>%
                 i2 = i2_calculated
                 ) %>%
   remove_empty(which = c("rows", "cols")) %>%
+  mutate(n = as.numeric(n)) %>%
   filter(usable_effect_size == TRUE,
          r < .99,
          n >= 1000) 
 
+q$i2 <- as.numeric(sapply(q$i2, as.numeric))
+q$effect_size_id_1 <- as.character(sapply(q$effect_size_id_1, as.character))
 # Merge in the plain language exposures and outcomes
 
 q <- left_join(q,
                select(plain_language_outcomes,
                       outcome_consensus,
-                      plain_language_descriptor_for_level_3)) %>%
+                      plain_language_descriptor_for_level_3,
+                      benefit_or_risk)) %>%
      rename(plain_language_outcome = plain_language_descriptor_for_level_3) %>%
      select(-plain_language_exposure)
 q <- left_join(q, select(plain_language_exposures,
@@ -51,10 +59,23 @@ q <- left_join(q, select(plain_language_exposures,
                       plain_language_exposure) %>%
                  rename(recoded_exposure = recoded_content_6))
 
+q <- left_join(q, select(continuous_effects,
+                         moderator_level_recoded_3,
+                         moderator_category_recoded_4,
+                         moderator_type_5) %>%
+                 rename(delete_continuous = moderator_type_5,
+                        moderator_level = moderator_level_recoded_3,
+                        moderator_category = moderator_category_recoded_4))
+q <- filter(q, is.na(delete_continuous))
+
+
 # Add significance and labels
 q$sig <- ((q$cilb * q$ciub) > 0)
 q$sig <- q$sig * .7 + .3
 q$author_year <- paste(q$first_author, ", ", q$year_of_publication, sep = "")
+
+#bold the rows that are classified as 'risks'
+q$risk <- ifelse(q$benefit_or_risk=="Risk", "bold", "plain")
 
 #if one effect from this review, keep or select "overall"
 # group by study_id and exposure and outcome, pick max K
@@ -64,24 +85,24 @@ q <- group_by(q,
               plain_language_exposure) %>% slice_max(k,
                                                      with_ties = TRUE) %>%
     select(author_year, covidence_review_id,
-           outcome_category,
+           outcome_category, effect_size_id_1,
            plain_language_outcome,
-           plain_language_exposure,
+           plain_language_exposure, 
+           risk,
            k, n, r, cilb, ciub, i2, sig) %>%
     distinct()
   
-# Take overall outcome into a variable and remove that from the sub-variable
-unique(q$plain_language_outcome)
+# Tidy up a few really long labels
+q$plain_language_outcome <- gsub("Executive Functioning ", "Executive Functioning<br>", q$plain_language_outcome)
 q$plain_language_outcome <- gsub("reasoning and ", "reasoning and<br>", q$plain_language_outcome)
+q$plain_language_exposure <- gsub("TV programs", "TV", q$plain_language_exposure)
+
+# Take overall outcome into a variable and remove that from the sub-variable
+
 q$outcome_lvl_1 <- factor(gsub(":.*", "", q$plain_language_outcome))
 q$plain_language_outcome <- factor(gsub(".*: ", "", q$plain_language_outcome))
 q$outcome_category <- factor(str_to_title(q$outcome_category))
 q$plain_language_exposure <- factor(q$plain_language_exposure)
-
-#convert funny lists to numeric vectors
-q$n <- as.numeric(q$n)
-q$k <- as.numeric(q$k)
-q$i2 <- as.numeric(sapply(q$i2, as.numeric))
 
 # Cleaning data before plotting
 q$i2[is.null(q$i2)] <- NA
@@ -91,6 +112,9 @@ q$i2[grepl("NA", q$i2)] <- NA
 q$rci <- with(q, paste(format(round(r,2), nsmall = 2),
                        " [", format(round(cilb, 2), nsmall = 2), ", ",
                        format(round(ciub, 2), nsmall = 2), "]", sep = ""))
+
+str(q)
+
 
 q$n <- format(q$n, big.mark = ",")
 q$n[grepl("NA", q$n)] <- NA
@@ -120,7 +144,8 @@ for (i in 1:length(unique(q$outcome_category))) {
   edu$n[last] <- "**N**"
   edu$k[last] <- "**K**"
   edu$i2[last] <- "**I^2**"
-
+  edu$risk[last] <- "bold"
+  
   edu$plain_language_outcome <- fct_expand(edu$plain_language_outcome, "**Specific Outcome**") %>%
     fct_relevel("**Specific Outcome**")
   edu$plain_language_outcome[last] <- "**Specific Outcome**"
@@ -161,6 +186,7 @@ for (i in 1:length(unique(q$outcome_category))) {
       label = author_year,
       family = "Times",
       shape = shape,
+      fontface = risk,
     )
   ) +
     geom_pointrange(
@@ -188,14 +214,14 @@ for (i in 1:length(unique(q$outcome_category))) {
       label.size = NA
     ) + 
     geom_richtext(
-      y = -1.2, label = edu$rci,
+      y = -1.1, label = edu$rci,
       vjust = 0.5, hjust = 0.5,
       stat = "identity",
       size = 2.5,
       label.size = NA
     ) +
     geom_richtext(
-      y = -1.7,
+      y = -1.8,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
@@ -203,6 +229,13 @@ for (i in 1:length(unique(q$outcome_category))) {
     ) +
     geom_richtext(
       y = -2.6, label = edu$plain_language_exposure,
+      vjust = 0.5, hjust = 0,
+      stat = "identity",
+      size = 2.5,
+      label.size = NA
+    ) +
+    geom_richtext(
+      y = 0.41, label = edu$effect_size_id_1,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
@@ -251,6 +284,7 @@ for (i in 1:length(unique(q$outcome_category))) {
       text = element_text(family = "Times")
     )
   p1
+  
   ggsave(paste("Forest plot for ", levels(q$outcome_category)[i], ".pdf", sep = ""),
          plot = p1,
          width = 10,

@@ -1,18 +1,4 @@
 library(tidyverse)
-# General functions ####
-# We should assume that Hedges g == Cohen's d and RR == OR
-regex_data = tidyr::tribble(
-  ~std_eff_name, ~regex,
-  "b", "beta",
-  "d", "(cohen d|cohen's d)",
-  "r", "(pearson's r|correlation|^r$)",
-  "d", "(hedges' g|g\\+)",
-  "d", "(smd|mean difference|Mean|mean)",
-  "rr","relative risk",
-  "or", "(odds ratio|or|odd ratio)",
-  "z", "(Z|z)"
-)
-
 # conversion functions ####
 
 #conversion formula from 10.1037/0021-9010.90.1.175
@@ -20,11 +6,7 @@ b2r <- function(beta){
   #test beta: beta = -.02
   r <- NA
   if(!is.na(beta)){
-    if(beta >= 0){
-      r <- beta * .98 + .05
-    } else {
-      r <- beta * .98
-    }
+    r <- beta 
   }
   r
 }
@@ -68,14 +50,13 @@ read_sheet <- function(){
     mutate(es = refinr::key_collision_merge(statistical_test_consensus) %>% str_to_lower()) %>%
     select(-ends_with("_r"))
     
-  
   return(d)
 }
 
-simplify_effects <- function(data, regex = regex_data){
+simplify_effects <- function(data){
   d = data %>%
-    dplyr::mutate(es = replace(es, es == 'r = uncorrected sample-weighted mean effect size', 'r')) %>%
-    fuzzyjoin::regex_inner_join(regex, by = c(es = "regex"))
+    dplyr::filter(es %in% c("b", "d", "r", "or", "z")) %>%
+    dplyr::rename(std_eff_name = es)
   return(d)
 }
 
@@ -83,12 +64,12 @@ convert_data <- function(data){
   d <- data %>%  
     mutate(value_ci_lower_bound_consensus =
              case_when(
-               !is.na(value_raw_se) ~ value_consensus+2*value_ci_lower_bound_consensus,
+               !is.na(value_raw_se) ~ value_consensus-2*value_raw_se,
                TRUE ~ value_ci_lower_bound_consensus
              ),
            value_ci_upper_bound_consensus =
              case_when(
-               !is.na(value_raw_se) ~ value_consensus+2*value_ci_upper_bound_consensus,
+               !is.na(value_raw_se) ~ value_consensus+2*value_raw_se,
                TRUE ~ value_ci_upper_bound_consensus
              )) %>%
     mutate(value_consensus = case_when(
