@@ -71,6 +71,8 @@ q <- group_by(q,
     distinct()
   
 # Take overall outcome into a variable and remove that from the sub-variable
+unique(q$plain_language_outcome)
+q$plain_language_outcome <- gsub("reasoning and ", "reasoning and<br>", q$plain_language_outcome)
 q$outcome_lvl_1 <- factor(gsub(":.*", "", q$plain_language_outcome))
 q$plain_language_outcome <- factor(gsub(".*: ", "", q$plain_language_outcome))
 q$outcome_category <- factor(str_to_title(q$outcome_category))
@@ -109,8 +111,8 @@ for (i in 1:length(unique(q$outcome_category))) {
   edu <- add_row(edu)
   last <- nrow(edu)
   #levels(edu$recoded_exposure)
-  edu$plain_language_exposure <- forcats::fct_expand(edu$plain_language_exposure, "**Exposure**") %>%
-    forcats::fct_relevel("**Exposure**", "Screen use: General")
+  edu$plain_language_exposure <- fct_expand(edu$plain_language_exposure, "**Exposure**") %>%
+    fct_relevel("**Exposure**", "Screen use: General")
   edu$plain_language_exposure[last] <- "**Exposure**"
   
   edu$author_year[last] <- "**Study Label**"
@@ -119,12 +121,12 @@ for (i in 1:length(unique(q$outcome_category))) {
   edu$k[last] <- "**K**"
   edu$i2[last] <- "**I^2**"
 
-  edu$plain_language_outcome <- forcats::fct_expand(edu$plain_language_outcome, "**Specific Outcome**") %>%
-    forcats::fct_relevel("**Specific Outcome**")
+  edu$plain_language_outcome <- fct_expand(edu$plain_language_outcome, "**Specific Outcome**") %>%
+    fct_relevel("**Specific Outcome**")
   edu$plain_language_outcome[last] <- "**Specific Outcome**"
   
-  edu$outcome_lvl_1 <- forcats::fct_expand(edu$outcome_lvl_1, "Outcome") %>%
-    forcats::fct_relevel("Outcome")
+  edu$outcome_lvl_1 <- fct_expand(edu$outcome_lvl_1, "Outcome") %>%
+    fct_relevel("Outcome")
   edu$outcome_lvl_1[last] <- "Outcome"
   
   
@@ -186,28 +188,28 @@ for (i in 1:length(unique(q$outcome_category))) {
       label.size = NA
     ) + 
     geom_richtext(
-      y = -1, label = edu$rci,
+      y = -1.2, label = edu$rci,
       vjust = 0.5, hjust = 0.5,
       stat = "identity",
       size = 2.5,
       label.size = NA
     ) +
     geom_richtext(
-      y = -1.5,
+      y = -1.7,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
       label.size = NA
     ) +
     geom_richtext(
-      y = -2.1, label = edu$plain_language_exposure,
+      y = -2.6, label = edu$plain_language_exposure,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
       label.size = NA
     ) +
     geom_richtext(
-      y = -3, label = edu$plain_language_outcome,
+      y = -3.1, label = edu$plain_language_outcome,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
@@ -251,6 +253,6 @@ for (i in 1:length(unique(q$outcome_category))) {
   p1
   ggsave(paste("Forest plot for ", levels(q$outcome_category)[i], ".pdf", sep = ""),
          plot = p1,
-         width = 14,
-         height = 14)
+         width = 10,
+         height = 10)
 }
