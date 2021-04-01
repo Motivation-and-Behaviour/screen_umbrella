@@ -47,7 +47,7 @@ read_sheet <- function(){
                                 na = "-999") %>%
     janitor::clean_names() %>%
     #set_names(str_remove(names(.), "_[0-9]+")) %>%
-    mutate(es = refinr::key_collision_merge(statistical_test_consensus) %>% str_to_lower()) %>%
+    mutate(es = str_to_lower(statistical_test_consensus)) %>%
     select(-ends_with("_r"))
     
   return(d)

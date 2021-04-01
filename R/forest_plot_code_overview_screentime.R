@@ -11,17 +11,6 @@ raw <- read_sheet()
 simple <- simplify_effects(raw)
 d <- convert_data(simple)
 
-plain_language_outcomes <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1P54V0aXlF5neoVIwViK-zAqFijYHLFFtXIBAK_2xkII/edit#gid=464363801",
-                                sheet = "Outcomes",
-                                na = "-999") %>% janitor::clean_names()
-
-plain_language_exposures <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1P54V0aXlF5neoVIwViK-zAqFijYHLFFtXIBAK_2xkII/edit#gid=464363801",
-                                                     sheet = "Exposures",
-                                                     na = "-999") %>% janitor::clean_names()
-
-continuous_effects <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1P54V0aXlF5neoVIwViK-zAqFijYHLFFtXIBAK_2xkII/edit#gid=464363801",
-                                                      sheet = "Moderators",
-                                                      na = "-999") %>% janitor::clean_names() 
 # Clean the names of the datafile, rename to something more meaningful, 
 # remove empty stuff, then cut small studies or rubbish
 q <- clean_names(d) %>%
@@ -41,32 +30,15 @@ q <- clean_names(d) %>%
   mutate(n = as.numeric(n)) %>%
   filter(usable_effect_size == TRUE,
          r < .99,
-         n >= 1000) 
+         n >= 1000,
+         moderator_level != "fixed effects") 
 
 q$i2 <- as.numeric(sapply(q$i2, as.numeric))
 q$effect_size_id_1 <- as.character(sapply(q$effect_size_id_1, as.character))
 # Merge in the plain language exposures and outcomes
 
-q <- left_join(q,
-               select(plain_language_outcomes,
-                      outcome_consensus,
-                      plain_language_descriptor_for_level_3,
-                      benefit_or_risk)) %>%
-     rename(plain_language_outcome = plain_language_descriptor_for_level_3) %>%
-     select(-plain_language_exposure)
-q <- left_join(q, select(plain_language_exposures,
-                      recoded_content_6,
-                      plain_language_exposure) %>%
-                 rename(recoded_exposure = recoded_content_6))
-
-q <- left_join(q, select(continuous_effects,
-                         moderator_level_recoded_3,
-                         moderator_category_recoded_4,
-                         moderator_type_5) %>%
-                 rename(delete_continuous = moderator_type_5,
-                        moderator_level = moderator_level_recoded_3,
-                        moderator_category = moderator_category_recoded_4))
-q <- filter(q, is.na(delete_continuous))
+#dim(q)
+q <- filter(q, is.na(moderator_type))
 
 
 # Add significance and labels
@@ -76,11 +48,12 @@ q$author_year <- paste(q$first_author, ", ", q$year_of_publication, sep = "")
 
 #bold the rows that are classified as 'risks'
 q$risk <- ifelse(q$benefit_or_risk=="Risk", "bold", "plain")
-
+names(q)
 #if one effect from this review, keep or select "overall"
 # group by study_id and exposure and outcome, pick max K
-q <- group_by(q,
-              covidence_review_id,
+q <- rename(q, 
+            plain_language_outcome = outcome_plain_language_descriptor) %>%
+    group_by(covidence_review_id,
               plain_language_outcome,
               plain_language_exposure) %>% slice_max(k,
                                                      with_ties = TRUE) %>%
@@ -95,7 +68,18 @@ q <- group_by(q,
 # Tidy up a few really long labels
 q$plain_language_outcome <- gsub("Executive Functioning ", "Executive Functioning<br>", q$plain_language_outcome)
 q$plain_language_outcome <- gsub("reasoning and ", "reasoning and<br>", q$plain_language_outcome)
-q$plain_language_exposure <- gsub("TV programs", "TV", q$plain_language_exposure)
+#q$plain_language_exposure <- gsub(" \\(", "<br>(", q$plain_language_exposure)
+
+
+
+#fixing the exposures that someone forgot to capitalise
+q$plain_language_exposure <- paste(toupper(substr(q$plain_language_exposure, 1, 1)),
+                                   substr(q$plain_language_exposure, 2, nchar(q$plain_language_exposure)),
+                                   sep="")
+
+q$plain_language_exposure <- gsub("^Intervention:",
+                                  "Screen-based intervention:",
+                                  q$plain_language_exposure)
 
 # Take overall outcome into a variable and remove that from the sub-variable
 
@@ -113,12 +97,16 @@ q$rci <- with(q, paste(format(round(r,2), nsmall = 2),
                        " [", format(round(cilb, 2), nsmall = 2), ", ",
                        format(round(ciub, 2), nsmall = 2), "]", sep = ""))
 
-str(q)
-
-
 q$n <- format(q$n, big.mark = ",")
-q$n[grepl("NA", q$n)] <- NA
+q$n[grepl("NA", q$n)] <- "—"
 q <- ungroup(q)
+
+# Rard removing some pesky effects
+q <- filter(q, effect_size_id_1 != "34306_020",
+            effect_size_id_1 != "34306_023",
+            effect_size_id_1 != "34306_015",
+            effect_size_id_1 != "34306_016")
+
 write.csv(q, "data_to_plot.csv")
 #### Forest plot for education####
 
@@ -139,16 +127,16 @@ for (i in 1:length(unique(q$outcome_category))) {
     fct_relevel("**Exposure**", "Screen use: General")
   edu$plain_language_exposure[last] <- "**Exposure**"
   
-  edu$author_year[last] <- "**Study Label**"
+  edu$author_year[last] <- "**Lead Author, Date**"
 
   edu$n[last] <- "**N**"
   edu$k[last] <- "**K**"
   edu$i2[last] <- "**I^2**"
-  edu$risk[last] <- "bold"
+  edu$risk[last] <- "plain"
   
-  edu$plain_language_outcome <- fct_expand(edu$plain_language_outcome, "**Specific Outcome**") %>%
-    fct_relevel("**Specific Outcome**")
-  edu$plain_language_outcome[last] <- "**Specific Outcome**"
+  edu$plain_language_outcome <- fct_expand(edu$plain_language_outcome, "**Specific Outcome (risks** & benefits**)**") %>%
+    fct_relevel("**Specific Outcome (risks** & benefits**)**")
+  edu$plain_language_outcome[last] <- "**Specific Outcome (risks** & benefits**)**"
   
   edu$outcome_lvl_1 <- fct_expand(edu$outcome_lvl_1, "Outcome") %>%
     fct_relevel("Outcome")
@@ -190,7 +178,7 @@ for (i in 1:length(unique(q$outcome_category))) {
     )
   ) +
     geom_pointrange(
-      alpha = edu$sig
+      #alpha = edu$sig
     ) +
     geom_richtext(
       y = -.5, label = edu$n,
@@ -228,21 +216,21 @@ for (i in 1:length(unique(q$outcome_category))) {
       label.size = NA
     ) +
     geom_richtext(
-      y = -2.6, label = edu$plain_language_exposure,
+      y = -3, label = edu$plain_language_exposure,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
       label.size = NA
     ) +
+    # geom_richtext(
+    #   y = 0.41, label = edu$effect_size_id_1,
+    #   vjust = 0.5, hjust = 0,
+    #   stat = "identity",
+    #   size = 2.5,
+    #   label.size = NA
+    # ) +
     geom_richtext(
-      y = 0.41, label = edu$effect_size_id_1,
-      vjust = 0.5, hjust = 0,
-      stat = "identity",
-      size = 2.5,
-      label.size = NA
-    ) +
-    geom_richtext(
-      y = -3.17, label = edu$plain_language_outcome,
+      y = -3.67, label = edu$plain_language_outcome,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
@@ -260,7 +248,7 @@ for (i in 1:length(unique(q$outcome_category))) {
       drop = T,
       switch = "both"
     ) +
-    coord_flip(ylim = c(-3, .4)) +
+    coord_flip(ylim = c(-3.5, .4)) +
     scale_shape_identity() +
     scale_x_discrete(limits=rev) + 
     scale_y_continuous(breaks = c(-.4, -.2, 0, .2, .4)) +
@@ -287,6 +275,6 @@ for (i in 1:length(unique(q$outcome_category))) {
   
   ggsave(paste("Forest plot for ", levels(q$outcome_category)[i], ".pdf", sep = ""),
          plot = p1,
-         width = 10,
+         width = 12,
          height = 10)
 }
