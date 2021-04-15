@@ -1,7 +1,7 @@
 library(tidyverse)
 # conversion functions ####
 
-#conversion formula from 10.1037/0021-9010.90.1.175
+#conversion formula from 10.1007/s11162-011-9232-5
 b2r <- function(beta){
   #test beta: beta = -.02
   r <- NA
