@@ -2,15 +2,18 @@ library(tidyverse)
 library(janitor)
 library(ggtext)
 library(tidyMB)
+source("R/functions.R")
 
 # remove existing environment
 #rm(list = ls())
 
 raw <- read_sheet() 
-#simple[simple$covidence_review_id=="47429",]
 simple <- simplify_effects(raw)
 d <- convert_data(simple)
-
+data_file <- "R/dynamic_forest_plot/clean_converted_data.Rdata"
+save(d, file = data_file)
+str(simple$value_ci_lower_bound_consensus)
+str(simple$value_consensus)
 # Clean the names of the datafile, rename to something more meaningful, 
 # remove empty stuff, then cut small studies or rubbish
 q <- clean_names(d) %>%
@@ -101,13 +104,14 @@ q$n <- format(q$n, big.mark = ",")
 q$n[grepl("NA", q$n)] <- "—"
 q <- ungroup(q)
 
+dim(q)
+
 # Rard removing some pesky effects
 q <- filter(q, effect_size_id_1 != "34306_020",
             effect_size_id_1 != "34306_023",
             effect_size_id_1 != "34306_015",
             effect_size_id_1 != "34306_016")
 
-write.csv(q, "data_to_plot.csv")
 #### Forest plot for education####
 
 for (i in 1:length(unique(q$outcome_category))) {
