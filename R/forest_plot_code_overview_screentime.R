@@ -10,8 +10,10 @@ source("R/functions.R")
 raw <- read_sheet() 
 simple <- simplify_effects(raw)
 d <- convert_data(simple)
+
 data_file <- "R/dynamic_forest_plot/clean_converted_data.Rdata"
 save(d, file = data_file)
+
 str(simple$value_ci_lower_bound_consensus)
 str(simple$value_consensus)
 # Clean the names of the datafile, rename to something more meaningful, 
@@ -103,8 +105,6 @@ q$rci <- with(q, paste(format(round(r,2), nsmall = 2),
 q$n <- format(q$n, big.mark = ",")
 q$n[grepl("NA", q$n)] <- "—"
 q <- ungroup(q)
-
-dim(q)
 
 # Rard removing some pesky effects
 q <- filter(q, effect_size_id_1 != "34306_020",
