@@ -43,7 +43,7 @@ od2r <- Vectorize(od2r)
 
 read_sheet <- function(){
   d = googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4/edit#gid=1427279106",
-                                sheet = "EffectSizes",
+                                sheet = "EffectSizesValidation",
                                 na = c("-999", "", "#N/A")) %>%
     janitor::clean_names() %>%
     #set_names(str_remove(names(.), "_[0-9]+")) %>%
