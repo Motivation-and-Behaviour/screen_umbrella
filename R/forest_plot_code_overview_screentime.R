@@ -22,7 +22,6 @@ q <- clean_names(d) %>%
   dplyr::rename(r = value_consensus,
                 outcome_category = outcome_level_1,
                 outcome = outcome_level_2,
-                recoded_exposure = recoded_content,
                 moderator_level = moderator_level_recoded,
                 moderator_category = moderator_category_recoded,
                 k = k_number_of_studies_for_this_effect_consensus,
@@ -33,9 +32,7 @@ q <- clean_names(d) %>%
                 ) %>%
   remove_empty(which = c("rows", "cols")) %>%
   mutate(n = as.numeric(n)) %>%
-  filter(usable_effect_size == TRUE,
-         r < .99,
-         n >= 1000,
+  filter(r < .99,
          moderator_level != "fixed effects") 
 
 q$i2 <- as.numeric(sapply(q$i2, as.numeric))
@@ -43,7 +40,7 @@ q$effect_size_id_1 <- as.character(sapply(q$effect_size_id_1, as.character))
 # Merge in the plain language exposures and outcomes
 
 #dim(q)
-q <- filter(q, is.na(moderator_type))
+q <- filter(q, moderator_type!="continuous")
 
 
 # Add significance and labels
@@ -58,9 +55,8 @@ names(q)
 # group by study_id and exposure and outcome, pick max K
 q <- rename(q, 
             plain_language_outcome = outcome_plain_language_descriptor) %>%
-    group_by(covidence_review_id,
-              plain_language_outcome,
-              plain_language_exposure) %>% slice_max(k,
+    group_by(plain_language_outcome,
+              plain_language_exposure) %>% slice_max(n,
                                                      with_ties = TRUE) %>%
     select(author_year, covidence_review_id,
            outcome_category, effect_size_id_1,
@@ -69,6 +65,7 @@ q <- rename(q,
            risk,
            k, n, r, cilb, ciub, i2, sig) %>%
     distinct()
+
   
 # Tidy up a few really long labels
 q$plain_language_outcome <- gsub("Executive Functioning ", "Executive Functioning<br>", q$plain_language_outcome)
