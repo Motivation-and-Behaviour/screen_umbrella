@@ -11,9 +11,6 @@ raw <- read_sheet()
 simple <- simplify_effects(raw)
 d <- convert_data(simple)
 
-data_file <- "R/dynamic_forest_plot/clean_converted_data.Rdata"
-save(d, file = data_file)
-
 str(simple$value_ci_lower_bound_consensus)
 str(simple$value_consensus)
 # Clean the names of the datafile, rename to something more meaningful, 
@@ -24,7 +21,7 @@ q <- clean_names(d) %>%
                 outcome = outcome_level_2,
                 moderator_level = moderator_level_recoded,
                 moderator_category = moderator_category_recoded,
-                k = k_number_of_studies_for_this_effect_consensus,
+                k = k_number_of_effects_informing_this_test_consensus,
                 n = combined_n,
                 cilb = value_ci_lower_bound_consensus,
                 ciub = value_ci_upper_bound_consensus,
@@ -50,7 +47,7 @@ q$author_year <- paste(q$first_author, ", ", q$year_of_publication, sep = "")
 
 #bold the rows that are classified as 'risks'
 q$risk <- ifelse(q$benefit_or_risk=="Risk", "bold", "plain")
-names(q)
+
 #if one effect from this review, keep or select "overall"
 # group by study_id and exposure and outcome, pick max K
 q <- rename(q, 
@@ -109,6 +106,7 @@ q <- filter(q, effect_size_id_1 != "34306_020",
             effect_size_id_1 != "34306_015",
             effect_size_id_1 != "34306_016")
 
+saveRDS(q, file = "R/dynamic_forest_plot/clean_converted_data.RDS")
 #### Forest plot for education####
 
 for (i in 1:length(unique(q$outcome_category))) {
