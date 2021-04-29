@@ -30,7 +30,9 @@ q <- clean_names(d) %>%
   remove_empty(which = c("rows", "cols")) %>%
   mutate(n = as.numeric(n)) %>%
   filter(r < .99,
-         moderator_level != "fixed effects") 
+         moderator_level != "fixed effects",
+         k>1,
+         use_moderator==TRUE) 
 
 q$i2 <- as.numeric(sapply(q$i2, as.numeric))
 q$effect_size_id_1 <- as.character(sapply(q$effect_size_id_1, as.character))
