@@ -1,21 +1,27 @@
 library(DiagrammeR)
 library(datapasta)
 library(tidyverse)
+source("R/functions.R")
+
+# Effect Size Data ####
+effects_dat <- get_effects()
+
+# Covidence data ####
 
 covidence_export <- "41928 references imported for screening as 41921 studies
 	24023 duplicates removed
 17898 studies screened against title and abstract
 	15934 studies excluded
-1959 studies assessed for full-text eligibility
-	1789 studies excluded
-		526  Not a systematic review
+1911 studies assessed for full-text eligibility
+	1792 studies excluded
+		527  Not a systematic review
 		508  Systematic review without meta-analysis
 		187  Wrong exposure - clinical health intervention 
 		138  Not a full-text
 		117  Not published in English
 		89  Doesn&#39;t examine exposure-outcome relationship
-		73  Wrong exposure - other (explain)
-		65  Wrong population
+		74  Wrong exposure - other (explain)
+		66  Wrong population
 		30  Not a review
 		22  Duplicated reference
 		14  Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.
@@ -27,29 +33,32 @@ covidence_export <- "41928 references imported for screening as 41921 studies
 		1  Sys review of qual studies
 	0 studies ongoing
 	0 studies awaiting classification
-170 studies included"
+119 studies included"
 
 
-dat <- 
+dat <-
   # Convert each to a separate line
-tibble(text = unlist(str_split(covidence_export, pattern = "\\n"))) %>%
+  tibble(text = unlist(str_split(covidence_export, pattern = "\\n"))) %>%
   # remove unneeded info
-  filter(!str_detect(text, "studies ongoing"), !str_detect(text, "studies awaiting classification")) %>%
+  filter(!str_detect(text, "studies ongoing"), 
+         !str_detect(text, "studies awaiting classification")) %>%
   # Determine row type
   mutate(
-    #type = if_else(startsWith(text, "\t"), "exclude", "main"),
-    type = case_when(startsWith(text, "\t\t") ~ "exclude_reason",
-                     startsWith(text, "\t") ~ "exclude",
-                     TRUE ~ "main"),
+    # type = if_else(startsWith(text, "\t"), "exclude", "main"),
+    type = case_when(
+      startsWith(text, "\t\t") ~ "exclude_reason",
+      startsWith(text, "\t") ~ "exclude",
+      TRUE ~ "main"
+    ),
     step = 0,
-    text = str_replace_all(text, "\t",""),
+    text = str_replace_all(text, "\t", ""),
     value = str_extract(text, "^[0-9]+") %>% as.numeric(),
-    text= str_remove(text, "^[0-9]+") %>% str_trim()
+    text = str_remove(text, "^[0-9]+") %>% str_trim()
   )
 # Generate steps
-step = 0
-for (i in 1:nrow(dat)){
-  if (dat$type[i]=="main") step <- step+1
+step <- 0
+for (i in seq_len(nrow(dat))) {
+  if (dat$type[i] == "main") step <- step + 1
   dat$step[i] <- step
 }
 
@@ -59,116 +68,75 @@ exclusion_collapse <- function(data, old_rows, new_row) {
     data %>%
       filter(text %in% old_rows) %>%
       summarise(value = sum(value), step = min(step)) %>%
-      mutate(text = new_row, type="exclude_reason")
+      mutate(text = new_row, type = "exclude_reason")
   )
 }
 
 
-# Modify dataframe before running below
+# Modify dataframe (add rows as needed)
 dat <- dat %>%
-  exclusion_collapse(c("Not a systematic review", "Not a review"), "Not a systematic review") %>%
-  exclusion_collapse(c("Systematic review without meta-analysis", "Sys review of qual studies", "Review of reviews"), "Systematic review without meta-analysis") %>%
-  exclusion_collapse(c("Duplicated reference", "DUPLICATE TO MERGE LATER"), "Duplicated reference") %>%
-  exclusion_collapse(c("Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.", "Individual level data only"), "All meta-analyses results include adults") %>% 
-  exclusion_collapse(c("Clinical outcome", "Wrong exposure - clinical health intervention"), "Wrong exposure - clinical health intervention") %>% 
-  arrange(step, desc(value)) %>% 
-  mutate(text = paste(value, text, sep=" "))
+  exclusion_collapse(c("Not a systematic review", "Not a review"),
+                     "Not a systematic review") %>%
+  exclusion_collapse(c("Systematic review without meta-analysis",
+                       "Sys review of qual studies", "Review of reviews"),
+                     "Systematic review without meta-analysis") %>%
+  exclusion_collapse(c("Duplicated reference", "DUPLICATE TO MERGE LATER"),
+                     "Duplicated reference") %>%
+  exclusion_collapse(c("Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.",
+                       "Individual level data only"), 
+                     "All meta-analyses results include non-target samples (e.g., adults)") %>%
+  exclusion_collapse(c("Clinical outcome", 
+                       "Wrong exposure - clinical health intervention"), 
+                     "Wrong exposure - clinical health intervention") %>%
+  arrange(step, desc(value))
 
+dat <- dat %>% add_row(
+  text = "studies contributed unique effects",
+  type = "main",
+  step = dat$step[nrow(dat)] + 1,
+  value = n_distinct(effects_dat$covidence_review_id)
+)
+
+# Generate PRISMA Diagram ####
 
 # Convert excl_reason to new column
 dat <- dat %>%
+  mutate(text = paste(value, text, sep = " ")) %>%
   group_by(step, type) %>%
-  mutate(text = if_else(type == "exclude_reason", paste("&nbsp;&nbsp;&nbsp;&nbsp;&#8226; ",text, collapse = "<br ALIGN = 'LEFT'/> \n"), text)) %>%
+  mutate(text = if_else(type == "exclude_reason",
+                        paste("&nbsp;&nbsp;&nbsp;&nbsp;&#8226; ",
+                              text,
+                              collapse = "<br ALIGN = 'LEFT'/> \n"),
+                        text)) %>%
   distinct(step, type, .keep_all = TRUE)
 
 labels <- dat$text
 
-
-grViz(paste("digraph flowchart {
+prisma <- paste("digraph flowchart {
       # node definitions with substituted label text
-      node [shape='box', fontsize = 10];
-      graph [splines=ortho, nodesep=1, dpi = 72]     
-      tab1 [label = '",labels[1],"']
-      tab2 [label = '",labels[2],"']
-      tab3 [label = '",labels[3],"']
-      tab4 [label = '",labels[4],"']
-      tab5 [label = '",labels[5],"']
-      tab6 [label = <",labels[6],"<br ALIGN = 'LEFT'/>",labels[7],"<br ALIGN = 'LEFT'/>>]
-      tab7 [label = '",labels[8],"']
+      node [shape='box', fontsize = 10, width=3.5];
+      graph [splines=ortho, nodesep=1, dpi = 72];
+      tab1 [label = '", labels[1], "']
+      tab2 [label = '", labels[2], "']
+      tab3 [label = '", labels[3], "']
+      tab4 [label = '", labels[4], "']
+      tab5 [label = '", labels[5], "']
+      tab6 [label = <", labels[6], "<br ALIGN = 'LEFT'/>", labels[7], "<br ALIGN = 'LEFT'/>>]
+      tab7 [label = '", labels[8], "']
+      tab8 [label = '", labels[9], "']
 
       # edge definitions with the node IDs
-      tab1 -> tab3 -> tab5 -> tab7;
+      tab1 -> tab3 -> tab5 -> tab7 -> tab8;
       tab1 -> tab2;
       {rank=same; tab1; tab2}
       tab3 -> tab4;
       {rank=same; tab3; tab4}
       tab5 -> tab6;
       {rank=same; tab5; tab6}
-
-      
       }
-", collapse=""))
+", collapse = "")
 
-cat("digraph flowchart {
-      # node definitions with substituted label text
-      node [shape='box', fontsize = 10];
-      graph [splines=ortho, nodesep=1, dpi = 72]     
-      tab1 [label = '",labels[1],"']
-      tab2 [label = '",labels[2],"']
-      tab3 [label = '",labels[3],"']
-      tab4 [label = '",labels[4],"']
-      tab5 [label = '",labels[5],"']
-      tab6 [label = '",labels[6],"']
-      tab7 [label = '",labels[7],"']
-
-      # edge definitions with the node IDs
-      tab1 -> tab3 -> tab5 -> tab7;
-      tab1 -> tab2;
-      {rank=same; tab1; tab2}
-      tab3 -> tab4;
-      {rank=same; tab3; tab4}
-      tab5 -> tab6;
-      {rank=same; tab5; tab6}
-
-      
-      }
-", collapse="")
-
-
-
-grViz("digraph flowchart {
-      # node definitions with substituted label text
-      node [fontname = Helvetica, shape = rectangle]        
-      tab1 [label = '@@1']
-      tab2 [label = '@@2']
-      tab3 [label = '@@3']
-      tab4 [label = '@@4']
-      tab5 [label = '@@5']
-      tab6 [label = 'Foo\\l&#8226;Bar\\l']
-
-      # edge definitions with the node IDs
-      {rank=same; tab2; tab6}
-      tab1 -> tab2 -> tab3 -> tab4 -> tab5;
-      tab2 -> tab6;
-      #{rank=same; tab4; tab5}
-      
-      }
-
-      [1]: 'Questionnaire sent to n=1000 participants'
-      [2]: 'Participants responded- to questionnaire n=850'
-      [3]: 'Participants came to clinic for evaluation n=700'
-      [4]: 'Participants eligible for the study n=600'
-      [5]: 'Study sample n=600'
-      ")
-
-grViz("
-  digraph test {
-    graph [fontsize = 10]
-
-    node [shape = box]
-    A [label = 'Foo\\lBar\\l']
-    B [label = 'Bar\\rFoo\\r']
-
-    A -> B
-  }
-")
+DiagrammeR::grViz(prisma) %>%
+  DiagrammeRsvg::export_svg() %>%
+  charToRaw() %>%
+  rsvg::rsvg_pdf(here::here("flow.pdf"))
