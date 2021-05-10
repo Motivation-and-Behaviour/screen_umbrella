@@ -43,20 +43,8 @@ od2r <- function(or, method=c("pearson","digby")){
 
 od2r <- Vectorize(od2r)
 
-# Read data ####
-read_sheet <- function(){
-  d = googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4/edit#gid=1427279106",
-                                sheet = "EffectSizesValidation",
-                                na = c("-999", "", "#N/A")) %>%
-    janitor::clean_names() %>%
-    #set_names(str_remove(names(.), "_[0-9]+")) %>%
-    mutate(es = str_to_lower(statistical_test_consensus)) %>%
-    select(-ends_with("_r"))
-    
-  return(d)
-}
+## Convert effects data ####
 
-# Convert Data ----
 simplify_effects <- function(data){
   d = data %>%
     dplyr::filter(es %in% c("b", "d", "r", "or", "z")) %>%
@@ -104,11 +92,24 @@ convert_data <- function(data){
   return(d)
 }
 
+# General Functions ####
+read_sheet <- function(sheet){
+  d = googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4/edit#gid=1427279106",
+                                sheet = sheet,
+                                na = c("-999", "", "#N/A")) %>%
+    janitor::clean_names()
+  return(d)
+}
+
+
+
 # Clean effects data ####
 
 get_effects <- function() {
   
-  raw <- read_sheet() 
+  raw <- read_sheet("EffectSizesValidation")  %>%  
+    mutate(es = str_to_lower(statistical_test_consensus)) %>%
+    select(-ends_with("_r"))
   simple <- simplify_effects(raw)
   d <- convert_data(simple)
   
