@@ -7,65 +7,9 @@ source("R/functions.R")
 # remove existing environment
 #rm(list = ls())
 
-raw <- read_sheet() 
-simple <- simplify_effects(raw)
-d <- convert_data(simple)
+# Read in data
+q <- get_effects()
 
-str(simple$value_ci_lower_bound_consensus)
-str(simple$value_consensus)
-# Clean the names of the datafile, rename to something more meaningful, 
-# remove empty stuff, then cut small studies or rubbish
-q <- clean_names(d) %>%
-  dplyr::rename(r = value_consensus,
-                outcome_category = outcome_level_1,
-                outcome = outcome_level_2,
-                moderator_level = moderator_level_recoded,
-                moderator_category = moderator_category_recoded,
-                k = k_number_of_effects_informing_this_test_consensus,
-                n = combined_n,
-                cilb = value_ci_lower_bound_consensus,
-                ciub = value_ci_upper_bound_consensus,
-                i2 = i2_calculated
-                ) %>%
-  remove_empty(which = c("rows", "cols")) %>%
-  mutate(n = as.numeric(n)) %>%
-  filter(r < .99,
-         moderator_level != "fixed effects",
-         k>1,
-         use_moderator==TRUE) 
-
-q$i2 <- as.numeric(sapply(q$i2, as.numeric))
-q$effect_size_id_1 <- as.character(sapply(q$effect_size_id_1, as.character))
-# Merge in the plain language exposures and outcomes
-
-#dim(q)
-q <- filter(q, moderator_type!="continuous")
-
-
-# Add significance and labels
-q$sig <- ((q$cilb * q$ciub) > 0)
-q$sig <- q$sig * .7 + .3
-q$author_year <- paste(q$first_author, ", ", q$year_of_publication, sep = "")
-
-#bold the rows that are classified as 'risks'
-q$risk <- ifelse(q$benefit_or_risk=="Risk", "bold", "plain")
-
-#if one effect from this review, keep or select "overall"
-# group by study_id and exposure and outcome, pick max K
-q <- rename(q, 
-            plain_language_outcome = outcome_plain_language_descriptor) %>%
-    group_by(plain_language_outcome,
-              plain_language_exposure) %>% slice_max(n,
-                                                     with_ties = TRUE) %>%
-    select(author_year, covidence_review_id,
-           outcome_category, effect_size_id_1,
-           plain_language_outcome,
-           plain_language_exposure, 
-           risk,
-           k, n, r, cilb, ciub, i2, sig) %>%
-    distinct()
-
-  
 # Tidy up a few really long labels
 q$plain_language_outcome <- gsub("Executive Functioning ", "Executive Functioning<br>", q$plain_language_outcome)
 q$plain_language_outcome <- gsub("reasoning and ", "reasoning and<br>", q$plain_language_outcome)
@@ -101,12 +45,6 @@ q$rci <- with(q, paste(format(round(r,2), nsmall = 2),
 #q$n <- format(q$n, big.mark = ",")
 q$n[grepl("NA", q$n)] <- "—"
 q <- ungroup(q)
-
-# Rard removing some pesky effects
-q <- filter(q, effect_size_id_1 != "34306_020",
-            effect_size_id_1 != "34306_023",
-            effect_size_id_1 != "34306_015",
-            effect_size_id_1 != "34306_016")
 
 saveRDS(q, file = "R/dynamic_forest_plot/clean_converted_data.RDS")
 #### Forest plot for education####
