@@ -1,5 +1,4 @@
 library(DiagrammeR)
-library(datapasta)
 library(tidyverse)
 source("R/functions.R")
 
@@ -7,7 +6,6 @@ source("R/functions.R")
 effects_dat <- get_effects()
 
 # Covidence data ####
-
 covidence_export <- "41928 references imported for screening as 41921 studies
 	24023 duplicates removed
 17898 studies screened against title and abstract
