@@ -1,5 +1,4 @@
 library(DiagrammeR)
-library(datapasta)
 library(tidyverse)
 
 covidence_export <- "41928 references imported for screening as 41921 studies
@@ -84,9 +83,9 @@ dat <- dat %>%
 labels <- dat$text
 
 
-grViz(paste("digraph flowchart {
+prisma <- paste("digraph flowchart {
       # node definitions with substituted label text
-      node [shape='box', fontsize = 10];
+      node [shape='box', fontsize = 10, width=4];
       graph [splines=ortho, nodesep=1, dpi = 72]     
       tab1 [label = '",labels[1],"']
       tab2 [label = '",labels[2],"']
@@ -107,68 +106,13 @@ grViz(paste("digraph flowchart {
 
       
       }
-", collapse=""))
-
-cat("digraph flowchart {
-      # node definitions with substituted label text
-      node [shape='box', fontsize = 10];
-      graph [splines=ortho, nodesep=1, dpi = 72]     
-      tab1 [label = '",labels[1],"']
-      tab2 [label = '",labels[2],"']
-      tab3 [label = '",labels[3],"']
-      tab4 [label = '",labels[4],"']
-      tab5 [label = '",labels[5],"']
-      tab6 [label = '",labels[6],"']
-      tab7 [label = '",labels[7],"']
-
-      # edge definitions with the node IDs
-      tab1 -> tab3 -> tab5 -> tab7;
-      tab1 -> tab2;
-      {rank=same; tab1; tab2}
-      tab3 -> tab4;
-      {rank=same; tab3; tab4}
-      tab5 -> tab6;
-      {rank=same; tab5; tab6}
-
-      
-      }
 ", collapse="")
 
+grViz(prisma) 
+
+%>% DiagrammeRsvg::export_svg() %>%
+  charToRaw %>%
+  rsvg::rsvg_pdf(here::here("flow.pdf"))
 
 
-grViz("digraph flowchart {
-      # node definitions with substituted label text
-      node [fontname = Helvetica, shape = rectangle]        
-      tab1 [label = '@@1']
-      tab2 [label = '@@2']
-      tab3 [label = '@@3']
-      tab4 [label = '@@4']
-      tab5 [label = '@@5']
-      tab6 [label = 'Foo\\l&#8226;Bar\\l']
 
-      # edge definitions with the node IDs
-      {rank=same; tab2; tab6}
-      tab1 -> tab2 -> tab3 -> tab4 -> tab5;
-      tab2 -> tab6;
-      #{rank=same; tab4; tab5}
-      
-      }
-
-      [1]: 'Questionnaire sent to n=1000 participants'
-      [2]: 'Participants responded- to questionnaire n=850'
-      [3]: 'Participants came to clinic for evaluation n=700'
-      [4]: 'Participants eligible for the study n=600'
-      [5]: 'Study sample n=600'
-      ")
-
-grViz("
-  digraph test {
-    graph [fontsize = 10]
-
-    node [shape = box]
-    A [label = 'Foo\\lBar\\l']
-    B [label = 'Bar\\rFoo\\r']
-
-    A -> B
-  }
-")
