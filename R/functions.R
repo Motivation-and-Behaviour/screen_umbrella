@@ -125,8 +125,9 @@ get_effects <- function() {
                   n = combined_n,
                   cilb = value_ci_lower_bound_consensus,
                   ciub = value_ci_upper_bound_consensus,
-                  i2 = i2_calculated
-    ) %>%
+                  i2 = i2_calculated,
+                  plain_language_outcome = outcome_plain_language_descriptor
+                  ) %>%
     remove_empty(which = c("rows", "cols")) %>%
     mutate(n = as.numeric(n)) %>%
     filter(r < .99,
@@ -147,17 +148,20 @@ get_effects <- function() {
   
   #if one effect from this review, keep or select "overall"
   # group by study_id and exposure and outcome, pick max n
-  q <- rename(q, 
-              plain_language_outcome = outcome_plain_language_descriptor) %>%
+  q_use <- q %>% 
     group_by(plain_language_outcome,
-             plain_language_exposure) %>% slice_max(n,
-                                                    with_ties = TRUE) %>%
+             plain_language_exposure) %>% 
+    slice_max(n, with_ties = TRUE) %>% 
+    mutate(use_effect = TRUE) %>% 
+    ungroup()
+  
+  q <- left_join(q, select(q_use, effect_size_id_1, use_effect)) %>% 
     select(author_year, covidence_review_id,
            outcome_category, effect_size_id_1,
            plain_language_outcome,
            plain_language_exposure, 
            risk,
-           k, n, r, cilb, ciub, i2, sig) %>%
+           k, n, r, cilb, ciub, i2, sig, use_effect) %>%
     distinct()
   
   return(q)

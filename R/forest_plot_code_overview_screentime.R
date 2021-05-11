@@ -8,7 +8,9 @@ source("R/functions.R")
 #rm(list = ls())
 
 # Read in data
-q <- get_effects()
+q <- get_effects() %>% 
+  filter(use_effect==TRUE) %>% 
+  select(-use_effect)
 
 # Tidy up a few really long labels
 q$plain_language_outcome <- gsub("Executive Functioning ", "Executive Functioning<br>", q$plain_language_outcome)
