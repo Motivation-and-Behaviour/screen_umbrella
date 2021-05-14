@@ -110,7 +110,7 @@ sketch <- htmltools::withTags(table(
   )
 ))
 
-table_df %>%
+review_tablet_DT <- table_df %>%
   datatable(
     escape = FALSE,
     rownames = FALSE,
@@ -130,7 +130,7 @@ table_df %>%
 
 ## Use Kable for printing ####
 
-table_df %>%
+review_table_kable <- table_df %>%
   mutate_at(
     vars("Eligibility Criteria Predefined And Specified":"Heterogeneity Assessed"),
     ~ case_when(

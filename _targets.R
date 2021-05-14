@@ -1,28 +1,49 @@
 library(targets)
-
-source(here::here("R","functions.R"))
+library(tarchetypes)
+source(here::here("R", "functions.R"))
 options(tidyverse.quiet = TRUE)
-tar_option_set(packages = c("tidyverse", "janitor","here", "glue", "fuzzyjoin",
-                            "googlesheets4", "refinr", "tidyr")
-)
-tar_pipeline(
+tar_option_set(packages = c(
+  "tidyverse", "janitor", "here", "glue", "fuzzyjoin",
+  "googlesheets4", "refinr", "tidyr"
+))
+
+list(
+  # Data sources
   tar_target(
-    read_data,
-    read_sheet()
+    modified_date,
+    get_mod_date(),
+    # Force run if outdated or doesn't exist
+    cue = tar_cue_force(condition = ifelse(tar_exist_objects("modified_date"),
+                        get_mod_date() != tar_read(modified_date),
+                        TRUE))
   ),
   tar_target(
-    simple_effects,
-    simplify_effects(read_data)
+    effects_raw,
+    read_sheet(modified_date, "EffectSizesValidation")
   ),
   tar_target(
-    converted_data,
-    convert_data(simple_effects)
+    reviews_raw,
+    read_sheet(modified_date, "ReviewLevelValidation")
   ),
-  tar_target(write_out,
-    googlesheets4::write_sheet(converted_data, ss= "1yEdtTxP0RIc3Td7lswTf7ySJJ_Jr6Qu9LWaIYV8_00k")
+  tar_target(
+    rob_raw,
+    read_sheet(modified_date, "QualityAssessment")
   ),
-  tarchetypes::tar_knit(
-    report,
-    "report.Rmd"
+  # Data cleaning
+  tar_target(
+    effects_clean,
+    process_effects(effects_raw),
   )
+  # tar_target(
+  #   simple_effects,
+  #   simplify_effects(read_data)
+  # ),
+  # tar_target(
+  #   converted_data,
+  #   convert_data(simple_effects)
+  # ),
+  # tarchetypes::tar_knit(
+  #   report,
+  #   "report.Rmd"
+  # )
 )

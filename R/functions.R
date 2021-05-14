@@ -1,47 +1,9 @@
-library(tidyverse)
-library(janitor)
+# Targets functions ####
 
-# Conversion functions ####
-
-#conversion formula from 10.1007/s11162-011-9232-5
-b2r <- function(beta){
-  #test beta: beta = -.02
-  r <- NA
-  if(!is.na(beta)){
-    r <- beta 
-  }
-  r
+get_mod_date <- function(){
+  x <- googledrive::drive_get(id = googledrive::as_id("1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4"))
+  return(x$drive_resource[[1]]$modifiedTime)
 }
-
-b2r <- Vectorize(b2r)
-
-d2r <- function(d, a = 4){
-  #assumes equal groups
-  #https://www.meta-analysis.com/downloads/Meta-analysis%20Converting%20among%20effect%20sizes.pdf
-  #10.1002/jrsm.1218
-  if(is.na(d)){NA}else{d/(sqrt(d^2+a))}
-}
-
-d2r <- Vectorize(d2r)
-
-z2r <- function(z){
-  #test z <- 3.4
-  if(is.na(z)){NA}else{tanh(z)}
-}
-
-z2r <- Vectorize(z2r)
-
-od2r <- function(or, method=c("pearson","digby")){
-  #DOI:10.1037/0003-066X.62.3.254
-  if(is.na(or)){NA
-    }else{switch(method,
-         pearson = cos(pi/(1+or^.5)),
-         digby = (or^(3/4)-1)/(or^(3/4)+1)
-  )
-    }
-}
-
-od2r <- Vectorize(od2r)
 
 ## Convert effects data ####
 
@@ -52,7 +14,50 @@ simplify_effects <- function(data){
   return(d)
 }
 
-convert_data <- function(data){
+convert_effects <- function(data){
+  # Conversion functions
+  
+  b2r <- function(beta){
+    # conversion formula from 10.1007/s11162-011-9232-5
+    r <- NA
+    if(!is.na(beta)){
+      r <- beta 
+    }
+    r
+  }
+  
+  b2r <- Vectorize(b2r)
+  
+  d2r <- function(d, a = 4){
+    #assumes equal groups
+    #https://www.meta-analysis.com/downloads/Meta-analysis%20Converting%20among%20effect%20sizes.pdf
+    #10.1002/jrsm.1218
+    if(is.na(d)){NA}else{d/(sqrt(d^2+a))}
+  }
+  
+  d2r <- Vectorize(d2r)
+  
+  z2r <- function(z){
+    #test z <- 3.4
+    if(is.na(z)){NA}else{tanh(z)}
+  }
+  
+  z2r <- Vectorize(z2r)
+  
+  od2r <- function(or, method=c("pearson","digby")){
+    #DOI:10.1037/0003-066X.62.3.254
+    if(is.na(or)){NA
+    }else{switch(method,
+                 pearson = cos(pi/(1+or^.5)),
+                 digby = (or^(3/4)-1)/(or^(3/4)+1)
+    )
+    }
+  }
+  
+  od2r <- Vectorize(od2r)
+  
+  # Process data
+  
   d <- data %>%  
     mutate(value_ci_lower_bound_consensus =
              case_when(
@@ -93,7 +98,7 @@ convert_data <- function(data){
 }
 
 # General Functions ####
-read_sheet <- function(sheet){
+read_sheet <- function(mod_date, sheet){
   d = googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4/edit#gid=1427279106",
                                 sheet = sheet,
                                 na = c("-999", "", "#N/A")) %>%
@@ -102,16 +107,15 @@ read_sheet <- function(sheet){
 }
 
 
+# Effects data ####
 
-# Clean effects data ####
-
-get_effects <- function() {
+process_effects <- function(raw) {
   
-  raw <- read_sheet("EffectSizesValidation")  %>%  
+  raw <- raw %>% 
     mutate(es = str_to_lower(statistical_test_consensus)) %>%
     select(-ends_with("_r"))
   simple <- simplify_effects(raw)
-  d <- convert_data(simple)
+  d <- convert_effects(simple)
   
   # Clean the names of the datafile, rename to something more meaningful, 
   # remove empty stuff, then cut small studies or rubbish

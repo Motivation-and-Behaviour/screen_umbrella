@@ -137,4 +137,4 @@ prisma <- paste("digraph flowchart {
 DiagrammeR::grViz(prisma) %>%
   DiagrammeRsvg::export_svg() %>%
   charToRaw() %>%
-  rsvg::rsvg_pdf(here::here("flow.pdf"))
+  rsvg::rsvg_pdf(here::here("figure","flow.pdf"))
