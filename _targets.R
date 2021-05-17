@@ -64,8 +64,9 @@ list(
     save_plots(plots),
     format = "file"
   ),
-  tarchetypes::tar_knit(
+  tarchetypes::tar_render(
     report,
-    "index.Rmd"
+    "index.Rmd",
+    
   )
 )

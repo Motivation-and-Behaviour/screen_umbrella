@@ -117,7 +117,7 @@ make_tables <- function(rob_df, effects_df, reviews_df) {
       escape = FALSE,
       rownames = FALSE,
       container = sketch,
-      width=1500,
+      width=1200,
       fillContainer = FALSE, 
       options = list(
         pageLength = 30, 
@@ -155,7 +155,7 @@ make_tables <- function(rob_df, effects_df, reviews_df) {
     kable(escape = FALSE) %>%
     kable_paper(full_width = TRUE, bootstrap_options = "striped") %>%
     add_header_above(c("Review Characteristics" = 9, "Quality Assessment" = 7)) %>% 
-    scroll_box(width="1500px")
+    scroll_box(width="1200px")
   
   reviews_tables <- list(DT = review_table_DT, kable = review_table_kable)
   
