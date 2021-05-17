@@ -66,7 +66,6 @@ make_plots <- function(effects_clean) {
 
   # Make output lists
   plots <- vector(mode = "list", length = length(unique(q$outcome_category)))
-  plots_files <- character(length = length(unique(q$outcome_category)))
   names(plots) <- unique(q$outcome_category)
 
   for (i in 1:length(unique(q$outcome_category))) {
@@ -234,16 +233,27 @@ make_plots <- function(effects_clean) {
       )
 
     plots[[levels(q$outcome_category)[i]]] <- p1
-    file_name <- here::here("figure", paste("Forest plot for ", levels(q$outcome_category)[i], ".pdf", sep = ""))
+  }
+  return(plots)
+}
 
-    ggsave(
-      filename = file_name,
-      plot = p1,
-      width = 12,
-      height = 10
-    )
-
-    plots_files[i] <- file_name
+save_plots <- function(plots){
+  plots_files <- character(length = length(plots))
+  
+  for (i in seq_along(plots)){
+  
+  file_name <- here::here("figure", paste("Forest plot for ", names(plots)[i], ".pdf", sep = ""))
+  
+  plots[i]
+  ggsave(
+    filename = file_name,
+    #plot = plots[i],
+    width = 12,
+    height = 10
+  )
+  
+  plots_files[i] <- file_name
+  
   }
   return(plots_files)
 }

@@ -1,0 +1,106 @@
+---
+title: "Screen Time Review of Reviews Summary"
+output:
+  rmdformats::html_clean:
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: true
+    highlight: tango
+    fig_caption: true
+    use_bookdown: true
+    number_sections: false
+    toc: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	fig.retina=2
+)
+
+library(tidyverse)
+library(targets)
+library(xfun)
+library(DiagrammeR)
+```
+
+# Results
+
+## Search Results
+
+```{r, load-targets}
+tar_load(prisma)
+tar_load(effects_clean)
+tar_load(reviews_table)
+tar_load(plots)
+```
+
+The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were removed as duplicates. After screening titles and abstracts, we assessed `r format(prisma$data$value[5], big.mark=",")` full-texts inclusion. `r str_to_sentence(numbers_to_words(prisma$data$value[8], and=TRUE))` met the inclusion criteria and we extracted the data of these studies.
+
+After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total effect size. This process yielded `r prisma$data$value[9]` unique effects/outcome combinations.
+
+```{r, fig.cap="PRISMA Diagram"}
+prisma$diag
+```
+
+## Review Characteristics {.tabset}
+
+### Interactive
+
+```{r}
+reviews_table$DT
+```
+
+### Print
+
+```{r}
+reviews_table$kable
+```
+
+
+## Forest Plots {.tabset}
+
+### Health Behaviour
+
+```{r, fig.cap="Forest Plot for Health Behaviour Outcomes", fig.width=12, fig.height=10}
+plots$`Health Behaviour`
+```
+
+### Physical Health
+
+```{r, fig.cap="Forest Plot for Physical Health Outcomes", fig.width=12, fig.height=10}
+plots$`Physical Health`
+```
+
+### Psychology
+
+```{r, fig.cap="Forest Plot for Psychology Outcomes", fig.width=12, fig.height=10}
+plots$Psychology
+```
+
+### Education
+
+```{r, fig.cap="Forest Plot for Education Outcomes", fig.width=12, fig.height=10}
+plots$Education
+```
+
+# Appendix
+
+## Assumptions
+
+I made the following assumptions which may or may not be reasonable:
+
+1.  That $\beta$ is equivilent to $r$ for $\beta < |.5|$ and undefined otherwise (never the case here)
+2.  That, given the large sample sizes involved *Hedge's g* and *Cohen's d* where essentially equivalent and that sample sizes used to make up these effects were approximately equal in treatment and control groups.
+3.  In the absence of information that could be used to construct a 2x2 contingency table that ORs and Relative Risk Ratios were equivalent and thus Relative Risk Ratios were converted to $r$ as if they were Odds ratios.
+4.  External to any other information that all forms of SMD, weighted means etc. were equivilent to Cohen's d.
+
+
+## Project Structure
+```{r message=FALSE, warning=FALSE}
+tar_visnetwork()
+```
+

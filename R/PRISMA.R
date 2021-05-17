@@ -2,10 +2,10 @@ library(DiagrammeR)
 library(tidyverse)
 
 make_prisma <- function(covidence_export, effects_clean) {
-
+  
   # Get Covidence PRISMA data
   covidence_export <- read_file(covidence_export)
-
+  
   dat <-
     # Convert each to a separate line
     tibble(text = unlist(str_split(covidence_export, pattern = "\\n"))) %>%
@@ -33,7 +33,7 @@ make_prisma <- function(covidence_export, effects_clean) {
     if (dat$type[i] == "main") step <- step + 1
     dat$step[i] <- step
   }
-
+  
   exclusion_collapse <- function(data, old_rows, new_row) {
     bind_rows(
       data %>% filter(!text %in% old_rows),
@@ -43,8 +43,8 @@ make_prisma <- function(covidence_export, effects_clean) {
         mutate(text = new_row, type = "exclude_reason")
     )
   }
-
-
+  
+  
   # Modify dataframe (add rows as needed)
   dat <- dat %>%
     exclusion_collapse(
@@ -77,31 +77,31 @@ make_prisma <- function(covidence_export, effects_clean) {
       "Wrong exposure - clinical health intervention"
     ) %>%
     arrange(step, desc(value))
-
+  
   dat <- dat %>% add_row(
     text = "studies contributed unique effects",
     type = "main",
     step = dat$step[nrow(dat)] + 1,
     value = n_distinct(effects_clean$covidence_review_id)
   )
-
+  
   # Generate PRISMA Diagram ####
-
+  
   # Convert excl_reason to new column
   dat <- dat %>%
     mutate(text = paste(value, text, sep = " ")) %>%
     group_by(step, type) %>%
     mutate(text = if_else(type == "exclude_reason",
-      paste("&nbsp;&nbsp;&nbsp;&nbsp;&#8226; ",
-        text,
-        collapse = "<br ALIGN = 'LEFT'/> \n"
-      ),
-      text
+                          paste("&nbsp;&nbsp;&nbsp;&nbsp;&#8226; ",
+                                text,
+                                collapse = "<br ALIGN = 'LEFT'/> \n"
+                          ),
+                          text
     )) %>%
     distinct(step, type, .keep_all = TRUE)
-
+  
   labels <- dat$text
-
+  
   prisma <- paste("digraph flowchart {
       # node definitions with substituted label text
       node [shape='box', fontsize = 10, width=3.5];
@@ -125,13 +125,20 @@ make_prisma <- function(covidence_export, effects_clean) {
       {rank=same; tab5; tab6}
       }
 ", collapse = "")
-
+  
   prisma_diag <- DiagrammeR::grViz(prisma)
+  prisma_data <- list(data = dat, diag = prisma_diag)
+  
+  return(prisma_data)
+  
+}
 
-  prisma_diag %>%
+save_prisma <- function(prisma_data){
+  
+  prisma_data$diag %>%
     DiagrammeRsvg::export_svg() %>%
     charToRaw() %>%
     rsvg::rsvg_pdf(here::here("figure", "flow.pdf"))
-
+  
   return(here::here("figure", "flow.pdf"))
 }
