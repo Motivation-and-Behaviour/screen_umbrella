@@ -1,11 +1,13 @@
 library(targets)
 library(tarchetypes)
-source(here::here("R", "functions.R"))
+library(here)
+
+source(here("R", "functions.R"))
+source(here("R", "reviews_table.R"))
+source(here("R","PRISMA.R"))
+source(here("R", "forest_plot_code_overview_screentime.R"))
+
 options(tidyverse.quiet = TRUE)
-tar_option_set(packages = c(
-  "tidyverse", "janitor", "here", "glue", "fuzzyjoin",
-  "googlesheets4", "refinr", "tidyr"
-))
 
 list(
   # Data sources
@@ -29,10 +31,30 @@ list(
     rob_raw,
     read_sheet(modified_date, "QualityAssessment")
   ),
+  tar_target(
+    prisma_data,
+    here("covidence_prisma.txt"),
+    format = "file"
+  ),
   # Data cleaning
   tar_target(
     effects_clean,
     process_effects(effects_raw),
+  ),
+  # Data Vis
+  tar_target(
+    reviews_table,
+    make_tables(rob_raw, effects_clean, reviews_raw)
+  ),
+  tar_target(
+    prisma,
+    make_prisma(prisma_data, effects_clean),
+    format = "file",
+  ),
+  tar_target(
+    plots,
+    make_plots(effects_clean),
+    format = "file"
   )
   # tar_target(
   #   simple_effects,

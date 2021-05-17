@@ -1,116 +1,108 @@
 library(DiagrammeR)
 library(tidyverse)
-source("R/functions.R")
 
-# Effect Size Data ####
-effects_dat <- get_effects()
+make_prisma <- function(covidence_export, effects_clean) {
 
-# Covidence data ####
-covidence_export <- "41928 references imported for screening as 41921 studies
-	24023 duplicates removed
-17898 studies screened against title and abstract
-	15934 studies excluded
-1911 studies assessed for full-text eligibility
-	1792 studies excluded
-		527  Not a systematic review
-		508  Systematic review without meta-analysis
-		187  Wrong exposure - clinical health intervention 
-		138  Not a full-text
-		117  Not published in English
-		89  Doesn&#39;t examine exposure-outcome relationship
-		74  Wrong exposure - other (explain)
-		66  Wrong population
-		30  Not a review
-		22  Duplicated reference
-		14  Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.
-		11  Individual level data only
-		3  Full-text article could not be retrieved
-		2  DUPLICATE TO MERGE LATER
-		2  Review of reviews
-		1  Clinical outcome
-		1  Sys review of qual studies
-	0 studies ongoing
-	0 studies awaiting classification
-119 studies included"
+  # Get Covidence PRISMA data
+  covidence_export <- read_file(covidence_export)
+
+  dat <-
+    # Convert each to a separate line
+    tibble(text = unlist(str_split(covidence_export, pattern = "\\n"))) %>%
+    # remove unneeded info
+    filter(
+      !str_detect(text, "studies ongoing"),
+      !str_detect(text, "studies awaiting classification")
+    ) %>%
+    # Determine row type
+    mutate(
+      # type = if_else(startsWith(text, "\t"), "exclude", "main"),
+      type = case_when(
+        startsWith(text, "\t\t") ~ "exclude_reason",
+        startsWith(text, "\t") ~ "exclude",
+        TRUE ~ "main"
+      ),
+      step = 0,
+      text = str_replace_all(text, "\t", ""),
+      value = str_extract(text, "^[0-9]+") %>% as.numeric(),
+      text = str_remove(text, "^[0-9]+") %>% str_trim()
+    )
+  # Generate steps
+  step <- 0
+  for (i in seq_len(nrow(dat))) {
+    if (dat$type[i] == "main") step <- step + 1
+    dat$step[i] <- step
+  }
+
+  exclusion_collapse <- function(data, old_rows, new_row) {
+    bind_rows(
+      data %>% filter(!text %in% old_rows),
+      data %>%
+        filter(text %in% old_rows) %>%
+        summarise(value = sum(value), step = min(step)) %>%
+        mutate(text = new_row, type = "exclude_reason")
+    )
+  }
 
 
-dat <-
-  # Convert each to a separate line
-  tibble(text = unlist(str_split(covidence_export, pattern = "\\n"))) %>%
-  # remove unneeded info
-  filter(!str_detect(text, "studies ongoing"), 
-         !str_detect(text, "studies awaiting classification")) %>%
-  # Determine row type
-  mutate(
-    # type = if_else(startsWith(text, "\t"), "exclude", "main"),
-    type = case_when(
-      startsWith(text, "\t\t") ~ "exclude_reason",
-      startsWith(text, "\t") ~ "exclude",
-      TRUE ~ "main"
-    ),
-    step = 0,
-    text = str_replace_all(text, "\t", ""),
-    value = str_extract(text, "^[0-9]+") %>% as.numeric(),
-    text = str_remove(text, "^[0-9]+") %>% str_trim()
+  # Modify dataframe (add rows as needed)
+  dat <- dat %>%
+    exclusion_collapse(
+      c("Not a systematic review", "Not a review"),
+      "Not a systematic review"
+    ) %>%
+    exclusion_collapse(
+      c(
+        "Systematic review without meta-analysis",
+        "Sys review of qual studies", "Review of reviews"
+      ),
+      "Systematic review without meta-analysis"
+    ) %>%
+    exclusion_collapse(
+      c("Duplicated reference", "DUPLICATE TO MERGE LATER"),
+      "Duplicated reference"
+    ) %>%
+    exclusion_collapse(
+      c(
+        "Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.",
+        "Individual level data only"
+      ),
+      "All meta-analyses results include non-target samples (e.g., adults)"
+    ) %>%
+    exclusion_collapse(
+      c(
+        "Clinical outcome",
+        "Wrong exposure - clinical health intervention"
+      ),
+      "Wrong exposure - clinical health intervention"
+    ) %>%
+    arrange(step, desc(value))
+
+  dat <- dat %>% add_row(
+    text = "studies contributed unique effects",
+    type = "main",
+    step = dat$step[nrow(dat)] + 1,
+    value = n_distinct(effects_clean$covidence_review_id)
   )
-# Generate steps
-step <- 0
-for (i in seq_len(nrow(dat))) {
-  if (dat$type[i] == "main") step <- step + 1
-  dat$step[i] <- step
-}
 
-exclusion_collapse <- function(data, old_rows, new_row) {
-  bind_rows(
-    data %>% filter(!text %in% old_rows),
-    data %>%
-      filter(text %in% old_rows) %>%
-      summarise(value = sum(value), step = min(step)) %>%
-      mutate(text = new_row, type = "exclude_reason")
-  )
-}
+  # Generate PRISMA Diagram ####
 
+  # Convert excl_reason to new column
+  dat <- dat %>%
+    mutate(text = paste(value, text, sep = " ")) %>%
+    group_by(step, type) %>%
+    mutate(text = if_else(type == "exclude_reason",
+      paste("&nbsp;&nbsp;&nbsp;&nbsp;&#8226; ",
+        text,
+        collapse = "<br ALIGN = 'LEFT'/> \n"
+      ),
+      text
+    )) %>%
+    distinct(step, type, .keep_all = TRUE)
 
-# Modify dataframe (add rows as needed)
-dat <- dat %>%
-  exclusion_collapse(c("Not a systematic review", "Not a review"),
-                     "Not a systematic review") %>%
-  exclusion_collapse(c("Systematic review without meta-analysis",
-                       "Sys review of qual studies", "Review of reviews"),
-                     "Systematic review without meta-analysis") %>%
-  exclusion_collapse(c("Duplicated reference", "DUPLICATE TO MERGE LATER"),
-                     "Duplicated reference") %>%
-  exclusion_collapse(c("Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.",
-                       "Individual level data only"), 
-                     "All meta-analyses results include non-target samples (e.g., adults)") %>%
-  exclusion_collapse(c("Clinical outcome", 
-                       "Wrong exposure - clinical health intervention"), 
-                     "Wrong exposure - clinical health intervention") %>%
-  arrange(step, desc(value))
+  labels <- dat$text
 
-dat <- dat %>% add_row(
-  text = "studies contributed unique effects",
-  type = "main",
-  step = dat$step[nrow(dat)] + 1,
-  value = n_distinct(effects_dat$covidence_review_id)
-)
-
-# Generate PRISMA Diagram ####
-
-# Convert excl_reason to new column
-dat <- dat %>%
-  mutate(text = paste(value, text, sep = " ")) %>%
-  group_by(step, type) %>%
-  mutate(text = if_else(type == "exclude_reason",
-                        paste("&nbsp;&nbsp;&nbsp;&nbsp;&#8226; ",
-                              text,
-                              collapse = "<br ALIGN = 'LEFT'/> \n"),
-                        text)) %>%
-  distinct(step, type, .keep_all = TRUE)
-
-labels <- dat$text
-
-prisma <- paste("digraph flowchart {
+  prisma <- paste("digraph flowchart {
       # node definitions with substituted label text
       node [shape='box', fontsize = 10, width=3.5];
       graph [splines=ortho, nodesep=1, dpi = 72];
@@ -134,7 +126,12 @@ prisma <- paste("digraph flowchart {
       }
 ", collapse = "")
 
-DiagrammeR::grViz(prisma) %>%
-  DiagrammeRsvg::export_svg() %>%
-  charToRaw() %>%
-  rsvg::rsvg_pdf(here::here("figure","flow.pdf"))
+  prisma_diag <- DiagrammeR::grViz(prisma)
+
+  prisma_diag %>%
+    DiagrammeRsvg::export_svg() %>%
+    charToRaw() %>%
+    rsvg::rsvg_pdf(here::here("figure", "flow.pdf"))
+
+  return(here::here("figure", "flow.pdf"))
+}
