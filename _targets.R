@@ -48,24 +48,24 @@ list(
   ),
   tar_target(
     prisma,
-    make_prisma(prisma_data, effects_clean),
+    make_prisma(prisma_data, effects_clean)
+  ),
+  tar_target(
+    export_prisma,
+    save_prisma(prisma),
     format = "file",
   ),
   tar_target(
     plots,
     make_plots(effects_clean),
+  ),
+  tar_target(
+    export_plots,
+    save_plots(plots),
     format = "file"
+  ),
+  tarchetypes::tar_knit(
+    report,
+    "index.Rmd"
   )
-  # tar_target(
-  #   simple_effects,
-  #   simplify_effects(read_data)
-  # ),
-  # tar_target(
-  #   converted_data,
-  #   convert_data(simple_effects)
-  # ),
-  # tarchetypes::tar_knit(
-  #   report,
-  #   "report.Rmd"
-  # )
 )

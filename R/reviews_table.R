@@ -117,11 +117,14 @@ make_tables <- function(rob_df, effects_df, reviews_df) {
       escape = FALSE,
       rownames = FALSE,
       container = sketch,
+      width=1500,
+      fillContainer = FALSE, 
       options = list(
+        pageLength = 30, 
         autoWidth = TRUE,
         columnDefs = list(
           list(className = "dt-center", targets = 9:15),
-          list(width = "300px", targets = 7:8)
+          list(width = "300px", targets = 8:9)
         )
       )
     ) %>%
@@ -131,7 +134,6 @@ make_tables <- function(rob_df, effects_df, reviews_df) {
 
 
   ## Use Kable for printing ####
-
   review_table_kable <- table_df %>%
     mutate_at(
       vars("Eligibility Criteria Predefined And Specified":"Heterogeneity Assessed"),
@@ -152,5 +154,10 @@ make_tables <- function(rob_df, effects_df, reviews_df) {
     ) %>%
     kable(escape = FALSE) %>%
     kable_paper(full_width = TRUE, bootstrap_options = "striped") %>%
-    add_header_above(c("Review Characteristics" = 9, "Quality Assessment" = 7))
+    add_header_above(c("Review Characteristics" = 9, "Quality Assessment" = 7)) %>% 
+    scroll_box(width="1500px")
+  
+  reviews_tables <- list(DT = review_table_DT, kable = review_table_kable)
+  
+  return(reviews_tables)
 }
