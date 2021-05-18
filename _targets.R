@@ -7,7 +7,7 @@ source(here("R", "reviews_table.R"))
 source(here("R","PRISMA.R"))
 source(here("R", "forest_plot_code_overview_screentime.R"))
 
-options(tidyverse.quiet = TRUE)
+options(tidyverse.quiet = TRUE, clustermq.scheduler="multiprocess")
 
 list(
   # Data sources
