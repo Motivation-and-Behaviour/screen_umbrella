@@ -101,6 +101,6 @@ I made the following assumptions which may or may not be reasonable:
 
 ## Project Structure
 ```{r message=FALSE, warning=FALSE}
-tar_visnetwork()
+tar_visnetwork(targets_only = TRUE)
 ```
 

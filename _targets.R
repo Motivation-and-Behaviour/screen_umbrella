@@ -1,6 +1,7 @@
 library(targets)
 library(tarchetypes)
 library(here)
+library(tidyverse)
 
 source(here("R", "functions.R"))
 source(here("R", "reviews_table.R"))
@@ -30,6 +31,11 @@ list(
   tar_target(
     rob_raw,
     read_sheet(modified_date, "QualityAssessment")
+  ),
+  tar_target(
+    studies_raw,
+    read_sheet(modified_date, "StudyLevel") %>% 
+      filter(ok_to_import)
   ),
   tar_target(
     prisma_data,
