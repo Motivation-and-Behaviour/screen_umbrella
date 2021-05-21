@@ -1,7 +1,6 @@
 library(targets)
 library(tarchetypes)
 library(here)
-library(tidyverse)
 
 source(here("R", "functions.R"))
 source(here("R", "reviews_table.R"))
@@ -9,6 +8,16 @@ source(here("R","PRISMA.R"))
 source(here("R", "forest_plot_code_overview_screentime.R"))
 
 options(tidyverse.quiet = TRUE, clustermq.scheduler="multiprocess")
+
+tar_option_set(packages = c(
+  "DT",
+  "ggplot2",
+  "ggtext",
+  "janitor",
+  "kableExtra",
+  "tidyMB",
+  "tidyverse"
+))
 
 list(
   # Data sources
@@ -34,8 +43,7 @@ list(
   ),
   tar_target(
     studies_raw,
-    read_sheet(modified_date, "StudyLevel") %>% 
-      filter(ok_to_import)
+    read_sheet(modified_date, "StudyLevel")
   ),
   tar_target(
     prisma_data,
