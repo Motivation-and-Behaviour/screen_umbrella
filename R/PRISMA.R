@@ -1,6 +1,3 @@
-library(DiagrammeR)
-library(tidyverse)
-
 make_prisma <- function(covidence_export, effects_clean) {
   
   # Get Covidence PRISMA data

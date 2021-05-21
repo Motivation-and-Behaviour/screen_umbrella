@@ -1,6 +1,3 @@
-library(DT)
-library(kableExtra)
-
 make_tables <- function(rob_df, effects_df, reviews_df) {
 
 
