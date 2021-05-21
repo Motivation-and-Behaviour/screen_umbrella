@@ -5,14 +5,7 @@ get_mod_date <- function(){
   return(x$drive_resource[[1]]$modifiedTime)
 }
 
-## Convert effects data ####
-
-simplify_effects <- function(data){
-  d = data %>%
-    dplyr::filter(es %in% c("b", "d", "r", "or", "z")) %>%
-    dplyr::rename(std_eff_name = es)
-  return(d)
-}
+# Convert effects data ####
 
 convert_effects <- function(data){
   # Conversion functions
@@ -59,6 +52,8 @@ convert_effects <- function(data){
   # Process data
   
   d <- data %>%  
+    filter(es %in% c("b", "d", "r", "or", "z")) %>%
+    rename(std_eff_name = es) %>% 
     mutate(value_ci_lower_bound_consensus =
              case_when(
                !is.na(value_raw_se) ~ value_consensus-2*value_raw_se,
@@ -97,6 +92,13 @@ convert_effects <- function(data){
   return(d)
 }
 
+convert_studies <- function(data) {
+  
+  data
+  
+}
+
+
 # General Functions ####
 read_sheet <- function(mod_date, sheet){
   d = googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4/edit#gid=1427279106",
@@ -114,8 +116,7 @@ process_effects <- function(raw) {
   raw <- raw %>% 
     mutate(es = str_to_lower(statistical_test_consensus)) %>%
     select(-ends_with("_r"))
-  simple <- simplify_effects(raw)
-  d <- convert_effects(simple)
+  d <- convert_effects(raw)
   
   # Clean the names of the datafile, rename to something more meaningful, 
   # remove empty stuff, then cut small studies or rubbish
@@ -136,7 +137,7 @@ process_effects <- function(raw) {
     mutate(n = as.numeric(n)) %>%
     filter(r < .99,
            moderator_level != "fixed effects",
-           k>1,
+           n>1,
            use_moderator==TRUE) 
   
   q$i2 <- as.numeric(sapply(q$i2, as.numeric))
@@ -170,3 +171,45 @@ process_effects <- function(raw) {
   
   return(q)
 }
+
+# Study level data ####
+
+process_studies <- function(raw){
+  
+  raw <- raw %>%
+    filter(ok_to_import) %>%
+    mutate(es = str_to_lower(converted_metric),
+           # Fix the nested imports
+           across(
+             c(effect_size_id, study_first_page_number),
+             ~ sapply(.x, as.character)
+           ),
+           across(
+             c(
+               lower_ci,
+               upper_ci,
+               standard_error,
+               p_value,
+               n_intervention,
+               n_control,
+               number_of_events_in_exposure_for_or_rr,
+               number_of_events_in_comparison_for_or_rr
+             ),
+             ~ sapply(.x, as.numeric)
+           ))
+  
+  d <- convert_studies()
+  
+  
+  
+  
+}
+
+
+
+
+
+
+
+
+
