@@ -333,3 +333,55 @@ run_eggers <- function(meta_results) {
 combine_study_results <- function(meta_aggregated, eggers_results) {
   full_join(meta_aggregated, eggers_results, by = "effect_size_id")
 }
+
+# Data Vis ####
+# NOTE - temporary only
+make_comp_plots <- function(effects_clean, studies_results) {
+  effects_match <- effects_clean %>%
+    filter(effect_size_id_1 %in% studies_results$effect_size_id) %>%
+    mutate(
+      std.error = (ciub - cilb) / 3.92,
+      source = "them",
+      outcome_lvl1 = factor(gsub(":.*", "", plain_language_outcome)),
+      plain_language_outcome = gsub(".*: ", "", plain_language_outcome),
+      desc = paste(
+        effect_size_id_1,
+        plain_language_outcome,
+        plain_language_exposure,
+        sep = " \n "
+      )
+    ) %>%
+    rename(estimate = r, effect_size_id = effect_size_id_1)
+  
+  joined_data <-
+    bind_rows(
+      studies_results %>% mutate(source = "us") %>%
+        left_join(
+          effects_match %>%
+            select(effect_size_id,
+                   desc,
+                   outcome_category,
+                   outcome_lvl1)
+        ),
+      effects_match
+    )
+  
+  comp_plots <-
+    vector(mode = "list", length = length(unique(joined_data$outcome_category)))
+  names(comp_plots) <- unique(joined_data$outcome_category)
+  
+  for (out_cat in unique(joined_data$outcome_category)) {
+    out_plot <-
+      forestplot(
+        df = joined_data %>% filter(outcome_category == out_cat),
+        name = desc,
+        estimate = estimate,
+        se = std.error,
+        colour = source
+      ) + ggforce::facet_col(facets = ~ outcome_lvl1,
+                             scales = "free_y",
+                             space = "free")
+    comp_plots[[out_cat]] <- out_plot
+  }
+  return(comp_plots)
+}

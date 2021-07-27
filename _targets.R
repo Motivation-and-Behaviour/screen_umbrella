@@ -16,6 +16,8 @@ tar_option_set(packages = c(
   "esc",
   "ggplot2",
   "ggtext",
+  "ggforestplot", # TEMP
+  "ggforce", # TEMP
   "janitor",
   "kableExtra",
   "metafor",
@@ -99,6 +101,10 @@ list(
   tar_target(
     plots,
     make_plots(effects_clean),
+  ),
+  tar_target(
+    comparison_plots,
+    make_comp_plots(effects_clean, studies_results)
   ),
   tar_target(
     export_plots,

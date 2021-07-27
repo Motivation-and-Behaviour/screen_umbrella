@@ -36,6 +36,8 @@ tar_load(prisma)
 tar_load(effects_clean)
 tar_load(reviews_table)
 tar_load(plots)
+tar_load(studies_results)
+tar_load(comparison_plots)
 ```
 
 The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were removed as duplicates. After screening titles and abstracts, we assessed `r format(prisma$data$value[5], big.mark=",")` full-texts inclusion. `r str_to_sentence(numbers_to_words(prisma$data$value[8], and=TRUE))` met the inclusion criteria and we extracted the data of these studies.
@@ -85,6 +87,36 @@ plots$Psychology
 
 ```{r, fig.cap="Forest Plot for Education Outcomes", fig.width=12, fig.height=10}
 plots$Education
+```
+
+# Individual Studies
+
+Currently, individual data has been extracted and cleaned for `r nrow(studies_results)` effect sizes.
+
+## Forest Plots {.tabset}
+
+### Health Behaviour
+
+```{r, fig.cap="Forest Plot for Health Behaviour Outcomes", fig.width=12, fig.height=10}
+comparison_plots$`health behaviour`
+```
+
+### Physical Health
+
+```{r, fig.cap="Forest Plot for Physical Health Outcomes", fig.width=12, fig.height=10}
+comparison_plots$`physical health`
+```
+
+### Psychology
+
+```{r, fig.cap="Forest Plot for Psychology Outcomes", fig.width=12, fig.height=10}
+comparison_plots$psychology
+```
+
+### Education
+
+```{r, fig.cap="Forest Plot for Education Outcomes", fig.width=12, fig.height=10}
+comparison_plots$education
 ```
 
 # Appendix
