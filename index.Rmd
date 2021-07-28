@@ -136,3 +136,9 @@ I made the following assumptions which may or may not be reasonable:
 tar_visnetwork(targets_only = TRUE)
 ```
 
+The following warnings were noted during the project build:
+
+```{r}
+tar_meta(fields = warnings) %>% filter(!is.na(warnings)) %>% arrange(name)
+```
+

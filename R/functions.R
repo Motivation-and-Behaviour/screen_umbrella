@@ -241,7 +241,7 @@ convert_studies <- function(raw) {
       "d", converted_metric
     )) %>%
     # Limit to those with a method to convert
-    filter(converted_metric %in% c("r", "d", "or", "z")) %>%
+    filter(converted_metric %in% c("r", "d", "or", "z"))%>%
     # Conversions
     mutate(
       # Convert the estimates
@@ -262,14 +262,17 @@ convert_studies <- function(raw) {
         converted_metric == "z" ~ esc::convert_z2r(lower_ci)
         # TODO - risk ratios lower ci
       ),
-      r_ci_lower = case_when(
+      r_ci_upper = case_when(
         is.na(upper_ci) ~ NA_real_,
         converted_metric == "r" ~ upper_ci,
         converted_metric == "d" ~ esc::pearsons_r(d = upper_ci),
         converted_metric == "or" ~ esc::pearsons_r(or = upper_ci),
         converted_metric == "z" ~ esc::convert_z2r(upper_ci)
         # TODO - risk ratios upper ci
-      )
+        ),
+      # Reverse coding as needed
+      across(c(r_estimate,r_ci_lower,r_ci_upper),
+               ~if_else(reverse_code, . * -1, .))
     ) %>%
     group_by(effect_size_id) %>%
     tar_group()
