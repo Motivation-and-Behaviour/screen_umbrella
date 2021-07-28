@@ -1,8 +1,3 @@
-library(tidyverse)
-library(janitor)
-library(ggtext)
-library(tidyMB)
-
 make_plots <- function(effects_clean) {
   q <- effects_clean %>%
     filter(use_effect == TRUE) %>%
