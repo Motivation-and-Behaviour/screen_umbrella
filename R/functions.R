@@ -274,6 +274,7 @@ convert_studies <- function(raw) {
       across(c(r_estimate,r_ci_lower,r_ci_upper),
                ~if_else(reverse_code, . * -1, .))
     ) %>%
+    drop_na(r_estimate, study_n) %>% 
     group_by(effect_size_id) %>%
     tar_group()
 
