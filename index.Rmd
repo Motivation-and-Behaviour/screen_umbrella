@@ -42,7 +42,7 @@ tar_load(comparison_plots)
 
 The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were removed as duplicates. After screening titles and abstracts, we assessed `r format(prisma$data$value[5], big.mark=",")` full-texts inclusion. `r str_to_sentence(numbers_to_words(prisma$data$value[8], and=TRUE))` met the inclusion criteria and we extracted the data of these studies.
 
-After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total effect size. This process yielded `r prisma$data$value[9]` unique effects/outcome combinations.
+After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total effect size. This process yielded `r nrow(effects_clean)` unique effects/outcome combinations contributed from `r prisma$data$value[9]` papers.
 
 ```{r, fig.cap="PRISMA Diagram"}
 prisma$diag
@@ -91,7 +91,7 @@ plots$Education
 
 # Individual Studies
 
-Currently, individual data has been extracted and cleaned for `r nrow(studies_results)` effect sizes.
+Currently, individual data has been extracted and cleaned for `r nrow(studies_results)` effect sizes, out of `r nrow(effects_clean)` total effects (`r scales::percent(nrow(studies_results)/nrow(effects_clean))`) . 
 
 ## Forest Plots {.tabset}
 

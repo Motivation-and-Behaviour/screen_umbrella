@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.5",
+    "Version": "4.1.0",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -9,7 +9,7 @@
     ]
   },
   "Bioconductor": {
-    "Version": "3.12"
+    "Version": "3.13"
   },
   "Packages": {
     "BH": {
@@ -172,6 +172,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "c6dddf90a1e38665c211932696ddbfde"
+    },
+    "bs4Dash": {
+      "Package": "bs4Dash",
+      "Version": "2.0.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e91fefcf385e2433f574263619307243"
     },
     "bslib": {
       "Package": "bslib",
@@ -376,6 +383,13 @@
       "Repository": "CRAN",
       "Hash": "81c3244cab67468aac4c60550832655d"
     },
+    "fresh": {
+      "Package": "fresh",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "fa54367040deb4537da49b7ac0ee5770"
+    },
     "fs": {
       "Package": "fs",
       "Version": "1.5.0",
@@ -428,14 +442,14 @@
       "RemoteUsername": "NightingaleHealth",
       "RemoteRef": "HEAD",
       "RemoteSha": "547617e63fa481a5f28ffc56c07d46be4af688b2",
-      "Hash": "5d22c52c06a149859735776e7e2c5ac6"
+      "Hash": "5d8477a13f52f6ad287dedfe1ad30ff2"
     },
     "ggplot2": {
       "Package": "ggplot2",
-      "Version": "3.3.3",
+      "Version": "3.3.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3eb6477d01eb5bbdc03f7d5f70f2733e"
+      "Hash": "d7566c471c7b17e095dd023b9ef155ad"
     },
     "ggplotify": {
       "Package": "ggplotify",
@@ -544,10 +558,10 @@
     },
     "haven": {
       "Package": "haven",
-      "Version": "2.4.1",
+      "Version": "2.4.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "9ace652bffef34af558eb5d70903ac2f"
+      "Hash": "10bec8a8264f3eb59531e8c4c0303f96"
     },
     "here": {
       "Package": "here",
@@ -670,10 +684,13 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.33",
+      "Version": "1.33.8",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "0bc1b5da1b0eb07cd4b727e95e9ff0b8"
+      "Repository": "https://yihui.r-universe.dev",
+      "RemoteUrl": "https://github.com/yihui/knitr",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "55a2df9353af1157b3954a968cfef5c1e30dd64c",
+      "Hash": "d3e32f8e2fa102948f788c01d2fa0bd9"
     },
     "labeling": {
       "Package": "labeling",
@@ -719,10 +736,10 @@
     },
     "lubridate": {
       "Package": "lubridate",
-      "Version": "1.7.9.2",
+      "Version": "1.7.10",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "5b5b02f621d39a499def7923a5aee746"
+      "Hash": "1ebfdc8a3cfe8fe19184f5481972b092"
     },
     "magrittr": {
       "Package": "magrittr",
@@ -835,6 +852,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "8672ae02bd20f6479bce2d06c7ff1401"
+    },
+    "pingr": {
+      "Package": "pingr",
+      "Version": "2.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e293e79be42ffd336d938937fd3017fb"
     },
     "pkgconfig": {
       "Package": "pkgconfig",
@@ -1013,10 +1037,10 @@
     },
     "rvest": {
       "Package": "rvest",
-      "Version": "1.0.0",
+      "Version": "1.0.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "74b905b0076e1de6e27f540c95ba68d5"
+      "Hash": "1db38d6f40e3e09527797ca4226a1b5b"
     },
     "sass": {
       "Package": "sass",
@@ -1045,6 +1069,20 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6e3b6ae7fe02b5859e4bb277f218b8ae"
+    },
+    "shinyWidgets": {
+      "Package": "shinyWidgets",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7dd5f3ee96c64a47fdbc6e437ff1c7e1"
+    },
+    "shinybusy": {
+      "Package": "shinybusy",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c38fc071d4def5e642c8dc34c3a082e4"
     },
     "slam": {
       "Package": "slam",
@@ -1251,6 +1289,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "12545f2acf49d1d346d075580122d89c"
+    },
+    "waiter": {
+      "Package": "waiter",
+      "Version": "0.2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "30b15e2b6a0abc1e67bb468d9d851071"
     },
     "webshot": {
       "Package": "webshot",

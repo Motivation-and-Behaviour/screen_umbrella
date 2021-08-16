@@ -230,9 +230,12 @@ convert_studies <- function(raw) {
       ),
       # Add a study name
       study_name = paste(study_author, study_year)
-    )
-
-  # TODO - Fix missing values for N
+    ) %>% 
+    # Impute mising N
+    # TODO - Use something other than mean imputation
+    group_by(effect_size_id) %>% 
+    mutate(study_n = replace_na(study_n, round(mean(study_n, na.rm = TRUE)))) %>% 
+    ungroup()
 
   # Convert effect sizes
   converted <- cleaned %>%

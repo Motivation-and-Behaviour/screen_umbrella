@@ -22,7 +22,8 @@ tar_option_set(packages = c(
   "kableExtra",
   "metafor",
   "tidyMB",
-  "tidyverse"
+  "tidyverse",
+  "scales"
 ))
 
 list(
