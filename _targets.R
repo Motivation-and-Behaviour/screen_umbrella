@@ -81,9 +81,13 @@ list(
     run_eggers(meta_results),
     pattern = map(meta_results)
   ),
+  tar_target(excess_sig_results,
+             run_excess_sig(meta_results),
+             pattern = map(meta_results)
+  ),
   tar_target(
     studies_results,
-    combine_study_results(meta_aggregated, eggers_results)
+    combine_study_results(meta_aggregated, eggers_results, excess_sig_results)
   ),
   # Data Vis
   tar_target(
