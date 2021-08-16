@@ -97,25 +97,25 @@ Currently, individual data has been extracted and cleaned for `r nrow(studies_re
 
 ### Health Behaviour
 
-```{r, fig.cap="Forest Plot for Health Behaviour Outcomes", fig.width=12, fig.height=10}
+```{r, fig.cap="Forest Plot for Health Behaviour Outcomes", fig.width=12, fig.height=15}
 comparison_plots$`health behaviour`
 ```
 
 ### Physical Health
 
-```{r, fig.cap="Forest Plot for Physical Health Outcomes", fig.width=12, fig.height=10}
+```{r, fig.cap="Forest Plot for Physical Health Outcomes", fig.width=12, fig.height=15}
 comparison_plots$`physical health`
 ```
 
 ### Psychology
 
-```{r, fig.cap="Forest Plot for Psychology Outcomes", fig.width=12, fig.height=10}
+```{r, fig.cap="Forest Plot for Psychology Outcomes", fig.width=12, fig.height=15}
 comparison_plots$psychology
 ```
 
 ### Education
 
-```{r, fig.cap="Forest Plot for Education Outcomes", fig.width=12, fig.height=10}
+```{r, fig.cap="Forest Plot for Education Outcomes", fig.width=12, fig.height=15}
 comparison_plots$education
 ```
 
