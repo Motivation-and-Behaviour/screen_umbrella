@@ -293,20 +293,37 @@ run_metaanalysis <- function(converted) {
     ni = study_n,
     slab = study_name
   )
-
+  
+  # Repeat for 99.9% CIs since bug in Broom
+  meta_out_999 <- rma(
+    data = converted,
+    measure = "COR",
+    ri = r_estimate,
+    ni = study_n,
+    slab = study_name,
+    level=99.9
+  )
+  
+  meta_out$conf.low_999 <- meta_out_999$ci.lb
+  meta_out$conf.high_999 <- meta_out_999$ci.ub
+  
   # Add the ID for later matching
   meta_out$effect_size_id <- converted$effect_size_id[1]
-
+  
   return(meta_out)
 }
 
 tidy_meta <- function(meta_results) {
-  df <- broom::tidy(meta_results, conf.int = T)
+  df <- broom::tidy(meta_results, conf.int = TRUE)
   # Add extras not provided by broom
   df$k <- meta_results$k
   df$i2 <- meta_results$I2
+  df$n <- sum(meta_results$ni)
+  df$n_max <- max(meta_results$ni)
+  df$conf.low_999 <- meta_results$conf.low_999
+  df$conf.high_999 <- meta_results$conf.high_999
   df$effect_size_id <- meta_results$effect_size_id
-
+  
   return(df)
 }
 
@@ -354,7 +371,76 @@ run_excess_sig <- function(meta_results){
 
 combine_study_results <- function(meta_aggregated, eggers_results, excess_sig_results) {
   full_join(meta_aggregated, eggers_results, by = "effect_size_id") %>% 
-    full_join(excess_sig_results, by = "effect_size_id")
+    full_join(excess_sig_results, by = "effect_size_id") %>% 
+    rename_with(.cols=estimate:conf.high_999, .fn= ~paste0("reanalysis_",.x)) %>% 
+    relocate(effect_size_id)
+}
+
+join_analyses <- function(effects_clean, studies_results){
+  # Join the results
+  joined_df <- left_join(
+    effects_clean %>%
+      rename("effect_size_id" = "effect_size_id_1") %>%
+      rename_with(.cols = k:sig, .fn =  ~ paste0("reported_", .x)),
+    studies_results,
+    by = "effect_size_id") %>%
+    # Create the columns that will be plotted
+    mutate(
+      source = if_else(!is.na(reanalysis_estimate),
+                       "reanalysis",
+                       "reported"),
+      r = if_else(!is.na(reanalysis_estimate),
+                  reanalysis_estimate,
+                  reported_r),
+      n = if_else(!is.na(reanalysis_estimate),
+                  reanalysis_n,
+                  reported_n),
+      k = if_else(
+        !is.na(reanalysis_estimate),
+        reanalysis_k,
+        as.integer(reported_k)
+      ),
+      i2 = if_else(!is.na(reanalysis_estimate),
+                   reanalysis_i2,
+                   reported_i2),
+      std.err = if_else(
+        !is.na(reanalysis_estimate),
+        reanalysis_std.error,
+        (reported_ciub - reported_cilb) / 3.92
+      ),
+      cilb95 = if_else(
+        !is.na(reanalysis_estimate),
+        reanalysis_conf.low,
+        reported_cilb
+      ),
+      ciub95 = if_else(
+        !is.na(reanalysis_estimate),
+        reanalysis_conf.high,
+        reported_ciub
+      ),
+      cilb999 = if_else(
+        !is.na(reanalysis_estimate),
+        reanalysis_conf.low_999,
+        NA_real_
+      ),
+      ciub999 = if_else(
+        !is.na(reanalysis_estimate),
+        reanalysis_conf.high_999,
+        NA_real_
+      )
+    ) %>% 
+      # Create the trustworthiness indicator
+      mutate(certainty = case_when(
+        source == "reported" ~ "unclear",
+        (reanalysis_n >=1000 &
+           if_else(!is.na(eggers_p),eggers_p>0.05 ,FALSE) &
+           tes_p>0.05) ~ "meets criteria",
+        TRUE ~ "unclear"
+      ))
+    
+  return(joined_df)
+
+  
 }
 
 # Data Vis ####

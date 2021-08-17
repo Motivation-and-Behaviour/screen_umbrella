@@ -89,6 +89,9 @@ list(
     studies_results,
     combine_study_results(meta_aggregated, eggers_results, excess_sig_results)
   ),
+  tar_target(combined_effects,
+              join_analyses(effects_clean, studies_results)),
+  
   # Data Vis
   tar_target(
     reviews_table,
@@ -105,7 +108,7 @@ list(
   ),
   tar_target(
     plots,
-    make_plots(effects_clean),
+    make_plots(combined_effects),
   ),
   tar_target(
     comparison_plots,

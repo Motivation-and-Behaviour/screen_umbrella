@@ -1,5 +1,5 @@
-make_plots <- function(effects_clean) {
-  q <- effects_clean %>%
+make_plots <- function(combined_effects) {
+  q <- combined_effects %>%
     filter(use_effect == TRUE) %>%
     select(-use_effect)
 
