@@ -117,7 +117,8 @@ list(
   tar_target(
     export_plots,
     save_plots(plots),
-    format = "file"
+    format = "file",
+    pattern = map(plots),
   ),
   tarchetypes::tar_render(
     report,
