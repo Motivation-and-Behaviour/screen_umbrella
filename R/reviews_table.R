@@ -154,7 +154,7 @@ make_tables <- function(rob_df, effects_df, reviews_df) {
     add_header_above(c("Review Characteristics" = 9, "Quality Assessment" = 7)) %>% 
     scroll_box(width="1200px")
   
-  reviews_tables <- list(DT = review_table_DT, kable = review_table_kable)
+  reviews_tables <- list(DT = review_table_DT, kable = review_table_kable, data = table_df)
   
   return(reviews_tables)
 }

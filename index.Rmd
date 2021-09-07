@@ -11,6 +11,7 @@ output:
     use_bookdown: true
     number_sections: false
     toc: false
+
 ---
 
 ```{r setup, include=FALSE}
@@ -27,10 +28,6 @@ library(xfun)
 library(DiagrammeR)
 ```
 
-# Results
-
-## Search Results
-
 ```{r, load-targets}
 tar_load(prisma)
 tar_load(effects_clean)
@@ -38,15 +35,135 @@ tar_load(reviews_table)
 tar_load(plots)
 tar_load(studies_results)
 tar_load(comparison_plots)
+tar_load(combined_effects)
 ```
 
-The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were removed as duplicates. After screening titles and abstracts, we assessed `r format(prisma$data$value[5], big.mark=",")` full-texts inclusion. `r str_to_sentence(numbers_to_words(prisma$data$value[8], and=TRUE))` met the inclusion criteria and we extracted the data of these studies.
+# Results
 
-After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total effect size. This process yielded `r nrow(effects_clean)` unique effects/outcome combinations contributed from `r prisma$data$value[9]` papers.
+## Search Results
 
-```{r, fig.cap="PRISMA Diagram"}
+```{r results}
+rename_effects <- function(cur_name) {
+  if (str_detect(cur_name, ":")) {
+      
+  cur_name_split <- str_split(cur_name, ": ")
+  return(str_to_lower(paste(cur_name_split[[1]][2], 
+                            cur_name_split[[1]][1])))
+  } else {
+    return(str_to_lower(cur_name))
+  }
+}
+rename_effects <- Vectorize(rename_effects)
+
+unique_effects <- nrow(effects_clean %>% filter(use_effect))
+
+freq_exposures <-  effects_clean %>% 
+  group_by(plain_language_exposure) %>% 
+  summarise(n=n()) %>% 
+  arrange(desc(n)) %>% 
+  mutate(plain_language_exposure = rename_effects(plain_language_exposure),
+         plain_language_exposure = str_replace_all(plain_language_exposure, 
+                                               c("lifestyle risk behaviour (at school) intervention" =                                             "digital interventions for lifestyle risk behaviours")),
+         out = paste0(plain_language_exposure, " (n = ", n, ")"))
+
+freq_outcomes <- effects_clean %>% 
+  group_by(plain_language_outcome) %>% 
+  summarise(n=n()) %>% 
+  arrange(desc(n)) %>%   
+  mutate(plain_language_outcome = rename_effects(plain_language_outcome),
+         out = paste0(plain_language_outcome, " (n = ", n, ")"))
+
+freq_combos <- effects_clean %>% 
+  group_by(plain_language_exposure, plain_language_outcome) %>% 
+  summarise(n=n()) %>% 
+  arrange(desc(n))
+```
+
+The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were removed as duplicates. After screening titles and abstracts, we assessed `r format(prisma$data$value[5], big.mark=",")` full-texts for inclusion. `r str_to_sentence(numbers_to_words(prisma$data$value[8], and=TRUE))` met the inclusion criteria and we extracted the data of these studies. Figure \@ref(fig:prisma) presents the full results of the study selection process. 
+
+```{r prisma, fig.cap="PRISMA Diagram"}
 prisma$diag
 ```
+
+After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total sample size. This process yielded `r unique_effects` unique effects/outcome combinations contributed from `r prisma$data$value[9]` papers. The most frequently reported exposures were `r knitr::combine_words(freq_exposures$out[1:4])`. The most frequently reported outcomes were `r knitr::combine_words(freq_outcomes$out[1:4])`. In most cases (`r paste0(sum(freq_combos$n==1), "/", nrow(effects_clean))`), there was only one exposure/outcome combination, with `r sum(freq_combos$n==2)` appearing twice, and `r sum(freq_combos$n>2)` three or more times. Full characteristics of the included studies are provided in Table X.
+
+## Study Quality
+
+```{r}
+reviews_count <- reviews_table$data %>% 
+  mutate(across("Eligibility Criteria Predefined And Specified":"Heterogeneity Assessed", as.factor)) %>% 
+  rowwise() %>% 
+  mutate(count_low = sum(c_across("Eligibility Criteria Predefined And Specified":"Heterogeneity Assessed")=="Low"))
+
+all_low <- reviews_count %>%
+  filter(count_low==7) %>% 
+  nrow()
+
+reviews_count <-
+  reviews_count %>%
+  select("Eligibility Criteria Predefined And Specified":"Heterogeneity Assessed") %>%
+  gather(name, value) %>%
+  count(name, value) %>%
+  arrange(desc(n))
+
+n_low_hetero <- reviews_count[reviews_count$name=="Heterogeneity Assessed" & reviews_count$value=="Low","n"]
+n_low_char <- reviews_count[reviews_count$name=="Included Studies Listed With Important Characteristics And Results Of Each" & reviews_count$value=="Low","n"]
+n_low_search <- reviews_count[reviews_count$name=="Literature Search Strategy Comprehensive And Systematic" & reviews_count$value=="Low","n"]
+
+n_unclear_elig <- reviews_count[reviews_count$name=="Eligibility Criteria Predefined And Specified" & reviews_count$value=="Unclear","n"]
+
+n_high_dualscreen <- reviews_count[reviews_count$name=="Dual Independent Screening Review" & reviews_count$value=="High","n"]
+n_unclear_dualscreen <- reviews_count[reviews_count$name=="Dual Independent Screening Review" & reviews_count$value=="Unclear","n"]
+
+n_high_dualquality <- reviews_count[reviews_count$name=="Dual Independent Quality Assessment" & reviews_count$value=="High","n"]
+n_unclear_dualquality <- reviews_count[reviews_count$name=="Dual Independent Quality Assessment" & reviews_count$value=="Unclear","n"]
+
+```
+
+The quality of the included studies was mixed. Most studies assessed heterogeneity (n = `r n_low_hetero`), reported the characteristics of the included studies (n = `r n_low_char`), and used a comprehensive and systematic search strategy (n = `r n_low_search`). Most studies did not clearly report if their eligibility criteria was predefined (n unclear = `r n_unclear_elig`). Many studies also did not complete dual independent screening of abstracts and full text (n = `r n_high_dualscreen`) or did not clearly report the method of screening (n = `r n_unclear_dualscreen`). A similar trend was observed for dual independent quality assessment (n high = `r n_high_dualquality`; n unclear = `r n_unclear_dualquality`). Overall, only `r all_low` studies were graded as *low* on all criteria.
+
+
+
+## Education Outcomes
+
+```{r}
+n_edu_effect <- nrow(effects_clean %>% filter(outcome_category=="education" & use_effect))
+n_edu_certain <- nrow(combined_effects %>% filter(outcome_category=="education" &
+                                                    certainty == "meets criteria"))
+```
+
+
+There were `r n_edu_effect` unique effects with education outcomes, including general learning outcomes, literacy, numeracy, and science (see Figure X). Of these, `r n_edu_certain` met our criteria for robust evidence. General screen use, TV viewing, and video games were all negatively associated with academic performance, and general screen use was further negatively associated with general learning and general literacy outcomes. Conversely, numeracy focused video games and screen-based interventions which target mathematics were positively associated with numeracy outcomes. There was substantial evidence to suggest that general screen time that occurred with an adult (i.e., coviewing) and education television are not associated with literacy outcomes (i.e., were not significantly different from zero). It is notable that of these results, heterogeneity was high for all except for the video games and academic achievement association. 
+
+## Health Behaviour Outcomes
+
+```{r}
+n_hb_effect <- nrow(effects_clean %>% filter(outcome_category=="health behaviour" & use_effect))
+n_hb_certain <- nrow(combined_effects %>% filter(outcome_category=="health behaviour" &
+                                                    certainty == "meets criteria"))
+```
+
+We identified `r n_hb_effect` unique health outcome exposure combinations, which were further grouped into diet, healthy behaviour, physical activity, risky behaviour, screen time, and sleep. See Figure X for all combinations of exposure and outcome. `r xfun::numbers_to_words(n_hb_certain)` effects met the criteria for certainty. Advertising of unhealthy foods---both traditional advertising and video games developed by a brand for promotion---were associated higher food intake. Social media use was also associated with higher risk of substance abuse, while screen-based interventions which target health behaviours appear effective. Television was negatively correlated with sleep duration, but only at the 95% confidence level, and was not statistically significant at our more stringent 99.9% confidence level. As with the education outcomes, there was substantial unexplained heterogeneity around the findings.
+
+## Physical Health
+
+```{r}
+n_ph_effect <- nrow(effects_clean %>% filter(outcome_category=="physical health" & use_effect))
+n_ph_certain <- nrow(combined_effects %>% filter(outcome_category=="physical health" &
+                                                    certainty == "meets criteria"))
+```
+
+There were `r n_ph_effect` unique effects identified for physical health, but only `r xfun::numbers_to_words(n_ph_certain)` met the criteria for certainty. General screen use, television viewing, and video games were all detrimentally associated with body composition, although all also had high levels of heterogeneity. None of the effects in the other categories---cardiometabolic health, eye health, and other physical health---met our criteria for certainty. 
+
+## Psychology
+
+```{r}
+n_psyc_effect <- nrow(effects_clean %>% filter(outcome_category=="psychology" & use_effect))
+n_psyc_certain <- nrow(combined_effects %>% filter(outcome_category=="psychology" &
+                                                    certainty == "meets criteria"))
+```
+
+We identified `r n_psyc_effect` unique effects which were categorised as psychological outcomes, with `r xfun::numbers_to_words(n_psyc_certain)` meeting the criteria for certainty. General screen use was associated with a small increased risk of depression. Social media use was associated with greater risk taking, and with higher instances of safe sex. Viewing of sexy media was associated with high sexual activity and with higher initiation of sex. All of these effects had substantial heterogeneity.
 
 ## Review Characteristics {.tabset}
 
@@ -65,28 +182,28 @@ reviews_table$kable
 
 ## Forest Plots {.tabset}
 
-### Health Behaviour
+### `r plots[[1]]$name`
 
-```{r, fig.cap="Forest Plot for Health Behaviour Outcomes", fig.width=12, fig.height=10}
-plots$`Health Behaviour`
+```{r, fig.cap=paste("Forest Plot for ", plots[[1]]$name," Outcomes"), fig.width=12, fig.height=10}
+plots[[1]]$plot
 ```
 
-### Physical Health
+### `r plots[[2]]$name`
 
-```{r, fig.cap="Forest Plot for Physical Health Outcomes", fig.width=12, fig.height=10}
-plots$`Physical Health`
+```{r, fig.cap=paste("Forest Plot for ", plots[[2]]$name," Outcomes"), fig.width=12, fig.height=10}
+plots[[2]]$plot
 ```
 
-### Psychology
+### `r plots[[3]]$name`
 
-```{r, fig.cap="Forest Plot for Psychology Outcomes", fig.width=12, fig.height=10}
-plots$Psychology
+```{r, fig.cap=paste("Forest Plot for ", plots[[3]]$name," Outcomes"), fig.width=12, fig.height=10}
+plots[[3]]$plot
 ```
 
-### Education
+### `r plots[[4]]$name`
 
-```{r, fig.cap="Forest Plot for Education Outcomes", fig.width=12, fig.height=10}
-plots$Education
+```{r, fig.cap=paste("Forest Plot for ", plots[[4]]$name," Outcomes"), fig.width=12, fig.height=10}
+plots[[4]]$plot
 ```
 
 # Individual Studies
