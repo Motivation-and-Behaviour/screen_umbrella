@@ -67,10 +67,11 @@ make_plots <- function(combined_effects) {
   q$certainty <- str_to_title(q$certainty)
   
   
+  
   # Make forest plots ####
 
   # Make output lists
-  plots <- vector(mode = "list", length = length(unique(q$outcome_category)))
+  plots <- vector(mode = "list", length = length(unique(q$outcome_category))*2)
   # names(plots) <- unique(q$outcome_category)
 
   for (i in 1:length(unique(q$outcome_category))) {
@@ -96,6 +97,7 @@ make_plots <- function(combined_effects) {
     edu$k[last] <- "**K**"
     edu$i2[last] <- "**I^2**"
     edu$risk[last] <- "plain"
+    edu$certainty[last] <- "**Credible**"
 
     edu$plain_language_outcome <- fct_expand(edu$plain_language_outcome, "**Specific Outcome**") %>%
       fct_relevel("**Specific Outcome**")
@@ -138,11 +140,13 @@ make_plots <- function(combined_effects) {
     edu$ciub95[edu$ciub95 > .4] <- .4
     edu$r[edu$r > .4] <- .39
     edu$shape[edu$r == .39] <- 62
-
-
+    
+    
+    edu_tmp <- edu %>% filter(certainty!="Unclear")
+    
     p1 <- 
       ggplot(
-      edu,
+      edu_tmp,
       aes(
         x = row_num,
         y = r,
@@ -182,35 +186,35 @@ make_plots <- function(combined_effects) {
       #   size=1.5
       # ) +
       geom_richtext(
-        y = -.65, label = edu$certainty,
+        y = -.65, label = edu_tmp$certainty,
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
         label.size = NA
       ) +
       geom_richtext(
-        y = -.95, label = edu$n,
+        y = -.95, label = edu_tmp$n,
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
         label.size = NA
       ) +
       geom_richtext(
-        y = -1.05, label = edu$k,
+        y = -1.05, label = edu_tmp$k,
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
         label.size = NA
       ) +
       geom_richtext(
-        y = -1.2, label = edu$i2,
+        y = -1.2, label = edu_tmp$i2,
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
         label.size = NA
       ) +
       geom_richtext(
-        y = -1.5, label = edu$rci,
+        y = -1.5, label = edu_tmp$rci,
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
@@ -224,14 +228,14 @@ make_plots <- function(combined_effects) {
         label.size = NA
       ) +
       geom_richtext(
-        y = -3.4, label = edu$plain_language_exposure,
+        y = -3.4, label = edu_tmp$plain_language_exposure,
         vjust = 0.5, hjust = 0,
         stat = "identity",
         size = 2.5,
         label.size = NA
       ) +
       geom_richtext(
-        y = -4.3, label = edu$plain_language_outcome,
+        y = -4.3, label = edu_tmp$plain_language_outcome,
         vjust = 0.5, hjust = 0,
         stat = "identity",
         size = 2.5,
@@ -278,6 +282,147 @@ make_plots <- function(combined_effects) {
 
     plots[[i]]$plot <- p1
     plots[[i]]$name <- levels(q$outcome_category)[i]
+    
+    # Plots that don't meet criteria
+    
+    edu_tmp <- edu %>% filter(certainty!="Meets Criteria")
+    p2 <- 
+      ggplot(
+        edu_tmp,
+        aes(
+          x = row_num,
+          y = r,
+          # ymin = cilb,
+          # ymax = ciub,
+          label = author_year,
+          family = "Times",
+          shape = shape,
+          #fontface = risk
+        )
+      ) +
+      geom_point(size=2) +
+      geom_linerange(
+        #99.9% CIs
+        aes(ymin=cilb999,
+            ymax=ciub999),
+        size=0.5,
+        position = position_identity()
+      )+
+      geom_linerange(
+        #95% CIs
+        aes(ymin=cilb95,
+            ymax=ciub95),
+        size=1,
+        position = position_identity()
+      ) +
+      # geom_pointrange(
+      #   #99.9% CIs
+      #   aes(ymin=cilb999,
+      #       ymax=ciub999),
+      #   size=0.5
+      #   ) +
+      # geom_pointrange(
+      #   #95% CIs
+      #   aes(ymin=cilb95,
+      #       ymax=ciub95),
+      #   size=1.5
+    # ) +
+    geom_richtext(
+      y = -.65, label = edu_tmp$certainty,
+      vjust = 0.5, hjust = 0.5,
+      stat = "identity",
+      size = 2.5,
+      label.size = NA
+    ) +
+      geom_richtext(
+        y = -.95, label = edu_tmp$n,
+        vjust = 0.5, hjust = 0.5,
+        stat = "identity",
+        size = 2.5,
+        label.size = NA
+      ) +
+      geom_richtext(
+        y = -1.05, label = edu_tmp$k,
+        vjust = 0.5, hjust = 0.5,
+        stat = "identity",
+        size = 2.5,
+        label.size = NA
+      ) +
+      geom_richtext(
+        y = -1.2, label = edu_tmp$i2,
+        vjust = 0.5, hjust = 0.5,
+        stat = "identity",
+        size = 2.5,
+        label.size = NA
+      ) +
+      geom_richtext(
+        y = -1.5, label = edu_tmp$rci,
+        vjust = 0.5, hjust = 0.5,
+        stat = "identity",
+        size = 2.5,
+        label.size = NA
+      ) +
+      geom_richtext(
+        y = -2.2,
+        vjust = 0.5, hjust = 0,
+        stat = "identity",
+        size = 2.5,
+        label.size = NA
+      ) +
+      geom_richtext(
+        y = -3.4, label = edu_tmp$plain_language_exposure,
+        vjust = 0.5, hjust = 0,
+        stat = "identity",
+        size = 2.5,
+        label.size = NA
+      ) +
+      geom_richtext(
+        y = -4.3, label = edu_tmp$plain_language_outcome,
+        vjust = 0.5, hjust = 0,
+        stat = "identity",
+        size = 2.5,
+        label.size = NA
+      ) +
+      geom_hline(yintercept = 0) +
+      labs(
+        x = NULL,
+        y = plot_title
+      ) +
+      facet_grid(
+        rows = vars(outcome_lvl_1),
+        scales = "free",
+        space = "free",
+        drop = T,
+        switch = "both"
+      ) +
+      coord_flip(ylim = c(-4.2, .4)) +
+      scale_shape_identity() +
+      scale_x_discrete(limits = rev) +
+      scale_y_continuous(breaks = c(-.4, -.2, 0, .2, .4)) +
+      scale_fill_discrete(c("black","white")) + 
+      tidyMB::theme_mb() %+replace% theme(
+        strip.text.y.left = element_text(
+          angle = 0,
+          hjust = 1
+        ),
+        axis.title.x = element_text(
+          hjust = 1,
+          vjust = 0,
+          face = "bold"
+        ),
+        axis.text.y = element_blank(
+          # colour = "white"
+        ),
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        strip.placement = "outside",
+        strip.background = element_rect(linetype = "solid"),
+        text = element_text(family = "Times")
+      )
+    
+    p2
+    
+    plots[[i]]$suppplot <- p2
   }
   return(plots)
 }
