@@ -184,25 +184,25 @@ reviews_table$kable
 
 ### `r plots[[1]]$name`
 
-```{r, fig.cap=paste("Forest Plot for ", plots[[1]]$name," Outcomes"), fig.width=12, fig.height=10}
+```{r, fig.cap=paste("Forest Plot for ", plots[[1]]$name," Outcomes"), fig.width=12}
 plots[[1]]$plot
 ```
 
 ### `r plots[[2]]$name`
 
-```{r, fig.cap=paste("Forest Plot for ", plots[[2]]$name," Outcomes"), fig.width=12, fig.height=10}
+```{r, fig.cap=paste("Forest Plot for ", plots[[2]]$name," Outcomes"), fig.width=12}
 plots[[2]]$plot
 ```
 
 ### `r plots[[3]]$name`
 
-```{r, fig.cap=paste("Forest Plot for ", plots[[3]]$name," Outcomes"), fig.width=12, fig.height=10}
+```{r, fig.cap=paste("Forest Plot for ", plots[[3]]$name," Outcomes"), fig.width=12}
 plots[[3]]$plot
 ```
 
 ### `r plots[[4]]$name`
 
-```{r, fig.cap=paste("Forest Plot for ", plots[[4]]$name," Outcomes"), fig.width=12, fig.height=10}
+```{r, fig.cap=paste("Forest Plot for ", plots[[4]]$name," Outcomes"), fig.width=12}
 plots[[4]]$plot
 ```
 
@@ -210,30 +210,30 @@ plots[[4]]$plot
 
 Currently, individual data has been extracted and cleaned for `r nrow(studies_results)` effect sizes, out of `r nrow(effects_clean)` total effects (`r scales::percent(nrow(studies_results)/nrow(effects_clean))`) . 
 
-## Forest Plots {.tabset}
+## Supplementary Forest Plots {.tabset}
 
-### Health Behaviour
+### `r plots[[1]]$name`
 
-```{r, fig.cap="Forest Plot for Health Behaviour Outcomes", fig.width=12, fig.height=15}
-comparison_plots$`health behaviour`
+```{r, fig.cap=paste("Forest Plot for ", plots[[1]]$name," Outcomes"), fig.width=12}
+plots[[1]]$suppplot
 ```
 
-### Physical Health
+### `r plots[[2]]$name`
 
-```{r, fig.cap="Forest Plot for Physical Health Outcomes", fig.width=12, fig.height=15}
-comparison_plots$`physical health`
+```{r, fig.cap=paste("Forest Plot for ", plots[[2]]$name," Outcomes"), fig.width=12}
+plots[[2]]$suppplot
 ```
 
-### Psychology
+### `r plots[[3]]$name`
 
-```{r, fig.cap="Forest Plot for Psychology Outcomes", fig.width=12, fig.height=15}
-comparison_plots$psychology
+```{r, fig.cap=paste("Forest Plot for ", plots[[3]]$name," Outcomes"), fig.width=12}
+plots[[3]]$suppplot
 ```
 
-### Education
+### `r plots[[4]]$name`
 
-```{r, fig.cap="Forest Plot for Education Outcomes", fig.width=12, fig.height=15}
-comparison_plots$education
+```{r, fig.cap=paste("Forest Plot for ", plots[[4]]$name," Outcomes"), fig.width=12}
+plots[[4]]$suppplot
 ```
 
 # Appendix
