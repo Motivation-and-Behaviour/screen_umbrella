@@ -429,12 +429,38 @@
       "Repository": "CRAN",
       "Hash": "4c64a588b497f8c088e1d308ddd40bc6"
     },
+    "ggforestplot": {
+      "Package": "ggforestplot",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "NightingaleHealth",
+      "RemoteRepo": "ggforestplot",
+      "RemoteRef": "master",
+      "RemoteSha": "547617e63fa481a5f28ffc56c07d46be4af688b2",
+      "Hash": "fd8ec7b8a08f3b8989d0a79a975880c4"
+    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.3.5",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "d7566c471c7b17e095dd023b9ef155ad"
+    },
+    "ggplotify": {
+      "Package": "ggplotify",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "acbcedf783cdb8710168aa0edba42ac0"
+    },
+    "ggstance": {
+      "Package": "ggstance",
+      "Version": "0.3.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2fed8b95e6159315d5a024a2e28d07c4"
     },
     "ggtext": {
       "Package": "ggtext",
@@ -498,6 +524,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "7d7f283939f563670a697165b2cf5560"
+    },
+    "gridGraphics": {
+      "Package": "gridGraphics",
+      "Version": "0.5-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5b79228594f02385d4df4979284879ae"
     },
     "gridtext": {
       "Package": "gridtext",
@@ -716,6 +749,20 @@
       "Repository": "CRAN",
       "Hash": "61e4a10781dd00d7d81dd06ca9b94e95"
     },
+    "mathjaxr": {
+      "Package": "mathjaxr",
+      "Version": "1.4-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "21ec862477d3845843994019cadc4629"
+    },
+    "metafor": {
+      "Package": "metafor",
+      "Version": "3.0-2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b598da1155b3f86b380c1a32f6f3b224"
+    },
     "mgcv": {
       "Package": "mgcv",
       "Version": "1.8-36",
@@ -779,6 +826,20 @@
       "Repository": "CRAN",
       "Hash": "e38aabb0dde91e5622b83747b559bfc2"
     },
+    "patchwork": {
+      "Package": "patchwork",
+      "Version": "1.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c446b30cb33ec125ff02588b60660ccb"
+    },
+    "pbapply": {
+      "Package": "pbapply",
+      "Version": "1.5-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "11359a5bb73622ab3f4136bf57108b64"
+    },
     "pdftools": {
       "Package": "pdftools",
       "Version": "3.0.1",
@@ -806,6 +867,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "01f28d4278f15c76cddbea05899c5d6f"
+    },
+    "plyr": {
+      "Package": "plyr",
+      "Version": "1.8.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ec0e5ab4e5f851f6ef32cd1d1984957f"
     },
     "png": {
       "Package": "png",
@@ -1059,6 +1127,13 @@
       "Repository": "CRAN",
       "Hash": "77102ffd3863e125da9898f9c2825f7b"
     },
+    "survival": {
+      "Package": "survival",
+      "Version": "3.2-11",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f4d706b25d640dbaeb56d9c9b6ce9a22"
+    },
     "svglite": {
       "Package": "svglite",
       "Version": "2.0.0",
@@ -1285,6 +1360,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "2826c5d9efb0a88f657c7a679c7106db"
+    },
+    "yulab.utils": {
+      "Package": "yulab.utils",
+      "Version": "0.0.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a60fcb170dc97ae6d7fbe0ba15a19c69"
     },
     "zip": {
       "Package": "zip",
