@@ -185,13 +185,13 @@ make_plots <- function(combined_effects) {
       #       ymax=ciub95),
       #   size=1.5
       # ) +
-      geom_richtext(
-        y = -.65, label = edu_tmp$certainty,
-        vjust = 0.5, hjust = 0.5,
-        stat = "identity",
-        size = 2.5,
-        label.size = NA
-      ) +
+      # geom_richtext(
+      #   y = -.65, label = edu_tmp$certainty,
+      #   vjust = 0.5, hjust = 0.5,
+      #   stat = "identity",
+      #   size = 2.5,
+      #   label.size = NA
+      # ) +
       geom_richtext(
         y = -.95, label = edu_tmp$n,
         vjust = 0.5, hjust = 0.5,
@@ -327,13 +327,13 @@ make_plots <- function(combined_effects) {
       #       ymax=ciub95),
       #   size=1.5
     # ) +
-    geom_richtext(
-      y = -.65, label = edu_tmp$certainty,
-      vjust = 0.5, hjust = 0.5,
-      stat = "identity",
-      size = 2.5,
-      label.size = NA
-    ) +
+    # geom_richtext(
+    #   y = -.65, label = edu_tmp$certainty,
+    #   vjust = 0.5, hjust = 0.5,
+    #   stat = "identity",
+    #   size = 2.5,
+    #   label.size = NA
+    # ) +
       geom_richtext(
         y = -.95, label = edu_tmp$n,
         vjust = 0.5, hjust = 0.5,
