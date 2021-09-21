@@ -14,6 +14,7 @@ tar_option_set(packages = c(
   "DiagrammeR",
   "DT",
   "esc",
+  "emojifont",
   "ggplot2",
   "ggtext",
   "ggforestplot", # TEMP

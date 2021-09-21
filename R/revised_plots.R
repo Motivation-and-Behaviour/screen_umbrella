@@ -37,7 +37,7 @@ combined_effects <- combined_effects %>%
                 " [", format(round(cilb95, 2), nsmall = 2), ", ",
                 format(round(ciub95, 2), nsmall = 2), "]",
                 sep = ""),
-    
+    indiv_data = if_else(source=="reanalysis", fontawesome("fa-check"), fontawesome("fa-times"))
   ) %>%
   arrange(outcome_lvl_1,
           plain_language_outcome,
@@ -149,14 +149,17 @@ if (certain) {
   
 
 } else {  
-  # updated_plot <- 
+  updated_plot <- 
     base_plot +
-    geom_richtext(aes(label=n),
+    geom_richtext(aes(label=indiv_data),
                   y=-0.6,
                   vjust = 0.5, hjust = 0.5,
                   stat = "identity",
                   size = 2.5,
-                  label.size = NA) +
+                  label.size = NA,
+                  family='fontawesome-webfont') 
+  
+  +
     geom_richtext(aes(label=k),
                   y=-0.85,
                   vjust = 0.5, hjust = 0.5,
@@ -201,7 +204,8 @@ if (certain) {
   }
 
 
-updated_plot <- updated_plot + 
+# updated_plot <- 
+  updated_plot + 
   labs(x = NULL,
        y=NULL,
        caption="<b>r</b> with <b style='color:#636363'>95%</b> and <b style='color:#bdbdbd'>99.9%</b> CIs",
