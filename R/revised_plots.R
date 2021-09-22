@@ -37,7 +37,8 @@ combined_effects <- combined_effects %>%
                 " [", format(round(cilb95, 2), nsmall = 2), ", ",
                 format(round(ciub95, 2), nsmall = 2), "]",
                 sep = ""),
-    indiv_data = if_else(source=="reanalysis", fontawesome("fa-check"), fontawesome("fa-times"))
+    indiv_data = if_else(source=="reanalysis", fontawesome("fa-check"), fontawesome("fa-times")),
+    font_fam = "fontawesome-webfont"
   ) %>%
   arrange(outcome_lvl_1,
           plain_language_outcome,
@@ -51,7 +52,9 @@ combined_effects <- combined_effects %>%
     i2 = "**I^2**",
     rci = "**<i>r</i> with 95% CI**",
     author_year = "**Lead Author, Date**",
-    row_num="NA"
+    row_num="NA",
+    indiv_data = "**Individual Data**",
+    font_fam = "Times" # Fix this
     ) %>% 
   mutate(
     outcome_lvl_1 = fct_expand(outcome_lvl_1, "Outcome") %>%
@@ -93,7 +96,7 @@ base_plot <- ggplot(plot_effects,
                  colour="#636363")  +
   geom_hline(aes(yintercept=0),
              lty=1, 
-             size=1) +
+             size=0.5) +
   geom_point(size=2, shape=21, 
              fill="#f0f0f0") 
 
@@ -130,13 +133,13 @@ if (certain) {
                   size = 2.5,
                   label.size = NA) +
     geom_richtext(aes(label=plain_language_exposure),
-                  y=-3.8,
+                  y=-3.5,
                   vjust = 0.5, hjust = 0,
                   stat = "identity",
                   size = 2.5,
                   label.size = NA) +
     geom_richtext(aes(label=plain_language_outcome),
-                  y=-4.8,
+                  y=-4.3,
                   vjust = 0.5, hjust = 0,
                   stat = "identity",
                   size = 2.5,
@@ -144,63 +147,63 @@ if (certain) {
     geom_linerange(x= "NA",
                    ymin=-.41,
                    ymax=.41,
-                   size = 10, 
+                   size = 20, 
                    colour="white")
   
 
 } else {  
   updated_plot <- 
     base_plot +
-    geom_richtext(aes(label=indiv_data),
+    geom_richtext(aes(label=indiv_data,
+                      family=font_fam),
                   y=-0.6,
                   vjust = 0.5, hjust = 0.5,
                   stat = "identity",
                   size = 2.5,
-                  label.size = NA,
-                  family='fontawesome-webfont') 
+                  label.size = NA) 
   
-  +
-    geom_richtext(aes(label=k),
-                  y=-0.85,
-                  vjust = 0.5, hjust = 0.5,
-                  stat = "identity",
-                  size = 2.5,
-                  label.size = NA) +
-    geom_richtext(aes(label=i2),
-                  y=-1.05,
-                  vjust = 0.5, hjust = 0.5,
-                  stat = "identity",
-                  size = 2.5,
-                  label.size = NA) +
-    geom_richtext(aes(label=rci),
-                  y=-1.45,
-                  vjust = 0.5, hjust = 0.5,
-                  stat = "identity",
-                  size = 2.5,
-                  label.size = NA) +
-    geom_richtext(aes(label=author_year),
-                  y=-2.4,
-                  vjust = 0.5, hjust = 0,
-                  stat = "identity",
-                  size = 2.5,
-                  label.size = NA) +
-    geom_richtext(aes(label=plain_language_exposure),
-                  y=-3.8,
-                  vjust = 0.5, hjust = 0,
-                  stat = "identity",
-                  size = 2.5,
-                  label.size = NA) +
-    geom_richtext(aes(label=plain_language_outcome),
-                  y=-4.8,
-                  vjust = 0.5, hjust = 0,
-                  stat = "identity",
-                  size = 2.5,
-                  label.size = NA) +
-    geom_linerange(x= "NA",
-                   ymin=-.41,
-                   ymax=.41,
-                   size = 10, 
-                   colour="white")
+  # +
+  #   geom_richtext(aes(label=k),
+  #                 y=-0.85,
+  #                 vjust = 0.5, hjust = 0.5,
+  #                 stat = "identity",
+  #                 size = 2.5,
+  #                 label.size = NA) +
+  #   geom_richtext(aes(label=i2),
+  #                 y=-1.05,
+  #                 vjust = 0.5, hjust = 0.5,
+  #                 stat = "identity",
+  #                 size = 2.5,
+  #                 label.size = NA) +
+  #   geom_richtext(aes(label=rci),
+  #                 y=-1.45,
+  #                 vjust = 0.5, hjust = 0.5,
+  #                 stat = "identity",
+  #                 size = 2.5,
+  #                 label.size = NA) +
+  #   geom_richtext(aes(label=author_year),
+  #                 y=-2.4,
+  #                 vjust = 0.5, hjust = 0,
+  #                 stat = "identity",
+  #                 size = 2.5,
+  #                 label.size = NA) +
+  #   geom_richtext(aes(label=plain_language_exposure),
+  #                 y=-3.8,
+  #                 vjust = 0.5, hjust = 0,
+  #                 stat = "identity",
+  #                 size = 2.5,
+  #                 label.size = NA) +
+  #   geom_richtext(aes(label=plain_language_outcome),
+  #                 y=-4.8,
+  #                 vjust = 0.5, hjust = 0,
+  #                 stat = "identity",
+  #                 size = 2.5,
+  #                 label.size = NA) +
+  #   geom_linerange(x= "NA",
+  #                  ymin=-.41,
+  #                  ymax=.41,
+  #                  size = 20, 
+  #                  colour="white")
   }
 
 
@@ -218,7 +221,7 @@ if (certain) {
     switch = "both"
   ) +
   coord_flip(clip = 'off',
-             ylim=c(-4.5,0.5)) + 
+             ylim=c(-4.1,0.5)) + 
   scale_y_continuous(breaks = c(-.4, -.2, 0, .2, .4)) +
   scale_x_discrete(limits = rev) +
   tidyMB::theme_mb() %+replace% theme(
@@ -232,7 +235,7 @@ if (certain) {
       face = "bold"
     ),
     axis.text.y = element_blank(),
-    plot.caption = element_markdown(hjust = 1),
+    plot.caption = element_markdown(hjust = 0.95,size = 10),
     plot.caption.position = "plot",
     panel.grid.major.y = element_blank(),
     panel.grid.minor.y = element_blank(),
@@ -241,3 +244,5 @@ if (certain) {
   )
 
 }
+
+ggsave(here::here("figure","Education.pdf"),width = 10,height=6)
