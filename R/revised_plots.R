@@ -37,7 +37,17 @@ combined_effects <- combined_effects %>%
                 " [", format(round(cilb95, 2), nsmall = 2), ", ",
                 format(round(ciub95, 2), nsmall = 2), "]",
                 sep = ""),
-    indiv_data = if_else(source=="reanalysis", fontawesome("fa-check"), fontawesome("fa-times")),
+    indiv_data = fontawesome(if_else(source=="reanalysis", "fa-check", "fa-times")),
+    eggers = case_when(
+      source == "reported" ~ fontawesome("fa-minus"),
+      eggers_p > 0.05 ~ fontawesome("fa-check"),
+      TRUE ~ fontawesome("fa-times")
+    ),
+    esig = case_when(
+      source == "reported" ~ fontawesome("fa-minus"),
+      tes_p > 0.05 ~ fontawesome("fa-check"),
+      TRUE ~ fontawesome("fa-times")
+    ),
     font_fam = "fontawesome-webfont"
   ) %>%
   arrange(outcome_lvl_1,
@@ -53,8 +63,10 @@ combined_effects <- combined_effects %>%
     rci = "**<i>r</i> with 95% CI**",
     author_year = "**Lead Author, Date**",
     row_num="NA",
-    indiv_data = "**Individual Data**",
-    font_fam = "Times" # Fix this
+    indiv_data = "**Indiv. Data**",
+    eggers = "**Eggers**",
+    esig = "**Excess Signif.**",
+    font_fam = "Times"
     ) %>% 
   mutate(
     outcome_lvl_1 = fct_expand(outcome_lvl_1, "Outcome") %>%
@@ -154,9 +166,25 @@ if (certain) {
 } else {  
   updated_plot <- 
     base_plot +
-    geom_richtext(aes(label=indiv_data,
+    geom_richtext(aes(label=esig,
                       family=font_fam),
                   y=-0.6,
+                  vjust = 0.5, hjust = 0.5,
+                  stat = "identity",
+                  size = 2.5,
+                  label.size = NA,
+                  
+                  ) +
+    geom_richtext(aes(label=eggers,
+                      family=font_fam),
+                  y=-0.9,
+                  vjust = 0.5, hjust = 0.5,
+                  stat = "identity",
+                  size = 2.5,
+                  label.size = NA)   +
+    geom_richtext(aes(label=indiv_data,
+                      family=font_fam),
+                  y=-1.2,
                   vjust = 0.5, hjust = 0.5,
                   stat = "identity",
                   size = 2.5,
@@ -208,7 +236,7 @@ if (certain) {
 
 
 # updated_plot <- 
-  updated_plot + 
+  updated_plot  +
   labs(x = NULL,
        y=NULL,
        caption="<b>r</b> with <b style='color:#636363'>95%</b> and <b style='color:#bdbdbd'>99.9%</b> CIs",
