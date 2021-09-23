@@ -1,25 +1,4 @@
 make_plots <- function(combined_effects) {
-  q <- combined_effects %>%
-    filter(use_effect == TRUE) %>%
-    select(-use_effect)
-
-  # fixing the exposures that someone forgot to capitalise
-  q$plain_language_exposure <- paste(toupper(substr(q$plain_language_exposure, 1, 1)),
-    substr(q$plain_language_exposure, 2, nchar(q$plain_language_exposure)),
-    sep = ""
-  )
-
-  q$plain_language_exposure <- gsub(
-    "^Intervention:",
-    "Screen-based intervention:",
-    q$plain_language_exposure
-  )
-
-  # Take overall outcome into a variable and remove that from the sub-variable
-  q$outcome_lvl_1 <- factor(gsub(":.*", "", q$plain_language_outcome))
-  q$plain_language_outcome <- gsub(".*: ", "", q$plain_language_outcome)
-  q$outcome_category <- factor(str_to_title(q$outcome_category))
-
 
   # Deal with long labels
   trimmer <- Vectorize(function(string, max_len) {
@@ -27,8 +6,7 @@ make_plots <- function(combined_effects) {
       # If there's a colon, always break there to keep it neat
       if (str_detect(string, ":")) {
         string <- gsub(":", ":<br/>", string)
-      }
-      else {
+      } else {
         string <- str_replace_all(str_wrap(string, width = str_length(string) / 1.5), "\n", "<br/>")
       }
     }
@@ -36,372 +14,265 @@ make_plots <- function(combined_effects) {
     return(string)
   })
 
-
-  q$plain_language_outcome <- factor(trimmer(q$plain_language_outcome, 40))
-  q$plain_language_exposure <- factor(trimmer(q$plain_language_exposure, 55))
-
-
-  # Cleaning data before plotting
-  q$i2[is.null(q$i2)] <- NA
-  q$i2 <- as.character(paste(round(as.numeric(q$i2), 0), "%", sep = ""))
-  q$i2[grepl("NA", q$i2)] <- NA
-  
-  # This is no longer used but keeping for backup
-  q$rci <- with(q, paste(format(round(r, 2), nsmall = 2),
-                         " [", format(round(cilb95, 2), nsmall = 2), ", ",
-                         format(round(ciub95, 2), nsmall = 2), "]",
-                         sep = ""
-  ))
-  
-  # Adding both 95 and 99.9% conf intervals
-  # q$r_s <- as.character(format(round(q$r, 2), nsmall = 2))
-  # q$cilb95 <- as.character(format(round(q$cilb95, 2), nsmall = 2))
-  # q$cilb999 <- as.character(format(round(q$cilb999, 2), nsmall = 2))
-  # q$ciub95 <- as.character(format(round(q$ciub95, 2), nsmall = 2))
-  # q$ciub999 <- as.character(format(round(q$ciub999, 2), nsmall = 2))
-
-  # q$n <- format(q$n, big.mark = ",")
-  q$n[grepl("NA", q$n)] <- "—"
-  q <- ungroup(q)
-
-  q$certainty <- str_to_title(q$certainty)
-  
-  
-  
-  # Make forest plots ####
-
-  # Make output lists
-  plots <- vector(mode = "list", length = length(unique(q$outcome_category))*2)
-  # names(plots) <- unique(q$outcome_category)
-
-  for (i in 1:length(unique(q$outcome_category))) {
-     # i <- 2
-    edu <- filter(q, as.numeric(outcome_category) == i)
-
-    plot_title <- paste("Effect on ",
-      levels(q$outcome_category)[i],
-      " Outcomes (r with 95% & 99.9% CI)",
-      sep = ""
-    )
-    # Create a row for labeling the plot
-    edu <- add_row(edu)
-    last <- nrow(edu)
-    # levels(edu$recoded_exposure)
-    edu$plain_language_exposure <- fct_expand(edu$plain_language_exposure, "**Exposure**") %>%
-      fct_relevel("**Exposure**", "Screen use: General")
-    edu$plain_language_exposure[last] <- "**Exposure**"
-
-    edu$author_year[last] <- "**Lead Author, Date**"
-
-    edu$n[last] <- "**N**"
-    edu$k[last] <- "**K**"
-    edu$i2[last] <- "**I^2**"
-    edu$risk[last] <- "plain"
-    edu$certainty[last] <- "**Credible**"
-
-    edu$plain_language_outcome <- fct_expand(edu$plain_language_outcome, "**Specific Outcome**") %>%
-      fct_relevel("**Specific Outcome**")
-    edu$plain_language_outcome[last] <- "**Specific Outcome**"
-
-    edu$outcome_lvl_1 <- fct_expand(edu$outcome_lvl_1, "Outcome") %>%
-      fct_relevel("Outcome")
-    edu$outcome_lvl_1[last] <- "Outcome"
-    
-    # edu$cilb999[last] <- "**Lower 99.9% CI**"
-    # edu$cilb95[last] <- "**Lower 95% CI**"
-    # edu$r[last] <- "**<i>r</i>**"
-    # edu$ciub95[last] <- "**Upper 95% CI**"
-    # edu$ciub999[last] <- "**Upper 99.9% CI**"
-
-
-    edu$rci[last] <- "**<i>r</i> with 95% CI**"
-
-    edu <- arrange(
-      edu,
+  # Modify the dataset
+  combined_effects <- combined_effects %>%
+    filter(use_effect) %>%
+    mutate(
+      # Truncate large effects
+      cilb999 = if_else(cilb999 < -1, -1, cilb999),
+      ciub999 = if_else(ciub999 > 1, 1, ciub999),
+      # Take overall outcome into a variable and remove that from the sub-variable
+      outcome_lvl_1 = factor(gsub(":.*", "", plain_language_outcome)),
+      plain_language_outcome = gsub(".*: ", "", plain_language_outcome),
+      outcome_category = factor(str_to_title(outcome_category)),
+      plain_language_exposure = str_replace(
+        plain_language_exposure,
+        "^Intervention:",
+        "Screen-based intervention:"
+      ),
+      # Fix long labels
+      plain_language_outcome = trimmer(plain_language_outcome, 40),
+      plain_language_exposure = trimmer(plain_language_exposure, 40),
+      i2 = scales::percent(i2, 2, scale = 1),
+      row_num = as.factor(row_number()),
+      n = scales::label_comma(accuracy = 1)(n),
+      k = as.character(k),
+      rci = paste(format(round(r, 2), nsmall = 2),
+        " [", format(round(cilb95, 2), nsmall = 2), ", ",
+        format(round(ciub95, 2), nsmall = 2), "]",
+        sep = ""
+      ),
+      indiv_data = fontawesome(if_else(source == "reanalysis", "fa-check", "fa-times")),
+      eggers = case_when(
+        source == "reported" ~ fontawesome("fa-minus"),
+        eggers_p > 0.05 ~ fontawesome("fa-check"),
+        TRUE ~ fontawesome("fa-times")
+      ),
+      esig = case_when(
+        source == "reported" ~ fontawesome("fa-minus"),
+        tes_p > 0.05 ~ fontawesome("fa-check"),
+        TRUE ~ fontawesome("fa-times")
+      ),
+      font_fam = "fontawesome-webfont"
+    ) %>%
+    arrange(
       outcome_lvl_1,
       plain_language_outcome,
-      plain_language_exposure,
-      k
+      plain_language_exposure
+    ) %>%
+    add_row(
+      outcome_lvl_1 = "**Outcome**",
+      plain_language_outcome = "**Specific Outcome**",
+      plain_language_exposure = "**Exposure**",
+      n = "**N**",
+      k = "**K**",
+      i2 = "**I^2**",
+      rci = "**<i>r</i> with 95% CI**",
+      author_year = "**Lead Author, Date**",
+      row_num = "NA",
+      indiv_data = "**Indiv.<br/>Data**",
+      eggers = "**Eggers**",
+      esig = "**Excess<br/>Signif.**",
+      outcome_category = "**Outcome Category**",
+      font_fam = "Times"
+    ) %>%
+    mutate(
+      outcome_lvl_1 = fct_expand(outcome_lvl_1, "**Outcome**") %>%
+        fct_relevel("**Outcome**"),
+      plain_language_outcome = fct_expand(
+        plain_language_outcome,
+        "**Specific Outcome**"
+      ) %>%
+        fct_relevel("**Specific Outcome**"),
+      plain_language_exposure = fct_expand(
+        plain_language_exposure,
+        "**Exposure**"
+      ) %>%
+        fct_relevel("**Exposure**"),
+      outcome_category = fct_expand(outcome_category, "**Outcome Category**") %>%
+        fct_relevel("**Outcome Category**"),
     )
-    edu$row_num <- as.factor(1:nrow(edu))
 
-    edu$shape <- 18
-    
-    edu$cilb999[edu$cilb999 < -.4] <- -.4
-    edu$cilb95[edu$cilb95 < -.4] <- -.4
-    edu$ciub999[edu$ciub999 < -.4] <- -.4
-    edu$ciub95[edu$ciub95 < -.4] <- -.4
-    edu$r[edu$r < -.4] <- -.39
-    edu$shape[edu$r == -.39] <- 60
 
-    edu$cilb999[edu$cilb999 > .4] <- .4
-    edu$cilb95[edu$cilb95 > .4] <- .4
-    edu$ciub999[edu$ciub999 > .4] <- .4
-    edu$ciub95[edu$ciub95 > .4] <- .4
-    edu$r[edu$r > .4] <- .39
-    edu$shape[edu$r == .39] <- 62
-    
-    
-    edu_tmp <- edu %>% filter(certainty!="Unclear")
-    
-    p1 <- 
-      ggplot(
-      edu_tmp,
+  gen_plot <- function(categories, certain, title, positions, debug = FALSE) {
+    if (debug) labsize <- 1 else labsize <- NA
+
+
+    plot_effects <- combined_effects %>%
+      filter(outcome_category %in% c(categories, "**Outcome Category**"))
+
+    if (certain) {
+      plot_effects <- plot_effects %>%
+        filter(certainty == "meets criteria" |
+          is.na(certainty))
+    } else {
+      plot_effects <- plot_effects %>%
+        filter(certainty == "unclear" |
+          is.na(certainty))
+    }
+
+    base_plot <- ggplot(
+      plot_effects,
       aes(
         x = row_num,
         y = r,
-        # ymin = cilb,
-        # ymax = ciub,
-        label = author_year,
-        family = "Times",
-        shape = shape,
-        #fontface = risk
+        label = plain_language_exposure
       )
     ) +
-        geom_point(size=2) +
-        geom_linerange(
-            #99.9% CIs
-            aes(ymin=cilb999,
-                ymax=ciub999),
-            size=0.5,
-            position = position_identity()
-        )+
-        geom_linerange(
-            #95% CIs
-            aes(ymin=cilb95,
-                ymax=ciub95),
-            size=1,
-            position = position_identity()
-        ) +
-      # geom_pointrange(
-      #   #99.9% CIs
-      #   aes(ymin=cilb999,
-      #       ymax=ciub999),
-      #   size=0.5
-      #   ) +
-      # geom_pointrange(
-      #   #95% CIs
-      #   aes(ymin=cilb95,
-      #       ymax=ciub95),
-      #   size=1.5
-      # ) +
-      # geom_richtext(
-      #   y = -.65, label = edu_tmp$certainty,
-      #   vjust = 0.5, hjust = 0.5,
-      #   stat = "identity",
-      #   size = 2.5,
-      #   label.size = NA
-      # ) +
-      geom_richtext(
-        y = -.95, label = edu_tmp$n,
+      geom_linerange(aes(
+        ymin = cilb999,
+        ymax = ciub999
+      ),
+      size = 2,
+      colour = "#bdbdbd"
+      ) +
+      geom_linerange(aes(
+        ymin = cilb95,
+        ymax = ciub95
+      ),
+      size = 2,
+      colour = "#636363"
+      ) +
+      geom_hline(aes(yintercept = 0),
+        lty = 1,
+        size = 0.5
+      ) +
+      geom_point(
+        size = 2, shape = 21,
+        fill = "#f0f0f0"
+      ) +
+      geom_richtext(aes(label = n),
+        y = positions$n,
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
-        label.size = NA
+        label.size = labsize
       ) +
-      geom_richtext(
-        y = -1.05, label = edu_tmp$k,
+      geom_richtext(aes(label = k),
+        y = positions$k,
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
-        label.size = NA
+        label.size = labsize
       ) +
-      geom_richtext(
-        y = -1.2, label = edu_tmp$i2,
+      geom_richtext(aes(label = i2),
+        y = positions$i2,
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
-        label.size = NA
+        label.size = labsize
       ) +
-      geom_richtext(
-        y = -1.5, label = edu_tmp$rci,
+      geom_richtext(aes(label = rci),
+        y = positions$rci,
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
-        label.size = NA
+        label.size = labsize
       ) +
-      geom_richtext(
-        y = -2.2,
+      geom_richtext(aes(label = author_year),
+        y = positions$author_year,
         vjust = 0.5, hjust = 0,
         stat = "identity",
         size = 2.5,
-        label.size = NA
+        label.size = labsize
       ) +
-      geom_richtext(
-        y = -3.4, label = edu_tmp$plain_language_exposure,
+      geom_richtext(aes(label = plain_language_exposure),
+        y = positions$expo,
         vjust = 0.5, hjust = 0,
         stat = "identity",
         size = 2.5,
-        label.size = NA
+        label.size = labsize
       ) +
-      geom_richtext(
-        y = -4.3, label = edu_tmp$plain_language_outcome,
+      geom_richtext(aes(label = plain_language_outcome),
+        y = positions$outcome,
         vjust = 0.5, hjust = 0,
         stat = "identity",
         size = 2.5,
-        label.size = NA
-      ) +
-      geom_hline(yintercept = 0) +
-      labs(
-        x = NULL,
-        y = plot_title
-      ) +
-      facet_grid(
-        rows = vars(outcome_lvl_1),
-        scales = "free",
-        space = "free",
-        drop = T,
-        switch = "both"
-      ) +
-      coord_flip(ylim = c(-4.2, .4)) +
-      scale_shape_identity() +
-      scale_x_discrete(limits = rev) +
-      scale_y_continuous(breaks = c(-.4, -.2, 0, .2, .4)) +
-        scale_fill_discrete(c("black","white")) + 
-      tidyMB::theme_mb() %+replace% theme(
-        strip.text.y.left = element_text(
-          angle = 0,
-          hjust = 1
-        ),
-        axis.title.x = element_text(
-          hjust = 1,
-          vjust = 0,
-          face = "bold"
-        ),
-        axis.text.y = element_blank(
-          # colour = "white"
-        ),
-        panel.grid.major.y = element_blank(),
-        panel.grid.minor.y = element_blank(),
-        strip.placement = "outside",
-        strip.background = element_rect(linetype = "solid"),
-        text = element_text(family = "Times")
+        label.size = labsize
       )
-    
-    p1
 
-    plots[[i]]$plot <- p1
-    plots[[i]]$name <- levels(q$outcome_category)[i]
-    
-    # Plots that don't meet criteria
-    
-    edu_tmp <- edu %>% filter(certainty!="Meets Criteria")
-    p2 <- 
-      ggplot(
-        edu_tmp,
-        aes(
-          x = row_num,
-          y = r,
-          # ymin = cilb,
-          # ymax = ciub,
-          label = author_year,
-          family = "Times",
-          shape = shape,
-          #fontface = risk
+    if (!certain) {
+      base_plot <-
+        base_plot +
+        geom_richtext(aes(
+          label = esig,
+          family = font_fam
+        ),
+        y = positions$esig,
+        vjust = 0.5, hjust = 0.5,
+        stat = "identity",
+        size = 2.5,
+        label.size = labsize
+        ) +
+        geom_richtext(aes(
+          label = eggers,
+          family = font_fam
+        ),
+        y = positions$eggers,
+        vjust = 0.5, hjust = 0.5,
+        stat = "identity",
+        size = 2.5,
+        label.size = labsize
+        ) +
+        geom_richtext(aes(
+          label = indiv_data,
+          family = font_fam
+        ),
+        y = positions$indiv_data,
+        vjust = 0.5, hjust = 0.5,
+        stat = "identity",
+        size = 2.5,
+        label.size = labsize
         )
-      ) +
-      geom_point(size=2) +
+    }
+
+
+    if (length(categories) > 1) {
+      facet_style <-
+        ggh4x::facet_nested(
+          rows = vars(outcome_category, outcome_lvl_1),
+          scales = "free",
+          space = "free",
+          drop = T,
+          switch = "both"
+        )
+    } else {
+      facet_style <-
+        facet_grid(
+          rows = vars(outcome_lvl_1),
+          scales = "free",
+          space = "free",
+          drop = T,
+          switch = "both"
+        )
+    }
+
+
+
+    base_plot <-
+      base_plot +
       geom_linerange(
-        #99.9% CIs
-        aes(ymin=cilb999,
-            ymax=ciub999),
-        size=0.5,
-        position = position_identity()
-      )+
-      geom_linerange(
-        #95% CIs
-        aes(ymin=cilb95,
-            ymax=ciub95),
-        size=1,
-        position = position_identity()
+        x = "NA",
+        ymin = head(positions$breaks, 1) - 0.01,
+        ymax = tail(positions$breaks, 1) + 0.01,
+        size = 20,
+        colour = "white"
       ) +
-      # geom_pointrange(
-      #   #99.9% CIs
-      #   aes(ymin=cilb999,
-      #       ymax=ciub999),
-      #   size=0.5
-      #   ) +
-      # geom_pointrange(
-      #   #95% CIs
-      #   aes(ymin=cilb95,
-      #       ymax=ciub95),
-      #   size=1.5
-    # ) +
-    # geom_richtext(
-    #   y = -.65, label = edu_tmp$certainty,
-    #   vjust = 0.5, hjust = 0.5,
-    #   stat = "identity",
-    #   size = 2.5,
-    #   label.size = NA
-    # ) +
-      geom_richtext(
-        y = -.95, label = edu_tmp$n,
-        vjust = 0.5, hjust = 0.5,
-        stat = "identity",
-        size = 2.5,
-        label.size = NA
-      ) +
-      geom_richtext(
-        y = -1.05, label = edu_tmp$k,
-        vjust = 0.5, hjust = 0.5,
-        stat = "identity",
-        size = 2.5,
-        label.size = NA
-      ) +
-      geom_richtext(
-        y = -1.2, label = edu_tmp$i2,
-        vjust = 0.5, hjust = 0.5,
-        stat = "identity",
-        size = 2.5,
-        label.size = NA
-      ) +
-      geom_richtext(
-        y = -1.5, label = edu_tmp$rci,
-        vjust = 0.5, hjust = 0.5,
-        stat = "identity",
-        size = 2.5,
-        label.size = NA
-      ) +
-      geom_richtext(
-        y = -2.2,
-        vjust = 0.5, hjust = 0,
-        stat = "identity",
-        size = 2.5,
-        label.size = NA
-      ) +
-      geom_richtext(
-        y = -3.4, label = edu_tmp$plain_language_exposure,
-        vjust = 0.5, hjust = 0,
-        stat = "identity",
-        size = 2.5,
-        label.size = NA
-      ) +
-      geom_richtext(
-        y = -4.3, label = edu_tmp$plain_language_outcome,
-        vjust = 0.5, hjust = 0,
-        stat = "identity",
-        size = 2.5,
-        label.size = NA
-      ) +
-      geom_hline(yintercept = 0) +
       labs(
         x = NULL,
-        y = plot_title
+        y = NULL,
+        caption = "<b>r</b> with <b style='color:#636363'>95%</b> and <b style='color:#bdbdbd'>99.9%</b> CIs",
+        title = title
       ) +
-      facet_grid(
-        rows = vars(outcome_lvl_1),
-        scales = "free",
-        space = "free",
-        drop = T,
-        switch = "both"
+      facet_style +
+      coord_flip(
+        clip = "off",
+        ylim = positions$lims
       ) +
-      coord_flip(ylim = c(-4.2, .4)) +
-      scale_shape_identity() +
+      scale_y_continuous(breaks = positions$breaks) +
       scale_x_discrete(limits = rev) +
-      scale_y_continuous(breaks = c(-.4, -.2, 0, .2, .4)) +
-      scale_fill_discrete(c("black","white")) + 
       tidyMB::theme_mb() %+replace% theme(
-        strip.text.y.left = element_text(
+        strip.text.y.left = element_markdown(
           angle = 0,
           hjust = 1
         ),
@@ -410,33 +281,143 @@ make_plots <- function(combined_effects) {
           vjust = 0,
           face = "bold"
         ),
-        axis.text.y = element_blank(
-          # colour = "white"
-        ),
+        axis.text.y = element_blank(),
+        plot.caption = element_markdown(hjust = 0.95, size = 10),
+        plot.caption.position = "plot",
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
         strip.placement = "outside",
-        strip.background = element_rect(linetype = "solid"),
-        text = element_text(family = "Times")
+        strip.background = element_rect(linetype = "solid")
       )
-    
-    p2
-    
-    plots[[i]]$suppplot <- p2
+
+    return(base_plot)
   }
+
+  edu_positions <-
+    list(
+      certain = list(
+        lims = c(-4, 0.5),
+        breaks = c(-0.4, -.2, 0, .2, 0.4),
+        esig = NULL,
+        eggers = NULL,
+        indiv_data = NULL,
+        n = -0.6,
+        k = -0.85,
+        i2 = -1.05,
+        rci = -1.45,
+        author_year = -2.4,
+        expo = -3.5,
+        outcome = -4.2
+      ),
+      uncertain = list(
+        lims = c(-4.3, 0.6),
+        breaks = c(-0.4, -.2, 0, .2, 0.4, 0.6),
+        esig = -0.55,
+        eggers = -0.75,
+        indiv_data = -.95,
+        n = -1.15,
+        k = -1.35,
+        i2 = -1.5,
+        rci = -1.85,
+        author_year = -2.7,
+        expo = -3.7,
+        outcome = -4.55
+      )
+    )
+
+  nonedu_positions <-
+    list(
+      certain = list(
+        lims = c(-4.0, 0.5),
+        breaks = c(-0.4, -.2, 0, .2, 0.4),
+        esig = NULL,
+        eggers = NULL,
+        indiv_data = NULL,
+        n = -0.6,
+        k = -0.85,
+        i2 = -1.05,
+        rci = -1.4,
+        author_year = -2.35,
+        expo = -3.35,
+        outcome = -4.25
+      ),
+      uncertain = list(
+        lims = c(-5.7, 0.9),
+        breaks = c(-1, -0.8, -0.6, -0.4, -.2, 0, .2, 0.4, 0.6, 0.8),
+        esig = -1.15,
+        eggers = -1.40,
+        indiv_data = -1.65,
+        n = -1.85,
+        k = -2.05,
+        i2 = -2.2,
+        rci = -2.6,
+        author_year = -3.6,
+        expo = -4.85,
+        outcome = -6.05
+      )
+    )
+
+  plot_params <- list(
+    list(
+      filename = "Forest plot for Education.pdf",
+      title = "Effect of Exposures on Education Outcomes",
+      categories = "Education",
+      certain = TRUE,
+      pos = edu_positions$certain,
+      dims = c(10, 6)
+    ),
+    list(
+      filename = "Forest plot for Health-related Outcomes.pdf",
+      title = "Effect of Exposures on Health-related Outcomes",
+      categories = c("Psychology", "Health Behaviour", "Physical Health"),
+      certain = TRUE,
+      pos = nonedu_positions$certain,
+      dims = c(10, 6)
+    ),
+    list(
+      filename = "Supplemental Forest plot for Education.pdf",
+      title = "Effect of Exposures on Education Outcomes",
+      categories = "Education",
+      certain = FALSE,
+      pos = edu_positions$uncertain,
+      dims = c(12, 8)
+    ),
+    list(
+      filename = "Supplemental Forest plot for Health-related Outcomes.pdf",
+      title = "Effect of Exposures on Health-related Outcomes",
+      categories = c("Psychology", "Health Behaviour", "Physical Health"),
+      certain = FALSE,
+      pos = nonedu_positions$uncertain,
+      dims = c(16, 25)
+    )
+  )
+
+  plots <- vector(mode = "list", length = 4)
+
+  for (i in 1:length(plot_params)) {
+    plots[[i]]$plot <- gen_plot(
+      plot_params[[i]]$categories,
+      plot_params[[i]]$certain,
+      plot_params[[i]]$title,
+      plot_params[[i]]$pos
+    )
+    plots[[i]]$dims <- plot_params[[i]]$dims
+    plots[[i]]$filename <- plot_params[[i]]$filename
+    plots[[i]]$categories <- plot_params[[i]]$categories
+    plots[[i]]$certain <- plot_params[[i]]$certain
+  }
+
   return(plots)
 }
 
-save_plots <- function(plots){
-  
-  file_name <- here::here("figure", paste("Forest plot for ", plots[[1]]$name, ".pdf", sep = ""))
-  
-  #plots[[1]]$plot
+save_plots <- function(plots) {
+  file_name <- here::here("figure", plots[[1]]$filename)
+
   ggsave(
     filename = file_name,
     plot = plots[[1]]$plot,
-    width = 14,
-    height = 13
+    width = plots[[1]]$dims[[1]],
+    height = plots[[1]]$dims[[2]]
   )
 
   return(file_name)

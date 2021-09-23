@@ -15,6 +15,7 @@ tar_option_set(packages = c(
   "DT",
   "esc",
   "emojifont",
+  "ggh4x",
   "ggplot2",
   "ggtext",
   "ggforestplot", # TEMP
@@ -119,7 +120,7 @@ list(
     export_plots,
     save_plots(plots),
     format = "file",
-    pattern = map(plots),
+    pattern = map(plots)
   ),
   tarchetypes::tar_render(
     report,
