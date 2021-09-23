@@ -1,0 +1,21 @@
+
+## Assumptions
+
+I made the following assumptions which may or may not be reasonable:
+
+1.  That $\beta$ is equivilent to $r$ for $\beta < |.5|$ and undefined otherwise (never the case here)
+2.  That, given the large sample sizes involved *Hedge's g* and *Cohen's d* where essentially equivalent and that sample sizes used to make up these effects were approximately equal in treatment and control groups.
+3.  In the absence of information that could be used to construct a 2x2 contingency table that ORs and Relative Risk Ratios were equivalent and thus Relative Risk Ratios were converted to $r$ as if they were Odds ratios.
+4.  External to any other information that all forms of SMD, weighted means etc. were equivilent to Cohen's d.
+
+## Project Structure
+
+```{r message=FALSE, warning=FALSE}
+tar_visnetwork(targets_only = TRUE)
+```
+
+The following warnings were noted during the project build:
+
+```{r}
+tar_meta(fields = warnings) %>% filter(!is.na(warnings)) %>% arrange(name)
+```

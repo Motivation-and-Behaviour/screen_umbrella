@@ -6,27 +6,17 @@ source(here("R", "functions.R"))
 source(here("R", "reviews_table.R"))
 source(here("R", "PRISMA.R"))
 source(here("R", "forest_plot_code_overview_screentime.R"))
+source(here("R", "utils.R"))
 
 options(tidyverse.quiet = TRUE, clustermq.scheduler = "multiprocess")
 
-tar_option_set(packages = c(
-  "broom",
-  "DiagrammeR",
-  "DT",
-  "esc",
-  "emojifont",
-  "ggh4x",
-  "ggplot2",
-  "ggtext",
-  "ggforestplot", # TEMP
-  "ggforce", # TEMP
-  "janitor",
-  "kableExtra",
-  "metafor",
-  "tidyMB",
-  "tidyverse",
-  "scales"
-))
+packages <- c("base","broom", "DiagrammeR", "DT", "esc", "emojifont", "ggh4x", 
+               "ggplot2", "ggtext",  "janitor", "knitr", "kableExtra", 
+               "metafor", "tidyMB", "tidyverse", "scales", "xfun",
+               # TEMP
+               "ggforestplot",  "ggforce")
+
+tar_option_set(packages = packages)
 
 list(
   # Data sources
@@ -122,8 +112,21 @@ list(
     format = "file",
     pattern = map(plots)
   ),
+  # REPORTS --------------------------------
+  tar_target(packages_bib, create_packages_bib(packages, 
+                                               here::here("reports",
+                                                          "packages.bib")), 
+             format="file"),
+  tar_target(references_bib, here::here("reports","references.bib"), format="file"),
+  tar_target(combined_bib, combine_bibs(packages_bib, 
+                                        references_bib, 
+                                        here::here("reports","combined.bib")), 
+             format="file"),
   tarchetypes::tar_render(
-    report,
-    "index.Rmd",
+    distill_report,
+    path = here::here("reports","manuscript.Rmd"),
+    output_file = here::here("index.html"),
+    output_yaml = here::here("reports","distill.yaml")
   )
 )
+
