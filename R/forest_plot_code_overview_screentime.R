@@ -360,7 +360,7 @@ make_plots <- function(combined_effects) {
   plot_params <- list(
     list(
       filename = "Forest plot for Education.pdf",
-      title = "Effect of Exposures on Education Outcomes",
+      title = "Associations Between Exposures and Education Outcomes",
       categories = "Education",
       certain = TRUE,
       pos = edu_positions$certain,
@@ -368,7 +368,7 @@ make_plots <- function(combined_effects) {
     ),
     list(
       filename = "Forest plot for Health-related Outcomes.pdf",
-      title = "Effect of Exposures on Health-related Outcomes",
+      title = "Associations Between Exposures and Health-related Outcomes",
       categories = c("Psychology", "Health Behaviour", "Physical Health"),
       certain = TRUE,
       pos = nonedu_positions$certain,
@@ -376,7 +376,7 @@ make_plots <- function(combined_effects) {
     ),
     list(
       filename = "Supplemental Forest plot for Education.pdf",
-      title = "Effect of Exposures on Education Outcomes",
+      title = "Associations Between Exposures and Education Outcomes",
       categories = "Education",
       certain = FALSE,
       pos = edu_positions$uncertain,
@@ -384,7 +384,7 @@ make_plots <- function(combined_effects) {
     ),
     list(
       filename = "Supplemental Forest plot for Health-related Outcomes.pdf",
-      title = "Effect of Exposures on Health-related Outcomes",
+      title = "Associations Between Exposures and Health-related Outcomes",
       categories = c("Psychology", "Health Behaviour", "Physical Health"),
       certain = FALSE,
       pos = nonedu_positions$uncertain,
@@ -419,6 +419,10 @@ save_plots <- function(plots) {
     width = plots[[1]]$dims[[1]],
     height = plots[[1]]$dims[[2]]
   )
-
+  
+  # Upload to GDrive
+  drive_put(here::here("figure", plots[[1]]$filename), 
+            path = as_id("https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml"))
+  
   return(file_name)
 }

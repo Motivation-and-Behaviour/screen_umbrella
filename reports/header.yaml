@@ -1,0 +1,4 @@
+author: Taren Sanders
+date: '`r format(Sys.Date())`'
+title: A sample title
+

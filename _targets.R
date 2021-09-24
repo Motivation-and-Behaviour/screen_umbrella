@@ -11,8 +11,8 @@ source(here("R", "utils.R"))
 options(tidyverse.quiet = TRUE, clustermq.scheduler = "multiprocess")
 
 packages <- c("base","broom", "DiagrammeR", "DT", "esc", "emojifont", "ggh4x", 
-               "ggplot2", "ggtext",  "janitor", "knitr", "kableExtra", 
-               "metafor", "tidyMB", "tidyverse", "scales", "xfun",
+              "googledrive", "ggplot2", "ggtext",  "janitor", "knitr", 
+              "kableExtra", "metafor", "tidyMB", "tidyverse", "scales", "xfun",
                # TEMP
                "ggforestplot",  "ggforce")
 
@@ -126,7 +126,13 @@ list(
     distill_report,
     path = here::here("reports","manuscript.Rmd"),
     output_file = here::here("index.html"),
-    output_yaml = here::here("reports","distill.yaml")
+    # output_yaml = here::here("reports","distill.yaml")
   )
+  # tarchetypes::tar_render(
+  #   pdf_report,
+  #   path = here::here("reports","manuscript.Rmd"),
+  #   output_file = here::here("reports", "manuscript.pdf"),
+  #   output_yaml = here::here("reports","pdf.yaml")
+  # )
 )
 
