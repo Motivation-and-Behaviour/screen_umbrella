@@ -135,7 +135,11 @@ save_prisma <- function(prisma_data){
   prisma_data$diag %>%
     DiagrammeRsvg::export_svg() %>%
     charToRaw() %>%
-    rsvg::rsvg_pdf(here::here("figure", "flow.pdf"))
+    rsvg::rsvg_pdf(here::here("figure", "PRISMA Diagram.pdf"))
   
-  return(here::here("figure", "flow.pdf"))
+  # Upload to GDrive
+  drive_put(here::here("figure", "PRISMA Diagram.pdf"), 
+            path = as_id("https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml"))
+  
+  return(here::here("figure", "PRISMA Diagram.pdf"))
 }

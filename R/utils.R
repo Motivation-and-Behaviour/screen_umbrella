@@ -1,12 +1,26 @@
-# Create packages bibliography
-create_packages_bib <- function(packages, bibpath){
-  knitr::write_bib(packages, bibpath)
-  return(bibpath)
+# ------------------- SETTINGS -----------------------
+
+# ------------------- TARGETS ------------------------
+
+
+
+
+# ------------------- FUNCTIONS ----------------------
+
+## Checking Dates ----
+get_mod_date <- function(id) {
+  x <- googledrive::drive_get(id = googledrive::as_id(id))
+  return(x$drive_resource[[1]]$modifiedTime)
 }
 
-# Combine bibliography files
-combine_bibs <- function(packages_bib, references_bib, outpath){
-  fullbib <- lapply(c(packages_bib, references_bib), readLines)
-  write(unlist(fullbib), file=outpath)
-  return(outpath)
+
+## Reading Data ----
+read_sheet <- function(file, sheet, mod_date) {
+  d <- googlesheets4::read_sheet(file = file,
+                                 sheet = sheet,
+                                 na = c("-999", "", "#N/A")
+  ) %>%
+    janitor::clean_names()
+  return(d)
 }
+

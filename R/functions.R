@@ -1,9 +1,3 @@
-# Targets functions ####
-
-get_mod_date <- function() {
-  x <- googledrive::drive_get(id = googledrive::as_id("1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4"))
-  return(x$drive_resource[[1]]$modifiedTime)
-}
 
 # Convert effects data ####
 
@@ -105,17 +99,6 @@ convert_effects <- function(data) {
 
   return(d)
 }
-
-# General Functions ####
-read_sheet <- function(mod_date, sheet) {
-  d <- googlesheets4::read_sheet("https://docs.google.com/spreadsheets/d/1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4/edit#gid=1427279106",
-    sheet = sheet,
-    na = c("-999", "", "#N/A")
-  ) %>%
-    janitor::clean_names()
-  return(d)
-}
-
 
 # Effects data ####
 

@@ -13,6 +13,7 @@ options(tidyverse.quiet = TRUE, clustermq.scheduler = "multiprocess")
 packages <- c("base","broom", "DiagrammeR", "DT", "esc", "emojifont", "ggh4x", 
               "googledrive", "ggplot2", "ggtext",  "janitor", "knitr", 
               "kableExtra", "metafor", "tidyMB", "tidyverse", "scales", "xfun",
+              "ymlthis",
                # TEMP
                "ggforestplot",  "ggforce")
 
@@ -22,10 +23,10 @@ list(
   # Data sources
   tar_target(
     modified_date,
-    get_mod_date(),
+    get_mod_date(data_sheet),
     # Force run if outdated or doesn't exist
     cue = tar_cue_force(condition = ifelse(tar_exist_objects("modified_date"),
-      get_mod_date() != tar_read(modified_date),
+      get_mod_date(data_sheet) != tar_read(modified_date),
       TRUE
     ))
   ),
@@ -113,15 +114,7 @@ list(
     pattern = map(plots)
   ),
   # REPORTS --------------------------------
-  tar_target(packages_bib, create_packages_bib(packages, 
-                                               here::here("reports",
-                                                          "packages.bib")), 
-             format="file"),
-  tar_target(references_bib, here::here("reports","references.bib"), format="file"),
-  tar_target(combined_bib, combine_bibs(packages_bib, 
-                                        references_bib, 
-                                        here::here("reports","combined.bib")), 
-             format="file"),
+  generate_bibliography,
   tarchetypes::tar_render(
     distill_report,
     path = here::here("reports","manuscript.Rmd"),
