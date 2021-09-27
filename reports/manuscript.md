@@ -1496,6 +1496,9 @@ We made decisions to present effects that reach certain thresholds (e.g., N&gt;1
 
 #### Tables
 
+-   [Descriptive Table](https://drive.google.com/file/d/1t5XvwY2kzsOsbZ2FxbGPsYEecZz5PgD1/view?usp=sharing)
+-   Supplemental tables (TBC)
+
 #### Links
 
 -   [Manuscript Google Doc](https://docs.google.com/document/d/1NN4yJWQVepNjbX0mND4aidWWXcCDkg-eMepRnWdtQ9o/edit#)
