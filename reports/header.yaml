@@ -1,4 +1,26 @@
-author: Taren Sanders
+author:
+- name: Taren Sanders
+  affiliation: Institute for Positive Psychology and Education, Australian Catholic
+    University
+  affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
+  orcid_id: 0000-0002-4504-6008
+- name: Philip Parker
+  affiliation: Institute for Positive Psychology and Education, Australian Catholic
+    University
+  affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
+  orcid_id: 0000-0002-4604-8566
+- name: Michael Noetel
+  affiliation: School of Health and Behavioural Sciences, Australian Catholic University
+  affiliation_url: https://www.acu.edu.au/about-acu/faculties-directorates-and-staff/faculty-of-health-sciences/school-of-behavioural-and-health-sciences
+  orcid_id: 0000-0002-6563-8203
+- name: Chris Lonsdale
 date: '`r format(Sys.Date())`'
-title: A sample title
+title: Benefits and risks associated with children’s and adolescents’ interactions
+  with electronic screens An umbrella review
+repository_url: https://github.com/Motivation-and-Behaviour/screen_umbrella
+bibliography: combined.bib
+csl: nature.csl
+params:
+  render_img: true
+  inc_ref: false
 

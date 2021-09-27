@@ -2,34 +2,27 @@
 title: "Benefits and risks associated with children’s and adolescents’ interactions with electronic screens: An umbrella review"
 author:
   - name: Taren Sanders
-    url: https://orcid.org/0000-0002-4504-6008
-    affiliation: Australian Catholic University
+    affiliation: Institute for Positive Psychology and Education, Australian Catholic
+      University
     affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
     orcid_id: 0000-0002-4504-6008
   - name: Philip Parker
-    url: https://orcid.org/0000-0002-4604-8566 
-    affiliation: Australian Catholic University
+    affiliation: Institute for Positive Psychology and Education, Australian Catholic
+      University
     affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
     orcid_id: 0000-0002-4604-8566
   - name: Michael Noetel
-    url: https://orcid.org/0000-0002-6563-8203 
-    affiliation: Australian Catholic University
-    affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
+    affiliation: School of Health and Behavioural Sciences, Australian Catholic University
+    affiliation_url: https://www.acu.edu.au/about-acu/faculties-directorates-and-staff/faculty-of-health-sciences/school-of-behavioural-and-health-sciences
     orcid_id: 0000-0002-6563-8203
   - name: Chris Lonsdale
-    url: https://orcid.org/000-0002-2523-5565  
-    affiliation: Australian Catholic University
-    affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
-    orcid_id: 000-0002-2523-5565 
-date: "`r Sys.Date()`"
+date: '`r format(Sys.Date())`'
 repository_url: https://github.com/Motivation-and-Behaviour/screen_umbrella
 bibliography: combined.bib
 csl: nature.csl
-always_allow_html: true
-output:
-  github_document:
-    html_preview: false
-    pandoc_args: "--wrap=none"
+params:
+  render_img: true
+  inc_ref: false
 ---
 
 ```{r setup, include=FALSE}
@@ -42,20 +35,16 @@ knitr::opts_chunk$set(
 	warning = FALSE
 )
 
-render_img <- knitr::pandoc_to()=="html5"
-inc_ref <- knitr::pandoc_to()!="html5"
-
 # Uncomment to run outside of pipeline
-library(tidyverse)
-library(targets)
-library(xfun)
-library(DiagrammeR)
+# library(tidyverse)
+# library(targets)
+# library(xfun)
 ```
 
 ```{r, load-targets}
-targets::tar_load(c("prisma", "effects_clean", "reviews_table", "plots", 
-           "studies_results", "comparison_plots", "combined_effects", 
-           "combined_bib"), 
+targets::tar_load(c("prisma", "effects_clean", "reviews_tables", "tables_df",
+                    "plots", "studies_results", "comparison_plots", 
+                    "combined_effects", "combined_bib"), 
          store = here::here("_targets"))
 ```
 
@@ -120,7 +109,7 @@ After extracting data, we examined the combinations of exposure and outcomes and
 
 ### Evidence assessment criteria
 
-*Statistical Credibility*. We employed a statistical classification approach to grade the statistical credibility of the effect sizes in the literature. To be considered credible an effect needed to be derived from a combined sample of >1,000 and have non-significant tests of publication bias (i.e., Egger’s test and excess significance test). 
+*Statistical Credibility*. We employed a statistical classification approach to grade the statistical credibility of the effect sizes in the literature. To be considered credible an effect needed to be derived from a combined sample of >1,000 and have non-significant tests of publication bias (i.e., Egger’s test and excess significance test). We performed these analyses, and tehrefore the review needed to provide usable study-level data in order to be included.
 
 *Consistency of Effect within the Population*. We also examined the consistency of the effect size using the $I^2$ measure. We considered $I^2 < 50\%$ to indicate effects that were relatively consistent across the population of interest. $I^2$ values of $> 50\%$ were taken to indicate an effect was potentially heterogeneous within the population.
 
@@ -174,24 +163,40 @@ freq_combos <- effects_clean %>%
   arrange(desc(n))
 ```
 
-The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were removed as duplicates. After screening titles and abstracts, we assessed `r format(prisma$data$value[5], big.mark=",")` full-texts for inclusion. `r str_to_sentence(numbers_to_words(prisma$data$value[8], and=TRUE))` met the inclusion criteria and we extracted the data of these studies. Figure \@ref(fig:prisma) presents the full results of the study selection process.
+The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were duplicates. After screening titles and abstracts, we assessed `r format(prisma$data$value[5], big.mark=",")` full-texts for inclusion. `r str_to_sentence(numbers_to_words(prisma$data$value[8], and=TRUE))` met the inclusion criteria and we extracted the data of these meta-analyses. Figure \@ref(fig:prisma) presents the full results of the selection process.
 
-```{r prisma, eval=render_img, fig.cap="PRISMA Diagram"}
+```{r prisma, fig.cap="PRISMA Diagram"}
 prisma$diag
 ```
 
 After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total sample size. This process yielded `r unique_effects` unique effects/outcome combinations contributed from `r prisma$data$value[9]` papers. 
 
-The most frequently reported exposures were `r knitr::combine_words(freq_exposures$out[1:4])`. The most frequently reported outcomes were `r knitr::combine_words(freq_outcomes$out[1:5])`. In most cases (`r paste0(sum(freq_combos$n==1), "/", nrow(effects_clean))`), there was only one exposure/outcome combination, with `r sum(freq_combos$n==2)` appearing twice, and `r sum(freq_combos$n>2)` three or more times. Full characteristics of the included studies are provided in Table X.
+The most frequently reported exposures were `r knitr::combine_words(freq_exposures$out[1:4])`. The most frequently reported outcomes were `r knitr::combine_words(freq_outcomes$out[1:5])`. In most cases (`r paste0(sum(freq_combos$n==1), "/", nrow(effects_clean))`), there was only one exposure/outcome combination, with `r sum(freq_combos$n==2)` appearing twice, and `r sum(freq_combos$n>2)` three or more times. Full characteristics of the included studies are provided in Table \@ref(tab:desctable).
+
+```{r desctable, layout="l-screen-inset shaded"}
+reviews_tables[[1]]$table
+```
 
 ```{r quality}
-qual_data <- reviews_table$data %>%
-  filter(`Outcomes Assessed` !="<ul><li></li></ul>") 
+qual_data <- 
+  tables_df %>%
+  filter(table=="main") %>% 
+  distinct(covidence_id, .keep_all = TRUE) %>% 
+  select(eligibility_criteria_predefined_and_specified:heterogeneity_assessed)
 
-reviews_count <- qual_data %>% 
-  mutate(across("Eligibility Criteria Predefined And Specified":"Heterogeneity Assessed", as.factor)) %>% 
-  rowwise() %>% 
-  mutate(count_low = sum(c_across("Eligibility Criteria Predefined And Specified":"Heterogeneity Assessed")=="Low"))
+reviews_count <- qual_data %>%
+  mutate(
+    across(
+      eligibility_criteria_predefined_and_specified:heterogeneity_assessed,
+      as.factor
+    )
+  ) %>%
+  rowwise() %>%
+  mutate(count_low = sum(
+    c_across(
+      eligibility_criteria_predefined_and_specified:heterogeneity_assessed
+    ) == "low"
+  ))
 
 all_low <- reviews_count %>%
   filter(count_low==7) %>% 
@@ -199,7 +204,7 @@ all_low <- reviews_count %>%
 
 reviews_count <-
   reviews_count %>%
-  select("Eligibility Criteria Predefined And Specified":"Heterogeneity Assessed") %>%
+  select(eligibility_criteria_predefined_and_specified:heterogeneity_assessed) %>%
   gather(name, value) %>%
   count(name, value) %>%
   arrange(desc(n))
@@ -209,32 +214,32 @@ qual_str <- function(n, totaln, ntype="", prefix="(n", suffix=")"){
 }
 
 n_low_hetero <-
-  reviews_count[reviews_count$name == "Heterogeneity Assessed" &
-                  reviews_count$value == "Low", "n"][[1]]
+  reviews_count[reviews_count$name == "heterogeneity_assessed" &
+                  reviews_count$value == "low", "n"][[1]]
 n_low_char <-
-  reviews_count[reviews_count$name == "Included Studies Listed With Important Characteristics And Results Of Each" &
-                  reviews_count$value == "Low", "n"][[1]]
+  reviews_count[reviews_count$name == "included_studies_listed_with_important_characteristics_and_results_of_each" &
+                  reviews_count$value == "low", "n"][[1]]
 n_low_search <-
-  reviews_count[reviews_count$name == "Literature Search Strategy Comprehensive And Systematic" &
-                  reviews_count$value == "Low", "n"][[1]]
+  reviews_count[reviews_count$name == "literature_search_strategy_comprehensive_and_systematic" &
+                  reviews_count$value == "low", "n"][[1]]
 
 n_unclear_elig <-
-  reviews_count[reviews_count$name == "Eligibility Criteria Predefined And Specified" &
-                  reviews_count$value == "Unclear", "n"][[1]]
+  reviews_count[reviews_count$name == "eligibility_criteria_predefined_and_specified" &
+                  reviews_count$value == "unclear", "n"][[1]]
 
 n_high_dualscreen <-
-  reviews_count[reviews_count$name == "Dual Independent Screening Review" &
-                  reviews_count$value == "High", "n"][[1]]
+  reviews_count[reviews_count$name == "dual_independent_screening_review" &
+                  reviews_count$value == "high", "n"][[1]]
 n_unclear_dualscreen <-
-  reviews_count[reviews_count$name == "Dual Independent Screening Review" &
-                  reviews_count$value == "Unclear", "n"][[1]]
+  reviews_count[reviews_count$name == "dual_independent_screening_review" &
+                  reviews_count$value == "unclear", "n"][[1]]
 
 n_high_dualquality <-
-  reviews_count[reviews_count$name == "Dual Independent Quality Assessment" &
-                  reviews_count$value == "High", "n"][[1]]
+  reviews_count[reviews_count$name == "dual_independent_quality_assessment" &
+                  reviews_count$value == "high", "n"][[1]]
 n_unclear_dualquality <-
-  reviews_count[reviews_count$name == "Dual Independent Quality Assessment" &
-                  reviews_count$value == "Unclear", "n"][[1]]
+  reviews_count[reviews_count$name == "dual_independent_quality_assessment" &
+                  reviews_count$value == "unclear", "n"][[1]]
 
 dualqualstr <- paste0(
   qual_str(n_high_dualquality, nrow(qual_data), " high ", suffix= "; "),
@@ -243,7 +248,7 @@ dualqualstr <- paste0(
 
 ```
 
-The quality of the included studies was mixed. Most studies assessed heterogeneity `r qual_str(n_low_hetero, nrow(qual_data), " low ", suffix=" of studies)")`, reported the characteristics of the included studies `r qual_str(n_low_char, nrow(qual_data), " low ")`, and used a comprehensive and systematic search strategy `r qual_str(n_low_search, nrow(qual_data), " low ")`. Most studies did not clearly report if their eligibility criteria was predefined `r qual_str(n_unclear_elig, nrow(qual_data), " unclear ")`. A similar trend was observed for dual independent quality assessment `r dualqualstr`. Overall, only `r all_low` were graded as *low* risk of bias on all criteria.
+The quality of the included meta-analyses was mixed. Most assessed heterogeneity `r qual_str(n_low_hetero, nrow(qual_data), " low ", suffix=" of studies)")`, reported the characteristics of the included studies `r qual_str(n_low_char, nrow(qual_data), " low ")`, and used a comprehensive and systematic search strategy `r qual_str(n_low_search, nrow(qual_data), " low ")`. Most reviews did not clearly report if their eligibility criteria was predefined `r qual_str(n_unclear_elig, nrow(qual_data), " unclear ")`. Many reviews also did not complete dual independent screening of abstracts and full text `r qual_str(n_high_dualscreen, nrow(qual_data), " high ")` or did not clearly report the method of screening `r qual_str(n_unclear_dualscreen, nrow(qual_data), " unclear ")`. Many reviews  also did not complete A similar trend was observed for dual independent quality assessment `r dualqualstr`. Overall, only `r all_low` meta-analyses were graded as *low* risk of bias on all criteria.
 
 ### Education Outcomes
 
@@ -289,7 +294,7 @@ n_edu_failtest <-
 
 There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. Of these, `r n_edu_certain` met our criteria for statistical credibility and are described below (see Figure \@ref(fig:eduplot)). We removed `r n_edu_noindiv` for not providing individual study-level data, `r n_edu_samplesize` for having meta-analytic effects with samples < 1,000, and `r n_edu_faileggers` had a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material.
 
-```{r eduplot, eval=render_img, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes"}
+```{r eduplot, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes"}
 plots[[1]]$plot
 ```
 
@@ -349,7 +354,7 @@ n_health_failtest <-
 
 We identified `r n_health_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes. `r xfun::numbers_to_words(n_health_certain, cap=TRUE)` of these meta-analytic associations met our criteria for credible evidence (see Figure \@ref(fig:healthplot)). We removed `r n_health_noindiv` for not providing individual study-level data, `r n_health_samplesize` for having meta-analytic effects with samples < 1,000, and `r n_health_faileggers` had a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. 
 
-```{r healthplot, eval=render_img, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes"}
+```{r healthplot, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes"}
 plots[[2]]$plot
 ```
 
@@ -434,6 +439,6 @@ We made decisions to present effects that reach certain thresholds (e.g., N>1,00
 * [Manuscript Google Doc](https://docs.google.com/document/d/1NN4yJWQVepNjbX0mND4aidWWXcCDkg-eMepRnWdtQ9o/edit#)
 * [Online Report](https://motivation-and-behaviour.github.io/screen_umbrella/)
 
-```{r refs, eval=inc_ref, results='asis'}
-"# References"
+```{r refs, results='asis'}
+if (params$inc_ref) "# References"
 ```

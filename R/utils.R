@@ -16,7 +16,7 @@ get_mod_date <- function(id) {
 
 ## Reading Data ----
 read_sheet <- function(file, sheet, mod_date) {
-  d <- googlesheets4::read_sheet(file = file,
+  d <- googlesheets4::read_sheet(ss = file,
                                  sheet = sheet,
                                  na = c("-999", "", "#N/A")
   ) %>%

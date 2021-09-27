@@ -827,10 +827,10 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.33",
+      "Version": "1.34",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "0bc1b5da1b0eb07cd4b727e95e9ff0b8"
+      "Hash": "aa958054ac6f0360926bb952ea302f0f"
     },
     "labeling": {
       "Package": "labeling",
@@ -1467,10 +1467,10 @@
     },
     "targets": {
       "Package": "targets",
-      "Version": "0.7.0",
+      "Version": "0.8.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f3bb17418c64dda3c4d4992f31e77afb"
+      "Hash": "857c34fc118c677cf6bf39e9816faf5c"
     },
     "testthat": {
       "Package": "testthat",
