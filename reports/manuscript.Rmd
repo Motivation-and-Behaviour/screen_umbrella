@@ -1,25 +1,39 @@
 ---
 title: "Benefits and risks associated with children’s and adolescents’ interactions with electronic screens: An umbrella review"
 author:
-  - name: Taren Sanders
-    affiliation: Institute for Positive Psychology and Education, Australian Catholic
-      University
-    affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
-    orcid_id: 0000-0002-4504-6008
-  - name: Philip Parker
-    affiliation: Institute for Positive Psychology and Education, Australian Catholic
-      University
-    affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
-    orcid_id: 0000-0002-4604-8566
-  - name: Michael Noetel
-    affiliation: School of Health and Behavioural Sciences, Australian Catholic University
-    affiliation_url: https://www.acu.edu.au/about-acu/faculties-directorates-and-staff/faculty-of-health-sciences/school-of-behavioural-and-health-sciences
-    orcid_id: 0000-0002-6563-8203
-  - name: Chris Lonsdale
+- name: Taren Sanders
+  affiliation: Institute for Positive Psychology and Education, ACU
+  affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
+  orcid_id: 0000-0002-4504-6008
+- name: Michael Noetel
+  affiliation: School of Health and Behavioural Sciences, ACU
+  affiliation_url: https://www.acu.edu.au/about-acu/faculties-directorates-and-staff/faculty-of-health-sciences/school-of-behavioural-and-health-sciences
+  orcid_id: 0000-0002-6563-8203
+- name: Philip Parker
+  affiliation: Institute for Positive Psychology and Education, ACU
+  affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
+  orcid_id: 0000-0002-4604-8566
+- name: Borja Del Pozo Cruz
+- name: Stuart Biddle
+- name: Rimante Ronto
+- name: Ryan Hulteen
+- name: Rhiannon Parker
+- name: George Thomas
+- name: Katrien De Cocker
+- name: Jo Salmon
+- name: Kylie Hesketh
+- name: Nicole Weeks
+- name: Hugh Arnott
+- name: Emma Devine
+- name: Roberta Vasconcellos
+- name: Chris Lonsdale
+  affiliation: Institute for Positive Psychology and Education, ACU
+  affiliation_url: https://www.acu.edu.au/research/our-research-institutes/institute-for-positive-psychology-and-education
+  orcid_id: 000-0002-2523-5565
 date: '`r format(Sys.Date())`'
 repository_url: https://github.com/Motivation-and-Behaviour/screen_umbrella
 bibliography: combined.bib
-csl: nature.csl
+csl: vancouver-brackets.csl
 params:
   render_img: true
   inc_ref: false
@@ -48,6 +62,11 @@ targets::tar_load(c("prisma", "effects_clean", "reviews_tables", "tables_df",
          store = here::here("_targets"))
 ```
 
+```{r, eval=params$inc_ref, results='markup'}
+
+```
+
+
 # Background
 
 In the 16th century, hysteria reigned around a new technology that threatened to be "confusing and harmful" to the mind. The cause of such concern? The widespread availability of books brought about by the invention of the printing press [@blairReadingStrategiesCoping2003]. In the early 19th century, concerns about schooling "exhausting the children's brains" followed, with the medical community accepting that excessive study could be a cause of madness [@bell1883sanitarian]. By the 20th century, the invention of the radio was accompanied by assertions that it would distract children from their reading (which by this point was no longer considered "confusing and harmful") leading to impaired learning [@dill2013oxford].
@@ -68,7 +87,7 @@ In order to support further evidence-based guideline development and refinement,
 
 ### Eligibility criteria
 
-*Population*: To be eligible for inclusion, meta-analyses needed to include meta-analytic effect sizes for children or adolescents ( age 0-18 years). Meta-analyses containing data from adults and youth were included if meta-analytic effect sizes estimates specific to participants aged 18 years or less could be extracted. We excluded meta-analyses that only contained evidence gathered from adults (age >18 years).
+*Population*: To be eligible for inclusion, meta-analyses needed to include meta-analytic effect sizes for children or adolescents (age 0-18 years). Meta-analyses containing data from adults and youth were included if meta-analytic effect sizes estimates specific to participants aged 18 years or less could be extracted. We excluded meta-analyses that only contained evidence gathered from adults (age >18 years).
 
 *Exposure*: We included meta-analyses examining all types of electronic screens including (but not necessarily limited to) television, gaming consoles, computer, tablet, TV, and mobile phones. We also included analyses of all types of content on these devices, including (but not necessarily limited to) recreational content  (e.g., television programs, movies, games), homework, and communication (e.g., video chat). In this review we adopted a population-level perspective, meaning that we examined electronic media exposure that occurs during typical daily living activities (e.g., home, school-based electronic media exposure). Consistent with this population-level approach, we excluded technology-based treatments for clinical conditions. 
 
@@ -109,7 +128,7 @@ After extracting data, we examined the combinations of exposure and outcomes and
 
 ### Evidence assessment criteria
 
-*Statistical Credibility*. We employed a statistical classification approach to grade the statistical credibility of the effect sizes in the literature. To be considered credible an effect needed to be derived from a combined sample of >1,000 and have non-significant tests of publication bias (i.e., Egger’s test and excess significance test). We performed these analyses, and tehrefore the review needed to provide usable study-level data in order to be included.
+*Statistical Credibility*. We employed a statistical classification approach to grade the statistical credibility of the effect sizes in the literature. To be considered credible an effect needed to be derived from a combined sample of >1,000 and have non-significant tests of publication bias (i.e., Egger’s test and excess significance test). We performed these analyses, and therefore the review needed to provide usable study-level data in order to be included.
 
 *Consistency of Effect within the Population*. We also examined the consistency of the effect size using the $I^2$ measure. We considered $I^2 < 50\%$ to indicate effects that were relatively consistent across the population of interest. $I^2$ values of $> 50\%$ were taken to indicate an effect was potentially heterogeneous within the population.
 
@@ -165,15 +184,15 @@ freq_combos <- effects_clean %>%
 
 The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were duplicates. After screening titles and abstracts, we assessed `r format(prisma$data$value[5], big.mark=",")` full-texts for inclusion. `r str_to_sentence(numbers_to_words(prisma$data$value[8], and=TRUE))` met the inclusion criteria and we extracted the data of these meta-analyses. Figure \@ref(fig:prisma) presents the full results of the selection process.
 
-```{r prisma, fig.cap="PRISMA Diagram"}
+```{r prisma, eval=params$render_img, fig.cap="PRISMA Diagram"}
 prisma$diag
 ```
 
 After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total sample size. This process yielded `r unique_effects` unique effects/outcome combinations contributed from `r prisma$data$value[9]` papers. 
 
-The most frequently reported exposures were `r knitr::combine_words(freq_exposures$out[1:4])`. The most frequently reported outcomes were `r knitr::combine_words(freq_outcomes$out[1:5])`. In most cases (`r paste0(sum(freq_combos$n==1), "/", nrow(effects_clean))`), there was only one exposure/outcome combination, with `r sum(freq_combos$n==2)` appearing twice, and `r sum(freq_combos$n>2)` three or more times. Full characteristics of the included studies are provided in Table \@ref(tab:desctable).
+The most frequently reported exposures were `r knitr::combine_words(freq_exposures$out[1:4])`. The most frequently reported outcomes were `r knitr::combine_words(freq_outcomes$out[1:5])`. In most cases (`r paste0(sum(freq_combos$n==1), "/", nrow(effects_clean))`), there was only one exposure/outcome combination, with `r sum(freq_combos$n==2)` appearing twice, and `r sum(freq_combos$n>2)` appearing three or more times. Full characteristics of the included studies are provided in Table \@ref(tab:desctable).
 
-```{r desctable, layout="l-screen-inset shaded"}
+```{r desctable, eval=params$render_img, layout="l-screen-inset shaded"}
 reviews_tables[[1]]$table
 ```
 
@@ -242,13 +261,13 @@ n_unclear_dualquality <-
                   reviews_count$value == "unclear", "n"][[1]]
 
 dualqualstr <- paste0(
-  qual_str(n_high_dualquality, nrow(qual_data), " high ", suffix= "; "),
-  qual_str(n_unclear_dualquality, nrow(qual_data), " unclear ", prefix = "n", suffix = ")"))
+  qual_str(n_high_dualquality, nrow(qual_data), " high risk ", suffix= "; "),
+  qual_str(n_unclear_dualquality, nrow(qual_data), " unclear  ", prefix = "n", suffix = ")"))
 
 
 ```
 
-The quality of the included meta-analyses was mixed. Most assessed heterogeneity `r qual_str(n_low_hetero, nrow(qual_data), " low ", suffix=" of studies)")`, reported the characteristics of the included studies `r qual_str(n_low_char, nrow(qual_data), " low ")`, and used a comprehensive and systematic search strategy `r qual_str(n_low_search, nrow(qual_data), " low ")`. Most reviews did not clearly report if their eligibility criteria was predefined `r qual_str(n_unclear_elig, nrow(qual_data), " unclear ")`. Many reviews also did not complete dual independent screening of abstracts and full text `r qual_str(n_high_dualscreen, nrow(qual_data), " high ")` or did not clearly report the method of screening `r qual_str(n_unclear_dualscreen, nrow(qual_data), " unclear ")`. Many reviews  also did not complete A similar trend was observed for dual independent quality assessment `r dualqualstr`. Overall, only `r all_low` meta-analyses were graded as *low* risk of bias on all criteria.
+The quality of the included meta-analyses was mixed. Most assessed heterogeneity `r qual_str(n_low_hetero, nrow(qual_data), " low risk ", suffix=" of studies)")`, reported the characteristics of the included studies `r qual_str(n_low_char, nrow(qual_data), " low risk ")`, and used a comprehensive and systematic search strategy `r qual_str(n_low_search, nrow(qual_data), " low risk ")`. Most reviews did not clearly report if their eligibility criteria was predefined `r qual_str(n_unclear_elig, nrow(qual_data), " unclear ")`. Many reviews also did not complete dual independent screening of abstracts and full text `r qual_str(n_high_dualscreen, nrow(qual_data), " high risk ")` or did not clearly report the method of screening `r qual_str(n_unclear_dualscreen, nrow(qual_data), " unclear ")`. A similar trend was observed for dual independent quality assessment `r dualqualstr`. Overall, only `r all_low` meta-analyses were graded as low risk of bias on all criteria.
 
 ### Education Outcomes
 
@@ -292,14 +311,14 @@ n_edu_failtest <-
 ```
 
 
-There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. Of these, `r n_edu_certain` met our criteria for statistical credibility and are described below (see Figure \@ref(fig:eduplot)). We removed `r n_edu_noindiv` for not providing individual study-level data, `r n_edu_samplesize` for having meta-analytic effects with samples < 1,000, and `r n_edu_faileggers` had a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material.
+There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed `r n_edu_noindiv` effects that did not provide individual study-level data, `r n_edu_samplesize` effects with samples < 1,000, and `r n_edu_faileggers` with a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining `r n_edu_certain` met our criteria for statistical credibility and are described below (see Figure \@ref(fig:eduplot)).
 
-```{r eduplot, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes"}
+```{r eduplot, eval=params$render_img, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes"}
 plots[[1]]$plot
 ```
 
 
-Among the statistically credible effects, general screen use, TV viewing, and video games were all negatively associated with academic performance or general learning. E-books that included narration, as well as touch screen education interventions, and augmented reality interventions were positively associated with learning. General screen use was also negatively associated with literacy outcomes. However, if the screen involved co-viewing (e.g., watching with a parent) or the content was educational the association with literacy was positive. Numeracy outcomes were positively associated with screen-based mathematics interventions and video games with numeracy content.
+Among the statistically credible effects, general screen use, TV viewing, and video games were all negatively associated with academic performance or general learning. E-books that included narration, as well as touch screen education interventions, and augmented reality interventions were positively associated with learning. General screen use was negatively associated with literacy outcomes. However, if the screen involved co-viewing (e.g., watching with a parent) or the content was educational the association with literacy was positive. Numeracy outcomes were positively associated with screen-based mathematics interventions and video games with numeracy content.
 
 ```{r educertain}
 n_edu_p999 <- edu_certain %>% filter(reanalysis_p.value<0.001) %>% nrow()
@@ -352,15 +371,15 @@ n_health_failtest <-
   nrow()
 ```
 
-We identified `r n_health_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes. `r xfun::numbers_to_words(n_health_certain, cap=TRUE)` of these meta-analytic associations met our criteria for credible evidence (see Figure \@ref(fig:healthplot)). We removed `r n_health_noindiv` for not providing individual study-level data, `r n_health_samplesize` for having meta-analytic effects with samples < 1,000, and `r n_health_faileggers` had a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. 
+We identified `r n_health_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes. We removed `r n_health_noindiv` effects that did not provide individual study-level data, `r n_health_samplesize` effects with samples < 1,000, and `r n_health_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining `r n_health_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)).
 
-```{r healthplot, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes"}
+```{r healthplot, eval=params$render_img, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes"}
 plots[[2]]$plot
 ```
 
 Advertising of unhealthy foods—both traditional advertising and video games developed by a brand for promotion—were associated with higher food intake. Social media use was associated with higher risk of substance abuse, while screen-based interventions which target health behaviours appeared effective. 
 
-Television was negatively correlated with sleep duration, but only at the 95% confidence level (weak evidence). All forms of observed screen time (general, TV, and video games) were positively associated with body composition (e.g., BMI). Risky behaviour (e.g., unsafe sex) was also positively associated with social media and with the use of sexy media. General screen use was also associated with depression.
+Television viewing was negatively correlated with sleep duration, but only at the 95% confidence level (weak evidence). All forms of screen time (general, TV, and video games) were positively associated with body composition (e.g., BMI). Risky behaviour (e.g., unsafe sex) was also positively associated with social media and with the use of sexy media. General screen use was also associated with depression.
 
 ```{r healthcertain}
 n_health_p999 <- health_certain %>% filter(reanalysis_p.value<0.001) %>% nrow()
@@ -370,7 +389,7 @@ n_health_i2 <- health_certain %>% filter(i2 > 50) %>% nrow()
 n_health_r2 <- health_certain %>% filter(abs(r) < 0.2) %>% nrow()
 ```
 
-Across the health outcomes, most (`r n_health_p999` of `r n_health_certain` effects) were statistically significant at the $P < 10^3$ level, with the remaining `r xfun::numbers_to_words(n_health_p95)` significant at the $P < .05$ level. However, all of the credible effects exhibited high levels of heterogeneity, with the lowest $I^2 = 75%$. Additionally, most effects were small, with the association between unhealthy food advertising and food intake the largest at $r = 0.25$. Most of the effect sizes (`r n_health_r2`/`r n_health_certain`) had an absolute value of $r < 0.2$. 
+Across the health outcomes, most (`r n_health_p999` of `r n_health_certain` effects) were statistically significant at the $P < 10^3$ level, with the remaining `r xfun::numbers_to_words(n_health_p95)` significant at the $P < .05$ level. However, all of the credible effects exhibited high levels of heterogeneity, with the lowest $I^2 = 75\%$. Additionally, most effects were small, with the association between unhealthy food advertising and food intake the largest at $r = 0.25$. Most of the effect sizes (`r n_health_r2`/`r n_health_certain`) had an absolute value of $r < 0.2$. 
 
 # Discussion
 
@@ -441,6 +460,5 @@ We made decisions to present effects that reach certain thresholds (e.g., N>1,00
 * [Manuscript Google Doc](https://docs.google.com/document/d/1NN4yJWQVepNjbX0mND4aidWWXcCDkg-eMepRnWdtQ9o/edit#)
 * [Online Report](https://motivation-and-behaviour.github.io/screen_umbrella/)
 
-```{r refs, results='asis'}
-if (params$inc_ref) "# References"
-```
+
+# References

@@ -275,7 +275,7 @@ make_plots <- function(combined_effects) {
     )
 
 
-  gen_plot <- function(categories, certain, title, positions, debug = FALSE) {
+  gen_plot <- function(categories, certain, title, positions, caption=FALSE, debug = FALSE) {
     if (debug) labsize <- 1 else labsize <- NA
 
 
@@ -470,6 +470,22 @@ make_plots <- function(combined_effects) {
         strip.placement = "outside",
         strip.background = element_rect(linetype = "solid")
       )
+    
+    if (caption) {
+      cap <- 
+        "**Note:**<br>
+      **Indiv. Data:** Individual study data available for reanalysis.<br>
+      **Eggers:** *P* > 0.05 for Egger's test of asymmetry, or too few studies to analyse (K < 10).<br>
+      **Excess Signif.:** *P* > 0.05 for test for excess significance."
+      
+      base_plot <-
+        base_plot +
+        labs(tag = cap) + theme(
+          plot.tag.position = positions$tag,
+          plot.tag = element_textbox(size = 7,
+                                     lineheight = 1)
+        )
+    }
 
     return(base_plot)
   }
@@ -488,7 +504,8 @@ make_plots <- function(combined_effects) {
         rci = -1.45,
         author_year = -2.4,
         expo = -3.5,
-        outcome = -4.2
+        outcome = -4.2,
+        tag = NA
       ),
       uncertain = list(
         lims = c(-4.3, 0.6),
@@ -502,25 +519,27 @@ make_plots <- function(combined_effects) {
         rci = -1.85,
         author_year = -2.7,
         expo = -3.7,
-        outcome = -4.55
+        outcome = -4.55,
+        tag = c(0.2,0.01)
       )
     )
 
   nonedu_positions <-
     list(
       certain = list(
-        lims = c(-4.0, 0.5),
+        lims = c(-5.1, 0.5),
         breaks = c(-0.4, -.2, 0, .2, 0.4),
         esig = NULL,
         eggers = NULL,
         indiv_data = NULL,
         n = -0.6,
         k = -0.85,
-        i2 = -1.05,
-        rci = -1.4,
-        author_year = -2.35,
-        expo = -3.35,
-        outcome = -4.25
+        i2 = -1.10,
+        rci = -1.6,
+        author_year = -2.75,
+        expo = -4.15,
+        outcome = -5.45,
+        tag = NA
       ),
       uncertain = list(
         lims = c(-5.7, 0.9),
@@ -534,7 +553,8 @@ make_plots <- function(combined_effects) {
         rci = -2.6,
         author_year = -3.6,
         expo = -4.85,
-        outcome = -6.05
+        outcome = -6.05,
+        tag = c(0.2,0)
       )
     )
 
@@ -545,7 +565,8 @@ make_plots <- function(combined_effects) {
       categories = "Education",
       certain = TRUE,
       pos = edu_positions$certain,
-      dims = c(10, 6)
+      dims = c(10, 6),
+      caption = FALSE
     ),
     list(
       filename = "Forest plot for Health-related Outcomes.pdf",
@@ -553,7 +574,8 @@ make_plots <- function(combined_effects) {
       categories = c("Psychology", "Health Behaviour", "Physical Health"),
       certain = TRUE,
       pos = nonedu_positions$certain,
-      dims = c(10, 6)
+      dims = c(10, 6),
+      caption = FALSE
     ),
     list(
       filename = "Supplemental Forest plot for Education.pdf",
@@ -561,7 +583,8 @@ make_plots <- function(combined_effects) {
       categories = "Education",
       certain = FALSE,
       pos = edu_positions$uncertain,
-      dims = c(12, 8)
+      dims = c(12, 10),
+      caption = TRUE
     ),
     list(
       filename = "Supplemental Forest plot for Health-related Outcomes.pdf",
@@ -569,7 +592,8 @@ make_plots <- function(combined_effects) {
       categories = c("Psychology", "Health Behaviour", "Physical Health"),
       certain = FALSE,
       pos = nonedu_positions$uncertain,
-      dims = c(16, 25)
+      dims = c(16, 25),
+      caption = TRUE
     )
   )
 
@@ -580,7 +604,8 @@ make_plots <- function(combined_effects) {
       plot_params[[i]]$categories,
       plot_params[[i]]$certain,
       plot_params[[i]]$title,
-      plot_params[[i]]$pos
+      plot_params[[i]]$pos,
+      plot_params[[i]]$caption
     )
     plots[[i]]$dims <- plot_params[[i]]$dims
     plots[[i]]$filename <- plot_params[[i]]$filename

@@ -1,7 +1,5 @@
 Benefits and risks associated with children’s and adolescents’ interactions with electronic screens: An umbrella review
 ================
-truetruetruetrue
-2021-09-27
 
 # Background
 
@@ -21,7 +19,7 @@ In order to support further evidence-based guideline development and refinement,
 
 ### Eligibility criteria
 
-*Population*: To be eligible for inclusion, meta-analyses needed to include meta-analytic effect sizes for children or adolescents ( age 0-18 years). Meta-analyses containing data from adults and youth were included if meta-analytic effect sizes estimates specific to participants aged 18 years or less could be extracted. We excluded meta-analyses that only contained evidence gathered from adults (age &gt;18 years).
+*Population*: To be eligible for inclusion, meta-analyses needed to include meta-analytic effect sizes for children or adolescents (age 0-18 years). Meta-analyses containing data from adults and youth were included if meta-analytic effect sizes estimates specific to participants aged 18 years or less could be extracted. We excluded meta-analyses that only contained evidence gathered from adults (age >18 years).
 
 *Exposure*: We included meta-analyses examining all types of electronic screens including (but not necessarily limited to) television, gaming consoles, computer, tablet, TV, and mobile phones. We also included analyses of all types of content on these devices, including (but not necessarily limited to) recreational content (e.g., television programs, movies, games), homework, and communication (e.g., video chat). In this review we adopted a population-level perspective, meaning that we examined electronic media exposure that occurs during typical daily living activities (e.g., home, school-based electronic media exposure). Consistent with this population-level approach, we excluded technology-based treatments for clinical conditions.
 
@@ -63,11 +61,11 @@ After extracting data, we examined the combinations of exposure and outcomes and
 
 ### Evidence assessment criteria
 
-*Statistical Credibility*. We employed a statistical classification approach to grade the statistical credibility of the effect sizes in the literature. To be considered credible an effect needed to be derived from a combined sample of &gt;1,000 and have non-significant tests of publication bias (i.e., Egger’s test and excess significance test). We performed these analyses, and tehrefore the review needed to provide usable study-level data in order to be included.
+*Statistical Credibility*. We employed a statistical classification approach to grade the statistical credibility of the effect sizes in the literature. To be considered credible an effect needed to be derived from a combined sample of >1,000 and have non-significant tests of publication bias (i.e., Egger’s test and excess significance test). We performed these analyses, and therefore the review needed to provide usable study-level data in order to be included.
 
-*Consistency of Effect within the Population*. We also examined the consistency of the effect size using the *I*<sup>2</sup> measure. We considered *I*<sup>2</sup> &lt; 50% to indicate effects that were relatively consistent across the population of interest. *I*<sup>2</sup> values of  &gt; 50% were taken to indicate an effect was potentially heterogeneous within the population.
+*Consistency of Effect within the Population*. We also examined the consistency of the effect size using the *I*<sup>2</sup> measure. We considered *I*<sup>2</sup> < 50% to indicate effects that were relatively consistent across the population of interest. *I*<sup>2</sup> values of  > 50% were taken to indicate an effect was potentially heterogeneous within the population.
 
-*Direction of Effect*. Finally, we examined the extent to which significance testing suggested screen exposure was associated with benefit, harm, or no effect on outcomes. We used thresholds of *P* &lt; .05 for weak evidence and *P* &lt; 10<sup> − 3</sup> for strong evidence. An effect that was neither significant at *P* &lt; .05 or 10<sup> − 3</sup> that also passed the criteria for statistical credibility was taken to indicate no association of interest.
+*Direction of Effect*. Finally, we examined the extent to which significance testing suggested screen exposure was associated with benefit, harm, or no effect on outcomes. We used thresholds of *P* < .05 for weak evidence and *P* < 10<sup>−3</sup> for strong evidence. An effect that was neither significant at *P* < .05 or 10<sup>−3</sup> that also passed the criteria for statistical credibility was taken to indicate no association of interest.
 
 ### Deviations from protocol
 
@@ -83,27 +81,27 @@ The searches yielded 41,928 results, of which 24,023 were duplicates. After scre
 
 After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total sample size. This process yielded 138 unique effects/outcome combinations contributed from 56 papers.
 
-The most frequently reported exposures were general tv programs and movies (n = 20), screen-based lifestyle risk behaviour interventions (at school) (n = 12), physically active video games (n = 12), and general screen use (n = 9). The most frequently reported outcomes were body composition (n = 31), general literacy (n = 11), general physical activity (n = 10), general numeracy (n = 8), and general learning (n = 7). In most cases (117/168), there was only one exposure/outcome combination, with 18 appearing twice, and 3 three or more times. Full characteristics of the included studies are provided in Table @ref(tab:desctable).
+The most frequently reported exposures were general tv programs and movies (n = 20), screen-based lifestyle risk behaviour interventions (at school) (n = 12), physically active video games (n = 12), and general screen use (n = 9). The most frequently reported outcomes were body composition (n = 31), general literacy (n = 11), general physical activity (n = 10), general numeracy (n = 8), and general learning (n = 7). In most cases (117/168), there was only one exposure/outcome combination, with 18 appearing twice, and 3 appearing three or more times. Full characteristics of the included studies are provided in Table @ref(tab:desctable).
 
-The quality of the included meta-analyses was mixed. Most assessed heterogeneity (n low = 50/56, 89% of studies), reported the characteristics of the included studies (n low = 50/56, 89%), and used a comprehensive and systematic search strategy (n low = 47/56, 84%). Most reviews did not clearly report if their eligibility criteria was predefined (n unclear = 37/56, 66%). Many reviews also did not complete dual independent screening of abstracts and full text (n high = 16/56, 29%) or did not clearly report the method of screening (n unclear = 14/56, 25%). Many reviews also did not complete A similar trend was observed for dual independent quality assessment (n high = 25/56, 45%; n unclear = 16/56, 29%). Overall, only 5 meta-analyses were graded as *low* risk of bias on all criteria.
+The quality of the included meta-analyses was mixed. Most assessed heterogeneity (n low risk = 50/56, 89% of studies), reported the characteristics of the included studies (n low risk = 50/56, 89%), and used a comprehensive and systematic search strategy (n low risk = 47/56, 84%). Most reviews did not clearly report if their eligibility criteria was predefined (n unclear = 37/56, 66%). Many reviews also did not complete dual independent screening of abstracts and full text (n high risk = 16/56, 29%) or did not clearly report the method of screening (n unclear = 14/56, 25%). A similar trend was observed for dual independent quality assessment (n high risk = 25/56, 45%; n unclear = 16/56, 29%). Overall, only 5 meta-analyses were graded as low risk of bias on all criteria.
 
 ### Education Outcomes
 
-There were 41 unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. Of these, 12 met our criteria for statistical credibility and are described below (see Figure @ref(fig:eduplot)). We removed 17 for not providing individual study-level data, 6 for having meta-analytic effects with samples &lt; 1,000, and 7 had a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material.
+There were 41 unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed 17 effects that did not provide individual study-level data, 6 effects with samples < 1,000, and 7 with a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining 12 met our criteria for statistical credibility and are described below (see Figure @ref(fig:eduplot)).
 
-Among the statistically credible effects, general screen use, TV viewing, and video games were all negatively associated with academic performance or general learning. E-books that included narration, as well as touch screen education interventions, and augmented reality interventions were positively associated with learning. General screen use was also negatively associated with literacy outcomes. However, if the screen involved co-viewing (e.g., watching with a parent) or the content was educational the association with literacy was positive. Numeracy outcomes were positively associated with screen-based mathematics interventions and video games with numeracy content.
+Among the statistically credible effects, general screen use, TV viewing, and video games were all negatively associated with academic performance or general learning. E-books that included narration, as well as touch screen education interventions, and augmented reality interventions were positively associated with learning. General screen use was negatively associated with literacy outcomes. However, if the screen involved co-viewing (e.g., watching with a parent) or the content was educational the association with literacy was positive. Numeracy outcomes were positively associated with screen-based mathematics interventions and video games with numeracy content.
 
-As shown in Figure @ref(fig:eduplot), most of the credible results (10 of 12 effects) showed statistically significant associations, with 99.9% confidence intervals not encompassing zero (strong evidence). The remaining two associations were significant at the 95% confidence level (weak evidence). All credible effects related to education outcomes were small-to-moderate. Screen-based interventions tended to have larger effect sizes than non-intervention exposure (e.g., TV viewing, e-book reading) with the largest effect size observed for augmented reality-based school interventions on general learning (*r* = 0.33). Most effects showed high levels of heterogeneity (10 of 12 with *I*<sup>2</sup> &gt; 50%).
+As shown in Figure @ref(fig:eduplot), most of the credible results (10 of 12 effects) showed statistically significant associations, with 99.9% confidence intervals not encompassing zero (strong evidence). The remaining two associations were significant at the 95% confidence level (weak evidence). All credible effects related to education outcomes were small-to-moderate. Screen-based interventions tended to have larger effect sizes than non-intervention exposure (e.g., TV viewing, e-book reading) with the largest effect size observed for augmented reality-based school interventions on general learning (*r* = 0.33). Most effects showed high levels of heterogeneity (10 of 12 with *I*<sup>2</sup> > 50%).
 
 ### Health and Health-related Behaviours
 
-We identified 97 unique outcome-exposure combinations associated with health or health-related behaviour outcomes. Sixteen of these meta-analytic associations met our criteria for credible evidence (see Figure @ref(fig:healthplot)). We removed 18 for not providing individual study-level data, 28 for having meta-analytic effects with samples &lt; 1,000, and 38 had a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material.
+We identified 97 unique outcome-exposure combinations associated with health or health-related behaviour outcomes. We removed 18 effects that did not provide individual study-level data, 28 effects with samples < 1,000, and 38 effects with a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining 16 meta-analytic associations met our criteria for credible evidence and are described below (see also Figure @ref(fig:healthplot)).
 
 Advertising of unhealthy foods—both traditional advertising and video games developed by a brand for promotion—were associated with higher food intake. Social media use was associated with higher risk of substance abuse, while screen-based interventions which target health behaviours appeared effective.
 
-Television was negatively correlated with sleep duration, but only at the 95% confidence level (weak evidence). All forms of observed screen time (general, TV, and video games) were positively associated with body composition (e.g., BMI). Risky behaviour (e.g., unsafe sex) was also positively associated with social media and with the use of sexy media. General screen use was also associated with depression.
+Television viewing was negatively correlated with sleep duration, but only at the 95% confidence level (weak evidence). All forms of screen time (general, TV, and video games) were positively associated with body composition (e.g., BMI). Risky behaviour (e.g., unsafe sex) was also positively associated with social media and with the use of sexy media. General screen use was also associated with depression.
 
-Across the health outcomes, most (13 of 16 effects) were statistically significant at the *P* &lt; 10<sup>3</sup> level, with the remaining six significant at the *P* &lt; .05 level. However, all of the credible effects exhibited high levels of heterogeneity, with the lowest *I*<sup>2</sup> = 75. Additionally, most effects were small, with the association between unhealthy food advertising and food intake the largest at *r* = 0.25. Most of the effect sizes (13/16) had an absolute value of *r* &lt; 0.2.
+Across the health outcomes, most (13 of 16 effects) were statistically significant at the *P* < 10<sup>3</sup> level, with the remaining six significant at the *P* < .05 level. However, all of the credible effects exhibited high levels of heterogeneity, with the lowest *I*<sup>2</sup> = 75%. Additionally, most effects were small, with the association between unhealthy food advertising and food intake the largest at *r* = 0.25. Most of the effect sizes (13/16) had an absolute value of *r* < 0.2.
 
 # Discussion
 
@@ -155,8 +153,8 @@ All observational research with self-report evidence.
 #### Limitations of the review
 
 Can’t look at fine-grained detail - eg moderators, but we did look at different exposures and outcomes (quasi moderators).  
-GRADE - we did not rate the risk of bias of individual studies in the meta-analyses. Total k &gt;3,000 (intractable task)  
-We made decisions to present effects that reach certain thresholds (e.g., N&gt;1,000, non-significant Egger’s test) but also provide more complete results in the supplementary files for those who wish to investigate.
+GRADE - we did not rate the risk of bias of individual studies in the meta-analyses. Total k >3,000 (intractable task)  
+We made decisions to present effects that reach certain thresholds (e.g., N>1,000, non-significant Egger’s test) but also provide more complete results in the supplementary files for those who wish to investigate.
 
 #### Conclusions
 
@@ -180,7 +178,7 @@ We made decisions to present effects that reach certain thresholds (e.g., N&gt;1
 -   [Manuscript Google Doc](https://docs.google.com/document/d/1NN4yJWQVepNjbX0mND4aidWWXcCDkg-eMepRnWdtQ9o/edit#)
 -   [Online Report](https://motivation-and-behaviour.github.io/screen_umbrella/)
 
-\[1\] “\# References”
+# References
 
 <div id="refs" class="references csl-bib-body">
 

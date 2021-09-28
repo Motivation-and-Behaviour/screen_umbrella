@@ -107,7 +107,7 @@ make_yaml <- function(authors_details){
                        orcid_id = authors_details$orcid,
                        url = NULL) %>% 
     yml_citations(bibliography = "combined.bib",
-                  csl = "nature.csl") %>% 
+                  csl = "vancouver-brackets.csl") %>% 
     yml_params(render_img= TRUE,
                inc_ref= FALSE) %>% 
     use_yml_file(filepath, quiet = TRUE)
