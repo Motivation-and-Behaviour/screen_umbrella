@@ -406,29 +406,15 @@ make_plots <- function(combined_effects) {
         label.size = labsize
         )
     }
-
-
-    if (length(categories) > 1) {
-      facet_style <-
-        ggh4x::facet_nested(
-          rows = vars(outcome_category, outcome_lvl_1),
-          scales = "free",
-          space = "free",
-          drop = T,
-          switch = "both"
-        )
-    } else {
-      facet_style <-
-        facet_grid(
-          rows = vars(outcome_lvl_1),
-          scales = "free",
-          space = "free",
-          drop = T,
-          switch = "both"
-        )
-    }
-
-
+    
+    facet_style <-
+      facet_grid(
+        rows = vars(outcome_lvl_1),
+        scales = "free",
+        space = "free",
+        drop = T,
+        switch = "both"
+      )
 
     base_plot <-
       base_plot +
@@ -527,7 +513,7 @@ make_plots <- function(combined_effects) {
   nonedu_positions <-
     list(
       certain = list(
-        lims = c(-5.1, 0.5),
+        lims = c(-4.4, 0.5),
         breaks = c(-0.4, -.2, 0, .2, 0.4),
         esig = NULL,
         eggers = NULL,
@@ -536,13 +522,13 @@ make_plots <- function(combined_effects) {
         k = -0.85,
         i2 = -1.10,
         rci = -1.6,
-        author_year = -2.75,
-        expo = -4.15,
-        outcome = -5.45,
+        author_year = -2.55,
+        expo = -3.65,
+        outcome = -4.65,
         tag = NA
       ),
       uncertain = list(
-        lims = c(-5.7, 0.9),
+        lims = c(-5.15, 0.9),
         breaks = c(-1, -0.8, -0.6, -0.4, -.2, 0, .2, 0.4, 0.6, 0.8),
         esig = -1.15,
         eggers = -1.40,
@@ -550,10 +536,10 @@ make_plots <- function(combined_effects) {
         n = -1.85,
         k = -2.05,
         i2 = -2.2,
-        rci = -2.6,
-        author_year = -3.6,
-        expo = -4.85,
-        outcome = -6.05,
+        rci = -2.5,
+        author_year = -3.35,
+        expo = -4.4,
+        outcome = -5.4,
         tag = c(0.2,0)
       )
     )
@@ -627,7 +613,7 @@ save_plots <- function(plots) {
   )
   
   # Upload to GDrive
-  drive_put(here::here("figure", plots[[1]]$filename), 
+  drive_put(here::here("figure", plots[[1]]$filename),
             path = as_id("https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml"))
   
   return(file_name)
