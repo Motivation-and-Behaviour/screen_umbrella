@@ -106,12 +106,42 @@ make_prisma <- function(covidence_export, effects_clean) {
     ) %>%
     arrange(step, desc(value))
   
+  # Reasons studies were removed
+  dat <- dat %>%
+    add_row(
+      text = "studies removed",
+      type = "exclude",
+      step = dat$step[nrow(dat)],
+      value = dat[dat$step == 4 &
+                    dat$type == "main", ]$value -  effects_clean %>% 
+        filter(use_effect) %>% 
+        distinct(covidence_review_id) %>% 
+        nrow()
+    ) %>% 
+    add_row(
+      text = "All effects missing key information (estimate, N)",
+      type = "exclude_reason",
+      step = dat$step[nrow(dat)],
+      value = 29 # TODO unhardcode this
+    ) 
+  
+  dat <- dat %>% 
+    add_row(
+      text = "Larger study available",
+      type = "exclude_reason",
+      step = dat$step[nrow(dat)],
+      value = dat[dat$step == 4 &
+                    dat$type == "exclude", ]$value - 29 # TODO unhardcode this
+    )
+    
   dat <- dat %>% add_row(
     text = "studies contributed unique effects",
     type = "main",
     step = dat$step[nrow(dat)] + 1,
     value = effects_clean %>% filter(use_effect) %>% distinct(covidence_review_id) %>% nrow()
   )
+  
+
   
   # Generate PRISMA Diagram ####
   
@@ -141,16 +171,19 @@ make_prisma <- function(covidence_export, effects_clean) {
       tab5 [label = '", labels[5], "']
       tab6 [label = <", labels[6], "<br ALIGN = 'LEFT'/>", labels[7], "<br ALIGN = 'LEFT'/>>]
       tab7 [label = '", labels[8], "']
-      tab8 [label = '", labels[9], "']
+      tab8 [label = <", labels[9], "<br ALIGN = 'LEFT'/>", labels[10], "<br ALIGN = 'LEFT'/>>]
+      tab9 [label = '", labels[11], "']
 
       # edge definitions with the node IDs
-      tab1 -> tab3 -> tab5 -> tab7 -> tab8;
+      tab1 -> tab3 -> tab5 -> tab7 -> tab9;
       tab1 -> tab2;
       {rank=same; tab1; tab2}
       tab3 -> tab4;
       {rank=same; tab3; tab4}
       tab5 -> tab6;
       {rank=same; tab5; tab6}
+      tab7 -> tab8;
+      {rank=same; tab7; tab8}
       }
 ", collapse = "")
   
