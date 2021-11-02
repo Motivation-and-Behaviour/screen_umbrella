@@ -232,19 +232,35 @@ process_effects <- function(raw) {
       plain_language_exposure
     ) %>%
     slice_max(n, with_ties = TRUE) %>%
-    mutate(use_effect = TRUE) %>%
+    mutate(use_effect = TRUE,
+           main_effect = TRUE) %>%
     ungroup()
   
-  q <- left_join(q, select(q_use, effect_size_id_1, use_effect)) %>%
+  q <- left_join(q, select(q_use, 
+                           covidence_review_id, 
+                           plain_language_outcome, 
+                           plain_language_exposure, 
+                           use_effect), by = c("covidence_review_id", 
+                                               "plain_language_outcome", 
+                                               "plain_language_exposure")) %>% 
+    left_join(select(q_use, 
+                     effect_size_id_1, 
+                     main_effect),
+              by = "effect_size_id_1") %>% 
     select(
       author_year, covidence_review_id,
       outcome_category, effect_size_id_1,
       plain_language_outcome,
       plain_language_exposure,
+      moderator_level,
+      moderator_category,
       risk,
-      k, n, r, cilb, ciub, i2, sig, use_effect
-    ) %>%
-    distinct()
+      k, n, r, cilb, ciub, i2, sig, use_effect, main_effect
+    ) %>% 
+    mutate(moderator = if_else(
+      moderator_level == "overall" & moderator_category == "overall",
+      "overall",
+      paste0(moderator_category,": ", moderator_level)))
   
   return(q)
 }
