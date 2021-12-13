@@ -1,7 +1,7 @@
 Benefits and risks associated with children’s and adolescents’ interactions with electronic screens: An umbrella review
 ================
 truetruetruetruetruetruetruetruetruetruetruetruetruetruetruetruetrue
-2021-11-02
+2021-12-13
 
 # Background
 
@@ -81,15 +81,15 @@ We initially planned to include systematic reviews without meta-analyses in a na
 
 The searches yielded 41,928 results, of which 24,023 were duplicates. After screening titles and abstracts, we assessed 1,964 full-texts for inclusion. One hundred and nineteen met the inclusion criteria and we extracted the data of these meta-analyses. Figure @ref(fig:prisma) presents the full results of the selection process.
 
-After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total sample size. This process yielded 138 unique effects/outcome combinations contributed from 63 papers.
+After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total sample size. This process yielded 167 unique effects/outcome combinations contributed from 53 papers.
 
-The most frequently reported exposures were general tv programs and movies (n = 20), screen-based lifestyle risk behaviour interventions (at school) (n = 12), physically active video games (n = 12), and general screen use (n = 9). The most frequently reported outcomes were body composition (n = 31), general literacy (n = 11), general physical activity (n = 10), general numeracy (n = 8), and general learning (n = 7). In most cases (117/168), there was only one exposure/outcome combination, with 18 appearing twice, and 3 appearing three or more times. Full characteristics of the included studies are provided in Table @ref(tab:desctable).
+The most frequently reported exposures were general tv programs and movies (n = 26), physically active video games (n = 15), screen-based lifestyle risk behaviour interventions (at school) (n = 14), and general screen use (n = 13). The most frequently reported outcomes were body composition (n = 34), general physical activity (n = 15), general literacy (n = 13), general learning (n = 12), and duration sleep (n = 9). In most cases (121/197), there was only one exposure/outcome combination, with 20 appearing twice, and 8 appearing three or more times. Full characteristics of the included studies are provided in Table @ref(tab:desctable).
 
-The quality of the included meta-analyses was mixed. Most assessed heterogeneity (n low risk = 50/56, 89% of studies), reported the characteristics of the included studies (n low risk = 50/56, 89%), and used a comprehensive and systematic search strategy (n low risk = 47/56, 84%). Most reviews did not clearly report if their eligibility criteria was predefined (n unclear = 37/56, 66%). Many reviews also did not complete dual independent screening of abstracts and full text (n high risk = 16/56, 29%) or did not clearly report the method of screening (n unclear = 14/56, 25%). A similar trend was observed for dual independent quality assessment (n high risk = 25/56, 45%; n unclear = 16/56, 29%). Overall, only 5 meta-analyses were graded as low risk of bias on all criteria.
+The quality of the included meta-analyses was mixed. Most assessed heterogeneity (n low risk = 58/65, 89% of studies), reported the characteristics of the included studies (n low risk = 56/65, 86%), and used a comprehensive and systematic search strategy (n low risk = 55/65, 85%). Most reviews did not clearly report if their eligibility criteria was predefined (n unclear = 44/65, 68%). Many reviews also did not complete dual independent screening of abstracts and full text (n high risk = 16/65, 25%) or did not clearly report the method of screening (n unclear = 21/65, 32%). A similar trend was observed for dual independent quality assessment (n high risk = 31/65, 48%; n unclear = 19/65, 29%). Overall, only 5 meta-analyses were graded as low risk of bias on all criteria.
 
 ### Education Outcomes
 
-There were 41 unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed 17 effects that did not provide individual study-level data, 6 effects with samples &lt; 1,000, and 7 with a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining 12 met our criteria for statistical credibility and are described below (see Figure @ref(fig:eduplot)).
+There were 46 unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed 22 effects that did not provide individual study-level data, 6 effects with samples &lt; 1,000, and 7 with a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining 12 met our criteria for statistical credibility and are described below (see Figure @ref(fig:eduplot)).
 
 Among the statistically credible effects, general screen use, TV viewing, and video games were all negatively associated with academic performance or general learning. E-books that included narration, as well as touch screen education interventions, and augmented reality interventions were positively associated with learning. General screen use was negatively associated with literacy outcomes. However, if the screen involved co-viewing (e.g., watching with a parent) or the content was educational the association with literacy was positive. Numeracy outcomes were positively associated with screen-based mathematics interventions and video games with numeracy content.
 
@@ -97,7 +97,7 @@ As shown in Figure @ref(fig:eduplot), most of the credible results (10 of 12 eff
 
 ### Health and Health-related Behaviours
 
-We identified 97 unique outcome-exposure combinations associated with health or health-related behaviour outcomes. We removed 18 effects that did not provide individual study-level data, 28 effects with samples &lt; 1,000, and 38 effects with a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining 16 meta-analytic associations met our criteria for credible evidence and are described below (see also Figure @ref(fig:healthplot)).
+We identified 121 unique outcome-exposure combinations associated with health or health-related behaviour outcomes. We removed 41 effects that did not provide individual study-level data, 28 effects with samples &lt; 1,000, and 38 effects with a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining 16 meta-analytic associations met our criteria for credible evidence and are described below (see also Figure @ref(fig:healthplot)).
 
 Advertising of unhealthy foods—both traditional advertising and video games developed by a brand for promotion—were associated with higher food intake. Social media use was associated with higher risk of substance abuse, while screen-based interventions which target health behaviours appeared effective.
 
@@ -214,27 +214,27 @@ We made decisions to present effects that reach certain thresholds (e.g., N&gt;1
 
 </div>
 
-<div id="ref-thelancetSocialMediaScreen2019a" class="csl-entry">
+<div id="ref-thelancetSocialMediaScreen2019" class="csl-entry">
 
 <span class="csl-left-margin">6. </span><span class="csl-right-inline">The Lancet. Social media, screen time, and young people’s mental health. The Lancet. 2019 Feb;393(10172):611. </span>
 
 </div>
 
-<div id="ref-haleScreenTimeSleep2015a" class="csl-entry">
+<div id="ref-haleScreenTimeSleep2015" class="csl-entry">
 
 <span class="csl-left-margin">7. </span><span class="csl-right-inline">Hale L, Guan S. Screen time and sleep among school-aged children and adolescents: A systematic literature review. Sleep Medicine Reviews. 2015 Jun;21:50–8. </span>
 
 </div>
 
-<div id="ref-sweetserActivePassiveScreen2012a" class="csl-entry">
+<div id="ref-sweetserActivePassiveScreen2012" class="csl-entry">
 
 <span class="csl-left-margin">8. </span><span class="csl-right-inline">Sweetser P, Johnson D, Ozdowska A, Wyeth P. Active versus Passive Screen Time for Young Children. Australasian Journal of Early Childhood. 2012 Dec;37(4):94–8. </span>
 
 </div>
 
-<div id="ref-liEarlyChildhoodComputer2004a" class="csl-entry">
+<div id="ref-liEarlyChildhoodComputer2004" class="csl-entry">
 
-<span class="csl-left-margin">9. </span><span class="csl-right-inline">Li X, Atkins MS. Early Childhood Computer Experience and Cognitive and Motor Development. PEDIATRICS. 2004 Jun;113(6):1715–22. </span>
+<span class="csl-left-margin">9. </span><span class="csl-right-inline">Li X, Atkins MS. Early childhood computer experience and cognitive and motor development. Pediatrics. 2004;113(6):1715–22. </span>
 
 </div>
 
