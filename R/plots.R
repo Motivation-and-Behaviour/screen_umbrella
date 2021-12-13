@@ -122,7 +122,7 @@ make_prisma <- function(covidence_export, effects_clean) {
       text = "All effects missing key information (estimate, N)",
       type = "exclude_reason",
       step = dat$step[nrow(dat)],
-      value = 29 # TODO unhardcode this
+      value = 40 # TODO unhardcode this
     ) 
   
   dat <- dat %>% 
@@ -131,7 +131,7 @@ make_prisma <- function(covidence_export, effects_clean) {
       type = "exclude_reason",
       step = dat$step[nrow(dat)],
       value = dat[dat$step == 4 &
-                    dat$type == "exclude", ]$value - 29 # TODO unhardcode this
+                    dat$type == "exclude", ]$value - 40 # TODO unhardcode this
     )
     
   dat <- dat %>% add_row(
