@@ -227,8 +227,7 @@ process_effects <- function(raw, revs) {
   q <- left_join(q, revs_dems, by = c("covidence_review_id"= 
                                    "covidence_review_id_auto")) %>% 
     mutate(moderator_age = case_when(
-      demographics_consensus %in% c("All", "Children; Adolescents",  "School-age Children",
-                                    "School-age Children (Primary/Elementary/Middle School)") ~ "All",
+      demographics_consensus %in% c("All", "Children; Adolescents",  "School-age Children") ~ "All",
       demographics_consensus %in% c("Adolescents", 
                                     "School-age Children (Middle/High School)", 
                                     "School-age_High School", "school-age_high school",
