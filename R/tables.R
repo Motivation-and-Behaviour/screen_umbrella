@@ -134,7 +134,7 @@ make_desc_tables <- function(tables_df) {
   
   gt_table_main <- 
     base_table %>% 
-    gt() %>% 
+    gt(caption = "Review characteristics and quality assessment for studies providing unique effects") %>% 
     # Add color to ROB
     data_color(
       columns = 

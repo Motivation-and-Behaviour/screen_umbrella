@@ -57,8 +57,8 @@ knitr::opts_chunk$set(
 
 ```{r, load-targets}
 targets::tar_load(c("prisma", "effects_clean", "reviews_tables", "tables_df",
-                    "plots", "studies_results", "comparison_plots", 
-                    "combined_effects", "combined_bib"), 
+                    "plots", "studies_results", "studies_converted",
+                    "comparison_plots", "combined_effects", "combined_bib"), 
          store = here::here("_targets"))
 ```
 
@@ -183,6 +183,16 @@ freq_combos <- effects_clean %>%
   group_by(plain_language_exposure, plain_language_outcome) %>% 
   summarise(n=n()) %>% 
   arrange(desc(n))
+
+
+effects_sum <- effects_clean %>% 
+  filter(use_effect) %>% 
+  group_by(covidence_review_id, moderator_age) %>% 
+  slice_max(n, with_ties = TRUE) %>% 
+  ungroup() %>% 
+  summarise(sum_k = sum(k, na.rm = TRUE),
+            sum_n = sum(n))
+
 ```
 
 The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were duplicates. After screening titles and abstracts, we assessed `r format(prisma$data$value[5], big.mark=",")` full-texts for inclusion. `r str_to_sentence(numbers_to_words(prisma$data$value[8], and=TRUE))` met the inclusion criteria and we extracted the data from these meta-analyses. Figure \@ref(fig:prisma) presents the full results of the selection process.
@@ -191,7 +201,7 @@ The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of 
 prisma$diag
 ```
 
-The most frequently reported exposures were `r knitr::combine_words(freq_exposures$out[1:4])`. Supplementary file X provides a list of all exposures identified. The most frequently reported outcomes were `r knitr::combine_words(freq_outcomes$out[1:5])`. In most cases (`r paste0(sum(freq_combos$n==1), "/", nrow(effects_clean))`), there was only one exposure/outcome combination, with `r sum(freq_combos$n==2)` appearing twice, and `r sum(freq_combos$n>2)` appearing three or more times. Full characteristics of the included studies are provided in Table \@ref(tab:desctable). Our process yielded `r unique_effects` unique effects/outcome combinations contributed from `r prisma$data$value[9]` papers. 
+The most frequently reported exposures were `r knitr::combine_words(freq_exposures$out[1:4])`. Supplementary file X provides a list of all exposures identified. The most frequently reported outcomes were `r knitr::combine_words(freq_outcomes$out[1:5])`. In most cases (`r paste0(sum(freq_combos$n==1), "/", nrow(effects_clean))`), there was only one exposure/outcome combination, with `r sum(freq_combos$n==2)` appearing twice, and `r sum(freq_combos$n>2)` appearing three or more times. Full characteristics of the included studies are provided in Table \@ref(tab:desctable). Our process yielded `r unique_effects` unique effects/outcome combinations contributed from `r prisma$data$value[9]` reviews. These effects represent the findings of `r format(effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(effects_sum$sum_m, big.mark=",")` participants.
 
 ```{r desctable, eval=params$render_img, layout="l-screen-inset shaded"}
 reviews_tables[[1]]$table
@@ -323,10 +333,21 @@ n_edu_failtest <-
   edu_effect %>% 
   filter(source == "reanalysis" & n > 1000 & eggers_p > 0.05 & tes_p < 0.05) %>% 
   nrow()
+
+n_edu_unique <- n_distinct(edu_certain$covidence_review_id)
+
+edu_summary <- 
+  studies_converted %>% 
+  filter(effect_size_id %in% edu_certain$effect_size_id) %>% 
+  group_by(study_author, study_year, study_first_page_number) %>% 
+  slice_max(study_n, with_ties = FALSE) %>% 
+  ungroup() %>% 
+  summarise(studies_n = n(),
+            total_n = sum(study_n))
 ```
 
 
-There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed `r n_edu_noindiv` effects that did not provide individual study-level data, `r n_edu_samplesize` effects with samples < 1,000, and `r n_edu_faileggers` with a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining `r n_edu_certain` met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot). <!-- TODO --> These `r n_edu_certain` effects came from X meta-analytic reviews analysing data from XXX empirical studies with XXX,XXXX individual participants. 
+There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed `r n_edu_noindiv` effects that did not provide individual study-level data, `r n_edu_samplesize` effects with samples < 1,000, and `r n_edu_faileggers` with a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining `r n_edu_certain` met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot). These `r n_edu_certain` effects came from `r n_edu_unique` meta-analytic reviews analysing data from `r edu_summary$studies_n` empirical studies with `r format(edu_summary$studies_n, big.mark=",")` individual participants. 
 
 ```{r eduplot, eval=params$render_img, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes"}
 plots[[1]]$plot
@@ -384,9 +405,20 @@ n_health_failtest <-
   health_effect %>% 
   filter(source == "reanalysis" & n > 1000 & eggers_p > 0.05 & tes_p < 0.05) %>% 
   nrow()
+
+n_health_unique <- n_distinct(health_certain$covidence_review_id)
+
+health_summary <- 
+  studies_converted %>% 
+  filter(effect_size_id %in% health_certain$effect_size_id) %>% 
+  group_by(study_author, study_year, study_first_page_number) %>% 
+  slice_max(study_n, with_ties = FALSE) %>% 
+  ungroup() %>% 
+  summarise(studies_n = n(),
+            total_n = sum(study_n))
 ```
 
-We identified `r n_health_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes. We removed `r n_health_noindiv` effects that did not provide individual study-level data, `r n_health_samplesize` effects with samples < 1,000, and `r n_health_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining `r n_health_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)). <!-- TODO --> These `r n_health_effect` effects came from X meta-analytic reviews analysing data from XXX empirical studies with XXX,XXXX individual participants
+We identified `r n_health_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes. We removed `r n_health_noindiv` effects that did not provide individual study-level data, `r n_health_samplesize` effects with samples < 1,000, and `r n_health_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining `r n_health_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)). These `r n_health_effect` effects came from `r n_health_unique` meta-analytic reviews analysing data from `r health_summary$studies_n` empirical studies with `r format(health_summary$studies_n, big.mark=",")` individual participants. 
 
 ```{r healthplot, eval=params$render_img, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes"}
 plots[[2]]$plot
