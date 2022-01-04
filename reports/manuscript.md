@@ -1,7 +1,7 @@
 Benefits and risks associated with children’s and adolescents’ interactions with electronic screens: An umbrella review
 ================
 truetruetruetruetruetruetruetruetruetruetruetruetruetruetruetruetrue
-2021-12-13
+2022-01-04
 
 # Background
 
@@ -89,7 +89,7 @@ The quality of the included meta-analyses was mixed. Most assessed heterogeneity
 
 ### Education Outcomes
 
-There were 46 unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed 22 effects that did not provide individual study-level data, 6 effects with samples &lt; 1,000, and 7 with a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining 12 met our criteria for statistical credibility and are described below (see Figure @ref(fig:eduplot)).
+There were 46 unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed 21 effects that did not provide individual study-level data, 7 effects with samples &lt; 1,000, and 7 with a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining 12 met our criteria for statistical credibility and are described below (see Figure @ref(fig:eduplot)).
 
 Among the statistically credible effects, general screen use, TV viewing, and video games were all negatively associated with academic performance or general learning. E-books that included narration, as well as touch screen education interventions, and augmented reality interventions were positively associated with learning. General screen use was negatively associated with literacy outcomes. However, if the screen involved co-viewing (e.g., watching with a parent) or the content was educational the association with literacy was positive. Numeracy outcomes were positively associated with screen-based mathematics interventions and video games with numeracy content.
 
@@ -97,7 +97,7 @@ As shown in Figure @ref(fig:eduplot), most of the credible results (10 of 12 eff
 
 ### Health and Health-related Behaviours
 
-We identified 121 unique outcome-exposure combinations associated with health or health-related behaviour outcomes. We removed 41 effects that did not provide individual study-level data, 28 effects with samples &lt; 1,000, and 38 effects with a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining 16 meta-analytic associations met our criteria for credible evidence and are described below (see also Figure @ref(fig:healthplot)).
+We identified 121 unique outcome-exposure combinations associated with health or health-related behaviour outcomes. We removed 38 effects that did not provide individual study-level data, 29 effects with samples &lt; 1,000, and 40 effects with a significant Egger’s test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in the supplementary material. The remaining 16 meta-analytic associations met our criteria for credible evidence and are described below (see also Figure @ref(fig:healthplot)).
 
 Advertising of unhealthy foods—both traditional advertising and video games developed by a brand for promotion—were associated with higher food intake. Social media use was associated with higher risk of substance abuse, while screen-based interventions which target health behaviours appeared effective.
 
