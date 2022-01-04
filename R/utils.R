@@ -24,3 +24,7 @@ read_sheet <- function(file, sheet, mod_date) {
   return(d)
 }
 
+## For debugging
+load_all_packages <- function(packages){
+  lapply(packages, library, character.only = TRUE)
+}
