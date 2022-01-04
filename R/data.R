@@ -38,7 +38,9 @@ fetch_data <- list(
 
 clean_and_convert <- list(
   tar_target(effects_clean,
-             process_effects(effects_raw)),
+             process_effects(effects_raw, reviews_raw)),
+  tar_target(update_sheet,
+             update_gsheet(effects_clean, data_sheet, "StudyLevelHelper")),
   tar_target(studies_converted,
              convert_studies(studies_raw),
              iteration = "group")
@@ -182,7 +184,7 @@ convert_effects <- function(data) {
 
 ## Effects data ----
 
-process_effects <- function(raw) {
+process_effects <- function(raw, revs) {
   raw <- raw %>%
     mutate(es = str_to_lower(statistical_test_consensus)) %>%
     select(-ends_with("_r"))
@@ -213,8 +215,35 @@ process_effects <- function(raw) {
       use_moderator == TRUE
     )
   
+  # Fix variables that are nested as lists
   q$i2 <- as.numeric(sapply(q$i2, as.numeric))
   q$effect_size_id_1 <- as.character(sapply(q$effect_size_id_1, as.character))
+  q$moderator_level <- as.character(sapply(q$moderator_level, as.character))
+  
+  # Create the age moderation check
+  revs_dems <- revs %>% 
+    select(covidence_review_id_auto, demographics_consensus)
+  
+  q <- left_join(q, revs_dems, by = c("covidence_review_id"= 
+                                   "covidence_review_id_auto")) %>% 
+    mutate(moderator_age = case_when(
+      demographics_consensus %in% c("All", "Children; Adolescents",  "School-age Children") ~ "All",
+      demographics_consensus %in% c("Adolescents", 
+                                    "School-age Children (Middle/High School)", 
+                                    "School-age_High School", "school-age_high school",
+                                    "School-age Children (Middle School)") ~ "Adolescents",
+      demographics_consensus %in% c("Early childhood/pre-school") ~ "Young children",
+      TRUE ~ "Children"        
+    ))  %>% 
+    mutate(moderator_age = case_when(
+      moderator_level %in% c("13-18", "12-17 years", 
+                             "adolescence","at least 13 years") ~ "Adolescents",
+      moderator_level %in% c("7-12", "children", "older than 8", "6-11 years",
+                             "grades 4-7", "childhood", "12 or younger") ~ "Children",
+      moderator_level %in% c("0-6", "younger than 8", "Infants", "pre-school",
+                             "Toddlers", "Preschoolers") ~ "Young children",
+      TRUE ~ moderator_age
+    ))
   
   # Add significance and labels
   q$sig <- ((q$cilb * q$ciub) > 0)
@@ -229,24 +258,46 @@ process_effects <- function(raw) {
   q_use <- q %>%
     group_by(
       plain_language_outcome,
-      plain_language_exposure
+      plain_language_exposure,
+      moderator_age
     ) %>%
     slice_max(n, with_ties = TRUE) %>%
-    mutate(use_effect = TRUE) %>%
+    mutate(use_effect = TRUE,
+           main_effect = TRUE) %>%
     ungroup()
   
-  q <- left_join(q, select(q_use, effect_size_id_1, use_effect)) %>%
+  q <- left_join(q, select(q_use, 
+                           effect_size_id_1, 
+                           use_effect, main_effect), by = "effect_size_id_1") %>% 
     select(
       author_year, covidence_review_id,
       outcome_category, effect_size_id_1,
       plain_language_outcome,
       plain_language_exposure,
+      moderator_level,
+      moderator_category,
       risk,
-      k, n, r, cilb, ciub, i2, sig, use_effect
-    ) %>%
-    distinct()
+      k, n, r, cilb, ciub, i2, sig, use_effect, main_effect, moderator_age,
+    )
   
   return(q)
+}
+
+update_gsheet <- function(effects_clean, file, sheet){
+  ids <- effects_clean %>% filter(use_effect) %>% select(effect_size_id_1)
+  googlesheets4::range_clear(ss = file,
+                             sheet = sheet,
+                             range = "A:A")
+  
+  googlesheets4::range_write(
+    ids,
+    ss= file,
+    sheet = sheet,
+    col_names = FALSE
+  )
+  
+  return(ids)
+  
 }
 
 ## Study level data ----

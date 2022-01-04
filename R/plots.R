@@ -229,7 +229,8 @@ make_plots <- function(combined_effects) {
   })
 
   # Modify the dataset
-  combined_effects <- combined_effects %>%
+  combined_effects <-
+    combined_effects %>%
     filter(use_effect) %>%
     mutate(
       # Truncate large effects
@@ -267,12 +268,14 @@ make_plots <- function(combined_effects) {
         tes_p > 0.05 ~ fontawesome("fa-check"),
         TRUE ~ fontawesome("fa-times")
       ),
-      font_fam = "fontawesome-webfont"
+      font_fam = "fontawesome-webfont",
+      moderator_age = factor(moderator_age, levels=c("All","Young children", "Children", "Adolescents"))
     ) %>%
     arrange(
       outcome_lvl_1,
       plain_language_outcome,
-      plain_language_exposure
+      plain_language_exposure,
+      moderator_age
     ) %>%
     add_row(
       outcome_lvl_1 = "**Outcome**",
@@ -288,7 +291,8 @@ make_plots <- function(combined_effects) {
       eggers = "**Eggers**",
       esig = "**Excess<br/>Signif.**",
       outcome_category = "**Outcome Category**",
-      font_fam = "Times"
+      font_fam = "Times",
+      moderator_age = "**Age Group**"
     ) %>%
     mutate(
       outcome_lvl_1 = fct_expand(outcome_lvl_1, "**Outcome**") %>%
@@ -305,10 +309,13 @@ make_plots <- function(combined_effects) {
         fct_relevel("**Exposure**"),
       outcome_category = fct_expand(outcome_category, "**Outcome Category**") %>%
         fct_relevel("**Outcome Category**"),
+      moderator_age = fct_expand(moderator_age, "**Age Group**") %>% 
+        fct_relevel("**Age Group**")
     )
 
 
-  gen_plot <- function(categories, certain, title, positions, caption=FALSE, debug = FALSE) {
+  gen_plot <- function(categories, certain, title, positions,
+                       caption=FALSE, debug = FALSE) {
     if (debug) labsize <- 1 else labsize <- NA
 
 
@@ -403,8 +410,15 @@ make_plots <- function(combined_effects) {
         stat = "identity",
         size = 2.5,
         label.size = labsize
+      ) +
+      geom_richtext(aes(label = moderator_age),
+                    y = positions$mod,
+                    vjust = 0.5, hjust = 0,
+                    stat = "identity",
+                    size = 2.5,
+                    label.size = labsize
       )
-
+    
     if (!certain) {
       base_plot <-
         base_plot +
@@ -470,7 +484,7 @@ make_plots <- function(combined_effects) {
         ylim = positions$lims
       ) +
       scale_y_continuous(breaks = positions$breaks) +
-      scale_x_discrete(limits = rev) +
+      scale_x_discrete(limits = rev, drop=TRUE) +
       tidyMB::theme_mb() %+replace% theme(
         strip.text.y.left = element_markdown(
           angle = 0,
@@ -511,8 +525,38 @@ make_plots <- function(combined_effects) {
 
   edu_positions <-
     list(
+      # certain = list(
+      #   lims = c(-4, 0.5),
+      #   breaks = c(-0.4, -.2, 0, .2, 0.4),
+      #   esig = NULL,
+      #   eggers = NULL,
+      #   indiv_data = NULL,
+      #   n = -0.6,
+      #   k = -0.85,
+      #   i2 = -1.05,
+      #   rci = -1.45,
+      #   author_year = -2.4,
+      #   expo = -3.5,
+      #   outcome = -4.2,
+      #   tag = NA
+      # ),
+      # uncertain = list(
+      #   lims = c(-4.3, 0.6),
+      #   breaks = c(-0.4, -.2, 0, .2, 0.4, 0.6),
+      #   esig = -0.55,
+      #   eggers = -0.75,
+      #   indiv_data = -.95,
+      #   n = -1.15,
+      #   k = -1.35,
+      #   i2 = -1.5,
+      #   rci = -1.85,
+      #   author_year = -2.7,
+      #   expo = -3.7,
+      #   outcome = -4.55,
+      #   tag = c(0.2,0.01)
+      # ),
       certain = list(
-        lims = c(-4, 0.5),
+        lims = c(-4.3, 0.5),
         breaks = c(-0.4, -.2, 0, .2, 0.4),
         esig = NULL,
         eggers = NULL,
@@ -522,8 +566,9 @@ make_plots <- function(combined_effects) {
         i2 = -1.05,
         rci = -1.45,
         author_year = -2.4,
-        expo = -3.5,
-        outcome = -4.2,
+        mod = -2.75,
+        expo = -3.8,
+        outcome = -4.5,
         tag = NA
       ),
       uncertain = list(
@@ -536,8 +581,9 @@ make_plots <- function(combined_effects) {
         k = -1.35,
         i2 = -1.5,
         rci = -1.85,
-        author_year = -2.7,
-        expo = -3.7,
+        author_year = -2.65,
+        mod = -2.95,
+        expo = -3.85,
         outcome = -4.55,
         tag = c(0.2,0.01)
       )
@@ -546,22 +592,23 @@ make_plots <- function(combined_effects) {
   nonedu_positions <-
     list(
       certain = list(
-        lims = c(-4.4, 0.5),
+        lims = c(-4.55, 0.5),
         breaks = c(-0.4, -.2, 0, .2, 0.4),
         esig = NULL,
         eggers = NULL,
         indiv_data = NULL,
         n = -0.6,
         k = -0.85,
-        i2 = -1.10,
-        rci = -1.6,
-        author_year = -2.55,
-        expo = -3.65,
-        outcome = -4.65,
+        i2 = -1.05,
+        rci = -1.4,
+        author_year = -2.25,
+        mod = -2.7,
+        expo = -3.8,
+        outcome = -4.8,
         tag = NA
       ),
       uncertain = list(
-        lims = c(-5.15, 0.9),
+        lims = c(-5.5, 0.9),
         breaks = c(-1, -0.8, -0.6, -0.4, -.2, 0, .2, 0.4, 0.6, 0.8),
         esig = -1.15,
         eggers = -1.40,
@@ -571,8 +618,9 @@ make_plots <- function(combined_effects) {
         i2 = -2.2,
         rci = -2.5,
         author_year = -3.35,
-        expo = -4.4,
-        outcome = -5.4,
+        mod = -3.75,
+        expo = -4.9,
+        outcome = -5.8,
         tag = c(0.2,0)
       )
     )
@@ -585,6 +633,7 @@ make_plots <- function(combined_effects) {
       certain = TRUE,
       pos = edu_positions$certain,
       dims = c(10, 6),
+      moderators = FALSE,
       caption = FALSE
     ),
     list(
@@ -594,6 +643,7 @@ make_plots <- function(combined_effects) {
       certain = TRUE,
       pos = nonedu_positions$certain,
       dims = c(10, 6),
+      moderators = FALSE,
       caption = FALSE
     ),
     list(
@@ -602,7 +652,8 @@ make_plots <- function(combined_effects) {
       categories = "Education",
       certain = FALSE,
       pos = edu_positions$uncertain,
-      dims = c(12, 10),
+      dims = c(14, 12),
+      moderators = FALSE,
       caption = TRUE
     ),
     list(
@@ -611,9 +662,30 @@ make_plots <- function(combined_effects) {
       categories = c("Psychology", "Health Behaviour", "Physical Health"),
       certain = FALSE,
       pos = nonedu_positions$uncertain,
-      dims = c(16, 25),
+      dims = c(16, 32),
+      moderators = FALSE,
       caption = TRUE
     )
+    # list(
+    #   filename = "Forest plot for Education With Moderators.pdf",
+    #   title = "Associations Between Exposures and Education Outcomes",
+    #   categories = "Education",
+    #   certain = TRUE,
+    #   pos = edu_positions$certain_mods,
+    #   dims = c(10, 6),
+    #   moderators = TRUE,
+    #   caption = FALSE
+    # ),
+    # list(
+    #   filename = "Supplemental Forest plot for Education with Moderators.pdf",
+    #   title = "Associations Between Exposures and Education Outcomes",
+    #   categories = "Education",
+    #   certain = FALSE,
+    #   pos = edu_positions$uncertain_mods,
+    #   dims = c(12, 10),
+    #   moderators = TRUE,
+    #   caption = TRUE
+    # )
   )
 
   plots <- vector(mode = "list", length = 4)
@@ -624,7 +696,8 @@ make_plots <- function(combined_effects) {
       plot_params[[i]]$certain,
       plot_params[[i]]$title,
       plot_params[[i]]$pos,
-      plot_params[[i]]$caption
+      plot_params[[i]]$caption,
+      debug = FALSE
     )
     plots[[i]]$dims <- plot_params[[i]]$dims
     plots[[i]]$filename <- plot_params[[i]]$filename
@@ -637,6 +710,7 @@ make_plots <- function(combined_effects) {
 
 save_plots <- function(plots) {
   file_name <- here::here("figure", plots[[1]]$filename)
+  
 
   ggsave(
     filename = file_name,
