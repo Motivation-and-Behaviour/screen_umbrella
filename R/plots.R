@@ -4,7 +4,7 @@
 
 make_prisma_figure <- list(
   tar_target(prisma_data,
-             here("covidence_prisma.txt"),
+             here::here("covidence_prisma.txt"),
              format = "file"),
   tar_target(prisma,
              make_prisma(prisma_data, effects_clean)),
