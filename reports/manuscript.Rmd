@@ -62,10 +62,6 @@ targets::tar_load(c("prisma", "effects_clean", "reviews_tables", "tables_df",
          store = here::here("_targets"))
 ```
 
-```{r, eval=params$inc_ref, results='markup'}
-
-```
-
 
 # Background
 
@@ -495,6 +491,10 @@ Also, we made somewhat arbitrary decisions to present effects that reach certain
 
 * [Descriptive Table](https://drive.google.com/file/d/1t5XvwY2kzsOsbZ2FxbGPsYEecZz5PgD1/view?usp=sharing)
 * Supplemental tables (TBC)
+
+#### Supplementary Files
+
+* [List of Exposures](https://drive.google.com/file/d/12rB0ihW9Hi1kxM-8AIBfjdCMO6TqP28n/view?usp=sharing)
 
 #### Links
 
