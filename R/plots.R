@@ -291,7 +291,7 @@ make_plots <- function(combined_effects) {
       eggers = "**Eggers**",
       esig = "**Excess<br/>Signif.**",
       outcome_category = "**Outcome Category**",
-      font_fam = "Times",
+      font_fam = "sans",
       moderator_age = "**Age Group**"
     ) %>%
     mutate(
