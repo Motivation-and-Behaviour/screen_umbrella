@@ -130,7 +130,8 @@ make_desc_tables <- function(tables_df) {
     relocate(any_of(c(
       "sample_ages", "outcomes_assessed", "exposures_assessed"
     )),
-    .after = latest_study_year) 
+    .after = latest_study_year) %>% 
+    arrange(first_author, year)
   
   gt_table_main <- 
     base_table %>% 
