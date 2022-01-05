@@ -3,7 +3,7 @@
 17898 studies screened against title and abstract
 	15934 studies excluded
 1964 studies assessed for full-text eligibility
-	1845 studies excluded
+	1846 studies excluded
 		527  Not a systematic review
 		508  Systematic review without meta-analysis
 		188  Wrong exposure - clinical health intervention 
@@ -11,7 +11,7 @@
 		117  Not published in English
 		90  Doesn&#39;t examine exposure-outcome relationship
 		76  Wrong exposure - other (explain)
-		66  Wrong population
+		67  Wrong population
 		58  Individual level data only
 		30  Not a review
 		23  Duplicated reference
@@ -23,4 +23,4 @@
 		1  Sys review of qual studies
 	0 studies ongoing
 	0 studies awaiting classification
-119 studies included
+118 studies included
