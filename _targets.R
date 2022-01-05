@@ -17,6 +17,7 @@ source(here("R", "utils.R"))
 source(here("R", "data.R"))
 source(here("R", "tables.R"))
 source(here("R", "plots.R"))
+source(here("R", "supplementary.R"))
 source(here("R", "reports.R"))
 
 list(
@@ -29,6 +30,8 @@ list(
   # Make plots (plots.R)
   make_prisma_figure,
   make_forest_plots,
+  # Make sundry supplementary material (supplementary.R)
+  make_supps,
   # Create reports (reports.R)
   generate_bibliography,
   create_metadata,
