@@ -239,7 +239,7 @@ all_high <- reviews_count %>%
 
 all_high_txt <- 
   paste0(str_to_sentence(numbers_to_words(all_high)), 
-         if (all_high>1) " meta-analyses" else " meta-analysis")
+         if (all_high>1 | all_high==0) " meta-analyses" else " meta-analysis")
 
 reviews_count <-
   reviews_count %>%
