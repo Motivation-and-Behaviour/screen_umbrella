@@ -63,15 +63,12 @@ create_reports <- list(
     params = list(render_img = TRUE, inc_ref = FALSE)
   ),
   tar_render(
-    markdown_report,
+    word_report,
     path = here::here("reports", "manuscript.Rmd"),
-    output_file = here::here("reports", "manuscript.md"),
-    output_yaml = here::here("reports", "md.yaml"),
-    params = list(render_img = FALSE, inc_ref = TRUE)
-  ),
-  tar_target(gdoc_markdown_report,
-             fix_md(markdown_report),
-             format = "file")
+    output_file = here::here("reports", "manuscript_raw.docx"),
+    output_yaml = here::here("reports", "docx.yaml"),
+    params = list(render_img = TRUE, inc_ref = TRUE)
+  )
 )
 
 # ------------------- FUNCTIONS ----------------------
@@ -114,31 +111,5 @@ make_yaml <- function(authors_details){
                inc_ref= FALSE) %>% 
     use_yml_file(filepath, quiet = TRUE)
   return(filepath)
-  
-}
-
-## Fix reports ----
-
-fix_md <- function(markdown_report){
-  md_file <- readLines(markdown_report[1])
-  
-  # Symbols
-  md_file <- gsub(pattern = "&lt;", replacement = "<", fixed = TRUE, x = md_file)
-  md_file <- gsub(pattern = "&gt;", replacement = "<", fixed = TRUE, x = md_file)
-  md_file <- gsub(pattern = "<sup>â€…âˆ’â€…3</sup>", replacement ="^-3", fixed = TRUE, x = md_file)
-  md_file <- gsub(pattern = "<sup>2</sup>", replacement ="^2", fixed = TRUE, x = md_file)
-  
-  # Spaces
-  md_file <- gsub(pattern = "â€„", replacement = " ", fixed = TRUE, x = md_file)
-  md_file <- gsub(pattern = "â€„", replacement = " ", fixed = TRUE, x = md_file)
-  md_file <- gsub(pattern = "â€„", replacement = " ", fixed = TRUE, x = md_file)
-  md_file <- gsub(pattern = "â€†", replacement = " ", fixed = TRUE, x = md_file)
-  md_file <- gsub(pattern = "â€†", replacement = " ", fixed = TRUE, x = md_file)
-  md_file <- gsub(pattern = "â€†", replacement = " ", fixed = TRUE, x = md_file)
-
-  out_path <- here::here("reports", "manuscript_gdoc.md")
-  writeLines(text = md_file, con = out_path)
-  
-  return(out_path)
   
 }
