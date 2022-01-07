@@ -1,4 +1,2 @@
-bookdown::pdf_document2:
-  fig_caption: yes
-  keep_tex: no
-  number_sections: yes
+papaja::apa6_pdf:
+  

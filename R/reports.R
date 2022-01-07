@@ -23,52 +23,45 @@ generate_bibliography <-
       combine_bibs(
         packages_bib,
         references_bib,
+        reviews_raw,
         here::here("reports", "combined.bib")
       ),
       format = "file"
     )
   )
 
-## Metadata ----
-create_metadata <-
-  list(
-    tar_target(
-      authors_modified_date,
-      get_mod_date(authors_sheet),
-      # Force run if outdated or doesn't exist
-      cue = tar_cue_force(
-        condition = ifelse(
-          tar_exist_objects("authors_modified_date"),
-          get_mod_date(authors_sheet) != tar_read(authors_modified_date),
-          TRUE
-        )
-      )
-    ),
-    tar_target(
-      authors_details,
-      read_sheet(authors_sheet, "Authors", authors_modified_date)
-    ),
-    tar_target(front_yml,
-               make_yaml(authors_details),
-               format = "file")
-  )
-
 ## Create reports ----
 create_reports <- list(
   tar_render(
     distill_report,
-    path = here::here("reports", "manuscript.Rmd"),
+    path = here::here("reports", "manuscript_distill.Rmd"),
     output_file = here::here("index.html"),
     output_yaml = here::here("reports", "distill.yaml"),
-    params = list(render_img = TRUE, inc_ref = FALSE)
+    params = list(render_img = TRUE, inc_tabs = TRUE,
+                  nocite_list = 
+                    paste0("@",
+                           paste(reviews_raw$bibtex_key, collapse = ", @")))
   ),
   tar_render(
     word_report,
-    path = here::here("reports", "manuscript.Rmd"),
-    output_file = here::here("reports", "manuscript_raw.docx"),
+    path = here::here("reports", "manuscript_papaja.Rmd"),
+    output_file = here::here("reports", "manuscript.docx"),
     output_yaml = here::here("reports", "docx.yaml"),
-    params = list(render_img = TRUE, inc_ref = TRUE)
+    params = list(render_img = TRUE, inc_tabs = TRUE,
+                  nocite_list = 
+                    paste0("@",
+                           paste(reviews_raw$bibtex_key, collapse = ", @")))
   )
+  # tar_render(
+  #   pdf_report,
+  #   path = here::here("reports", "manuscript_papaja.Rmd"),
+  #   output_file = here::here("reports", "manuscript.pdf"),
+  #   #output_yaml = here::here("reports", "pdf.yaml"),
+  #   params = list(render_img = TRUE, inc_tabs = FALSE,
+  #                 nocite_list =
+  #                   paste0("@",
+  #                          paste(reviews_raw$bibtex_key, collapse = ", @")))
+  # )
 )
 
 # ------------------- FUNCTIONS ----------------------
@@ -81,35 +74,26 @@ create_packages_bib <- function(packages, bibpath){
 }
 
 # Combine bibliography files
-combine_bibs <- function(packages_bib, references_bib, outpath){
-  fullbib <- lapply(c(packages_bib, references_bib), readLines)
-  write(unlist(fullbib), file=outpath)
+combine_bibs <- function(packages_bib, references_bib, reviews_raw, outpath){
+  # Fix UTF-8 encoding
+  refs <- readLines(references_bib, encoding="UTF-8") 
+  refs <- str_replace_all(refs, "[^[:graph:]]", " ") 
+  refs <- iconv(refs, from = 'UTF-8', to = 'ASCII//TRANSLIT') 
+  refs_tmp <- here::here("reports", "references_tmp.bib")
+  writeLines(refs, con=refs_tmp)
+  
+  paths <- c(packages_bib, refs_tmp)
+  bibs <- lapply(paths, bib2df)
+  full_bib <- bind_rows(bibs)
+  
+  full_bib <-
+    full_bib %>%
+    mutate(ANNOTE = if_else(BIBTEXKEY %in% reviews_raw$bibtex_key,
+                            "*",
+                            ""))
+  
+  df2bib(full_bib, file = outpath)
+  
+  rm(refs_tmp)
   return(outpath)
-}
-
-## Metadata ----
-
-make_yaml <- function(authors_details){
-  filepath <- here::here("reports","header.yaml")
-  
-  # Remove existing
-  unlink(filepath)
-  
-  yml() %>%
-    yml_title(article_title) %>%    
-    yml_distill_opts(
-      repository_url = 
-        "https://github.com/Motivation-and-Behaviour/screen_umbrella") %>% 
-    yml_distill_author(name = authors_details$name,
-                       affiliation = authors_details$affiliation,
-                       affiliation_url = authors_details$affiliation_url,
-                       orcid_id = authors_details$orcid,
-                       url = NULL) %>% 
-    yml_citations(bibliography = "combined.bib",
-                  csl = "vancouver-brackets.csl") %>% 
-    yml_params(render_img= TRUE,
-               inc_ref= FALSE) %>% 
-    use_yml_file(filepath, quiet = TRUE)
-  return(filepath)
-  
 }
