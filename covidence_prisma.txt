@@ -3,7 +3,7 @@
 17898 studies screened against title and abstract
 	15934 studies excluded
 1964 studies assessed for full-text eligibility
-	1846 studies excluded
+	1847 studies excluded
 		527  Not a systematic review
 		508  Systematic review without meta-analysis
 		188  Wrong exposure - clinical health intervention 
@@ -14,7 +14,7 @@
 		67  Wrong population
 		58  Individual level data only
 		30  Not a review
-		23  Duplicated reference
+		24  Duplicated reference
 		14  Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.
 		3  Full-text article could not be retrieved
 		2  Clinical outcome
@@ -23,4 +23,4 @@
 		1  Sys review of qual studies
 	0 studies ongoing
 	0 studies awaiting classification
-118 studies included
+117 studies included
