@@ -249,7 +249,6 @@ make_plots <- function(combined_effects) {
       plain_language_outcome = trimmer(plain_language_outcome, 40),
       plain_language_exposure = trimmer(plain_language_exposure, 40),
       i2 = scales::percent(i2, 2, scale = 1),
-      row_num = as.factor(row_number()),
       n = scales::label_comma(accuracy = 1)(n),
       k = as.character(k),
       rci = paste(format(round(r, 2), nsmall = 2),
@@ -277,6 +276,7 @@ make_plots <- function(combined_effects) {
       plain_language_exposure,
       moderator_age
     ) %>%
+    mutate(row_num = as.factor(row_number())) %>% 
     add_row(
       outcome_lvl_1 = "**Outcome**",
       plain_language_outcome = "**Specific Outcome**",
@@ -565,9 +565,9 @@ make_plots <- function(combined_effects) {
         k = -0.85,
         i2 = -1.05,
         rci = -1.45,
-        author_year = -2.4,
-        mod = -2.75,
-        expo = -3.8,
+        author_year = -2.45,
+        mod = -2.8,
+        expo = -3.9,
         outcome = -4.5,
         tag = NA
       ),
@@ -608,7 +608,7 @@ make_plots <- function(combined_effects) {
         tag = NA
       ),
       uncertain = list(
-        lims = c(-5.5, 0.9),
+        lims = c(-5.6, 0.9),
         breaks = c(-1, -0.8, -0.6, -0.4, -.2, 0, .2, 0.4, 0.6, 0.8),
         esig = -1.15,
         eggers = -1.40,
@@ -620,7 +620,7 @@ make_plots <- function(combined_effects) {
         author_year = -3.35,
         mod = -3.75,
         expo = -4.9,
-        outcome = -5.8,
+        outcome = -5.9,
         tag = c(0.2,0)
       )
     )
