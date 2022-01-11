@@ -141,19 +141,19 @@ convert_effects <- function(data) {
     filter(es %in% c("b", "d", "r", "or", "z")) %>%
     rename(std_eff_name = es) %>%
     mutate(
-      value_ci_lower_bound_consensus =
+      converted_ci_lower_bound =
         case_when(
           !is.na(value_raw_se) ~ value_consensus - 2 * value_raw_se,
           TRUE ~ value_ci_lower_bound_consensus
         ),
-      value_ci_upper_bound_consensus =
+      converted_ci_upper_bound =
         case_when(
           !is.na(value_raw_se) ~ value_consensus + 2 * value_raw_se,
           TRUE ~ value_ci_upper_bound_consensus
         )
     ) %>%
     mutate(
-      value_consensus = case_when(
+      converted_value = case_when(
         is.na(value_consensus) ~ NA_real_,
         std_eff_name == "r" ~ value_consensus,
         std_eff_name == "b" ~ b2r(value_consensus),
@@ -161,21 +161,21 @@ convert_effects <- function(data) {
         std_eff_name == "or" ~ od2r(value_consensus, method = "digby"),
         std_eff_name == "z" ~ z2r(value_consensus)
       ),
-      value_ci_lower_bound_consensus = case_when(
-        is.na(value_ci_lower_bound_consensus) ~ NA_real_,
-        std_eff_name == "r" ~ value_ci_lower_bound_consensus,
-        std_eff_name == "b" ~ b2r(value_ci_lower_bound_consensus),
-        std_eff_name == "d" ~ d2r(value_ci_lower_bound_consensus),
-        std_eff_name == "or" ~ od2r(value_ci_lower_bound_consensus, method = "digby"),
-        std_eff_name == "z" ~ z2r(value_ci_lower_bound_consensus)
+      converted_ci_lower_bound = case_when(
+        is.na(converted_ci_lower_bound) ~ NA_real_,
+        std_eff_name == "r" ~ converted_ci_lower_bound,
+        std_eff_name == "b" ~ b2r(converted_ci_lower_bound),
+        std_eff_name == "d" ~ d2r(converted_ci_lower_bound),
+        std_eff_name == "or" ~ od2r(converted_ci_lower_bound, method = "digby"),
+        std_eff_name == "z" ~ z2r(converted_ci_lower_bound)
       ),
-      value_ci_upper_bound_consensus = case_when(
-        is.na(value_ci_upper_bound_consensus) ~ NA_real_,
-        std_eff_name == "r" ~ value_ci_upper_bound_consensus,
-        std_eff_name == "b" ~ b2r(value_ci_upper_bound_consensus),
-        std_eff_name == "d" ~ d2r(value_ci_upper_bound_consensus),
-        std_eff_name == "or" ~ od2r(value_ci_upper_bound_consensus, method = "digby"),
-        std_eff_name == "z" ~ z2r(value_ci_upper_bound_consensus)
+      converted_ci_upper_bound = case_when(
+        is.na(converted_ci_upper_bound) ~ NA_real_,
+        std_eff_name == "r" ~ converted_ci_upper_bound,
+        std_eff_name == "b" ~ b2r(converted_ci_upper_bound),
+        std_eff_name == "d" ~ d2r(converted_ci_upper_bound),
+        std_eff_name == "or" ~ od2r(converted_ci_upper_bound, method = "digby"),
+        std_eff_name == "z" ~ z2r(converted_ci_upper_bound)
       )
     )
   
@@ -194,17 +194,20 @@ process_effects <- function(raw, revs) {
   # remove empty stuff, then cut small studies or rubbish
   q <- clean_names(d) %>%
     dplyr::rename(
-      r = value_consensus,
+      r = converted_value,
       outcome_category = outcome_level_1,
       outcome = outcome_level_2,
       moderator_level = moderator_level_recoded,
       moderator_category = moderator_category_recoded,
       k = k_number_of_effects_informing_this_test_consensus,
       n = combined_n,
-      cilb = value_ci_lower_bound_consensus,
-      ciub = value_ci_upper_bound_consensus,
+      cilb = converted_ci_lower_bound,
+      ciub = converted_ci_upper_bound,
       i2 = i2_calculated,
-      plain_language_outcome = outcome_plain_language_descriptor
+      plain_language_outcome = outcome_plain_language_descriptor,
+      raw_value = value_consensus,
+      raw_cilb = value_ci_lower_bound_consensus,
+      raw_ciub = value_ci_upper_bound_consensus
     ) %>%
     remove_empty(which = c("rows", "cols")) %>%
     mutate(n = as.numeric(n)) %>%
@@ -278,6 +281,7 @@ process_effects <- function(raw, revs) {
       moderator_category,
       risk,
       k, n, r, cilb, ciub, i2, sig, use_effect, main_effect, moderator_age,
+      starts_with("raw_"), starts_with("converted_"), std_eff_name
     )
   
   return(q)
