@@ -60,6 +60,7 @@ options(dplyr.summarise.inform = FALSE)
 ```
 
 ```{r child = 'manuscript_content.Rmd'}
+
 ```
 
 

@@ -145,13 +145,14 @@ knitr::opts_chunk$set(
 options(dplyr.summarise.inform = FALSE)
 
 # Uncomment to run outside of pipeline
-# library(tidyverse)
-# library(targets)
-# library(xfun)
+library(tidyverse)
+library(targets)
+library(xfun)
 ```
 
 
 ```{r child = 'manuscript_content.Rmd'}
+
 ```
 
 

@@ -137,7 +137,7 @@ effects_sum <- effects_clean %>%
 
 The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were duplicates. After screening titles and abstracts, we assessed `r format(prisma$data$value[5], big.mark=",")` full-texts for inclusion. `r str_to_sentence(numbers_to_words(prisma$data$value[8], and=TRUE))` met the inclusion criteria and we extracted the data from these meta-analyses. Figure \@ref(fig:prisma) presents the full results of the selection process.
 
-```{r prisma, eval=params$render_img, fig.cap="PRISMA Diagram"}
+```{r prisma, eval=params$render_img, fig.cap="PRISMA Diagram", out.extra ='WIDTH="75%"'}
 prisma$diag
 ```
 
@@ -301,7 +301,7 @@ edu_summary <-
 
 There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed `r n_edu_noindiv` effects that did not provide individual study-level data, `r n_edu_samplesize` effects with samples < 1,000, and `r n_edu_faileggers` with a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in [Supplementary File 4](https://drive.google.com/file/d/1wUotZRh-jvdBJh5dkstkMtvcz7DPn-vS/view?usp=sharing). The remaining `r n_edu_certain` met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot). These `r n_edu_certain` effects came from `r n_edu_unique` meta-analytic reviews analysing data from `r edu_summary$studies_n` empirical studies with `r format(edu_summary$total_n, big.mark=",")` individual participants. 
 
-```{r eduplot, eval=params$render_img, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes"}
+```{r eduplot, eval=params$render_img, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes", dev='cairo_pdf'}
 plots[[1]]$plot
 ```
 
@@ -371,7 +371,7 @@ health_summary <-
 
 We identified `r n_health_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes. We removed `r n_health_noindiv` effects that did not provide individual study-level data, `r n_health_samplesize` effects with samples < 1,000, and `r n_health_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in [Supplementary File 5](https://drive.google.com/file/d/1-3frrZ3woWjPqkO84Dn3_1CCaE8thIZn/view?usp=sharing) The remaining `r n_health_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)). These `r n_health_effect` effects came from `r n_health_unique` meta-analytic reviews analysing data from `r health_summary$studies_n` empirical studies with `r format(health_summary$total_n, big.mark=",")` individual participants. 
 
-```{r healthplot, eval=params$render_img, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes"}
+```{r healthplot, eval=params$render_img, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes", dev='cairo_pdf'}
 plots[[2]]$plot
 ```
 
