@@ -79,7 +79,7 @@ combine_bibs <- function(packages_bib, references_bib, reviews_raw, outpath){
   refs <- readLines(references_bib, encoding="UTF-8") 
   refs <- str_replace_all(refs, "[^[:graph:]]", " ") 
   refs <- iconv(refs, from = 'UTF-8', to = 'ASCII//TRANSLIT') 
-  refs_tmp <- here::here("reports", "references_tmp.bib")
+  refs_tmp <- tempfile(fileext = ".bib")
   writeLines(refs, con=refs_tmp)
   
   paths <- c(packages_bib, refs_tmp)
