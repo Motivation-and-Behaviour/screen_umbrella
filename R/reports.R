@@ -45,23 +45,27 @@ create_reports <- list(
   tar_render(
     word_report,
     path = here::here("reports", "manuscript_papaja.Rmd"),
-    output_file = here::here("reports", "manuscript.docx"),
+    output_file = here::here("reports", "manuscript_raw.docx"),
     output_yaml = here::here("reports", "docx.yaml"),
     params = list(render_img = TRUE, inc_tabs = TRUE,
                   nocite_list = 
                     paste0("@",
                            paste(reviews_raw$bibtex_key, collapse = ", @")))
-  )
+  ),
   # tar_render(
   #   pdf_report,
   #   path = here::here("reports", "manuscript_papaja.Rmd"),
   #   output_file = here::here("reports", "manuscript.pdf"),
-  #   #output_yaml = here::here("reports", "pdf.yaml"),
+  #   output_yaml = here::here("reports", "pdf.yaml"),
   #   params = list(render_img = TRUE, inc_tabs = FALSE,
   #                 nocite_list =
   #                   paste0("@",
   #                          paste(reviews_raw$bibtex_key, collapse = ", @")))
   # )
+  tar_target(
+    uploaded_manuscripts,
+    upload_manuscript(word_report)
+  )
 )
 
 # ------------------- FUNCTIONS ----------------------
@@ -96,4 +100,17 @@ combine_bibs <- function(packages_bib, references_bib, reviews_raw, outpath){
   
   rm(refs_tmp)
   return(outpath)
+}
+
+# Upload to GDrive
+upload_manuscript <- function(word_report){
+  
+  
+  drive_val <- drive_put(
+    word_report[1],
+    path = as_id("https://drive.google.com/drive/folders/1WQiAUmDanOL2GPPBoYxUoNkHmZUjpbPj")
+  )
+  
+  return(drive_val)
+  
 }
