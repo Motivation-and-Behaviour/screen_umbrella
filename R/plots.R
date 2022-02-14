@@ -4,19 +4,24 @@
 
 make_prisma_figure <- list(
   tar_target(prisma_data,
-             here::here("covidence_prisma.txt"),
-             format = "file"),
-  tar_target(prisma,
-             make_prisma(prisma_data, effects_clean)),
+    here::here("covidence_prisma.txt"),
+    format = "file"
+  ),
+  tar_target(
+    prisma,
+    make_prisma(prisma_data, effects_clean)
+  ),
   tar_target(export_prisma,
-             save_prisma(prisma),
-             format = "file",)
+    save_prisma(prisma),
+    format = "file",
+  )
 )
 
 make_forest_plots <- list(
-  tar_target(plots,
-             make_plots(combined_effects)),
-  
+  tar_target(
+    plots,
+    make_plots(combined_effects)
+  ),
   tar_target(
     export_plots,
     save_plots(plots),
@@ -31,10 +36,10 @@ make_forest_plots <- list(
 ## PRISMA ----
 
 make_prisma <- function(covidence_export, effects_clean) {
-  
+
   # Get Covidence PRISMA data
   covidence_export <- read_file(covidence_export)
-  
+
   dat <-
     # Convert each to a separate line
     tibble(text = unlist(str_split(covidence_export, pattern = "\\n"))) %>%
@@ -62,7 +67,7 @@ make_prisma <- function(covidence_export, effects_clean) {
     if (dat$type[i] == "main") step <- step + 1
     dat$step[i] <- step
   }
-  
+
   exclusion_collapse <- function(data, old_rows, new_row) {
     bind_rows(
       data %>% filter(!text %in% old_rows),
@@ -72,7 +77,7 @@ make_prisma <- function(covidence_export, effects_clean) {
         mutate(text = new_row, type = "exclude_reason")
     )
   }
-  
+
   # Modify dataframe (add rows as needed)
   dat <- dat %>%
     exclusion_collapse(
@@ -105,7 +110,7 @@ make_prisma <- function(covidence_export, effects_clean) {
       "Wrong exposure - clinical health intervention"
     ) %>%
     arrange(step, desc(value))
-  
+
   # Reasons studies were removed
   dat <- dat %>%
     add_row(
@@ -113,53 +118,53 @@ make_prisma <- function(covidence_export, effects_clean) {
       type = "exclude",
       step = dat$step[nrow(dat)],
       value = dat[dat$step == 4 &
-                    dat$type == "main", ]$value -  effects_clean %>% 
-        filter(use_effect) %>% 
-        distinct(covidence_review_id) %>% 
+        dat$type == "main", ]$value - effects_clean %>%
+        filter(use_effect) %>%
+        distinct(covidence_review_id) %>%
         nrow()
-    ) %>% 
+    ) %>%
     add_row(
       text = "All effects missing key information (estimate, N)",
       type = "exclude_reason",
       step = dat$step[nrow(dat)],
       value = 40 # TODO unhardcode this
-    ) 
-  
-  dat <- dat %>% 
+    )
+
+  dat <- dat %>%
     add_row(
       text = "Larger study available",
       type = "exclude_reason",
       step = dat$step[nrow(dat)],
       value = dat[dat$step == 4 &
-                    dat$type == "exclude", ]$value - 40 # TODO unhardcode this
+        dat$type == "exclude", ]$value - 40 # TODO unhardcode this
     )
-    
+
   dat <- dat %>% add_row(
     text = "studies contributed unique effects",
     type = "main",
     step = dat$step[nrow(dat)] + 1,
     value = effects_clean %>% filter(use_effect) %>% distinct(covidence_review_id) %>% nrow()
   )
-  
 
-  
+
+
   # Generate PRISMA Diagram ####
-  
+
   # Convert excl_reason to new column
   dat <- dat %>%
     mutate(text = paste(value, text, sep = " ")) %>%
     group_by(step, type) %>%
     mutate(text = if_else(type == "exclude_reason",
-                          paste("&nbsp;&nbsp;&nbsp;&nbsp;&#8226; ",
-                                text,
-                                collapse = "<br ALIGN = 'LEFT'/> \n"
-                          ),
-                          text
+      paste("&nbsp;&nbsp;&nbsp;&nbsp;&#8226; ",
+        text,
+        collapse = "<br ALIGN = 'LEFT'/> \n"
+      ),
+      text
     )) %>%
     distinct(step, type, .keep_all = TRUE)
-  
+
   labels <- dat$text
-  
+
   prisma <- paste("digraph flowchart {
       # node definitions with substituted label text
       node [shape='box', fontsize = 10, width=3.5];
@@ -186,25 +191,24 @@ make_prisma <- function(covidence_export, effects_clean) {
       {rank=same; tab7; tab8}
       }
 ", collapse = "")
-  
+
   prisma_diag <- DiagrammeR::grViz(prisma)
   prisma_data <- list(data = dat, diag = prisma_diag)
-  
+
   return(prisma_data)
-  
 }
 
-save_prisma <- function(prisma_data){
-  
+save_prisma <- function(prisma_data) {
   prisma_data$diag %>%
     DiagrammeRsvg::export_svg() %>%
     charToRaw() %>%
     rsvg::rsvg_pdf(here::here("figure", "PRISMA Diagram.pdf"))
-  
+
   # Upload to GDrive
-  drive_put(here::here("figure", "PRISMA Diagram.pdf"), 
-            path = as_id("https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml"))
-  
+  drive_put(here::here("figure", "PRISMA Diagram.pdf"),
+    path = as_id("https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml")
+  )
+
   return(here::here("figure", "PRISMA Diagram.pdf"))
 }
 
@@ -268,7 +272,7 @@ make_plots <- function(combined_effects) {
         TRUE ~ fontawesome("fa-times")
       ),
       font_fam = "fontawesome-webfont",
-      moderator_age = factor(moderator_age, levels=c("All","Young children", "Children", "Adolescents"))
+      moderator_age = factor(moderator_age, levels = c("All", "Young children", "Children", "Adolescents"))
     ) %>%
     arrange(
       outcome_lvl_1,
@@ -276,7 +280,7 @@ make_plots <- function(combined_effects) {
       plain_language_exposure,
       moderator_age
     ) %>%
-    mutate(row_num = as.factor(row_number())) %>% 
+    mutate(row_num = as.factor(row_number())) %>%
     add_row(
       outcome_lvl_1 = "**Outcome**",
       plain_language_outcome = "**Specific Outcome**",
@@ -309,13 +313,13 @@ make_plots <- function(combined_effects) {
         fct_relevel("**Exposure**"),
       outcome_category = fct_expand(outcome_category, "**Outcome Category**") %>%
         fct_relevel("**Outcome Category**"),
-      moderator_age = fct_expand(moderator_age, "**Age Group**") %>% 
+      moderator_age = fct_expand(moderator_age, "**Age Group**") %>%
         fct_relevel("**Age Group**")
     )
 
 
   gen_plot <- function(categories, certain, title, positions,
-                       caption=FALSE, debug = FALSE) {
+                       caption = FALSE, debug = FALSE) {
     if (debug) labsize <- 1 else labsize <- NA
 
 
@@ -412,13 +416,13 @@ make_plots <- function(combined_effects) {
         label.size = labsize
       ) +
       geom_richtext(aes(label = moderator_age),
-                    y = positions$mod,
-                    vjust = 0.5, hjust = 0,
-                    stat = "identity",
-                    size = 2.5,
-                    label.size = labsize
+        y = positions$mod,
+        vjust = 0.5, hjust = 0,
+        stat = "identity",
+        size = 2.5,
+        label.size = labsize
       )
-    
+
     if (!certain) {
       base_plot <-
         base_plot +
@@ -453,7 +457,7 @@ make_plots <- function(combined_effects) {
         label.size = labsize
         )
     }
-    
+
     facet_style <-
       facet_grid(
         rows = vars(outcome_lvl_1),
@@ -484,7 +488,7 @@ make_plots <- function(combined_effects) {
         ylim = positions$lims
       ) +
       scale_y_continuous(breaks = positions$breaks) +
-      scale_x_discrete(limits = rev, drop=TRUE) +
+      scale_x_discrete(limits = rev, drop = TRUE) +
       tidyMB::theme_mb() %+replace% theme(
         strip.text.y.left = element_markdown(
           angle = 0,
@@ -503,20 +507,22 @@ make_plots <- function(combined_effects) {
         strip.placement = "outside",
         strip.background = element_rect(linetype = "solid")
       )
-    
+
     if (caption) {
-      cap <- 
+      cap <-
         "**Note:**<br>
       **Indiv. Data:** Individual study data available for reanalysis.<br>
       **Eggers:** *P* > 0.05 for Egger's test of asymmetry, or too few studies to analyse (K < 10).<br>
       **Excess Signif.:** *P* > 0.05 for test for excess significance."
-      
+
       base_plot <-
         base_plot +
         labs(tag = cap) + theme(
           plot.tag.position = positions$tag,
-          plot.tag = element_textbox(size = 7,
-                                     lineheight = 1)
+          plot.tag = element_textbox(
+            size = 7,
+            lineheight = 1
+          )
         )
     }
 
@@ -585,7 +591,7 @@ make_plots <- function(combined_effects) {
         mod = -2.95,
         expo = -3.85,
         outcome = -4.55,
-        tag = c(0.2,0.01)
+        tag = c(0.2, 0.01)
       )
     )
 
@@ -621,7 +627,7 @@ make_plots <- function(combined_effects) {
         mod = -3.75,
         expo = -4.9,
         outcome = -5.9,
-        tag = c(0.2,0)
+        tag = c(0.2, 0)
       )
     )
 
@@ -710,7 +716,7 @@ make_plots <- function(combined_effects) {
 
 save_plots <- function(plots) {
   file_name <- here::here("figure", plots[[1]]$filename)
-  
+
 
   ggsave(
     filename = file_name,
@@ -718,10 +724,11 @@ save_plots <- function(plots) {
     width = plots[[1]]$dims[[1]],
     height = plots[[1]]$dims[[2]]
   )
-  
+
   # Upload to GDrive
   drive_put(here::here("figure", plots[[1]]$filename),
-            path = as_id("https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml"))
-  
+    path = as_id("https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml")
+  )
+
   return(file_name)
 }
