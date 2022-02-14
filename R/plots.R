@@ -56,6 +56,10 @@ make_prisma <- function(covidence_export, effects_clean) {
         startsWith(text, "\t") ~ "exclude",
         TRUE ~ "main"
       ),
+      text = str_replace_all(
+        text, "studies included",
+        "met inclusion criteria"
+      ),
       step = 0,
       text = str_replace_all(text, "\t", ""),
       value = str_extract(text, "^[0-9]+") %>% as.numeric(),
@@ -97,7 +101,7 @@ make_prisma <- function(covidence_export, effects_clean) {
     ) %>%
     exclusion_collapse(
       c(
-        "Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.",
+        "Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.", # nolint
         "Individual level data only"
       ),
       "All meta-analyses results include non-target samples (e.g., adults)"
@@ -143,7 +147,10 @@ make_prisma <- function(covidence_export, effects_clean) {
     text = "studies contributed unique effects",
     type = "main",
     step = dat$step[nrow(dat)] + 1,
-    value = effects_clean %>% filter(use_effect) %>% distinct(covidence_review_id) %>% nrow()
+    value = effects_clean %>%
+      filter(use_effect) %>%
+      distinct(covidence_review_id) %>%
+      nrow()
   )
 
 
@@ -174,9 +181,11 @@ make_prisma <- function(covidence_export, effects_clean) {
       tab3 [label = '", labels[3], "']
       tab4 [label = '", labels[4], "']
       tab5 [label = '", labels[5], "']
-      tab6 [label = <", labels[6], "<br ALIGN = 'LEFT'/>", labels[7], "<br ALIGN = 'LEFT'/>>]
+      tab6 [label = <", labels[6],
+    "<br ALIGN = 'LEFT'/>", labels[7], "<br ALIGN = 'LEFT'/>>]
       tab7 [label = '", labels[8], "']
-      tab8 [label = <", labels[9], "<br ALIGN = 'LEFT'/>", labels[10], "<br ALIGN = 'LEFT'/>>]
+      tab8 [label = <", labels[9],
+    "<br ALIGN = 'LEFT'/>", labels[10], "<br ALIGN = 'LEFT'/>>]
       tab9 [label = '", labels[11], "']
 
       # edge definitions with the node IDs
@@ -190,7 +199,9 @@ make_prisma <- function(covidence_export, effects_clean) {
       tab7 -> tab8;
       {rank=same; tab7; tab8}
       }
-", collapse = "")
+",
+    collapse = ""
+  )
 
   prisma_diag <- DiagrammeR::grViz(prisma)
   prisma_data <- list(data = dat, diag = prisma_diag)
@@ -206,7 +217,9 @@ save_prisma <- function(prisma_data) {
 
   # Upload to GDrive
   drive_put(here::here("figure", "PRISMA Diagram.pdf"),
-    path = as_id("https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml")
+    path = as_id(
+      "https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml"
+    )
   )
 
   return(here::here("figure", "PRISMA Diagram.pdf"))
@@ -225,7 +238,9 @@ make_plots <- function(combined_effects) {
       if (str_detect(string, ":")) {
         string <- gsub(":", ":<br/>", string)
       } else {
-        string <- str_replace_all(str_wrap(string, width = str_length(string) / 1.5), "\n", "<br/>")
+        string <- str_replace_all(str_wrap(string,
+          width = str_length(string) / 1.5
+        ), "\n", "<br/>")
       }
     }
 
@@ -240,7 +255,7 @@ make_plots <- function(combined_effects) {
       # Truncate large effects
       cilb999 = if_else(cilb999 < -1, -1, cilb999),
       ciub999 = if_else(ciub999 > 1, 1, ciub999),
-      # Take overall outcome into a variable and remove that from the sub-variable
+      # Overall outcome into a variable and remove that from the sub-variable
       outcome_lvl_1 = factor(gsub(":.*", "", plain_language_outcome)),
       plain_language_outcome = gsub(".*: ", "", plain_language_outcome),
       outcome_category = factor(str_to_title(outcome_category)),
@@ -260,7 +275,9 @@ make_plots <- function(combined_effects) {
         format(round(ciub95, 2), nsmall = 2), "]",
         sep = ""
       ),
-      indiv_data = fontawesome(if_else(source == "reanalysis", "fa-check", "fa-times")),
+      indiv_data = fontawesome(if_else(source == "reanalysis",
+        "fa-check", "fa-times"
+      )),
       eggers = case_when(
         source == "reported" ~ fontawesome("fa-minus"),
         eggers_p > 0.05 ~ fontawesome("fa-check"),
@@ -272,7 +289,9 @@ make_plots <- function(combined_effects) {
         TRUE ~ fontawesome("fa-times")
       ),
       font_fam = "fontawesome-webfont",
-      moderator_age = factor(moderator_age, levels = c("All", "Young children", "Children", "Adolescents"))
+      moderator_age = factor(moderator_age,
+        levels = c("All", "Young children", "Children", "Adolescents")
+      )
     ) %>%
     arrange(
       outcome_lvl_1,
@@ -311,7 +330,10 @@ make_plots <- function(combined_effects) {
         "**Exposure**"
       ) %>%
         fct_relevel("**Exposure**"),
-      outcome_category = fct_expand(outcome_category, "**Outcome Category**") %>%
+      outcome_category = fct_expand(
+        outcome_category,
+        "**Outcome Category**"
+      ) %>%
         fct_relevel("**Outcome Category**"),
       moderator_age = fct_expand(moderator_age, "**Age Group**") %>%
         fct_relevel("**Age Group**")
@@ -479,7 +501,7 @@ make_plots <- function(combined_effects) {
       labs(
         x = NULL,
         y = NULL,
-        caption = "<b>r</b> with <b style='color:#636363'>95%</b> and <b style='color:#bdbdbd'>99.9%</b> CIs",
+        caption = "<b>r</b> with <b style='color:#636363'>95%</b> and <b style='color:#bdbdbd'>99.9%</b> CIs", # nolint
         title = title
       ) +
       facet_style +
@@ -512,7 +534,8 @@ make_plots <- function(combined_effects) {
       cap <-
         "**Note:**<br>
       **Indiv. Data:** Individual study data available for reanalysis.<br>
-      **Eggers:** *P* > 0.05 for Egger's test of asymmetry, or too few studies to analyse (K < 10).<br>
+      **Eggers:** *P* > 0.05 for Egger's test of asymmetry,
+      or too few studies to analyse (K < 10).<br>
       **Excess Signif.:** *P* > 0.05 for test for excess significance."
 
       base_plot <-
@@ -727,7 +750,9 @@ save_plots <- function(plots) {
 
   # Upload to GDrive
   drive_put(here::here("figure", plots[[1]]$filename),
-    path = as_id("https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml")
+    path = as_id(
+      "https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml"
+    )
   )
 
   return(file_name)
