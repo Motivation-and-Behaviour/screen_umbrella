@@ -181,9 +181,14 @@
     "bib2df": {
       "Package": "bib2df",
       "Version": "1.1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "5d19ebab9d2c4d2d87dd87445a823aa6",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "ropensci",
+      "RemoteRepo": "bib2df",
+      "RemoteRef": "master",
+      "RemoteSha": "8cfa2178e8a24c12846c848432c46e57cd362a59",
+      "Hash": "35bc9d934b00592af74a9f40be13e6fe",
       "Requirements": [
         "dplyr",
         "httr",
@@ -243,6 +248,14 @@
         "xfun",
         "yaml"
       ]
+    },
+    "brio": {
+      "Package": "brio",
+      "Version": "1.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2f01e16ff9571fe70381c7b9ae560dc4",
+      "Requirements": []
     },
     "broom": {
       "Package": "broom",
@@ -496,6 +509,56 @@
       "Repository": "CRAN",
       "Hash": "cf6b206a045a684728c3267ef7596190",
       "Requirements": []
+    },
+    "distill": {
+      "Package": "distill",
+      "Version": "1.2.4",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rstudio",
+      "RemoteRepo": "distill",
+      "RemoteRef": "master",
+      "RemoteSha": "33f858a0e56cd083d55d8ff8df2ed7eecd27372a",
+      "Remotes": "rstudio/rmarkdown",
+      "Hash": "c812fbd4c1366ff32a0c8db1b4315e2f",
+      "Requirements": [
+        "base64enc",
+        "bookdown",
+        "digest",
+        "downlit",
+        "htmltools",
+        "jsonlite",
+        "knitr",
+        "lubridate",
+        "mime",
+        "openssl",
+        "png",
+        "rmarkdown",
+        "rprojroot",
+        "rstudioapi",
+        "stringr",
+        "whisker",
+        "xfun",
+        "xml2",
+        "yaml"
+      ]
+    },
+    "downlit": {
+      "Package": "downlit",
+      "Version": "0.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f24f1e44320a978c03050b8403a83793",
+      "Requirements": [
+        "brio",
+        "digest",
+        "evaluate",
+        "fansi",
+        "rlang",
+        "vctrs",
+        "yaml"
+      ]
     },
     "downloader": {
       "Package": "downloader",
@@ -1361,7 +1424,7 @@
       "RemoteRef": "master",
       "RemoteSha": "a231c3628ccf24359cc17f11a5bbc743e3fed920",
       "Remotes": "tidymodels/broom",
-      "Hash": "3df0637229690f807616c46d3ff77113",
+      "Hash": "fd359b0974a09b94d29a266589c0a5a5",
       "Requirements": [
         "base64enc",
         "bookdown",

@@ -213,7 +213,11 @@ all_high_txt <-
 all_high_unclear_txt <-
   paste0(
     numbers_to_words(all_high_unclear),
-    if (all_high_unclear > 1 | all_high_unclear == 0) " meta-analyses" else " meta-analysis" # nolint
+    if (all_high_unclear > 1 | all_high_unclear == 0) {
+      " meta-analyses"
+    } else {
+      " meta-analysis"
+    }
   )
 
 reviews_count <-
@@ -271,7 +275,7 @@ dualqualstr <- paste0(
 )
 ```
 
-The quality of the included meta-analyses was mixed (see Table \@ref(tab:desctable)). Most assessed heterogeneity `r qual_str(n_low_hetero, nrow(qual_data), " low risk ", suffix=" of meta-analyses)")`, reported the characteristics of the included studies `r qual_str(n_low_char, nrow(qual_data), " low risk ")`, and used a comprehensive and systematic search strategy `r qual_str(n_low_search, nrow(qual_data), " low risk ")`. Most reviews did not clearly report if their eligibility criteria was predefined `r qual_str(n_unclear_elig, nrow(qual_data), " unclear ")`. Many papers also did not complete dual independent screening of abstracts and full text `r qual_str(n_high_dualscreen, nrow(qual_data), " high risk ")` or did not clearly report the method of screening `r qual_str(n_unclear_dualscreen, nrow(qual_data), " unclear ")`. A similar trend was observed for dual independent quality assessment `r dualqualstr`. Overall, only `r all_low` meta-analyses were graded as low risk of bias on all criteria. `r all_high_txt` showed high risk of bias on all criteria (`r all_high_unclear_txt` if 'unclear' was included as 'high').
+The quality of the included meta-analyses was mixed (see Table \@ref(tab:desctable)). Most assessed heterogeneity `r qual_str(n_low_hetero, nrow(qual_data), " low risk ", suffix=" of meta-analyses)")`, reported the characteristics of the included studies `r qual_str(n_low_char, nrow(qual_data), " low risk ")`, and used a comprehensive and systematic search strategy `r qual_str(n_low_search, nrow(qual_data), " low risk ")`. Most reviews did not clearly report if their eligibility criteria were predefined `r qual_str(n_unclear_elig, nrow(qual_data), " unclear ")`. Many papers also did not complete dual independent screening of abstracts and full text `r qual_str(n_high_dualscreen, nrow(qual_data), " high risk ")` or did not clearly report the method of screening `r qual_str(n_unclear_dualscreen, nrow(qual_data), " unclear ")`. A similar trend was observed for dual independent quality assessment `r dualqualstr`. Overall, only `r all_low` meta-analyses were graded as low risk of bias on all criteria. `r all_high_txt` showed high risk of bias on all criteria (if 'unclear' was treated as 'high' then `r all_high_unclear_txt` would be considered all 'high risk').
 
 ### Education Outcomes
 
@@ -328,13 +332,13 @@ edu_summary <-
 ```
 
 
-There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed `r n_edu_noindiv` effects that did not provide individual study-level data, `r n_edu_samplesize` effects with samples < 1,000, and `r n_edu_faileggers` with a significant Egger's test or insufficient studies to conduct the test. No remaining studies showed evidence of excessive significance. Effects not meeting one or more of these standards are presented in [Supplementary File 4](https://drive.google.com/file/d/1wUotZRh-jvdBJh5dkstkMtvcz7DPn-vS/view?usp=sharing). The remaining `r n_edu_certain` met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot). These `r n_edu_certain` effects came from `r n_edu_unique` meta-analytic reviews analysing data from `r edu_summary$studies_n` empirical studies with `r format(edu_summary$total_n, big.mark=",")` individual participants. 
+There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science. We removed `r n_edu_noindiv` effects that did not provide individual study-level data, `r n_edu_samplesize` effects with samples < 1,000, and `r n_edu_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test. Effects not meeting one or more of these standards are presented in [Supplementary File 4](https://drive.google.com/file/d/1wUotZRh-jvdBJh5dkstkMtvcz7DPn-vS/view?usp=sharing). The remaining `r n_edu_certain` effects met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot). These `r n_edu_certain` effects came from `r n_edu_unique` meta-analytic reviews analysing data from `r edu_summary$studies_n` empirical studies with `r format(edu_summary$total_n, big.mark=",")` individual participants. 
 
 ```{r eduplot, eval=params$render_img, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes", dev='cairo_pdf'}
 plots[[1]]$plot
 ```
 
-Among the statistically credible effects, general screen use, television viewing, and video games were all negatively associated with learning. E-books that included narration, as well as touch screen education interventions, and augmented reality education interventions were positively associated with learning. General screen use was negatively associated with literacy outcomes. However, if the screen use involved co-viewing (e.g., watching with a parent), or the content of television programs was educational, the association with literacy was positive (95\% CI, weak evidence). Numeracy outcomes were positively associated with screen-based mathematics interventions and video games with numeracy content.
+Among the statistically credible effects, general screen use, television viewing, and video games were all negatively associated with learning. E-books that included narration, as well as touch screen education interventions, and augmented reality education interventions were positively associated with learning. General screen use was negatively associated with literacy outcomes. However, if the screen use involved co-viewing (e.g., watching with a parent), or the content of television programs was educational, the association with literacy was positive (95\% CI, weak evidence). Numeracy outcomes were positively associated with screen-based mathematics interventions and video games that contained numeracy content.
 
 ```{r educertain}
 n_edu_p999 <- edu_certain %>%
@@ -350,7 +354,7 @@ n_edu_i2 <- edu_certain %>%
 ```
 
 
-As shown in Figure \@ref(fig:eduplot), most of the credible results (`r n_edu_p999` of `r n_edu_certain` effects) showed statistically significant associations, with 99.9\% confidence intervals not encompassing zero (strong evidence). The remaining `r xfun::numbers_to_words(n_edu_p95)` associations were significant at the 95% confidence level (weak evidence). All credible effects related to education outcomes were small-to-moderate. Screen-based interventions designed to influence an outcome (e.g., a computer based program designed to enhance learning [@xieCanTouchscreenDevices2018]) tended to have larger effect sizes than non-intervention exposure (e.g., the association between television viewing and learning [@adelantado-renauAssociationScreenMedia2019]). The largest effect size observed was for augmented reality-based education interventions on general learning ($r = 0.33, k = 15, N = 1,474$). Most effects showed high levels of heterogeneity (`r n_edu_i2` of `r n_edu_certain` with $I^2 > 50\%$).
+As shown in Figure \@ref(fig:eduplot), most of the credible results (`r n_edu_p999` of `r n_edu_certain` effects) showed statistically significant associations, with 99.9\% confidence intervals not encompassing zero (strong evidence). The remaining `r xfun::numbers_to_words(n_edu_p95)` associations were significant at the 95% confidence level (weak evidence). All credible effects related to education outcomes were small-to-moderate. Screen-based interventions designed to influence an outcome (e.g., a computer based program designed to enhance learning [@xieCanTouchscreenDevices2018]) tended to have larger effect sizes than exposures that were not specifically intended to influence any of the measured outcomes (e.g., the association between television viewing and learning [@adelantado-renauAssociationScreenMedia2019]). The largest effect size observed was for augmented reality-based education interventions on general learning ($r = 0.33, k = 15, N = 1,474$). Most effects showed high levels of heterogeneity (`r n_edu_i2` of `r n_edu_certain` with $I^2 > 50\%$).
 
 ### Health and Health-related Behaviours
 
@@ -420,7 +424,7 @@ n_health_p999 <- health_certain %>%
   nrow()
 n_health_p95 <- health_certain %>%
   filter(reanalysis_p.value < 0.05) %>%
-  nrow() - n_edu_p999
+  nrow() - n_health_p999
 
 n_health_i2 <- health_certain %>%
   filter(i2 > 50) %>%
@@ -454,7 +458,7 @@ Broadly, our findings align with the recommendations of others who suggest that 
 
 Screen use research is big, varied, and rapidly growing. Reviews tended to be general (e.g., all screen time) and even when more targeted (e.g., social media) nuances related to specific content (e.g., Instagram vs Facebook) have not been meta-analysed or have not produced credible evidence.
 
-Screen time research has a well-established measurement problem, which impacts the individual studies of this umbrella review. The vast majority of screen time research relies on self-reported data, which not only lacks the nuance required for understanding the effects of screen time, but may also be inaccurate. In a meta-analysis of 47 studies comparing self-reported media use with logged measures, @parrySystematicReviewMetaanalysis2021 found that the measures were only moderately correlated ($r = 0.38$), with self-reported problematic usage fairing worse ($r = 0.25$). It may be that the field of screen time research cannot be sufficiently advanced until more accurate and nuanced measures are available.
+Screen time research has a well-established measurement problem, which impacts the individual studies of this umbrella review. The vast majority of screen time research relies on self-reported data, which not only lacks the nuance required for understanding the effects of screen time, but may also be inaccurate. In a meta-analysis of 47 studies comparing self-reported media use with logged measures, Parry et al [@parrySystematicReviewMetaanalysis2021] found that the measures were only moderately correlated ($r = 0.38$), with self-reported problematic usage fairing worse ($r = 0.25$). It may be that the field of screen time research cannot be sufficiently advanced until more accurate and nuanced measures are available.
 
 #### Strengths and Limitations
 
@@ -463,3 +467,5 @@ Our primary goal for this umbrella review was to provide a high-level synthesis 
 Our high-level approach limits the feasibility of examining fine-grained details of the individual studies. For example, we did not examine moderators beyond age, nor did we rate the risk of bias for the individual studies. Thus, our assessment of evidence quality was restricted to statistical credibility, rather than a more complete assessment of quality (e.g., GRADE [@guyattGRADEGuidelinesIntroduction2011]). As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics. For this reason, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria.
 
 #### Conclusions
+
+Screen time is a topic of significant interest, as shown by the wide variety of academic domains involved and the intrusion into society. Our findings showed that the impact of screen time can be both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition). The interplay of these findings show that parents, teachers, and other caregivers need to carefully weigh the pros and cons of each acitivty for potential harms and benefits. However, our findings also suggest that in order to aid caregivers to make this judgement, researchers need to conduct more careful and nuanced measurement and analysis of screen time, with less emphasis on measures that aggregate screen time and instead focus on the content and environment in which the exposure occurs. 
