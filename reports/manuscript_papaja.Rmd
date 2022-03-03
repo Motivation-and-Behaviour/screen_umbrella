@@ -126,7 +126,7 @@ draft             : yes
 documentclass     : "apa6"
 classoption       : "man"
 csl               : vancouver-brackets-meta.csl
-output            : papaja::apa6_pdf
+output            : papaja::apa6_word
 nocite            : "`r params$nocite_list`"
 params:
   render_img: true
