@@ -4,12 +4,18 @@ library(here)
 
 options(tidyverse.quiet = TRUE, clustermq.scheduler = "multiprocess")
 
-packages <- c("base","broom", "bib2df", "DiagrammeR", "distill", "DT", "esc", "emojifont", 
-              "ggh4x", "googledrive", "ggplot2", "ggtext", "gt", "janitor", 
-              "knitr", "kableExtra", "magrittr", "metafor", "papaja", "targets", 
-              "tarchetypes", "tidyMB", "tidyverse", "scales", "xfun")
+packages <- c(
+  "base", "broom", "bib2df", "DiagrammeR", "distill", "DT", "esc",
+  "emojifont", "ggh4x", "googledrive", "ggplot2", "ggtext", "gt", "janitor",
+  "knitr", "kableExtra", "magrittr", "metafor", "papaja", "targets",
+  "tarchetypes", "tidyMB", "tidyverse", "scales", "xfun"
+)
 
-tar_option_set(packages = packages, debug = "yml_base", workspace_on_error = TRUE)
+tar_option_set(
+  packages = packages,
+  debug = "yml_base",
+  workspace_on_error = TRUE
+)
 
 googledrive::drive_auth()
 googlesheets4::gs4_auth()

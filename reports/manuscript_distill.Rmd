@@ -43,12 +43,12 @@ params:
 
 ```{r setup, include=FALSE}
 # This allows distill to render from a targets pipeline
-Sys.setenv("RSTUDIO_VERSION" = '1.4.1725')
+Sys.setenv("RSTUDIO_VERSION" = "1.4.1725")
 
 knitr::opts_chunk$set(
-	echo = FALSE,
-	message = FALSE,
-	warning = FALSE
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
 )
 
 options(dplyr.summarise.inform = FALSE)

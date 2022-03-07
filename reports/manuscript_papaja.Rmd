@@ -152,7 +152,6 @@ library(xfun)
 
 
 ```{r child = 'manuscript_content.Rmd'}
-
 ```
 
 
