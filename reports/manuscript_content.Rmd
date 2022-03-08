@@ -557,7 +557,7 @@ We found that when meta-analyses examined general screen use, and did not specif
 However, when meta-analyses included a more nuanced examination of exposures, a more complex picture appeared.
 
 Consider children watching television programs---an often cited form of screen time harm.
-Indeed, we find robust evidence for a small association with poorer academic performance and literacy skills [@adelantado-renauAssociationScreenMedia2019].
+We found robust evidence for a small association with poorer academic performance and literacy skills [@adelantado-renauAssociationScreenMedia2019].
 However, we also found evidence that if the content of the program was educational, or the child was watching the program with a parent (i.e., co-viewing), this exposure was instead associated with better literacy [@madiganAssociationsScreenUse2020].
 Thus, parents may play an important role in selecting content that is likely to benefit their children or, perhaps, interact with their children in ways that may foster literacy (e.g., asking their children questions about the program).
 Similar nuanced findings occur for video games.
@@ -581,6 +581,10 @@ If we expand to include those reviews which did meet this threshold, there remai
 For example, advertising of unhealthy food was associated with unhealthy food choice for young children, but was not statistically significant for other age groups [@sadeghiradInfluenceUnhealthyFood2016].
 Conversely, TV programs and movies were more strongly associated with lower physical activity for adolescents than for younger age groups [@marshallRelationshipsMediaUse2004].
 
+Among studies that met our criteria for statistical certainty heterogeneity was high, with almost all effects having $I^2 > 50\%$.
+Much of this heterogeneity is likely explained by differences in measures across pooled studies, or in some cases, the generic nature of some of the exposures.
+For example, "TV programs and movies" covers a substantial range of content, which may explain the heterogeneous association with education outcomes. 
+
 ## Implications for Policy and Practice
 
 Broadly, our findings align with the recommendations of others who suggest that current guidelines may be too simplistic, mischaracterise the strength of the evidence, or do not acknowledge the important nuances of the issue [@elsonPolicyStatementsMedia2019;@ashtonScreenTimeChildren2019;@royalcollegeofpaediatricsandchildhealthHealthImpactsScreen2019].
@@ -591,12 +595,19 @@ We suggest that future guidelines need to embrace the complexity of the issue, t
 ## Implications for Future Research
 
 Screen use research is big, varied, and rapidly growing.
-Reviews tended to be general (e.g., all screen time) and even when more targeted (e.g., social media) nuances related to specific content (e.g., Instagram vs Facebook) have not been meta-analysed or have not produced credible evidence. Fewer than 20\% of the effects identified met our criteria for statistical credibility. Most studies which did not meet our critiera did so because they failed to provide study-level data (or, did not provide sufficent study level data such as including effect sizes but not sample sizes), despite <!--TODO: add reference--> 
+Reviews tended to be general (e.g., all screen time) and even when more targeted (e.g., social media) nuances related to specific content (e.g., Instagram vs Facebook) have not been meta-analysed or have not produced credible evidence.
+Fewer than 20\% of the effects identified met our criteria for statistical credibility.
+Most studies which did not meet our critiera failed to provide study-level data (or did not provide sufficent data, such as including effect estimates but not sample sizes).
+Newer reviews were more likely to provide this information than older reviews, but it highlights the importance of data and code sharing as recommended in the PRISMA guidelines [@pagePRISMA2020Statement2020].
+When study level data was available, many effects were removed because the pooled sample size was small, or because there were fewer than ten studies on which to perform an Egger's test.
+It seems that much of the current screen time research is small in scale, and there is a need for larger, high-quality studies.
 
 Screen time research has a well-established measurement problem, which impacts the individual studies of this umbrella review.
 The vast majority of screen time research relies on self-reported data, which not only lacks the nuance required for understanding the effects of screen time, but may also be inaccurate.
 In a meta-analysis of 47 studies comparing self-reported media use with logged measures, Parry et al [@parrySystematicReviewMetaanalysis2021] found that the measures were only moderately correlated ($r = 0.38$), with self-reported problematic usage fairing worse ($r = 0.25$).
-It may be that the field of screen time research cannot be sufficiently advanced until more accurate and nuanced measures are available.
+Indeed, of 622 studies which measured the screen time of 0---6 year-olds, only 69 provided any sort of psychometric properties for their measure, with only 19 studies reporting validity [@byrneMeasurementScreenTime2021].
+While some researchers have started using newer methods of capturing screen behaviours---such as wearable cameras [@smithFeasibilityAutomatedCameras2019] or device-based loggers [@rydingPassiveObjectiveMeasures2020]---these are still not widely used.
+It may be that the field of screen time research cannot be sufficiently advanced until accurate, validated, and nuanced measures are more widely available and adopted.
 
 ## Strengths and Limitations
 
