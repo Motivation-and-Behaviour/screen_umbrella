@@ -181,14 +181,9 @@
     "bib2df": {
       "Package": "bib2df",
       "Version": "1.1.2",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "ropensci",
-      "RemoteRepo": "bib2df",
-      "RemoteRef": "master",
-      "RemoteSha": "8cfa2178e8a24c12846c848432c46e57cd362a59",
-      "Hash": "35bc9d934b00592af74a9f40be13e6fe",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5d19ebab9d2c4d2d87dd87445a823aa6",
       "Requirements": [
         "dplyr",
         "httr",
@@ -251,10 +246,10 @@
     },
     "brio": {
       "Package": "brio",
-      "Version": "1.1.2",
+      "Version": "1.1.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2f01e16ff9571fe70381c7b9ae560dc4",
+      "Hash": "976cf154dfb043c012d87cddd8bca363",
       "Requirements": []
     },
     "broom": {
@@ -512,16 +507,10 @@
     },
     "distill": {
       "Package": "distill",
-      "Version": "1.2.4",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "rstudio",
-      "RemoteRepo": "distill",
-      "RemoteRef": "master",
-      "RemoteSha": "33f858a0e56cd083d55d8ff8df2ed7eecd27372a",
-      "Remotes": "rstudio/rmarkdown",
-      "Hash": "c812fbd4c1366ff32a0c8db1b4315e2f",
+      "Version": "1.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "fd2d78314cb71e719d21b687657ccbfd",
       "Requirements": [
         "base64enc",
         "bookdown",
@@ -546,15 +535,17 @@
     },
     "downlit": {
       "Package": "downlit",
-      "Version": "0.2.1",
+      "Version": "0.4.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f24f1e44320a978c03050b8403a83793",
+      "Hash": "ba63dc9ab5a31f3209892437e40c5f60",
       "Requirements": [
         "brio",
+        "desc",
         "digest",
         "evaluate",
         "fansi",
+        "memoise",
         "rlang",
         "vctrs",
         "yaml"
@@ -1315,6 +1306,17 @@
       "Hash": "21ec862477d3845843994019cadc4629",
       "Requirements": []
     },
+    "memoise": {
+      "Package": "memoise",
+      "Version": "2.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e2817ccf4a065c5d9d7f2cfbe7c1d78c",
+      "Requirements": [
+        "cachem",
+        "rlang"
+      ]
+    },
     "metafor": {
       "Package": "metafor",
       "Version": "3.0-2",
@@ -1421,17 +1423,17 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "crsh",
       "RemoteRepo": "papaja",
-      "RemoteRef": "master",
-      "RemoteSha": "a231c3628ccf24359cc17f11a5bbc743e3fed920",
-      "Remotes": "tidymodels/broom",
-      "Hash": "fd359b0974a09b94d29a266589c0a5a5",
+      "RemoteRef": "devel",
+      "RemoteSha": "f1bbad9f206cdb45f56604dbbead7f996efd5cad",
+      "Hash": "4668743ed6e8798e9aa5512244b2dbd4",
       "Requirements": [
-        "base64enc",
         "bookdown",
         "broom",
+        "glue",
         "knitr",
         "rmarkdown",
         "rmdfiltr",
+        "tinylabels",
         "yaml",
         "zip"
       ]
@@ -2166,6 +2168,14 @@
         "tidyr",
         "xml2"
       ]
+    },
+    "tinylabels": {
+      "Package": "tinylabels",
+      "Version": "0.2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2cba68be303261e64987a11f6997fdfb",
+      "Requirements": []
     },
     "tinytex": {
       "Package": "tinytex",
