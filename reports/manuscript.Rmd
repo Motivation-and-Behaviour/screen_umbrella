@@ -1,9 +1,162 @@
+---
+title             : "Benefits and risks associated with children’s and adolescents’ interactions with electronic screens: An umbrella review"
+shorttitle        : "Benefits and risks of electronic screens"
+
+author: 
+  - name          : "Taren Sanders"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "33 Berry St, North Sydney, NSW, Australia"
+    email         : "Taren.Sanders@acu.edu.au"
+    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
+      - Conceptualization
+      - Data curation
+      - Writing - Original Draft
+  - name          : "Michael Noetel"
+    affiliation   : "2"
+    role:
+      - Conceptualization
+      - Writing - Original Draft
+  - name          : "Philip Parker"
+    affiliation   : "1"
+    role:
+      - Conceptualization
+      - Writing - Original Draft
+  - name          : "Borja Del Pozo Cruz"
+    affiliation   : "3"
+    role:
+      - Writing - Review & Editing
+  - name          : "Stuart Biddle"
+    affiliation   : "4"
+    role:
+      - Writing - Review & Editing
+  - name          : "Rimante Ronto"
+    affiliation   : "5"
+    role:
+      - Writing - Review & Editing
+  - name          : "Ryan Hulteen"
+    affiliation   : "6"
+    role:
+      - Writing - Review & Editing
+  - name          : "Rhiannon Parker"
+    affiliation   : "7"
+    role:
+      - Writing - Review & Editing
+  - name          : "George Thomas"
+    affiliation   : "8"
+    role:
+      - Writing - Review & Editing
+  - name          : "Katrien De Cocker"
+    affiliation   : "5"
+    role:
+      - Writing - Review & Editing
+  - name          : "Jo Salmon"
+    affiliation   : "9"
+    role:
+      - Writing - Review & Editing
+  - name          : "Kylie Hesketh"
+    affiliation   : "9"
+    role:
+      - Writing - Review & Editing
+  - name          : "Nicole Weeks"
+    affiliation   : "1"
+    role:
+      - Writing - Review & Editing
+  - name          : "Hugh Arnott"
+    affiliation   : "1"
+    role:
+      - Writing - Review & Editing
+  - name          : "Emma Devine"
+    affiliation   : "10"
+    role:
+      - Writing - Review & Editing
+  - name          : "Roberta Vasconcellos"
+    affiliation   : "1"
+    role:
+      - Writing - Review & Editing
+  - name          : "Chris Lonsdale"
+    affiliation   : "1"
+    role:
+      - Writing - Original Draft
+      - Project Administration
+                          
+
+affiliation:
+  - id            : "1"
+    institution   : "Institute for Positive Psychology and Education, Australian Catholic University"
+  - id            : "2"
+    institution   : "School of Health and Behavioural Sciences, Australian Catholic University"
+  - id            : "3"
+    institution   : "Department of Sport Science and Clinical Biomechanics, University of Southern Denmark"
+  - id            : "4"
+    institution   : "School of Psychology and Counselling, University of Southern Queensland"
+  - id            : "5"
+    institution   : "Department of Health Systems and Populations, Faculty of Medicine, Health and Human Sciences, Macquarie University"
+  - id            : "6"
+    institution   : "School of Kinesiology, Louisiana State University"
+  - id            : "7"
+    institution   : "School of Medicine and Health, Sydney University"
+  - id            : "8"
+    institution   : "Faculty of Health Sciences, Curtin University"
+  - id            : "9"
+    institution   : "Institute for Physical Activity and Nutrition, Deakin University"
+  - id            : "10"
+    institution   : "The Matilda Centre for Research in Mental Health and Substance Use, University of Sydney"
+    
+  
+authornote: |
+  Add author notes here
+
+abstract: |
+  Add abstract here
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["combined.bib"]
+
+floatsintext      : yes
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : yes
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+csl               : vancouver-brackets-meta.csl
+output            : papaja::apa6_pdf
+nocite            : "`r params$nocite_list`"
+params:
+  render_img: true
+  nocite_list : true
+  inc_tabs: true
+---
+
+```{r setup, include=FALSE}
+Sys.setenv("RSTUDIO_VERSION" = "1.4.1725")
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+
+options(dplyr.summarise.inform = FALSE)
+
+# Uncomment to run outside of pipeline
+library(tidyverse)
+library(targets)
+library(xfun)
+library(DiagrammeR)
+library(gt)
+```
 
 ```{r, load-targets}
 targets::tar_load(c(
-  "prisma", "effects_clean", "reviews_tables", "tables_df",
-  "plots", "studies_results", "studies_converted",
-  "comparison_plots", "combined_effects", "combined_bib"
+    "prisma", "effects_clean", "reviews_tables", "tables_df",
+    "plots", "studies_results", "studies_converted",
+    "comparison_plots", "combined_effects", "combined_bib"
 ),
 store = here::here("_targets")
 )
@@ -179,64 +332,64 @@ This would have significantly harmed knowledge gained from our review as it woul
 
 ```{r results}
 rename_effects <- function(cur_name) {
-  if (str_detect(cur_name, ":")) {
-    cur_name_split <- str_split(cur_name, ": ")
-    return(str_to_lower(paste(
-      cur_name_split[[1]][2],
-      cur_name_split[[1]][1]
-    )))
-  } else {
-    return(str_to_lower(cur_name))
-  }
+    if (str_detect(cur_name, ":")) {
+        cur_name_split <- str_split(cur_name, ": ")
+        return(str_to_lower(paste(
+            cur_name_split[[1]][2],
+            cur_name_split[[1]][1]
+        )))
+    } else {
+        return(str_to_lower(cur_name))
+    }
 }
 rename_effects <- Vectorize(rename_effects)
 
 unique_effects <- nrow(effects_clean %>% filter(use_effect))
 
 freq_exposures <- effects_clean %>%
-  group_by(plain_language_exposure) %>%
-  summarise(n = n()) %>%
-  arrange(desc(n)) %>%
-  mutate(
-    plain_language_exposure = rename_effects(plain_language_exposure),
-    plain_language_exposure = case_when(
-      plain_language_exposure ==
-        "lifestyle risk behaviour (at school) intervention" ~
-      "screen-based lifestyle risk behaviour interventions (at school)",
-      plain_language_exposure == "general tv programs and movies" ~
-      "general TV programs and movies",
-      TRUE ~ plain_language_exposure
-    ),
-    out = paste0(plain_language_exposure, " (*n* = ", n, ")")
-  )
+    group_by(plain_language_exposure) %>%
+    summarise(n = n()) %>%
+    arrange(desc(n)) %>%
+    mutate(
+        plain_language_exposure = rename_effects(plain_language_exposure),
+        plain_language_exposure = case_when(
+            plain_language_exposure ==
+                "lifestyle risk behaviour (at school) intervention" ~
+            "screen-based lifestyle risk behaviour interventions (at school)",
+            plain_language_exposure == "general tv programs and movies" ~
+            "general TV programs and movies",
+            TRUE ~ plain_language_exposure
+        ),
+        out = paste0(plain_language_exposure, " (*n* = ", n, ")")
+    )
 
 freq_outcomes <- effects_clean %>%
-  group_by(plain_language_outcome) %>%
-  summarise(n = n()) %>%
-  arrange(desc(n)) %>%
-  mutate(
-    plain_language_outcome = rename_effects(plain_language_outcome),
-    plain_language_outcome = case_when(
-      plain_language_outcome == "duration sleep" ~ "sleep duration",
-      TRUE ~ plain_language_outcome
-    ),
-    out = paste0(plain_language_outcome, " (*n* = ", n, ")")
-  )
+    group_by(plain_language_outcome) %>%
+    summarise(n = n()) %>%
+    arrange(desc(n)) %>%
+    mutate(
+        plain_language_outcome = rename_effects(plain_language_outcome),
+        plain_language_outcome = case_when(
+            plain_language_outcome == "duration sleep" ~ "sleep duration",
+            TRUE ~ plain_language_outcome
+        ),
+        out = paste0(plain_language_outcome, " (*n* = ", n, ")")
+    )
 
 freq_combos <- effects_clean %>%
-  group_by(plain_language_exposure, plain_language_outcome) %>%
-  summarise(n = n()) %>%
-  arrange(desc(n))
+    group_by(plain_language_exposure, plain_language_outcome) %>%
+    summarise(n = n()) %>%
+    arrange(desc(n))
 
 effects_sum <- effects_clean %>%
-  filter(use_effect) %>%
-  group_by(covidence_review_id, moderator_age) %>%
-  slice_max(n, with_ties = TRUE) %>%
-  ungroup() %>%
-  summarise(
-    sum_k = sum(k, na.rm = TRUE),
-    sum_n = sum(n)
-  )
+    filter(use_effect) %>%
+    group_by(covidence_review_id, moderator_age) %>%
+    slice_max(n, with_ties = TRUE) %>%
+    ungroup() %>%
+    summarise(
+        sum_k = sum(k, na.rm = TRUE),
+        sum_n = sum(n)
+    )
 ```
 
 The searches yielded `r format(prisma$data$value[1], big.mark=",")` results, of which `r format(prisma$data$value[2], big.mark=",")` were duplicates.
@@ -244,7 +397,7 @@ After screening titles and abstracts, we assessed `r format(prisma$data$value[5]
 Of those, `r prisma$data$value[8]` met the inclusion criteria and we extracted the data from all of these meta-analyses.
 Figure \@ref(fig:prisma) presents the full results of the selection process.
 
-```{r prisma, fig.cap="PRISMA Diagram", out.width="80%", fig.width=8, fig.height=8}
+```{r prisma, fig.cap="PRISMA Diagram"}
 prisma$diag
 ```
 
@@ -256,123 +409,123 @@ Full characteristics of the included studies are provided in Table \@ref(tab:des
 After removing reviews with duplicate exposure/outcome combinations, our process yielded `r unique_effects` unique effect/outcome combinations contributed from `r prisma$data$value[9]` reviews.
 These effects represent the findings of `r format(effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(effects_sum$sum_n, big.mark=",")` participants.
 
-```{r desctable, eval=params$inc_tabs, layout="l-screen-inset shaded"}
+```{r desctable, eval=params$inc_tabs}
 reviews_tables[[1]]$table
 ```
 
 ```{r quality}
 qual_data <-
-  tables_df %>%
-  filter(table == "main") %>%
-  distinct(covidence_id, .keep_all = TRUE) %>%
-  select(eligibility_criteria_predefined_and_specified:heterogeneity_assessed)
+    tables_df %>%
+    filter(table == "main") %>%
+    distinct(covidence_id, .keep_all = TRUE) %>%
+    select(eligibility_criteria_predefined_and_specified:heterogeneity_assessed)
 
 reviews_count <- qual_data %>%
-  mutate(
-    across(
-      eligibility_criteria_predefined_and_specified:heterogeneity_assessed,
-      as.factor
+    mutate(
+        across(
+            eligibility_criteria_predefined_and_specified:heterogeneity_assessed,
+            as.factor
+        )
+    ) %>%
+    rowwise() %>%
+    mutate(
+        count_low = sum(
+            c_across(
+                eligibility_criteria_predefined_and_specified:heterogeneity_assessed
+            ) == "low"
+        ),
+        count_high = sum(
+            c_across(
+                eligibility_criteria_predefined_and_specified:heterogeneity_assessed
+            ) == "high"
+        ),
+        count_high_unclear = sum(
+            c_across(
+                eligibility_criteria_predefined_and_specified:heterogeneity_assessed
+            ) %in% c("high", "unclear")
+        )
     )
-  ) %>%
-  rowwise() %>%
-  mutate(
-    count_low = sum(
-      c_across(
-        eligibility_criteria_predefined_and_specified:heterogeneity_assessed
-      ) == "low"
-    ),
-    count_high = sum(
-      c_across(
-        eligibility_criteria_predefined_and_specified:heterogeneity_assessed
-      ) == "high"
-    ),
-    count_high_unclear = sum(
-      c_across(
-        eligibility_criteria_predefined_and_specified:heterogeneity_assessed
-      ) %in% c("high", "unclear")
-    )
-  )
 
 all_low <- reviews_count %>%
-  filter(count_low == 7) %>%
-  nrow()
+    filter(count_low == 7) %>%
+    nrow()
 
 all_high <- reviews_count %>%
-  filter(count_high == 7) %>%
-  nrow()
+    filter(count_high == 7) %>%
+    nrow()
 
 all_high_unclear <- reviews_count %>%
-  filter(count_high_unclear == 7) %>%
-  nrow()
+    filter(count_high_unclear == 7) %>%
+    nrow()
 
 all_high_txt <-
-  paste0(
-    str_to_sentence(numbers_to_words(all_high)),
-    if (all_high > 1 | all_high == 0) " meta-analyses" else " meta-analysis"
-  )
+    paste0(
+        str_to_sentence(numbers_to_words(all_high)),
+        if (all_high > 1 | all_high == 0) " meta-analyses" else " meta-analysis"
+    )
 
 all_high_unclear_txt <-
-  paste0(
-    numbers_to_words(all_high_unclear),
-    if (all_high_unclear > 1 | all_high_unclear == 0) {
-      " meta-analyses"
-    } else {
-      " meta-analysis"
-    }
-  )
+    paste0(
+        numbers_to_words(all_high_unclear),
+        if (all_high_unclear > 1 | all_high_unclear == 0) {
+            " meta-analyses"
+        } else {
+            " meta-analysis"
+        }
+    )
 
 reviews_count <-
-  reviews_count %>%
-  select(eligibility_criteria_predefined_and_specified:heterogeneity_assessed) %>% # nolint
-  gather(name, value) %>%
-  count(name, value) %>%
-  arrange(desc(n))
+    reviews_count %>%
+    select(eligibility_criteria_predefined_and_specified:heterogeneity_assessed) %>% # nolint
+    gather(name, value) %>%
+    count(name, value) %>%
+    arrange(desc(n))
 
 qual_str <- function(n, totaln, ntype = "", prefix = "(*n*", suffix = ")") {
-  paste0(
-    prefix, ntype, "= ", n, "/",
-    totaln, ", ", scales::percent(n / totaln, accuracy = 1), suffix
-  )
+    paste0(
+        prefix, ntype, "= ", n, "/",
+        totaln, ", ", scales::percent(n / totaln, accuracy = 1), suffix
+    )
 }
 
 n_low_hetero <-
-  reviews_count[reviews_count$name == "heterogeneity_assessed" &
-    reviews_count$value == "low", "n"][[1]]
+    reviews_count[reviews_count$name == "heterogeneity_assessed" &
+        reviews_count$value == "low", "n"][[1]]
 n_low_char <-
-  reviews_count[reviews_count$name ==
-    "included_studies_listed_with_important_characteristics_and_results_of_each" & # nolint
-    reviews_count$value == "low", "n"][[1]]
+    reviews_count[reviews_count$name ==
+        "included_studies_listed_with_important_characteristics_and_results_of_each" & # nolint
+        reviews_count$value == "low", "n"][[1]]
 n_low_search <-
-  reviews_count[reviews_count$name ==
-    "literature_search_strategy_comprehensive_and_systematic" &
-    reviews_count$value == "low", "n"][[1]]
+    reviews_count[reviews_count$name ==
+        "literature_search_strategy_comprehensive_and_systematic" &
+        reviews_count$value == "low", "n"][[1]]
 
 n_unclear_elig <-
-  reviews_count[reviews_count$name ==
-    "eligibility_criteria_predefined_and_specified" &
-    reviews_count$value == "unclear", "n"][[1]]
+    reviews_count[reviews_count$name ==
+        "eligibility_criteria_predefined_and_specified" &
+        reviews_count$value == "unclear", "n"][[1]]
 
 n_high_dualscreen <-
-  reviews_count[reviews_count$name == "dual_independent_screening_review" &
-    reviews_count$value == "high", "n"][[1]]
+    reviews_count[reviews_count$name == "dual_independent_screening_review" &
+        reviews_count$value == "high", "n"][[1]]
 n_unclear_dualscreen <-
-  reviews_count[reviews_count$name == "dual_independent_screening_review" &
-    reviews_count$value == "unclear", "n"][[1]]
+    reviews_count[reviews_count$name == "dual_independent_screening_review" &
+        reviews_count$value == "unclear", "n"][[1]]
 
 n_high_dualquality <-
-  reviews_count[reviews_count$name == "dual_independent_quality_assessment" &
-    reviews_count$value == "high", "n"][[1]]
+    reviews_count[reviews_count$name == "dual_independent_quality_assessment" &
+        reviews_count$value == "high", "n"][[1]]
 n_unclear_dualquality <-
-  reviews_count[reviews_count$name == "dual_independent_quality_assessment" &
-    reviews_count$value == "unclear", "n"][[1]]
+    reviews_count[reviews_count$name == "dual_independent_quality_assessment" &
+        reviews_count$value == "unclear", "n"][[1]]
 
 dualqualstr <- paste0(
-  qual_str(n_high_dualquality, nrow(qual_data), " high risk ", suffix = "; "),
-  qual_str(
-    n_unclear_dualquality,
-    nrow(qual_data), " unclear  ",
-    prefix = "n", suffix = ")"
-  )
+    qual_str(n_high_dualquality, nrow(qual_data), " high risk ", suffix = "; "),
+    qual_str(
+        n_unclear_dualquality,
+        nrow(qual_data), " unclear  ",
+        prefix = "n", suffix = ")"
+    )
 )
 ```
 
@@ -387,54 +540,54 @@ Overall, only `r all_low` meta-analyses were graded as low risk of bias on all c
 
 ```{r eduoutcomes}
 edu_effect <-
-  combined_effects %>%
-  filter(outcome_category == "education" & use_effect)
+    combined_effects %>%
+    filter(outcome_category == "education" & use_effect)
 
 edu_certain <-
-  combined_effects %>%
-  filter(outcome_category == "education" & certainty == "meets criteria")
+    combined_effects %>%
+    filter(outcome_category == "education" & certainty == "meets criteria")
 
 n_edu_effect <-
-  edu_effect %>%
-  nrow()
+    edu_effect %>%
+    nrow()
 
 n_edu_certain <-
-  edu_certain %>%
-  nrow()
+    edu_certain %>%
+    nrow()
 
 n_edu_noindiv <-
-  edu_effect %>%
-  filter(source == "reported") %>%
-  nrow()
+    edu_effect %>%
+    filter(source == "reported") %>%
+    nrow()
 
 n_edu_samplesize <-
-  edu_effect %>%
-  filter(source == "reanalysis" & n < 1000) %>%
-  nrow()
+    edu_effect %>%
+    filter(source == "reanalysis" & n < 1000) %>%
+    nrow()
 
 n_edu_faileggers <-
-  edu_effect %>%
-  filter(source == "reanalysis" & n > 1000 &
-    (eggers_p < 0.05 | is.na(eggers_p))) %>%
-  nrow()
+    edu_effect %>%
+    filter(source == "reanalysis" & n > 1000 &
+        (eggers_p < 0.05 | is.na(eggers_p))) %>%
+    nrow()
 
 n_edu_failtest <-
-  edu_effect %>%
-  filter(source == "reanalysis" & n > 1000 & eggers_p > 0.05 & tes_p < 0.05) %>%
-  nrow()
+    edu_effect %>%
+    filter(source == "reanalysis" & n > 1000 & eggers_p > 0.05 & tes_p < 0.05) %>%
+    nrow()
 
 n_edu_unique <- n_distinct(edu_certain$covidence_review_id)
 
 edu_summary <-
-  studies_converted %>%
-  filter(effect_size_id %in% edu_certain$effect_size_id) %>%
-  group_by(study_author, study_year, study_first_page_number) %>%
-  slice_max(study_n, with_ties = FALSE) %>%
-  ungroup() %>%
-  summarise(
-    studies_n = n(),
-    total_n = sum(study_n)
-  )
+    studies_converted %>%
+    filter(effect_size_id %in% edu_certain$effect_size_id) %>%
+    group_by(study_author, study_year, study_first_page_number) %>%
+    slice_max(study_n, with_ties = FALSE) %>%
+    ungroup() %>%
+    summarise(
+        studies_n = n(),
+        total_n = sum(study_n)
+    )
 ```
 
 There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science.
@@ -455,15 +608,15 @@ Numeracy outcomes were positively associated with screen-based mathematics inter
 
 ```{r educertain}
 n_edu_p999 <- edu_certain %>%
-  filter(reanalysis_p.value < 0.001) %>%
-  nrow()
+    filter(reanalysis_p.value < 0.001) %>%
+    nrow()
 n_edu_p95 <- edu_certain %>%
-  filter(reanalysis_p.value < 0.05) %>%
-  nrow() - n_edu_p999
+    filter(reanalysis_p.value < 0.05) %>%
+    nrow() - n_edu_p999
 
 n_edu_i2 <- edu_certain %>%
-  filter(i2 > 50) %>%
-  nrow()
+    filter(i2 > 50) %>%
+    nrow()
 ```
 
 As shown in Figure \@ref(fig:eduplot), most of the credible results (`r n_edu_p999` of `r n_edu_certain` effects) showed statistically significant associations, with 99.9\% confidence intervals not encompassing zero (strong evidence).
@@ -477,54 +630,54 @@ Most effects showed high levels of heterogeneity (`r n_edu_i2` of `r n_edu_certa
 
 ```{r healthoutcome}
 health_effect <-
-  combined_effects %>%
-  filter(outcome_category != "education" & use_effect)
+    combined_effects %>%
+    filter(outcome_category != "education" & use_effect)
 
 health_certain <-
-  combined_effects %>%
-  filter(outcome_category != "education" & certainty == "meets criteria")
+    combined_effects %>%
+    filter(outcome_category != "education" & certainty == "meets criteria")
 
 n_health_effect <-
-  health_effect %>%
-  nrow()
+    health_effect %>%
+    nrow()
 
 n_health_certain <-
-  health_certain %>%
-  nrow()
+    health_certain %>%
+    nrow()
 
 n_health_noindiv <-
-  health_effect %>%
-  filter(source == "reported") %>%
-  nrow()
+    health_effect %>%
+    filter(source == "reported") %>%
+    nrow()
 
 n_health_samplesize <-
-  health_effect %>%
-  filter(source == "reanalysis" & n < 1000) %>%
-  nrow()
+    health_effect %>%
+    filter(source == "reanalysis" & n < 1000) %>%
+    nrow()
 
 n_health_faileggers <-
-  health_effect %>%
-  filter(source == "reanalysis" & n > 1000 &
-    (eggers_p < 0.05 | is.na(eggers_p))) %>%
-  nrow()
+    health_effect %>%
+    filter(source == "reanalysis" & n > 1000 &
+        (eggers_p < 0.05 | is.na(eggers_p))) %>%
+    nrow()
 
 n_health_failtest <-
-  health_effect %>%
-  filter(source == "reanalysis" & n > 1000 & eggers_p > 0.05 & tes_p < 0.05) %>%
-  nrow()
+    health_effect %>%
+    filter(source == "reanalysis" & n > 1000 & eggers_p > 0.05 & tes_p < 0.05) %>%
+    nrow()
 
 n_health_unique <- n_distinct(health_certain$covidence_review_id)
 
 health_summary <-
-  studies_converted %>%
-  filter(effect_size_id %in% health_certain$effect_size_id) %>%
-  group_by(study_author, study_year, study_first_page_number) %>%
-  slice_max(study_n, with_ties = FALSE) %>%
-  ungroup() %>%
-  summarise(
-    studies_n = n(),
-    total_n = sum(study_n)
-  )
+    studies_converted %>%
+    filter(effect_size_id %in% health_certain$effect_size_id) %>%
+    group_by(study_author, study_year, study_first_page_number) %>%
+    slice_max(study_n, with_ties = FALSE) %>%
+    ungroup() %>%
+    summarise(
+        studies_n = n(),
+        total_n = sum(study_n)
+    )
 ```
 
 We identified `r n_health_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
@@ -547,18 +700,18 @@ Screen-based interventions which target health behaviours appeared effective.
 
 ```{r healthcertain}
 n_health_p999 <- health_certain %>%
-  filter(reanalysis_p.value < 0.001) %>%
-  nrow()
+    filter(reanalysis_p.value < 0.001) %>%
+    nrow()
 n_health_p95 <- health_certain %>%
-  filter(reanalysis_p.value < 0.05) %>%
-  nrow() - n_health_p999
+    filter(reanalysis_p.value < 0.05) %>%
+    nrow() - n_health_p999
 
 n_health_i2 <- health_certain %>%
-  filter(i2 > 50) %>%
-  nrow()
+    filter(i2 > 50) %>%
+    nrow()
 n_health_r2 <- health_certain %>%
-  filter(abs(r) < 0.2) %>%
-  nrow()
+    filter(abs(r) < 0.2) %>%
+    nrow()
 ```
 
 Across the health outcomes, most (`r n_health_p999` of `r n_health_certain`) effects were statistically significant at the 99.9\% confidence interval level, with the remaining `r xfun::numbers_to_words(n_health_p95)` significant at 95\% confidence.
@@ -645,3 +798,15 @@ Screen time is a topic of significant interest, as shown by the wide variety of 
 Our findings showed that the impact of screen time can be both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition).
 The interplay of these findings show that parents, teachers, and other caregivers need to carefully weigh the pros and cons of each specific activity for potential harms and benefits.
 However, our findings also suggest that in order to aid caregivers to make this judgement, researchers need to conduct more careful and nuanced measurement and analysis of screen time, with less emphasis on measures that aggregate screen time and instead focus on the content, context, and environment in which the exposure occurs.
+
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+References marked with an asterisk indicate studies which were included in the synthesis.
+<div id = "refs"></div>
+\endgroup
