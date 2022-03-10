@@ -9,6 +9,22 @@ store = here::here("_targets")
 )
 ```
 
+# Summary
+
+Children's engagement is a screen time is a complex issue.
+Parents, policymakers, and educators needing to weigh the risks that sedentary use of screens present alongside the potential benefits for learning and social connectedness.
+Hampering efforts to make an informed decision is the lack of comprehensive evidence.
+As a Lancet editorial [@thelancetSocialMediaScreen2019] suggested, "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking."
+In this study, we systematically harmonize data from existing meta-analyses of screen time on a range of outcomes, including health, education, and psychology, and identify the most statistically robust relationships.
+We show that some forms of screen time---such as social media---show consistent evidence of harm for children, with no clear evidence of a benefit.
+Other relationships are more complex.
+Video games, for example, are associated with poorer body composition and learning outcomes.
+However, video games for a specific educational purpose (such as numeracy) are associated with improvements in that subject area.
+Caregivers must therefore weigh the health risk against the educational benefit.
+The findings of this study provide parents and other caregivers with the information to make these informed decisions.
+
+\newpage
+
 # Background
 
 In the 16th century, hysteria reigned around a new technology that threatened to be "confusing and harmful" to the mind.
