@@ -126,12 +126,8 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "man"
 csl               : vancouver-brackets-meta.csl
-output            : papaja::apa6_pdf
+output:papaja::apa6_pdf
 nocite            : "`r params$nocite_list`"
-params:
-  render_img: true
-  nocite_list : true
-  inc_tabs: true
 ---
 
 ```{r setup, include=FALSE}
@@ -409,7 +405,7 @@ Full characteristics of the included studies are provided in Table \@ref(tab:des
 After removing reviews with duplicate exposure/outcome combinations, our process yielded `r unique_effects` unique effect/outcome combinations contributed from `r prisma$data$value[9]` reviews.
 These effects represent the findings of `r format(effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(effects_sum$sum_n, big.mark=",")` participants.
 
-```{r desctable, eval=params$inc_tabs}
+```{r desctable, eval = TRUE, results="asis"}
 reviews_tables[[1]]$table
 ```
 
@@ -596,7 +592,7 @@ Effects not meeting one or more of these standards are presented in [Supplementa
 The remaining `r n_edu_certain` effects met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot).
 These `r n_edu_certain` effects came from `r n_edu_unique` meta-analytic reviews analysing data from `r edu_summary$studies_n` empirical studies with `r format(edu_summary$total_n, big.mark=",")` individual participants.
 
-```{r eduplot, eval=params$render_img, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes"}
+```{r eduplot, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes"}
 plots[[1]]$plot
 ```
 
@@ -687,7 +683,7 @@ Effects not meeting one or more of these standards are presented in [Supplementa
 The remaining `r n_health_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)).
 These `r n_health_certain` effects came from `r n_health_unique` meta-analytic reviews analysing data from `r health_summary$studies_n` empirical studies with `r format(health_summary$total_n, big.mark=",")` individual participants.
 
-```{r healthplot, eval=params$render_img, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes", dev='cairo_pdf'}
+```{r healthplot, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes", dev='cairo_pdf'}
 plots[[2]]$plot
 ```
 
