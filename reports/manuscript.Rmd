@@ -160,7 +160,7 @@ store = here::here("_targets")
 
 # Summary
 
-Children's engagement is a screen time is a complex issue.
+Children's engagement in screen time is a complex issue.
 Parents, policymakers, and educators needing to weigh the risks that sedentary use of screens present alongside the potential benefits for learning and social connectedness.
 Hampering efforts to make an informed decision is the lack of comprehensive evidence.
 As a Lancet editorial [@thelancetSocialMediaScreen2019] suggested, "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking."
@@ -188,7 +188,7 @@ Yet, the evidence to support parents' concerns is inadequate.
 A Lancet editorial [@thelancetSocialMediaScreen2019] suggested that, "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking."
 
 While some forms of screen use (e.g., television viewing) may be detrimental to health and wellbeing [@haleScreenTimeSleep2015;@sweetserActivePassiveScreen2012], evidence for other forms of screen exposure (e.g., video games or online communication, such as Zoom) remains less certain and, in some cases, may even be beneficial [@liEarlyChildhoodComputer2004;@warburton2017children].
-Thus, according to a Nature Human Behaviour editorial, research to determine the effect of screen exposure on youth is "a defining challenge of the digital age" [@orbenAssociationAdolescentWellbeing2019].
+Thus, according to a Nature Human Behaviour editorial, research to determine the effect of screen exposure on youth is "a defining question of our age" [@naturehumanbehaviourScreenTimeHow2019].
 With concerns over the impact of screen use including education, health, social development, and psychological well-being, a broad overview that identifies potential benefits and risks is needed.
 
 Citing the negative effects of screens on health (e.g., increased risk of obesity) and health-related behaviours (e.g., sleep), guidelines from the World Health Organisation [@whoGuidelinesPhysicalActivity2019] and numerous government agencies [@australiangovernmentPhysicalActivityExercise2021;@Canadian24HourMovement2016] and statements by expert groups [@AAPMediaUseSchoolAged2016] have recommended that young people's time spent using electronic media devices for entertainment purposes should be limited.
