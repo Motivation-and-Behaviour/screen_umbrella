@@ -126,8 +126,12 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "man"
 csl               : vancouver-brackets-meta.csl
-output:papaja::apa6_pdf
-nocite            : "`r params$nocite_list`"
+output            : papaja::apa6_pdf
+header-includes:
+    - \usepackage{makecell}
+    - \usepackage{booktabs}
+    - \usepackage{colortbl}
+# nocite            : "`r # params$nocite_list`"
 ---
 
 ```{r setup, include=FALSE}
@@ -406,7 +410,17 @@ After removing reviews with duplicate exposure/outcome combinations, our process
 These effects represent the findings of `r format(effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(effects_sum$sum_n, big.mark=",")` participants.
 
 ```{r desctable, eval = TRUE, results="asis"}
-reviews_tables[[1]]$table
+reviews_tables$kable$table %>%
+    kableExtra::row_spec(1:reviews_tables$kable$nrow, hline_after = TRUE) %>%
+    kableExtra::row_spec(0, bold = TRUE) %>%
+    kableExtra::column_spec(3:4, width = "2cm") %>%
+    kableExtra::column_spec(5, width = "1.5cm") %>%
+    kableExtra::column_spec(6:8, width = "3cm") %>%
+    kableExtra::kable_styling(
+        latex_options = c("repeat_header"),
+        font_size = 5
+    ) %>%
+    kableExtra::landscape()
 ```
 
 ```{r quality}

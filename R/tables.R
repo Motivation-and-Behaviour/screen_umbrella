@@ -76,25 +76,53 @@ make_table_data <- function(rob_df, effects_df, reviews_df) {
 
 make_desc_tables <- function(tables_df) {
   bullet_list <- function(column) {
-    paste0("<ul style='padding-left:10px'><li>",
+    paste0(
+      "<ul style='padding-left:10px'><li>",
       paste(column %>% unique() %>% sort(),
         collapse = "</li><li>"
-      ), "</li></ul>",
+      ),
+      "</li></ul>",
+      collapse = ""
+    )
+  }
+
+  bullet_list_markdown <- function(column) {
+    paste0(
+      "* ",
+      paste(column %>% unique() %>% sort(),
+        collapse = "<br>* "
+      ),
+      "",
+      collapse = ""
+    )
+  }
+
+  bullet_list_latex <- function(column) {
+    paste0(
+      "\\begin{itemize} \n  \\item ",
+      paste(column %>% unique() %>% sort(),
+        collapse = "\n  \\item "
+      ),
+      " \n  \\end{itemize}",
       collapse = ""
     )
   }
 
   unique_list <- function(column) {
     paste(column %>% unique() %>% sort(),
-      collapse = "<br><br>"
+      collapse = "\n"
     )
   }
 
   rob_cols <- c("#b7e1cd", "#fce8b2", "#f4c7c3")
 
-  # Main table
-  base_table <- tables_df %>%
+  desc_df <- tables_df %>%
     filter(table == "main") %>%
+    select(-(eligibility_criteria_predefined_and_specified:heterogeneity_assessed))
+
+
+  # Main table
+  base_table <- desc_df %>%
     group_by(covidence_id) %>%
     mutate(
       outcomes_assessed = map(bullet_list(plain_language_outcome), gt::html),
@@ -127,12 +155,12 @@ make_desc_tables <- function(tables_df) {
       ),
       sample_ages = map(sample_ages, gt::html)
     ) %>%
-    mutate_at(
-      vars(
-        "eligibility_criteria_predefined_and_specified":"heterogeneity_assessed"
-      ),
-      str_to_title
-    ) %>%
+    # mutate_at(
+    #   vars(
+    #     "eligibility_criteria_predefined_and_specified":"heterogeneity_assessed"
+    #   ),
+    #   str_to_title
+    # ) %>%
     # Reorder the columns
     select(
       -starts_with("sample_age_mean"),
@@ -146,34 +174,34 @@ make_desc_tables <- function(tables_df) {
     ) %>%
     arrange(first_author, year)
 
-  gt_table_main <-
+  gt_table_main_original <-
     base_table %>%
-    gt(caption = "Review characteristics and quality assessment for studies providing unique effects") %>%
-    # Add color to ROB
-    data_color(
-      columns =
-        eligibility_criteria_predefined_and_specified:heterogeneity_assessed,
-      colors = scales::col_factor(
-        palette = rob_cols,
-        levels = c("Low", "Unclear", "High")
-      )
-    ) %>%
-    cols_align(
-      columns =
-        eligibility_criteria_predefined_and_specified:heterogeneity_assessed,
-      align = "center"
-    ) %>%
+    gt(caption = "Review characteristics for studies providing unique effects") %>%
+    # # Add color to ROB
+    # data_color(
+    #   columns =
+    #     eligibility_criteria_predefined_and_specified:heterogeneity_assessed,
+    #   colors = scales::col_factor(
+    #     palette = rob_cols,
+    #     levels = c("Low", "Unclear", "High")
+    #   )
+    # ) %>%
+    # cols_align(
+    #   columns =
+    #     eligibility_criteria_predefined_and_specified:heterogeneity_assessed,
+    #   align = "center"
+    # ) %>%
     tab_header(html("<strong>Study Characteristics</strong>"),
       subtitle = "Review characteristics and quality assessment for studies providing unique effects"
     ) %>%
-    tab_spanner(
-      label = "Review Characteristics",
-      columns = first_author:exposures_assessed
-    ) %>%
-    tab_spanner(
-      label = "Quality Assessment",
-      columns = eligibility_criteria_predefined_and_specified:heterogeneity_assessed
-    ) %>%
+    # tab_spanner(
+    #   label = "Review Characteristics",
+    #   columns = first_author:exposures_assessed
+    # ) %>%
+    # tab_spanner(
+    #   label = "Quality Assessment",
+    #   columns = eligibility_criteria_predefined_and_specified:heterogeneity_assessed
+    # ) %>%
     cols_merge_range(col_begin = earliest_study_year, col_end = latest_study_year) %>%
     cols_label(
       first_author = "First Author",
@@ -183,14 +211,14 @@ make_desc_tables <- function(tables_df) {
       earliest_study_year = html("Study Range<br><small>Earliest - Latest</small>"),
       sample_ages = html("Sample Age Restrictions<br><small>(Age Range)</small>"),
       outcomes_assessed = "Outcomes Assessed",
-      exposures_assessed = "Exposures Assessed",
-      eligibility_criteria_predefined_and_specified = html("Elig. <br>Crit."),
-      literature_search_strategy_comprehensive_and_systematic = "Lit. Search",
-      dual_independent_screening_review = "Dual Screening",
-      dual_independent_quality_assessment = "Dual Quality",
-      included_studies_listed_with_important_characteristics_and_results_of_each = "Studies Listed",
-      publication_bias_assessed = "Pub. Bias Assessed",
-      heterogeneity_assessed = "Heterog. Assessed"
+      exposures_assessed = "Exposures Assessed"
+      # eligibility_criteria_predefined_and_specified = html("Elig. <br>Crit."),
+      # literature_search_strategy_comprehensive_and_systematic = "Lit. Search",
+      # dual_independent_screening_review = "Dual Screening",
+      # dual_independent_quality_assessment = "Dual Quality",
+      # included_studies_listed_with_important_characteristics_and_results_of_each = "Studies Listed",
+      # publication_bias_assessed = "Pub. Bias Assessed",
+      # heterogeneity_assessed = "Heterog. Assessed"
     ) %>%
     cols_align(
       columns =
@@ -201,39 +229,39 @@ make_desc_tables <- function(tables_df) {
       footnote = "Where provided",
       locations = cells_column_labels(sample_ages)
     ) %>%
-    # ROB footnotes
-    tab_footnote(
-      footnote = "Eligibility criteria predefined and specified",
-      locations = cells_column_labels(eligibility_criteria_predefined_and_specified)
-    ) %>%
-    tab_footnote(
-      footnote = "Literature search strategy comprehensive and systematic",
-      locations = cells_column_labels(literature_search_strategy_comprehensive_and_systematic)
-    ) %>%
-    tab_footnote(
-      footnote = "Dual independent screening & review",
-      locations = cells_column_labels(dual_independent_screening_review)
-    ) %>%
-    tab_footnote(
-      footnote = "Dual independent quality assessment",
-      locations = cells_column_labels(dual_independent_quality_assessment)
-    ) %>%
-    tab_footnote(
-      footnote = "Included studies listed with important characteristics and results of each",
-      locations = cells_column_labels(included_studies_listed_with_important_characteristics_and_results_of_each)
-    ) %>%
-    tab_footnote(
-      footnote = "Publication bias assessed",
-      locations = cells_column_labels(publication_bias_assessed)
-    ) %>%
-    tab_footnote(
-      footnote = "Heterogeneity assessed",
-      locations = cells_column_labels(heterogeneity_assessed)
-    ) %>%
-    tab_footnote(
-      footnote = "Items are from the National Health, Lung and Blood Institute’s Quality Assessment of Systematic Reviews and Meta-Analyses tool. Note that we excluded the first item of the tool.",
-      locations = cells_column_spanners("Quality Assessment")
-    ) %>%
+    # # ROB footnotes
+    # tab_footnote(
+    #   footnote = "Eligibility criteria predefined and specified",
+    #   locations = cells_column_labels(eligibility_criteria_predefined_and_specified)
+    # ) %>%
+    # tab_footnote(
+    #   footnote = "Literature search strategy comprehensive and systematic",
+    #   locations = cells_column_labels(literature_search_strategy_comprehensive_and_systematic)
+    # ) %>%
+    # tab_footnote(
+    #   footnote = "Dual independent screening & review",
+    #   locations = cells_column_labels(dual_independent_screening_review)
+    # ) %>%
+    # tab_footnote(
+    #   footnote = "Dual independent quality assessment",
+    #   locations = cells_column_labels(dual_independent_quality_assessment)
+    # ) %>%
+    # tab_footnote(
+    #   footnote = "Included studies listed with important characteristics and results of each",
+    #   locations = cells_column_labels(included_studies_listed_with_important_characteristics_and_results_of_each)
+    # ) %>%
+    # tab_footnote(
+    #   footnote = "Publication bias assessed",
+    #   locations = cells_column_labels(publication_bias_assessed)
+    # ) %>%
+    # tab_footnote(
+    #   footnote = "Heterogeneity assessed",
+    #   locations = cells_column_labels(heterogeneity_assessed)
+    # ) %>%
+    # tab_footnote(
+    #   footnote = "Items are from the National Health, Lung and Blood Institute’s Quality Assessment of Systematic Reviews and Meta-Analyses tool. Note that we excluded the first item of the tool.",
+    #   locations = cells_column_spanners("Quality Assessment")
+    # ) %>%
     # Styling
     cols_width(
       first_author ~ pct(6),
@@ -243,8 +271,8 @@ make_desc_tables <- function(tables_df) {
       earliest_study_year ~ pct(8),
       sample_ages ~ pct(8),
       outcomes_assessed ~ pct(17),
-      exposures_assessed ~ pct(17),
-      c(eligibility_criteria_predefined_and_specified:heterogeneity_assessed) ~ pct(3)
+      exposures_assessed ~ pct(17)
+      # c(eligibility_criteria_predefined_and_specified:heterogeneity_assessed) ~ pct(3)
     ) %>%
     tab_options(
       heading.align = "left",
@@ -270,10 +298,67 @@ make_desc_tables <- function(tables_df) {
       locations = cells_column_spanners(everything())
     )
 
-  reviews_tables <- list(length = 1)
+  base_table_latex <- desc_df %>%
+    group_by(covidence_id) %>%
+    mutate(
+      outcomes_assessed = unique_list(plain_language_outcome),
+      exposures_assessed = unique_list(plain_language_exposure)
+    ) %>%
+    ungroup() %>%
+    select(
+      -plain_language_outcome,
+      -plain_language_exposure,
+      -use_effect,
+      -table
+    ) %>%
+    distinct() %>%
+    mutate(
+      sample_ages = demographics_restrictions
+    ) %>%
+    tidyr::unite("study_range",
+      earliest_study_year:latest_study_year,
+      sep = " - "
+    ) %>%
+    select(
+      -starts_with("sample_age_mean"),
+      -demographics_restrictions,
+      -covidence_id
+    ) %>%
+    relocate(any_of(c(
+      "sample_ages", "outcomes_assessed", "exposures_assessed"
+    )),
+    .after = study_range
+    ) %>%
+    arrange(first_author, year) %>%
+    mutate_all(kableExtra::linebreak, align = "l")
 
-  reviews_tables[[1]]$table <- gt_table_main
-  reviews_tables[[1]]$filename <- "Descriptive table.pdf"
+  kable_table_main <-
+    base_table_latex %>%
+    knitr::kable("latex",
+      caption = "Review characteristics for studies providing unique effects",
+      col.names = c(
+        "First Author", "Year", "Design Restrictions",
+        "Regions Restrictions", "Study Range",
+        "Sample Age Restrictions",
+        "Outcomes Assessed", "Exposures Assessed"
+      ),
+      escape = FALSE,
+      booktabs = TRUE,
+      align = c("l", "c", "l", "l", "c", "l", "l", "l"),
+      linesep = "",
+      longtable = TRUE
+    )
+
+
+
+  reviews_tables <- list()
+
+  reviews_tables[["original"]]$table <- gt_table_main_original
+  reviews_tables[["original"]]$filename <- "Descriptive table.pdf"
+
+  reviews_tables[["kable"]]$table <- kable_table_main
+  reviews_tables[["kable"]]$filename <- "Descriptive table_kable.pdf"
+  reviews_tables[["kable"]]$nrow <- nrow(base_table_latex)
 
   return(reviews_tables)
 }
