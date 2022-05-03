@@ -1,5 +1,5 @@
 ---
-title             : "Benefits and risks associated with children’s and adolescents’ interactions with electronic screens: An umbrella review"
+title             : "Benefits and risks associated with children's and adolescents' interactions with electronic screens: An umbrella review"
 shorttitle        : "Benefits and risks of electronic screens"
 
 author: 
@@ -131,7 +131,7 @@ header-includes:
     - \usepackage{makecell}
     - \usepackage{booktabs}
     - \usepackage{colortbl}
-# nocite            : "`r # params$nocite_list`"
+# remember to add no cite back in here
 ---
 
 ```{r setup, include=FALSE}
@@ -191,7 +191,7 @@ Excessive screen time use is the number one concern parents have about their chi
 Yet, the evidence to support parents' concerns is inadequate.
 A Lancet editorial [@thelancetSocialMediaScreen2019] suggested that, "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking."
 
-While some forms of screen use (e.g., television viewing) may be detrimental to health and wellbeing [@haleScreenTimeSleep2015;@sweetserActivePassiveScreen2012], evidence for other forms of screen exposure (e.g., video games or online communication, such as Zoom) remains less certain and, in some cases, may even be beneficial [@liEarlyChildhoodComputer2004;@warburton2017children].
+While some forms of screen use (e.g., television viewing) may be detrimental to health and wellbeing [@haleScreenTimeSleep2015;@sweetserActivePassiveScreen2012], evidence for other forms of screen exposure (e.g., video games or online communication, such as Zoom&trade;) remains less certain and, in some cases, may even be beneficial [@liEarlyChildhoodComputer2004;@warburton2017children].
 Thus, according to a Nature Human Behaviour editorial, research to determine the effect of screen exposure on youth is "a defining question of our age" [@naturehumanbehaviourScreenTimeHow2019].
 With concerns over the impact of screen use including education, health, social development, and psychological well-being, a broad overview that identifies potential benefits and risks is needed.
 
@@ -205,12 +205,12 @@ This evidence has led some researchers to argue that a more nuanced approach to 
 
 In 2016, the American Academy of Pediatrics used a narrative review to examine the benefits and risks of children and adolescents' electronic media [@chassiakosChildrenAdolescentsDigital2016] as a basis for updating their guidelines about screen use [@AAPMediaUseSchoolAged2016].
 Since then, a large number of systematic reviews and meta-analyses have provided evidence about the potential benefits and risks of screen use.
-Yet, no review has synthesised the evidence available across a broad range of outcome domains, such as physical health, education, development, behaviour, and well-being.
+Yet, no review has synthesised the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviour, and well-being.
 
-In order to crystallise the evidence base and support further evidence-based guideline development and refinement, we reviewed published meta-analyses examining the effects of screen use on children and youth.
+In order to synthesise the evidence and support further evidence-based guideline development and refinement, we reviewed published meta-analyses examining the effects of screen use on children and youth.
 This review synthesises evidence on any plausible outcome of electronic media exposure.
 Adopting this broad approach allowed us to provide a holistic perspective on the influence of screens on children’s lives.
-By synthesising across life domains (e.g., school and home), this review provides evidence to support better guidelines and advice for parents, teachers, pediatricians and other professionals in order to maximise human functioning.
+By synthesising across life domains (e.g., school and home), this review provides evidence to inform guidelines and advice for parents, teachers, pediatricians and other professionals in order to maximise human functioning.
 
 \newpage
 
@@ -230,7 +230,7 @@ In this review we adopted a population-level perspective, meaning that we examin
 Consistent with this population-level approach, we excluded technology-based treatments for clinical conditions.
 However, we included studies examining the effect of screen exposure on non-clinical outcomes (e.g., learning) for children and youth with a clinical condition.
 For example, a meta-analysis of the effect of television watching on learning among adolescents diagnosed with depression would be included.
-However, a meta-analysis of interventions designed to treat clinical depression delivered by a mobile phone app would be excluded.
+However, a meta-analysis of interventions designed to *treat* clinical depression delivered by a mobile phone app would be excluded.
 
 *Outcomes*: We included all reported outcomes.
 
@@ -705,7 +705,7 @@ Digital advertising of unhealthy foods—both traditional advertising and video 
 Social media use and sexual content were positively associated with risky behaviors (e.g., sexual activity, risk taking, and substance abuse).
 General screen use was positively associated with depression.
 Television viewing was negatively correlated with sleep duration, but only at the 95% confidence level (weak evidence).
-All forms of screen use (general, television, and video games) were positively associated with body composition (e.g., BMI), although the association was smaller for children than for adolescents or for combined populations.
+All forms of screen use (general, television, and video games) were associated with body composition (e.g., higher BMI), although the association was smaller for children than for adolescents or for combined populations.
 Screen-based interventions which target health behaviours appeared effective.
 
 ```{r healthcertain}
@@ -731,17 +731,17 @@ Most of the effect sizes (`r n_health_r2`/`r n_health_certain`) had an absolute 
 
 # Discussion
 
-The primary goal of this review was to provide a holistic perspective on the influence of screens on children’s lives across a broad domain of outcomes.
+The primary goal of this review was to provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes.
 We found that when meta-analyses examined general screen use, and did not specify the content, context or device, there was strong evidence showing potentially harmful associations with general learning, literacy, body composition, and depression.
 However, when meta-analyses included a more nuanced examination of exposures, a more complex picture appeared.
 
-Consider children watching television programs---an often cited form of screen time harm.
+As an example, consider children watching television programs---an often cited form of screen time harm.
 We found robust evidence for a small association with poorer academic performance and literacy skills [@adelantado-renauAssociationScreenMedia2019].
 However, we also found evidence that if the content of the program was educational, or the child was watching the program with a parent (i.e., co-viewing), this exposure was instead associated with better literacy [@madiganAssociationsScreenUse2020].
 Thus, parents may play an important role in selecting content that is likely to benefit their children or, perhaps, interact with their children in ways that may foster literacy (e.g., asking their children questions about the program).
-Similar nuanced findings occur for video games.
-The credible evidence we identified showed that video game playing is associated with poorer body composition and learning [@adelantado-renauAssociationScreenMedia2019;@poorolajalBehavioralFactorsInfluencing2020].
-However, when the video game was designed specifically to teach numeracy, playing these games showed learning benefits [@byunDigitalGamebasedLearning2018].
+Similar nuanced findings were observed for video games.
+The credible evidence we identified showed that video game playing was associated with poorer body composition and learning [@adelantado-renauAssociationScreenMedia2019;@poorolajalBehavioralFactorsInfluencing2020].
+However, when the video game were designed specifically to teach numeracy, playing these games showed learning benefits [@byunDigitalGamebasedLearning2018].
 One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 4 & 5) therefore this hypothesis could not be addressed.
 
 Social media was one type of exposure that showed consistent risks to health, with no indication of potential benefit.
@@ -756,7 +756,7 @@ The way that a young person interacts with digital screens may also be important
 We found evidence that touch screens had strong evidence for benefits on learning [@xieCanTouchscreenDevices2018], as did augmented reality [@tekedereExaminingEffectivenessAugmented2016].
 
 Largely owing to a small number of studies or missing individual study data, there were few age-based conclusions that could be drawn from reviews which met our criteria for statistical certainty.
-If we expand to include those reviews which did meet this threshold, there remains no clear pattern although there were some age-specific differences in associations.
+If we expand to include those reviews which did not meet this threshold, there remained no clear pattern although there were some age-specific differences in associations (data avilable in Supplementary Materials).
 For example, advertising of unhealthy food was associated with unhealthy food choice for young children, but was not statistically significant for other age groups [@sadeghiradInfluenceUnhealthyFood2016].
 Conversely, TV programs and movies were more strongly associated with lower physical activity for adolescents than for younger age groups [@marshallRelationshipsMediaUse2004].
 
@@ -773,7 +773,7 @@ We suggest that future guidelines need to embrace the complexity of the issue, t
 
 ## Implications for Future Research
 
-Screen use research is big, varied, and rapidly growing.
+Screen use research is extensive, varied, and rapidly growing.
 Reviews tended to be general (e.g., all screen time) and even when more targeted (e.g., social media) nuances related to specific content (e.g., Instagram vs Facebook) have not been meta-analysed or have not produced credible evidence.
 Fewer than 20\% of the effects identified met our criteria for statistical credibility.
 Most studies which did not meet our critiera failed to provide study-level data (or did not provide sufficent data, such as including effect estimates but not sample sizes).
@@ -783,9 +783,11 @@ It seems that much of the current screen time research is small in scale, and th
 
 Screen time research has a well-established measurement problem, which impacts the individual studies of this umbrella review.
 The vast majority of screen time research relies on self-reported data, which not only lacks the nuance required for understanding the effects of screen time, but may also be inaccurate.
+In one systematic review on screen time and sleep [@haleScreenTimeSleep2015], 66 of the 67 included studies used self-reported data for *both* the exposure and outcome variable.
+It has been established that self-reported screen time data has questionnable validity.
 In a meta-analysis of 47 studies comparing self-reported media use with logged measures, Parry et al [@parrySystematicReviewMetaanalysis2021] found that the measures were only moderately correlated ($r = 0.38$), with self-reported problematic usage fairing worse ($r = 0.25$).
 Indeed, of 622 studies which measured the screen time of 0---6 year-olds, only 69 provided any sort of psychometric properties for their measure, with only 19 studies reporting validity [@byrneMeasurementScreenTime2021].
-While some researchers have started using newer methods of capturing screen behaviours---such as wearable cameras [@smithFeasibilityAutomatedCameras2019] or device-based loggers [@rydingPassiveObjectiveMeasures2020]---these are still not widely used.
+While some researchers have started using newer methods of capturing screen behaviours---such as wearable cameras [@smithFeasibilityAutomatedCameras2019] or device-based loggers [@rydingPassiveObjectiveMeasures2020]---these are still not widely adopted.
 It may be that the field of screen time research cannot be sufficiently advanced until accurate, validated, and nuanced measures are more widely available and adopted.
 
 ## Strengths and Limitations
@@ -800,11 +802,11 @@ Thus, our assessment of evidence quality was restricted to statistical credibili
 As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics.
 For this reason, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria.
 In addition, reviews provide only historical evidence which may not keep up with the changing ways children can engage with screens.
-While our synthesis of the existing evidence provides good information about how screens might have influenced children in the past, it is difficult to know if these findings will translate to new forms of technology in the future.
+While our synthesis of the existing evidence provides information about how screens might have influenced children in the past, it is difficult to know if these findings will translate to new forms of technology in the future.
 
 ## Conclusions
 
-Screen time is a topic of significant interest, as shown by the wide variety of academic domains involved and the growing pervasiveness into society.
+Screen time is a topic of significant interest, as shown by the wide variety of academic domains involved, parents' concerns, and the growing pervasiveness into society.
 Our findings showed that the impact of screen time can be both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition).
 The interplay of these findings show that parents, teachers, and other caregivers need to carefully weigh the pros and cons of each specific activity for potential harms and benefits.
 However, our findings also suggest that in order to aid caregivers to make this judgement, researchers need to conduct more careful and nuanced measurement and analysis of screen time, with less emphasis on measures that aggregate screen time and instead focus on the content, context, and environment in which the exposure occurs.
