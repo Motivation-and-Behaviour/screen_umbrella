@@ -131,7 +131,7 @@ header-includes:
     - \usepackage{makecell}
     - \usepackage{booktabs}
     - \usepackage{colortbl}
-# remember to add no cite back in here
+nocite            : "`r params$nocite_list`"
 ---
 
 ```{r setup, include=FALSE}
