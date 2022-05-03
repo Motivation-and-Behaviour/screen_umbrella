@@ -18,4 +18,3 @@
 ## Links
 
 * [PROSPERO Registration](https://www.crd.york.ac.uk/prospero/display_record.php?RecordID=76051)
-* [View the report](https://motivation-and-behaviour.github.io/screen_umbrella/)
