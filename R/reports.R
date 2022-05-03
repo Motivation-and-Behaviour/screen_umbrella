@@ -35,12 +35,10 @@ generate_bibliography <-
 ## Create reports ----
 create_reports <- list(
   tar_render(
-    distill_report,
-    path = here::here("reports", "manuscript_distill.Rmd"),
-    output_file = here::here("index.html"),
-    output_yaml = here::here("reports", "distill.yaml"),
+    manuscript,
+    path = here::here("reports", "manuscript.Rmd"),
+    output_file = here::here("reports", "manuscript.pdf"),
     params = list(
-      render_img = TRUE, inc_tabs = TRUE,
       nocite_list =
         paste0(
           "@",
@@ -48,33 +46,9 @@ create_reports <- list(
         )
     )
   ),
-  tar_render(
-    word_report,
-    path = here::here("reports", "manuscript_papaja.Rmd"),
-    output_file = here::here("reports", "manuscript_raw.docx"),
-    output_yaml = here::here("reports", "docx.yaml"),
-    params = list(
-      render_img = TRUE, inc_tabs = TRUE,
-      nocite_list =
-        paste0(
-          "@",
-          paste(reviews_raw$bibtex_key, collapse = ", @")
-        )
-    )
-  ),
-  # tar_render(
-  #   pdf_report,
-  #   path = here::here("reports", "manuscript_papaja.Rmd"),
-  #   output_file = here::here("reports", "manuscript.pdf"),
-  #   output_yaml = here::here("reports", "pdf.yaml"),
-  #   params = list(render_img = TRUE, inc_tabs = FALSE,
-  #                 nocite_list =
-  #                   paste0("@",
-  #                          paste(reviews_raw$bibtex_key, collapse = ", @")))
-  # )
   tar_target(
     uploaded_manuscripts,
-    upload_manuscript(word_report)
+    upload_manuscript(manuscript)
   )
 )
 
