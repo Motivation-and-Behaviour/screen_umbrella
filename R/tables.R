@@ -367,11 +367,20 @@ make_desc_tables <- function(tables_df) {
 save_tables <- function(tables) {
   file_name <- here::here("figure", tables[[1]]$filename)
 
-  gtsave(
-    data = tables[[1]]$table,
-    filename = tables[[1]]$filename,
-    path = here::here("figure")
-  )
+  if ("gt_tbl" %in% class(tables[[1]]$table)) {
+    gtsave(
+      data = tables[[1]]$table,
+      filename = tables[[1]]$filename,
+      path = here::here("figure")
+    )
+  }
+
+  if ("knitr_kable" %in% class(tables[[1]]$table)) {
+    save_kable(
+      x = tables[[1]]$table,
+      file = here::here("figure", tables[[1]]$filename)
+    )
+  }
 
   # Upload to GDrive
   drive_put(file_name,

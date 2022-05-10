@@ -203,7 +203,7 @@ make_prisma <- function(covidence_export, effects_clean) {
     collapse = ""
   )
 
-  prisma_diag <- DiagrammeR::grViz(prisma)
+  prisma_diag <- DiagrammeR::grViz(prisma, width = 1000, height = 700)
   prisma_data <- list(data = dat, diag = prisma_diag)
 
   return(prisma_data)
