@@ -131,6 +131,8 @@ header-includes:
     - \usepackage{makecell}
     - \usepackage{booktabs}
     - \usepackage{colortbl}
+params:
+    nocite_list: !r list()
 nocite            : "`r params$nocite_list`"
 ---
 
@@ -398,7 +400,7 @@ Of those, `r prisma$data$value[8]` met the inclusion criteria and we extracted t
 Figure \@ref(fig:prisma) presents the full results of the selection process.
 
 ```{r prisma, fig.cap="PRISMA Diagram"}
-prisma$diag
+knitr::include_graphics(here::here("figure", "PRISMA Diagram.pdf"))
 ```
 
 The most frequently reported exposures were `r knitr::combine_words(freq_exposures$out[1:4])`.
@@ -409,7 +411,7 @@ Full characteristics of the included studies are provided in Table \@ref(tab:des
 After removing reviews with duplicate exposure/outcome combinations, our process yielded `r unique_effects` unique effect/outcome combinations contributed from `r prisma$data$value[9]` reviews.
 These effects represent the findings of `r format(effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(effects_sum$sum_n, big.mark=",")` participants.
 
-```{r desctable, eval = TRUE, results="asis"}
+```{r desctable, results="asis"}
 reviews_tables$kable$table %>%
     kableExtra::row_spec(1:reviews_tables$kable$nrow, hline_after = TRUE) %>%
     kableExtra::row_spec(0, bold = TRUE) %>%

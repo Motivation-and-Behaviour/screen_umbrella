@@ -37,7 +37,6 @@ create_reports <- list(
   tar_render(
     manuscript,
     path = here::here("reports", "manuscript.Rmd"),
-    output_file = here::here("reports", "manuscript.pdf"),
     params = list(
       nocite_list =
         paste0(
