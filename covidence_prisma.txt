@@ -12,7 +12,7 @@
 		90  Doesn&#39;t examine exposure-outcome relationship
 		76  Wrong exposure - other (explain)
 		67  Wrong population
-		58  Individual level data only
+		59  Individual level data only
 		30  Not a review
 		24  Duplicated reference
 		14  Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.
@@ -23,4 +23,4 @@
 		1  Sys review of qual studies
 	0 studies ongoing
 	0 studies awaiting classification
-117 studies included
+116 studies included
