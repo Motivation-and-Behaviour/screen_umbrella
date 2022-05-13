@@ -191,9 +191,14 @@
     "bib2df": {
       "Package": "bib2df",
       "Version": "1.1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "5d19ebab9d2c4d2d87dd87445a823aa6",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "ropensci",
+      "RemoteRepo": "bib2df",
+      "RemoteRef": "master",
+      "RemoteSha": "8cfa2178e8a24c12846c848432c46e57cd362a59",
+      "Hash": "35bc9d934b00592af74a9f40be13e6fe",
       "Requirements": [
         "dplyr",
         "httr",
@@ -1288,6 +1293,18 @@
       "Requirements": [
         "cpp11",
         "generics"
+      ]
+    },
+    "magick": {
+      "Package": "magick",
+      "Version": "2.7.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "56fbad418aa50939ed8c3028126af8d7",
+      "Requirements": [
+        "Rcpp",
+        "curl",
+        "magrittr"
       ]
     },
     "magrittr": {

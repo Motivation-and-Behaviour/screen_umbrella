@@ -7,7 +7,7 @@ options(tidyverse.quiet = TRUE, clustermq.scheduler = "multiprocess")
 packages <- c(
   "base", "broom", "bib2df", "DiagrammeR", "distill", "DT", "esc",
   "emojifont", "ggh4x", "googledrive", "ggplot2", "ggtext", "gt", "janitor",
-  "knitr", "kableExtra", "magrittr", "metafor", "papaja", "targets",
+  "knitr", "kableExtra", "magick", "magrittr", "metafor", "papaja", "targets",
   "tarchetypes", "tidyMB", "tidyverse", "scales", "xfun"
 )
 
