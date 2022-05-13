@@ -283,7 +283,7 @@ Two researchers independently extracted all quantitative meta-analytic effect si
 Where possible, they also extracted effect sizes from primary studies included in each meta-analysis.
 To facilitate comparisons, we converted effect sizes to Pearson’s $r$ using established formulae [@bonettTransformingOddsRatios2007;@bowmanEffectSizesStatistical2012;@jacobsEstimationBiserialCorrelation2017].
 We excluded relative risk ratios from this conversion because meta-analyses did not contain sufficient information to meaningfully convert.
-Effect sizes on the original metric are provided in [Supplementary File 1](https://drive.google.com/file/d/1icdKoSdaOs5c8X6Ugmm0qLW_CEFSWDDu/view?usp=sharing).
+Effect sizes on the original metric are provided in Supplementary File 1.
 
 ### Synthesis methods
 
@@ -320,7 +320,7 @@ An effect that was neither significant at $P < .05$ or $10^{-3}$ that also passe
 
 We initially planned to include systematic reviews without meta-analyses in a narrative summary alongside the main meta-analytic findings.
 However, we determined that combining results from the meta-analyses allowed readers to compare relative strength of associations more easily.
-Readers interested in the relevant systematic reviews (i.e., without meta-analysis) can consult the list of references in [Supplementary File 2](https://drive.google.com/file/d/1JhMsySEyfby5MtcUcIVpp0LjDDfTA5IH/view?usp=sharing).
+Readers interested in the relevant systematic reviews (i.e., without meta-analysis) can consult the list of references in Supplementary File 2.
 
 We altered our evidence assessment plan when we identified that, as written, it could not classify precise evidence of null effects (i.e., from large reviews with low heterogeneity and low risk of publication bias) as 'credible' because a highly-significant *P*-value was a criteria.
 This would have significantly harmed knowledge gained from our review as it would have restricted our ability to show where the empirical evidence strongly indicated that there was no association between screen time and a given outcome.
@@ -401,7 +401,7 @@ knitr::include_graphics(here::here("figure", "PRISMA Diagram.pdf"))
 ```
 
 The most frequently reported exposures were `r knitr::combine_words(freq_exposures$out[1:4])`.
-[Supplementary File 3](https://drive.google.com/file/d/12rB0ihW9Hi1kxM-8AIBfjdCMO6TqP28n/view?usp=sharing) provides a list of all exposures identified.
+Supplementary File 3 provides a list of all exposures identified.
 The most frequently reported outcomes were `r knitr::combine_words(freq_outcomes$out[1:5])`.
 In most cases (`r paste0(sum(freq_combos$n==1), "/", nrow(effects_clean))`), there was only one exposure/outcome combination for an age group, with `r sum(freq_combos$n==2)` appearing twice, and `r sum(freq_combos$n>2)` appearing three or more times.
 Full characteristics of the included studies are provided in Table \@ref(tab:desctable).
@@ -615,7 +615,7 @@ edu_summary <-
 
 There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science.
 We removed `r n_edu_noindiv` effects that did not provide individual study-level data, `r n_edu_samplesize` effects with samples < 1,000, and `r n_edu_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
-Effects not meeting one or more of these standards are presented in [Supplementary File 4](https://drive.google.com/file/d/1wUotZRh-jvdBJh5dkstkMtvcz7DPn-vS/view?usp=sharing).
+Effects not meeting one or more of these standards are presented in Supplementary File 4.
 The remaining `r n_edu_certain` effects met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot).
 These `r n_edu_certain` effects came from `r n_edu_unique` meta-analytic reviews analysing data from `r edu_summary$studies_n` empirical studies with `r format(edu_summary$total_n, big.mark=",")` individual participants.
 
@@ -706,7 +706,7 @@ health_summary <-
 We identified `r n_health_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
 We removed `r n_health_noindiv` effects that did not provide individual study-level data, `r n_health_samplesize` effects with samples < 1,000, and `r n_health_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
 No remaining studies showed evidence of excessive significance.
-Effects not meeting one or more of these standards are presented in [Supplementary File 5](https://drive.google.com/file/d/1-3frrZ3woWjPqkO84Dn3_1CCaE8thIZn/view?usp=sharing).
+Effects not meeting one or more of these standards are presented in Supplementary File 5.
 The remaining `r n_health_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)).
 These `r n_health_certain` effects came from `r n_health_unique` meta-analytic reviews analysing data from `r health_summary$studies_n` empirical studies with `r format(health_summary$total_n, big.mark=",")` individual participants.
 
