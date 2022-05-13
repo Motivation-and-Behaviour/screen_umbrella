@@ -102,16 +102,12 @@ affiliation:
     institution   : "Institute for Physical Activity and Nutrition, Deakin University"
   - id            : "10"
     institution   : "The Matilda Centre for Research in Mental Health and Substance Use, University of Sydney"
-    
-  
-authornote: |
-  Add author notes here
 
 abstract: |
   Add abstract here
   
 keywords          : "keywords"
-wordcount         : "X"
+wordcount         : "`r wordcountaddin::word_count(here::here('reports', 'manuscript.Rmd'))`"
 
 bibliography      : ["combined.bib"]
 
