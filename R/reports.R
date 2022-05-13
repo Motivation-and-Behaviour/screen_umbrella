@@ -36,7 +36,12 @@ generate_bibliography <-
 create_reports <- list(
   tar_render(
     manuscript,
-    path = here::here("reports", "manuscript.Rmd"),
+    path = here::here("reports", "manuscript.Rmd")
+  ),
+  tar_render(
+    references,
+    path = here::here("reports", "references.Rmd"),
+    output_file = here::here("supplementary_files", "References.pdf"),
     params = list(
       nocite_list =
         paste0(
@@ -47,7 +52,11 @@ create_reports <- list(
   ),
   tar_target(
     uploaded_manuscripts,
-    upload_manuscript(manuscript)
+    upload_files(manuscript)
+  ),
+  tar_target(
+    uploaded_references,
+    upload_files(references)
   )
 )
 
@@ -87,10 +96,17 @@ combine_bibs <- function(packages_bib, references_bib, reviews_raw, outpath) {
 }
 
 # Upload to GDrive
-upload_manuscript <- function(word_report) {
+upload_files <- function(target_file, type = "manuscript") {
+  gdrive_path <- switch(type,
+    "manuscript" =
+      "https://drive.google.com/drive/folders/1WQiAUmDanOL2GPPBoYxUoNkHmZUjpbPj", # nolint
+    "supp" =
+      "https://drive.google.com/drive/folders/1gW5k2CIRJf1w2FP0dbUHCXwpAxtV1Gxp" # nolint
+  )
+
   drive_val <- drive_put(
-    word_report[1],
-    path = as_id("https://drive.google.com/drive/folders/1WQiAUmDanOL2GPPBoYxUoNkHmZUjpbPj")
+    target_file[1],
+    path = as_id(gdrive_path)
   )
 
   return(drive_val)

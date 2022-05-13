@@ -1,0 +1,12 @@
+---
+csl               : nature.csl
+bibliography      : ["combined.bib"]
+params:
+    nocite_list: !r list()
+nocite            : "`r params$nocite_list`"
+output: pdf_document
+---
+
+# Included Studies
+
+<div id = "refs"></div>
