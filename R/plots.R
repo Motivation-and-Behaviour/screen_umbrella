@@ -676,7 +676,7 @@ make_plots <- function(combined_effects) {
       caption = FALSE
     ),
     list(
-      filename = "Supplemental Forest plot for Education.pdf",
+      filename = "Supplementary File 4 - Education Outcomes.pdf",
       title = "Associations Between Exposures and Education Outcomes",
       categories = "Education",
       certain = FALSE,
@@ -686,7 +686,7 @@ make_plots <- function(combined_effects) {
       caption = TRUE
     ),
     list(
-      filename = "Supplemental Forest plot for Health-related Outcomes.pdf",
+      filename = "Supplementary File 4 - Health-related Outcomes.pdf",
       title = "Associations Between Exposures and Health-related Outcomes",
       categories = c("Psychology", "Health Behaviour", "Physical Health"),
       certain = FALSE,

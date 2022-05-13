@@ -41,7 +41,10 @@ create_reports <- list(
   tar_render(
     references,
     path = here::here("reports", "references.Rmd"),
-    output_file = here::here("supplementary_files", "References.pdf"),
+    output_file = here::here(
+      "supplementary_files",
+      "Supplementary File 6 - Include Studies.pdf"
+    ),
     params = list(
       nocite_list =
         paste0(
