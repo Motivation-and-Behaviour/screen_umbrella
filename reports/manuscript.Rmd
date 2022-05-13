@@ -408,8 +408,22 @@ Full characteristics of the included studies are provided in Table \@ref(tab:des
 After removing reviews with duplicate exposure/outcome combinations, our process yielded `r unique_effects` unique effect/outcome combinations contributed from `r prisma$data$value[9]` reviews.
 These effects represent the findings of `r format(effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(effects_sum$sum_n, big.mark=",")` participants.
 
-```{r desctable, results="asis"}
-reviews_tables$kable$table %>%
+```{r desctable}
+reviews_tables$kable$data %>%
+    knitr::kable("latex",
+        caption = "Review characteristics for studies providing unique effects",
+        col.names = c(
+            "First Author", "Year", "Design Restrictions",
+            "Regions Restrictions", "Study Range",
+            "Sample Age Restrictions",
+            "Outcomes Assessed", "Exposures Assessed"
+        ),
+        escape = FALSE,
+        booktabs = TRUE,
+        align = c("l", "c", "l", "l", "c", "l", "l", "l"),
+        linesep = "",
+        longtable = TRUE
+    ) %>%
     kableExtra::row_spec(1:reviews_tables$kable$nrow, hline_after = TRUE) %>%
     kableExtra::row_spec(0, bold = TRUE) %>%
     kableExtra::column_spec(3:4, width = "2cm") %>%

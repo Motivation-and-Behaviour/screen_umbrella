@@ -279,23 +279,6 @@ make_desc_tables <- function(tables_df) {
     arrange(first_author, year) %>%
     mutate_all(kableExtra::linebreak, align = "l")
 
-  kable_table_main <-
-    base_table_latex %>%
-    knitr::kable("latex",
-      caption = "Review characteristics for studies providing unique effects",
-      col.names = c(
-        "First Author", "Year", "Design Restrictions",
-        "Regions Restrictions", "Study Range",
-        "Sample Age Restrictions",
-        "Outcomes Assessed", "Exposures Assessed"
-      ),
-      escape = FALSE,
-      booktabs = TRUE,
-      align = c("l", "c", "l", "l", "c", "l", "l", "l"),
-      linesep = "",
-      longtable = TRUE
-    )
-
   rob_table <-
     rob_df %>%
     distinct() %>%
@@ -416,8 +399,7 @@ make_desc_tables <- function(tables_df) {
   reviews_tables[["original"]]$table <- gt_table_main_original
   reviews_tables[["original"]]$filename <- "Descriptive table.pdf"
 
-  reviews_tables[["kable"]]$table <- kable_table_main
-  reviews_tables[["kable"]]$filename <- "Descriptive table_kable.pdf"
+  reviews_tables[["kable"]]$data <- base_table_latex
   reviews_tables[["kable"]]$nrow <- nrow(base_table_latex)
 
   reviews_tables[["rob"]]$table <- rob_table
@@ -429,6 +411,8 @@ make_desc_tables <- function(tables_df) {
 save_tables <- function(tables) {
   file_name <- here::here("figure", tables[[1]]$filename)
 
+  if (is.null(file_name)) file_name <- "NA"
+
   if ("gt_tbl" %in% class(tables[[1]]$table)) {
     gtsave(
       data = tables[[1]]$table,
@@ -436,21 +420,14 @@ save_tables <- function(tables) {
       path = here::here("figure"),
       zoom = 1
     )
-  }
 
-  if ("knitr_kable" %in% class(tables[[1]]$table)) {
-    save_kable(
-      x = tables[[1]]$table,
-      file = here::here("figure", tables[[1]]$filename)
+    # Upload to GDrive
+    drive_put(file_name,
+      path = as_id(
+        "https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml" # nolint
+      )
     )
   }
-
-  # Upload to GDrive
-  drive_put(file_name,
-    path = as_id(
-      "https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml"
-    )
-  )
 
   return(file_name)
 }
