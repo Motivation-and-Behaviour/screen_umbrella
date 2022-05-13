@@ -107,7 +107,7 @@ abstract: |
   Can i have `r print('words')` here?
   
 keywords          : "keywords"
-wordcount         : "`r wordcountaddin::word_count(here::here('reports', 'manuscript.Rmd'))`"
+
 
 bibliography      : ["combined.bib"]
 
@@ -148,9 +148,7 @@ library(gt)
 
 ```{r, load-targets}
 targets::tar_load(c(
-    "manuscript_info", "combined_bib", "reviews_tables",
-    "plots", "studies_results", "studies_converted",
-    "comparison_plots", "combined_effects", "combined_bib"
+    "manuscript_info", "combined_bib", "reviews_tables", "combined_bib", "plots"
 ),
 store = here::here("_targets")
 )
@@ -378,63 +376,11 @@ Overall, only `r manuscript_info$qual$all_low` meta-analyses were graded as low 
 
 ### Education Outcomes
 
-```{r eduoutcomes}
-edu_effect <-
-    combined_effects %>%
-    filter(outcome_category == "education" & use_effect)
-
-edu_certain <-
-    combined_effects %>%
-    filter(outcome_category == "education" & certainty == "meets criteria")
-
-n_edu_effect <-
-    edu_effect %>%
-    nrow()
-
-n_edu_certain <-
-    edu_certain %>%
-    nrow()
-
-n_edu_noindiv <-
-    edu_effect %>%
-    filter(source == "reported") %>%
-    nrow()
-
-n_edu_samplesize <-
-    edu_effect %>%
-    filter(source == "reanalysis" & n < 1000) %>%
-    nrow()
-
-n_edu_faileggers <-
-    edu_effect %>%
-    filter(source == "reanalysis" & n > 1000 &
-        (eggers_p < 0.05 | is.na(eggers_p))) %>%
-    nrow()
-
-n_edu_failtest <-
-    edu_effect %>%
-    filter(source == "reanalysis" & n > 1000 & eggers_p > 0.05 & tes_p < 0.05) %>%
-    nrow()
-
-n_edu_unique <- n_distinct(edu_certain$covidence_review_id)
-
-edu_summary <-
-    studies_converted %>%
-    filter(effect_size_id %in% edu_certain$effect_size_id) %>%
-    group_by(study_author, study_year, study_first_page_number) %>%
-    slice_max(study_n, with_ties = FALSE) %>%
-    ungroup() %>%
-    summarise(
-        studies_n = n(),
-        total_n = sum(study_n)
-    )
-```
-
-There were `r n_edu_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science.
-We removed `r n_edu_noindiv` effects that did not provide individual study-level data, `r n_edu_samplesize` effects with samples < 1,000, and `r n_edu_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
+There were `r manuscript_info$edu$n_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science.
+We removed `r manuscript_info$edu$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$edu$n_samplesize` effects with samples < 1,000, and `r manuscript_info$edu$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
 Effects not meeting one or more of these standards are presented in Supplementary File 4.
-The remaining `r n_edu_certain` effects met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot).
-These `r n_edu_certain` effects came from `r n_edu_unique` meta-analytic reviews analysing data from `r edu_summary$studies_n` empirical studies with `r format(edu_summary$total_n, big.mark=",")` individual participants.
+The remaining `r manuscript_info$edu$n_certain` effects met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot).
+These `r manuscript_info$edu$n_certain` effects came from `r manuscript_info$edu$n_unique` meta-analytic reviews analysing data from `r manuscript_info$edu$summary$studies_n` empirical studies with `r format(manuscript_info$edu$summary$total_n, big.mark=",")` individual participants.
 
 ```{r eduplot, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes"}
 plots[[1]]$plot
@@ -446,86 +392,21 @@ General screen use was negatively associated with literacy outcomes.
 However, if the screen use involved co-viewing (e.g., watching with a parent), or the content of television programs was educational, the association with literacy was positive and significant at the 95\% confidence level (weak evidence).
 Numeracy outcomes were positively associated with screen-based mathematics interventions and video games that contained numeracy content.
 
-```{r educertain}
-n_edu_p999 <- edu_certain %>%
-    filter(reanalysis_p.value < 0.001) %>%
-    nrow()
-n_edu_p95 <- edu_certain %>%
-    filter(reanalysis_p.value < 0.05) %>%
-    nrow() - n_edu_p999
-
-n_edu_i2 <- edu_certain %>%
-    filter(i2 > 50) %>%
-    nrow()
-```
-
-As shown in Figure \@ref(fig:eduplot), most of the credible results (`r n_edu_p999` of `r n_edu_certain` effects) showed statistically significant associations, with 99.9\% confidence intervals not encompassing zero (strong evidence).
-The remaining `r xfun::numbers_to_words(n_edu_p95)` associations were significant at the 95% confidence level (weak evidence).
+As shown in Figure \@ref(fig:eduplot), most of the credible results (`r manuscript_info$edu$n_p999` of `r manuscript_info$edu$n_certain` effects) showed statistically significant associations, with 99.9\% confidence intervals not encompassing zero (strong evidence).
+The remaining `r xfun::numbers_to_words(manuscript_info$edu$n_p95)` associations were significant at the 95% confidence level (weak evidence).
 All credible effects related to education outcomes were small-to-moderate.
 Screen-based interventions designed to influence an outcome (e.g., a computer based program designed to enhance learning [@xieCanTouchscreenDevices2018]) tended to have larger effect sizes than exposures that were not specifically intended to influence any of the measured outcomes (e.g., the association between television viewing and learning [@adelantado-renauAssociationScreenMedia2019]).
 The largest effect size observed was for augmented reality-based education interventions on general learning ($r = 0.33, k = 15, N = 1,474$).
-Most effects showed high levels of heterogeneity (`r n_edu_i2` of `r n_edu_certain` with $I^2 > 50\%$).
+Most effects showed high levels of heterogeneity (`r manuscript_info$edu$n_i2` of `r manuscript_info$edu$n_certain` with $I^2 > 50\%$).
 
 ### Health and Health-related Behaviours
 
-```{r healthoutcome}
-health_effect <-
-    combined_effects %>%
-    filter(outcome_category != "education" & use_effect)
-
-health_certain <-
-    combined_effects %>%
-    filter(outcome_category != "education" & certainty == "meets criteria")
-
-n_health_effect <-
-    health_effect %>%
-    nrow()
-
-n_health_certain <-
-    health_certain %>%
-    nrow()
-
-n_health_noindiv <-
-    health_effect %>%
-    filter(source == "reported") %>%
-    nrow()
-
-n_health_samplesize <-
-    health_effect %>%
-    filter(source == "reanalysis" & n < 1000) %>%
-    nrow()
-
-n_health_faileggers <-
-    health_effect %>%
-    filter(source == "reanalysis" & n > 1000 &
-        (eggers_p < 0.05 | is.na(eggers_p))) %>%
-    nrow()
-
-n_health_failtest <-
-    health_effect %>%
-    filter(source == "reanalysis" & n > 1000 & eggers_p > 0.05 & tes_p < 0.05) %>%
-    nrow()
-
-n_health_unique <- n_distinct(health_certain$covidence_review_id)
-
-health_summary <-
-    studies_converted %>%
-    filter(effect_size_id %in% health_certain$effect_size_id) %>%
-    group_by(study_author, study_year, study_first_page_number) %>%
-    slice_max(study_n, with_ties = FALSE) %>%
-    ungroup() %>%
-    summarise(
-        studies_n = n(),
-        total_n = sum(study_n)
-    )
-```
-
-We identified `r n_health_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
-We removed `r n_health_noindiv` effects that did not provide individual study-level data, `r n_health_samplesize` effects with samples < 1,000, and `r n_health_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
+We identified `r manuscript_info$health$n_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
+We removed `r manuscript_info$health$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$health$n_samplesize` effects with samples < 1,000, and `r manuscript_info$health$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
 No remaining studies showed evidence of excessive significance.
 Effects not meeting one or more of these standards are presented in Supplementary File 5.
-The remaining `r n_health_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)).
-These `r n_health_certain` effects came from `r n_health_unique` meta-analytic reviews analysing data from `r health_summary$studies_n` empirical studies with `r format(health_summary$total_n, big.mark=",")` individual participants.
+The remaining `r manuscript_info$health$n_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)).
+These `r manuscript_info$health$n_certain` effects came from `r manuscript_info$health$n_unique` meta-analytic reviews analysing data from `r manuscript_info$health$summary$studies_n` empirical studies with `r format(manuscript_info$health$summary$total_n, big.mark=",")` individual participants.
 
 ```{r healthplot, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes", dev='cairo_pdf'}
 plots[[2]]$plot
@@ -538,26 +419,10 @@ Television viewing was negatively correlated with sleep duration, but only at th
 All forms of screen use (general, television, and video games) were associated with body composition (e.g., higher BMI), although the association was smaller for children than for adolescents or for combined populations.
 Screen-based interventions which target health behaviours appeared effective.
 
-```{r healthcertain}
-n_health_p999 <- health_certain %>%
-    filter(reanalysis_p.value < 0.001) %>%
-    nrow()
-n_health_p95 <- health_certain %>%
-    filter(reanalysis_p.value < 0.05) %>%
-    nrow() - n_health_p999
-
-n_health_i2 <- health_certain %>%
-    filter(i2 > 50) %>%
-    nrow()
-n_health_r2 <- health_certain %>%
-    filter(abs(r) < 0.2) %>%
-    nrow()
-```
-
-Across the health outcomes, most (`r n_health_p999` of `r n_health_certain`) effects were statistically significant at the 99.9\% confidence interval level, with the remaining `r xfun::numbers_to_words(n_health_p95)` significant at 95\% confidence.
+Across the health outcomes, most (`r manuscript_info$health$n_p999` of `r manuscript_info$health$n_certain`) effects were statistically significant at the 99.9\% confidence interval level, with the remaining `r xfun::numbers_to_words(manuscript_info$health$n_p95)` significant at 95\% confidence.
 However, most of the credible effects exhibited high levels of heterogeneity, with all but one having $I^2 > 75\%$.
 Additionally, most effects were small, with the association between unhealthy food advertising and intake the largest at $r = 0.25$ ($k = 13, N = 1,756$).
-Most of the effect sizes (`r n_health_r2`/`r n_health_certain`) had an absolute value of $r < 0.2$.
+Most of the effect sizes (`r manuscript_info$health$n_r2`/`r manuscript_info$health$n_certain`) had an absolute value of $r < 0.2$.
 
 # Discussion
 
