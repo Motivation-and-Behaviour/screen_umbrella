@@ -19,12 +19,12 @@ tar_option_set(
 
 googledrive::drive_auth()
 googlesheets4::gs4_auth()
-source(here("R", "utils.R"))
-source(here("R", "data.R"))
-source(here("R", "tables.R"))
-source(here("R", "plots.R"))
-source(here("R", "supplementary.R"))
-source(here("R", "reports.R"))
+source(here::here("R", "utils.R"))
+source(here::here("R", "data.R"))
+source(here::here("R", "tables.R"))
+source(here::here("R", "plots.R"))
+source(here::here("R", "supplementary.R"))
+source(here::here("R", "reports.R"))
 
 list(
   # Fetch and analyse (data.R)
