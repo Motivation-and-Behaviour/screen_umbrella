@@ -36,7 +36,9 @@ generate_bibliography <-
 create_reports <- list(
   tar_target(
     manuscript_info,
-    create_manuscript_info(effects_clean, prisma, tables_df)
+    create_manuscript_info(
+      effects_clean, prisma, tables_df, combined_effects, studies_converted
+    )
   ),
   tar_render(
     manuscript,
@@ -120,7 +122,8 @@ upload_files <- function(target_file, type = "manuscript") {
 }
 
 # Make info required for manuscript
-create_manuscript_info <- function(effects_clean, prisma, tables_df) {
+create_manuscript_info <- function(effects_clean, prisma, tables_df,
+                                   combined_effects, studies_converted) {
   manuscript_info <- list()
 
   # Results --------------------------------------------------
@@ -334,6 +337,129 @@ create_manuscript_info <- function(effects_clean, prisma, tables_df) {
       suffix = ")"
     )
   )
+
+  # Education Results ---------------------------------------------
+  edu_effect <-
+    combined_effects %>%
+    filter(outcome_category == "education" & use_effect)
+
+  edu_certain <-
+    combined_effects %>%
+    filter(outcome_category == "education" & certainty == "meets criteria")
+
+  manuscript_info$edu$n_effect <- edu_effect %>% nrow()
+  manuscript_info$edu$n_certain <- edu_certain %>% nrow()
+
+  manuscript_info$edu$n_noindiv <-
+    edu_effect %>%
+    filter(source == "reported") %>%
+    nrow()
+
+  manuscript_info$edu$n_samplesize <-
+    edu_effect %>%
+    filter(source == "reanalysis" & n < 1000) %>%
+    nrow()
+
+  manuscript_info$edu$n_faileggers <-
+    edu_effect %>%
+    filter(source == "reanalysis" & n > 1000 &
+      (eggers_p < 0.05 | is.na(eggers_p))) %>%
+    nrow()
+
+  manuscript_info$edu$n_failtest <-
+    edu_effect %>%
+    filter(
+      source == "reanalysis" & n > 1000 & eggers_p > 0.05 & tes_p < 0.05
+    ) %>%
+    nrow()
+
+  manuscript_info$edu$n_unique <- n_distinct(edu_certain$covidence_review_id)
+  manuscript_info$edu$summary <-
+    studies_converted %>%
+    filter(effect_size_id %in% edu_certain$effect_size_id) %>%
+    group_by(study_author, study_year, study_first_page_number) %>%
+    slice_max(study_n, with_ties = FALSE) %>%
+    ungroup() %>%
+    summarise(
+      studies_n = n(),
+      total_n = sum(study_n)
+    ) %>%
+    as.list()
+
+  manuscript_info$edu$n_p999 <- edu_certain %>%
+    filter(reanalysis_p.value < 0.001) %>%
+    nrow()
+  manuscript_info$edu$n_p95 <- edu_certain %>%
+    filter(reanalysis_p.value < 0.05) %>%
+    nrow() - manuscript_info$edu$n_p999
+
+  manuscript_info$edu$n_i2 <- edu_certain %>%
+    filter(i2 > 50) %>%
+    nrow()
+
+  # Health Results ---------------------------------------------
+  health_effect <-
+    combined_effects %>%
+    filter(outcome_category != "education" & use_effect)
+
+  health_certain <-
+    combined_effects %>%
+    filter(outcome_category != "education" & certainty == "meets criteria")
+
+  manuscript_info$health$n_effect <- health_effect %>% nrow()
+  manuscript_info$health$n_certain <- health_certain %>% nrow()
+
+  manuscript_info$health$n_noindiv <-
+    health_effect %>%
+    filter(source == "reported") %>%
+    nrow()
+
+  manuscript_info$health$n_samplesize <-
+    health_effect %>%
+    filter(source == "reanalysis" & n < 1000) %>%
+    nrow()
+
+  manuscript_info$health$n_faileggers <-
+    health_effect %>%
+    filter(source == "reanalysis" & n > 1000 &
+      (eggers_p < 0.05 | is.na(eggers_p))) %>%
+    nrow()
+
+  manuscript_info$health$n_failtest <-
+    health_effect %>%
+    filter(source == "reanalysis" & n > 1000 &
+      eggers_p > 0.05 & tes_p < 0.05) %>%
+    nrow()
+
+  manuscript_info$health$n_unique <-
+    n_distinct(health_certain$covidence_review_id)
+
+  manuscript_info$health$summary <-
+    studies_converted %>%
+    filter(effect_size_id %in% health_certain$effect_size_id) %>%
+    group_by(study_author, study_year, study_first_page_number) %>%
+    slice_max(study_n, with_ties = FALSE) %>%
+    ungroup() %>%
+    summarise(
+      studies_n = n(),
+      total_n = sum(study_n)
+    ) %>%
+    as.list()
+
+  manuscript_info$health$n_p999 <- health_certain %>%
+    filter(reanalysis_p.value < 0.001) %>%
+    nrow()
+
+  manuscript_info$health$n_p95 <- health_certain %>%
+    filter(reanalysis_p.value < 0.05) %>%
+    nrow() - manuscript_info$health$n_p999
+
+  manuscript_info$health$n_i2 <- health_certain %>%
+    filter(i2 > 50) %>%
+    nrow()
+  manuscript_info$health$n_r2 <- health_certain %>%
+    filter(abs(r) < 0.2) %>%
+    nrow()
 
   return(manuscript_info)
 }
