@@ -554,36 +554,6 @@ make_plots <- function(combined_effects) {
 
   edu_positions <-
     list(
-      # certain = list(
-      #   lims = c(-4, 0.5),
-      #   breaks = c(-0.4, -.2, 0, .2, 0.4),
-      #   esig = NULL,
-      #   eggers = NULL,
-      #   indiv_data = NULL,
-      #   n = -0.6,
-      #   k = -0.85,
-      #   i2 = -1.05,
-      #   rci = -1.45,
-      #   author_year = -2.4,
-      #   expo = -3.5,
-      #   outcome = -4.2,
-      #   tag = NA
-      # ),
-      # uncertain = list(
-      #   lims = c(-4.3, 0.6),
-      #   breaks = c(-0.4, -.2, 0, .2, 0.4, 0.6),
-      #   esig = -0.55,
-      #   eggers = -0.75,
-      #   indiv_data = -.95,
-      #   n = -1.15,
-      #   k = -1.35,
-      #   i2 = -1.5,
-      #   rci = -1.85,
-      #   author_year = -2.7,
-      #   expo = -3.7,
-      #   outcome = -4.55,
-      #   tag = c(0.2,0.01)
-      # ),
       certain = list(
         lims = c(-4.3, 0.5),
         breaks = c(-0.4, -.2, 0, .2, 0.4),
@@ -695,31 +665,11 @@ make_plots <- function(combined_effects) {
       moderators = FALSE,
       caption = TRUE
     )
-    # list(
-    #   filename = "Forest plot for Education With Moderators.pdf",
-    #   title = "Associations Between Exposures and Education Outcomes",
-    #   categories = "Education",
-    #   certain = TRUE,
-    #   pos = edu_positions$certain_mods,
-    #   dims = c(10, 6),
-    #   moderators = TRUE,
-    #   caption = FALSE
-    # ),
-    # list(
-    #   filename = "Supplemental Forest plot for Education with Moderators.pdf",
-    #   title = "Associations Between Exposures and Education Outcomes",
-    #   categories = "Education",
-    #   certain = FALSE,
-    #   pos = edu_positions$uncertain_mods,
-    #   dims = c(12, 10),
-    #   moderators = TRUE,
-    #   caption = TRUE
-    # )
   )
 
   plots <- vector(mode = "list", length = 4)
 
-  for (i in 1:length(plot_params)) {
+  for (i in seq_along(plot_params)) {
     plots[[i]]$plot <- gen_plot(
       plot_params[[i]]$categories,
       plot_params[[i]]$certain,
