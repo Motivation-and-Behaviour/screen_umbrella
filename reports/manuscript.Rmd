@@ -104,10 +104,20 @@ affiliation:
     institution   : "The Matilda Centre for Research in Mental Health and Substance Use, University of Sydney"
 
 abstract: |
-  Can i have `r print('words')` here?
-  
-keywords          : "keywords"
+  Children's engagement in screen time is a complex issue.
+  While some forms of screen time have consistently been associated with harm, others have been associated with gains, making it difficult to weigh the risks and benefits of use.
+  In this umbrella review, we systematically collate and synthesise meta-analyses examining the effects of screen use on children and youth.
+  We converted results onto a common metric to make comparisons simple, and where possible we reanalysed study-level data to standardise the approach across meta-analyses.
+  We identified `r targets::tar_read(manuscript_info)$prisma$included` meta-analyses, and extracted `r targets::tar_read(manuscript_info)$unique_effects` unique exposure/outcome combinations.
+  These effects represent the findings of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_n, big.mark=",")` participants.
+  When focusing on the meta-analyses with the most statistically robust evidence, we found that general screen use (when content was not indicated), was associated with potentially harmful impacts on learning, literacy, body composition, and depression.
+  Like-wise, social media was consistently associated with risks to health, with no identified benefits.
+  However, we also found that these harms could often be mitigated by certain kinds of content (e.g., educational), or by modifying the context (e.g., co-viewing with a parent).
+  In summary, our findings point to the need for careful and nuanced guidelines that support parents to make the best deicsions for their children.
 
+  
+keywords          : "screen time; youth; health; education"
+wordcount         : "`r wordcountaddin::word_count(here::here('reports', 'manuscript.Rmd'))`"
 
 bibliography      : ["combined.bib"]
 
@@ -131,9 +141,9 @@ header-includes:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-    echo = FALSE,
-    message = FALSE,
-    warning = FALSE
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE
 )
 
 options(dplyr.summarise.inform = FALSE)
@@ -148,7 +158,7 @@ library(gt)
 
 ```{r, load-targets}
 targets::tar_load(c(
-    "manuscript_info", "combined_bib", "reviews_tables", "combined_bib", "plots"
+  "manuscript_info", "combined_bib", "reviews_tables", "combined_bib", "plots"
 ),
 store = here::here("_targets")
 )
@@ -208,6 +218,8 @@ By synthesising across life domains (e.g., school and home), this review provide
 
 # Methods
 
+We prospectively registered our methods on the International Prospective Register of Systematic Reviews (PROSPERO; CRD42017076051).
+
 ### Eligibility criteria
 
 *Population*: 
@@ -247,7 +259,7 @@ We also searched PROSPERO to identify relevant protocols and contacted authors t
 
 ### Search strategy
 
-The search strategy associated with each of the 12 databases can be found [here](https://docs.google.com/document/d/1hz5Dgw0aVOMeXL3vpRXsNtCIbf6dHZTb8uz7wQ29ke4/edit#heading=h.i6znptfz9nwa).
+The search strategy associated with each of the 12 databases can be found in Supplementary File 1.
 We hand searched reference lists from any relevant umbrella reviews to identify systematic meta-analyses that our search may have missed.
 
 ### Selection process
@@ -276,7 +288,7 @@ Two researchers independently extracted all quantitative meta-analytic effect si
 Where possible, they also extracted effect sizes from primary studies included in each meta-analysis.
 To facilitate comparisons, we converted effect sizes to Pearson’s $r$ using established formulae [@bonettTransformingOddsRatios2007;@bowmanEffectSizesStatistical2012;@jacobsEstimationBiserialCorrelation2017].
 We excluded relative risk ratios from this conversion because meta-analyses did not contain sufficient information to meaningfully convert.
-Effect sizes on the original metric are provided in Supplementary File 1.
+Effect sizes on the original metric are provided in Supplementary File 2.
 
 ### Synthesis methods
 
@@ -313,7 +325,7 @@ An effect that was neither significant at $P < .05$ or $10^{-3}$ that also passe
 
 We initially planned to include systematic reviews without meta-analyses in a narrative summary alongside the main meta-analytic findings.
 However, we determined that combining results from the meta-analyses allowed readers to compare relative strength of associations more easily.
-Readers interested in the relevant systematic reviews (i.e., without meta-analysis) can consult the list of references in Supplementary File 2.
+Readers interested in the relevant systematic reviews (i.e., without meta-analysis) can consult the list of references in Supplementary File 3.
 
 We altered our evidence assessment plan when we identified that, as written, it could not classify precise evidence of null effects (i.e., from large reviews with low heterogeneity and low risk of publication bias) as 'credible' because a highly-significant *P*-value was a criteria.
 This would have significantly harmed knowledge gained from our review as it would have restricted our ability to show where the empirical evidence strongly indicated that there was no association between screen time and a given outcome.
@@ -332,7 +344,7 @@ knitr::include_graphics(here::here("figure", "PRISMA Diagram.pdf"))
 ```
 
 The most frequently reported exposures were `r manuscript_info$freq_exposures`.
-Supplementary File 3 provides a list of all exposures identified.
+Supplementary File 4 provides a list of all exposures identified.
 The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
 In most cases (`r paste0(manuscript_info$freq_combos$n1, "/", manuscript_info$effects_clean_n)`), there was only one exposure/outcome combination for an age group, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
 Full characteristics of the included studies are provided in Table \@ref(tab:desctable).
@@ -341,30 +353,30 @@ These effects represent the findings of `r format(manuscript_info$effects_sum$su
 
 ```{r desctable}
 reviews_tables$kable$data %>%
-    knitr::kable("latex",
-        caption = "Review characteristics for studies providing unique effects",
-        col.names = c(
-            "First Author", "Year", "Design Restrictions",
-            "Regions Restrictions", "Study Range",
-            "Sample Age Restrictions",
-            "Outcomes Assessed", "Exposures Assessed"
-        ),
-        escape = FALSE,
-        booktabs = TRUE,
-        align = c("l", "c", "l", "l", "c", "l", "l", "l"),
-        linesep = "",
-        longtable = TRUE
-    ) %>%
-    kableExtra::row_spec(1:reviews_tables$kable$nrow, hline_after = TRUE) %>%
-    kableExtra::row_spec(0, bold = TRUE) %>%
-    kableExtra::column_spec(3:4, width = "2cm") %>%
-    kableExtra::column_spec(5, width = "1.5cm") %>%
-    kableExtra::column_spec(6:8, width = "3cm") %>%
-    kableExtra::kable_styling(
-        latex_options = c("repeat_header"),
-        font_size = 5
-    ) %>%
-    kableExtra::landscape()
+  knitr::kable("latex",
+    caption = "Review characteristics for studies providing unique effects",
+    col.names = c(
+      "First Author", "Year", "Design Restrictions",
+      "Regions Restrictions", "Study Range",
+      "Sample Age Restrictions",
+      "Outcomes Assessed", "Exposures Assessed"
+    ),
+    escape = FALSE,
+    booktabs = TRUE,
+    align = c("l", "c", "l", "l", "c", "l", "l", "l"),
+    linesep = "",
+    longtable = TRUE
+  ) %>%
+  kableExtra::row_spec(1:reviews_tables$kable$nrow, hline_after = TRUE) %>%
+  kableExtra::row_spec(0, bold = TRUE) %>%
+  kableExtra::column_spec(3:4, width = "2cm") %>%
+  kableExtra::column_spec(5, width = "1.5cm") %>%
+  kableExtra::column_spec(6:8, width = "3cm") %>%
+  kableExtra::kable_styling(
+    latex_options = c("repeat_header"),
+    font_size = 5
+  ) %>%
+  kableExtra::landscape()
 ```
 
 The quality of the included meta-analyses was mixed (see Table \@ref(tab:desctable)).
@@ -378,7 +390,7 @@ Overall, only `r manuscript_info$qual$all_low` meta-analyses were graded as low 
 
 There were `r manuscript_info$edu$n_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science.
 We removed `r manuscript_info$edu$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$edu$n_samplesize` effects with samples < 1,000, and `r manuscript_info$edu$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
-Effects not meeting one or more of these standards are presented in Supplementary File 4.
+Effects not meeting one or more of these standards are presented in Supplementary File 5.
 The remaining `r manuscript_info$edu$n_certain` effects met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot).
 These `r manuscript_info$edu$n_certain` effects came from `r manuscript_info$edu$n_unique` meta-analytic reviews analysing data from `r manuscript_info$edu$summary$studies_n` empirical studies with `r format(manuscript_info$edu$summary$total_n, big.mark=",")` individual participants.
 
@@ -404,7 +416,7 @@ Most effects showed high levels of heterogeneity (`r manuscript_info$edu$n_i2` o
 We identified `r manuscript_info$health$n_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
 We removed `r manuscript_info$health$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$health$n_samplesize` effects with samples < 1,000, and `r manuscript_info$health$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
 No remaining studies showed evidence of excessive significance.
-Effects not meeting one or more of these standards are presented in Supplementary File 5.
+Effects not meeting one or more of these standards are presented in Supplementary File 6.
 The remaining `r manuscript_info$health$n_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)).
 These `r manuscript_info$health$n_certain` effects came from `r manuscript_info$health$n_unique` meta-analytic reviews analysing data from `r manuscript_info$health$summary$studies_n` empirical studies with `r format(manuscript_info$health$summary$total_n, big.mark=",")` individual participants.
 
@@ -431,13 +443,13 @@ We found that when meta-analyses examined general screen use, and did not specif
 However, when meta-analyses included a more nuanced examination of exposures, a more complex picture appeared.
 
 As an example, consider children watching television programs---an often cited form of screen time harm.
-We found robust evidence for a small association with poorer academic performance and literacy skills [@adelantado-renauAssociationScreenMedia2019].
+We found robust evidence for a small association with poorer academic performance and literacy skills for general television watching[@adelantado-renauAssociationScreenMedia2019].
 However, we also found evidence that if the content of the program was educational, or the child was watching the program with a parent (i.e., co-viewing), this exposure was instead associated with better literacy [@madiganAssociationsScreenUse2020].
 Thus, parents may play an important role in selecting content that is likely to benefit their children or, perhaps, interact with their children in ways that may foster literacy (e.g., asking their children questions about the program).
 Similar nuanced findings were observed for video games.
 The credible evidence we identified showed that video game playing was associated with poorer body composition and learning [@adelantado-renauAssociationScreenMedia2019;@poorolajalBehavioralFactorsInfluencing2020].
 However, when the video game were designed specifically to teach numeracy, playing these games showed learning benefits [@byunDigitalGamebasedLearning2018].
-One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 4 & 5) therefore this hypothesis could not be addressed.
+One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 5 & 6) therefore this hypothesis could not be addressed.
 
 Social media was one type of exposure that showed consistent risks to health, with no indication of potential benefit.
 Social media showed strong evidence of harmful associations with risk taking in general, as well as unsafe sex and substance abuse [@vannucciSocialMediaUse2020].
