@@ -113,7 +113,7 @@ abstract: |
   When focusing on the meta-analyses with the most statistically robust evidence, we found that general screen use (when content was not indicated), was associated with potentially harmful impacts on learning, literacy, body composition, and depression.
   Like-wise, social media was consistently associated with risks to health, with no identified benefits.
   However, we also found that these harms could often be mitigated by certain kinds of content (e.g., educational), or by modifying the context (e.g., co-viewing with a parent).
-  In summary, our findings point to the need for careful and nuanced guidelines that support parents to make the best deicsions for their children.
+  In summary, our findings point to the need for careful and nuanced guidelines that support parents to make the best decisions for their children.
 
   
 keywords          : "screen time; youth; health; education"
