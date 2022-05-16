@@ -47,15 +47,15 @@ author:
     role:
       - Writing - Review & Editing
   - name          : "Katrien De Cocker"
-    affiliation   : "5"
+    affiliation   : "9"
     role:
       - Writing - Review & Editing
   - name          : "Jo Salmon"
-    affiliation   : "9"
+    affiliation   : "10"
     role:
       - Writing - Review & Editing
   - name          : "Kylie Hesketh"
-    affiliation   : "9"
+    affiliation   : "10"
     role:
       - Writing - Review & Editing
   - name          : "Nicole Weeks"
@@ -67,7 +67,7 @@ author:
     role:
       - Writing - Review & Editing
   - name          : "Emma Devine"
-    affiliation   : "10"
+    affiliation   : "11"
     role:
       - Writing - Review & Editing
   - name          : "Roberta Vasconcellos"
@@ -99,8 +99,10 @@ affiliation:
   - id            : "8"
     institution   : "Faculty of Health Sciences, Curtin University"
   - id            : "9"
-    institution   : "Institute for Physical Activity and Nutrition, Deakin University"
+    institution   : "Faculty of Medicine and Health Sciences, Ghent University"
   - id            : "10"
+    institution   : "Institute for Physical Activity and Nutrition, Deakin University"
+  - id            : "11"
     institution   : "The Matilda Centre for Research in Mental Health and Substance Use, University of Sydney"
 
 abstract: |
