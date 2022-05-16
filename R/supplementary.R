@@ -33,7 +33,7 @@ make_supp_exposures <-
 
     out_path <- here::here(
       "supplementary_files",
-      "Supplementary File 3 - List of Exposures.csv"
+      "Supplementary File 4 - List of Exposures.csv"
     )
     write_csv(out, file = out_path, col_names = FALSE)
 
@@ -93,7 +93,7 @@ make_supp_effects <- function(combined_effects) {
 
   out_path <- here::here(
     "supplementary_files",
-    "Supplementary File 1 - Complete Effects Data.csv"
+    "Supplementary File 2 - Complete Effects Data.csv"
   )
 
   write_csv(out_effects, out_path)
