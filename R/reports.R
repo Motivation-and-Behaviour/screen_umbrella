@@ -282,7 +282,8 @@ create_manuscript_info <- function(effects_clean, prisma, tables_df,
 
   manuscript_info$qual$low_char <- qual_str(
     qual_count(
-      reviews_summary, "included_studies_listed_with_important_characteristics_and_results_of_each",
+      reviews_summary,
+      "included_studies_listed_with_important_characteristics_and_results_of_each", # nolint
       "low"
     ),
     qual_data_n,
@@ -290,7 +291,10 @@ create_manuscript_info <- function(effects_clean, prisma, tables_df,
   )
 
   manuscript_info$qual$low_search <- qual_str(
-    qual_count(reviews_summary, "literature_search_strategy_comprehensive_and_systematic", "low"),
+    qual_count(
+      reviews_summary,
+      "literature_search_strategy_comprehensive_and_systematic", "low"
+    ),
     qual_data_n,
     " low risk "
   )

@@ -39,7 +39,9 @@ make_supp_exposures <-
 
     # Upload to GDrive
     drive_put(out_path,
-      path = as_id("https://drive.google.com/drive/folders/1gW5k2CIRJf1w2FP0dbUHCXwpAxtV1Gxp")
+      path = as_id(
+        "https://drive.google.com/drive/folders/1gW5k2CIRJf1w2FP0dbUHCXwpAxtV1Gxp" # nolint
+      )
     )
 
 
