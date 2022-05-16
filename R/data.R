@@ -1,7 +1,6 @@
 # ------------------- SETTINGS -----------------------
 data_sheet <- "1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4"
 
-
 # ------------------- TARGETS ------------------------
 
 fetch_data <- list(
@@ -37,13 +36,18 @@ fetch_data <- list(
 )
 
 clean_and_convert <- list(
-  tar_target(effects_clean,
-             process_effects(effects_raw, reviews_raw)),
-  tar_target(update_sheet,
-             update_gsheet(effects_clean, data_sheet, "StudyLevelHelper")),
+  tar_target(
+    effects_clean,
+    process_effects(effects_raw, reviews_raw)
+  ),
+  tar_target(
+    update_sheet,
+    update_gsheet(effects_clean, data_sheet, "StudyLevelHelper")
+  ),
   tar_target(studies_converted,
-             convert_studies(studies_raw),
-             iteration = "group")
+    convert_studies(studies_raw),
+    iteration = "group"
+  )
 )
 
 reanalyse <- list(
@@ -85,7 +89,7 @@ reanalyse <- list(
 
 convert_effects <- function(data) {
   # Conversion functions
-  
+
   b2r <- function(beta) {
     # conversion formula from 10.1007/s11162-011-9232-5
     r <- NA
@@ -94,9 +98,9 @@ convert_effects <- function(data) {
     }
     r
   }
-  
+
   b2r <- Vectorize(b2r)
-  
+
   d2r <- function(d, a = 4) {
     # assumes equal groups
     # https://www.meta-analysis.com/downloads/Meta-analysis%20Converting%20among%20effect%20sizes.pdf
@@ -107,9 +111,9 @@ convert_effects <- function(data) {
       d / (sqrt(d^2 + a))
     }
   }
-  
+
   d2r <- Vectorize(d2r)
-  
+
   z2r <- function(z) {
     # test z <- 3.4
     if (is.na(z)) {
@@ -118,25 +122,25 @@ convert_effects <- function(data) {
       tanh(z)
     }
   }
-  
+
   z2r <- Vectorize(z2r)
-  
+
   od2r <- function(or, method = c("pearson", "digby")) {
     # DOI:10.1037/0003-066X.62.3.254
     if (is.na(or)) {
       NA
     } else {
       switch(method,
-             pearson = cos(pi / (1 + or^.5)),
-             digby = (or^(3 / 4) - 1) / (or^(3 / 4) + 1)
+        pearson = cos(pi / (1 + or^.5)),
+        digby = (or^(3 / 4) - 1) / (or^(3 / 4) + 1)
       )
     }
   }
-  
+
   od2r <- Vectorize(od2r)
-  
+
   # Process data
-  
+
   d <- data %>%
     filter(es %in% c("b", "d", "r", "or", "z")) %>%
     rename(std_eff_name = es) %>%
@@ -178,7 +182,7 @@ convert_effects <- function(data) {
         std_eff_name == "z" ~ z2r(converted_ci_upper_bound)
       )
     )
-  
+
   return(d)
 }
 
@@ -189,7 +193,7 @@ process_effects <- function(raw, revs) {
     mutate(es = str_to_lower(statistical_test_consensus)) %>%
     select(-ends_with("_r"))
   d <- convert_effects(raw)
-  
+
   # Clean the names of the datafile, rename to something more meaningful,
   # remove empty stuff, then cut small studies or rubbish
   q <- clean_names(d) %>%
@@ -217,45 +221,58 @@ process_effects <- function(raw, revs) {
       n > 1,
       use_moderator == TRUE
     )
-  
+
   # Fix variables that are nested as lists
   q$i2 <- as.numeric(sapply(q$i2, as.numeric))
   q$effect_size_id_1 <- as.character(sapply(q$effect_size_id_1, as.character))
   q$moderator_level <- as.character(sapply(q$moderator_level, as.character))
-  
+
   # Create the age moderation check
-  revs_dems <- revs %>% 
+  revs_dems <- revs %>%
     select(covidence_review_id_auto, demographics_consensus)
-  
-  q <- left_join(q, revs_dems, by = c("covidence_review_id"= 
-                                   "covidence_review_id_auto")) %>% 
+
+  q <- left_join(q, revs_dems, by = c(
+    "covidence_review_id" =
+      "covidence_review_id_auto"
+  )) %>%
     mutate(moderator_age = case_when(
-      demographics_consensus %in% c("All", "Children; Adolescents",  "School-age Children") ~ "All",
-      demographics_consensus %in% c("Adolescents", 
-                                    "School-age Children (Middle/High School)", 
-                                    "School-age_High School", "school-age_high school",
-                                    "School-age Children (Middle School)") ~ "Adolescents",
-      demographics_consensus %in% c("Early childhood/pre-school") ~ "Young children",
-      TRUE ~ "Children"        
-    ))  %>% 
+      demographics_consensus %in% c(
+        "All", "Children; Adolescents", "School-age Children"
+      ) ~ "All",
+      demographics_consensus %in% c(
+        "Adolescents",
+        "School-age Children (Middle/High School)",
+        "School-age_High School", "school-age_high school",
+        "School-age Children (Middle School)"
+      ) ~ "Adolescents",
+      demographics_consensus %in% c("Early childhood/pre-school") ~
+      "Young children",
+      TRUE ~ "Children"
+    )) %>%
     mutate(moderator_age = case_when(
-      moderator_level %in% c("13-18", "12-17 years", 
-                             "adolescence","at least 13 years") ~ "Adolescents",
-      moderator_level %in% c("7-12", "children", "older than 8", "6-11 years",
-                             "grades 4-7", "childhood", "12 or younger") ~ "Children",
-      moderator_level %in% c("0-6", "younger than 8", "Infants", "pre-school",
-                             "Toddlers", "Preschoolers") ~ "Young children",
+      moderator_level %in% c(
+        "13-18", "12-17 years",
+        "adolescence", "at least 13 years"
+      ) ~ "Adolescents",
+      moderator_level %in% c(
+        "7-12", "children", "older than 8", "6-11 years",
+        "grades 4-7", "childhood", "12 or younger"
+      ) ~ "Children",
+      moderator_level %in% c(
+        "0-6", "younger than 8", "Infants", "pre-school",
+        "Toddlers", "Preschoolers"
+      ) ~ "Young children",
       TRUE ~ moderator_age
     ))
-  
+
   # Add significance and labels
   q$sig <- ((q$cilb * q$ciub) > 0)
   q$sig <- q$sig * .7 + .3
   q$author_year <- paste(q$first_author, ", ", q$year_of_publication, sep = "")
-  
+
   # bold the rows that are classified as 'risks'
   q$risk <- ifelse(q$benefit_or_risk == "Risk", "bold", "plain")
-  
+
   # if one effect from this review, keep or select "overall"
   # group by study_id and exposure and outcome, pick max n
   q_use <- q %>%
@@ -265,13 +282,17 @@ process_effects <- function(raw, revs) {
       moderator_age
     ) %>%
     slice_max(n, with_ties = TRUE) %>%
-    mutate(use_effect = TRUE,
-           main_effect = TRUE) %>%
+    mutate(
+      use_effect = TRUE,
+      main_effect = TRUE
+    ) %>%
     ungroup()
-  
-  q <- left_join(q, select(q_use, 
-                           effect_size_id_1, 
-                           use_effect, main_effect), by = "effect_size_id_1") %>% 
+
+  q <- left_join(q, select(
+    q_use,
+    effect_size_id_1,
+    use_effect, main_effect
+  ), by = "effect_size_id_1") %>%
     select(
       author_year, covidence_review_id,
       outcome_category, effect_size_id_1,
@@ -283,25 +304,28 @@ process_effects <- function(raw, revs) {
       k, n, r, cilb, ciub, i2, sig, use_effect, main_effect, moderator_age,
       starts_with("raw_"), starts_with("converted_"), std_eff_name
     )
-  
+
   return(q)
 }
 
-update_gsheet <- function(effects_clean, file, sheet){
-  ids <- effects_clean %>% filter(use_effect) %>% select(effect_size_id_1)
-  googlesheets4::range_clear(ss = file,
-                             sheet = sheet,
-                             range = "A:A")
-  
+update_gsheet <- function(effects_clean, file, sheet) {
+  ids <- effects_clean %>%
+    filter(use_effect) %>%
+    select(effect_size_id_1)
+  googlesheets4::range_clear(
+    ss = file,
+    sheet = sheet,
+    range = "A:A"
+  )
+
   googlesheets4::range_write(
     ids,
-    ss= file,
+    ss = file,
     sheet = sheet,
     col_names = FALSE
   )
-  
+
   return(ids)
-  
 }
 
 ## Study level data ----
@@ -317,14 +341,15 @@ convert_studies <- function(raw) {
     )
     return(r)
   }
-  
+
   b2r <- Vectorize(b2r)
-  
+
   # Clean data
   cleaned <- raw %>%
     filter(ok_to_import) %>%
     select(-ok_to_import, -starts_with("mismatches_")) %>%
-    mutate( # Fix the nested imports
+    mutate(
+      # Fix the nested imports
       across(
         c(effect_size_id, study_first_page_number),
         ~ sapply(.x, as.character)
@@ -348,21 +373,23 @@ convert_studies <- function(raw) {
       ),
       # Add a study name
       study_name = paste(study_author, study_year)
-    ) %>% 
+    ) %>%
     # Impute mising N
     # TODO - Use something other than mean imputation
-    group_by(effect_size_id) %>% 
-    mutate(study_n = replace_na(study_n, round(mean(study_n, na.rm = TRUE)))) %>% 
+    group_by(effect_size_id) %>%
+    mutate(
+      study_n = replace_na(study_n, round(mean(study_n, na.rm = TRUE)))
+    ) %>%
     ungroup()
-  
+
   # Convert effect sizes
   converted <- cleaned %>%
     # Treat Hedge's g as Cohen's d
     mutate(converted_metric = if_else(converted_metric == "g",
-                                      "d", converted_metric
+      "d", converted_metric
     )) %>%
     # Limit to those with a method to convert
-    filter(converted_metric %in% c("r", "d", "or", "z"))%>%
+    filter(converted_metric %in% c("r", "d", "or", "z")) %>%
     # Conversions
     mutate(
       # Convert the estimates
@@ -392,13 +419,15 @@ convert_studies <- function(raw) {
         # TODO - risk ratios upper ci
       ),
       # Reverse coding as needed
-      across(c(r_estimate,r_ci_lower,r_ci_upper),
-             ~if_else(reverse_code, . * -1, .))
+      across(
+        c(r_estimate, r_ci_lower, r_ci_upper),
+        ~ if_else(reverse_code, . * -1, .)
+      )
     ) %>%
-    drop_na(r_estimate, study_n) %>% 
+    drop_na(r_estimate, study_n) %>%
     group_by(effect_size_id) %>%
     tar_group()
-  
+
   return(converted)
 }
 
@@ -413,7 +442,7 @@ run_metaanalysis <- function(converted) {
     ni = study_n,
     slab = study_name
   )
-  
+
   # Repeat for 99.9% CIs since bug in Broom
   meta_out_999 <- rma(
     data = converted,
@@ -421,15 +450,15 @@ run_metaanalysis <- function(converted) {
     ri = r_estimate,
     ni = study_n,
     slab = study_name,
-    level=99.9
+    level = 99.9
   )
-  
+
   meta_out$conf.low_999 <- meta_out_999$ci.lb
   meta_out$conf.high_999 <- meta_out_999$ci.ub
-  
+
   # Add the ID for later matching
   meta_out$effect_size_id <- converted$effect_size_id[1]
-  
+
   return(meta_out)
 }
 
@@ -443,7 +472,7 @@ tidy_meta <- function(meta_results) {
   df$conf.low_999 <- meta_results$conf.low_999
   df$conf.high_999 <- meta_results$conf.high_999
   df$effect_size_id <- meta_results$effect_size_id
-  
+
   return(df)
 }
 
@@ -472,13 +501,13 @@ run_eggers <- function(meta_results) {
       eggers_ci_u = NA_real_
     )
   }
-  
+
   return(eggers_df)
 }
 
 ## Excess significance test ----
 
-run_excess_sig <- function(meta_results){
+run_excess_sig <- function(meta_results) {
   exc_sig <- tes(meta_results)
   tes_df <- tibble(
     effect_size_id = meta_results$effect_size_id,
@@ -493,40 +522,50 @@ run_excess_sig <- function(meta_results){
   return(tes_df)
 }
 
-combine_study_results <- function(meta_aggregated, eggers_results, excess_sig_results) {
-  full_join(meta_aggregated, eggers_results, by = "effect_size_id") %>% 
-    full_join(excess_sig_results, by = "effect_size_id") %>% 
-    rename_with(.cols=estimate:conf.high_999, .fn= ~paste0("reanalysis_",.x)) %>% 
+combine_study_results <- function(meta_aggregated,
+                                  eggers_results,
+                                  excess_sig_results) {
+  full_join(meta_aggregated, eggers_results, by = "effect_size_id") %>%
+    full_join(excess_sig_results, by = "effect_size_id") %>%
+    rename_with(
+      .cols = estimate:conf.high_999,
+      .fn = ~ paste0("reanalysis_", .x)
+    ) %>%
     relocate(effect_size_id)
 }
 
-join_analyses <- function(effects_clean, studies_results){
+join_analyses <- function(effects_clean, studies_results) {
   # Join the results
   joined_df <- left_join(
     effects_clean %>%
       rename("effect_size_id" = "effect_size_id_1") %>%
-      rename_with(.cols = k:sig, .fn =  ~ paste0("reported_", .x)),
+      rename_with(.cols = k:sig, .fn = ~ paste0("reported_", .x)),
     studies_results,
-    by = "effect_size_id") %>%
+    by = "effect_size_id"
+  ) %>%
     # Create the columns that will be plotted
     mutate(
       source = if_else(!is.na(reanalysis_estimate),
-                       "reanalysis",
-                       "reported"),
+        "reanalysis",
+        "reported"
+      ),
       r = if_else(!is.na(reanalysis_estimate),
-                  reanalysis_estimate,
-                  reported_r),
+        reanalysis_estimate,
+        reported_r
+      ),
       n = if_else(!is.na(reanalysis_estimate),
-                  reanalysis_n,
-                  reported_n),
+        reanalysis_n,
+        reported_n
+      ),
       k = if_else(
         !is.na(reanalysis_estimate),
         reanalysis_k,
         as.integer(reported_k)
       ),
       i2 = if_else(!is.na(reanalysis_estimate),
-                   reanalysis_i2,
-                   reported_i2),
+        reanalysis_i2,
+        reported_i2
+      ),
       std.err = if_else(
         !is.na(reanalysis_estimate),
         reanalysis_std.error,
@@ -552,17 +591,15 @@ join_analyses <- function(effects_clean, studies_results){
         reanalysis_conf.high_999,
         NA_real_
       )
-    ) %>% 
+    ) %>%
     # Create the trustworthiness indicator
     mutate(certainty = case_when(
       source == "reported" ~ "unclear",
-      (reanalysis_n >=1000 &
-         if_else(!is.na(eggers_p),eggers_p>0.05 ,FALSE) &
-         tes_p>0.05) ~ "meets criteria",
+      (reanalysis_n >= 1000 &
+        if_else(!is.na(eggers_p), eggers_p > 0.05, FALSE) &
+        tes_p > 0.05) ~ "meets criteria",
       TRUE ~ "unclear"
     ))
-  
+
   return(joined_df)
-  
-  
 }
