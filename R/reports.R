@@ -49,7 +49,7 @@ create_reports <- list(
     path = here::here("reports", "references.Rmd"),
     output_file = here::here(
       "supplementary_files",
-      "Supplementary File 7 - Include Studies.pdf"
+      "Supplementary File 7 - Included Studies.pdf"
     ),
     params = list(
       nocite_list =
