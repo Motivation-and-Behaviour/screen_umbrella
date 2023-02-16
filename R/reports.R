@@ -2,73 +2,6 @@
 authors_sheet <- "1V-j8oQXI3Y8etUnaRETvUvq9Hr8eAbAoBc_0XoLgb48"
 article_title <- "Benefits and risks associated with children’s and adolescents’ interactions with electronic screens An umbrella review" # nolint
 
-# ------------------- TARGETS ------------------------
-
-## Bibliographies ----
-generate_bibliography <-
-  list(
-    tar_target(
-      packages_bib,
-      create_packages_bib(
-        packages,
-        here::here("reports", "packages.bib")
-      ),
-      format = "file"
-    ),
-    tar_target(
-      references_bib,
-      here::here("reports", "references.bib"),
-      format = "file"
-    ),
-    tar_target(
-      combined_bib,
-      combine_bibs(
-        packages_bib,
-        references_bib,
-        reviews_raw,
-        here::here("reports", "combined.bib")
-      ),
-      format = "file"
-    )
-  )
-
-## Create reports ----
-create_reports <- list(
-  tar_target(
-    manuscript_info,
-    create_manuscript_info(
-      effects_clean, prisma, tables_df, combined_effects, studies_converted
-    )
-  ),
-  tar_render(
-    manuscript,
-    path = here::here("reports", "manuscript.Rmd")
-  ),
-  tar_render(
-    references,
-    path = here::here("reports", "references.Rmd"),
-    output_file = here::here(
-      "supplementary_files",
-      "Supplementary File 7 - Included Studies.pdf"
-    ),
-    params = list(
-      nocite_list =
-        paste0(
-          "@",
-          paste(reviews_raw$bibtex_key, collapse = ", @")
-        )
-    )
-  ),
-  tar_target(
-    uploaded_manuscripts,
-    upload_files(manuscript)
-  ),
-  tar_target(
-    uploaded_references,
-    upload_files(references)
-  )
-)
-
 # ------------------- FUNCTIONS ----------------------
 
 ## Bibliography ----
@@ -144,9 +77,9 @@ create_manuscript_info <- function(effects_clean, prisma, tables_df,
       plain_language_exposure = case_when(
         plain_language_exposure ==
           "lifestyle risk behaviour (at school) intervention" ~
-        "screen-based lifestyle risk behaviour interventions (at school)",
+          "screen-based lifestyle risk behaviour interventions (at school)",
         plain_language_exposure == "general tv programs and movies" ~
-        "general TV programs and movies",
+          "general TV programs and movies",
         TRUE ~ plain_language_exposure
       ),
       out = paste0(plain_language_exposure, " (*n* = ", n, ")")

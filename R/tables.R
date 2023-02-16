@@ -1,26 +1,3 @@
-# ------------------- SETTINGS -----------------------
-
-# ------------------- TARGETS ------------------------
-
-make_tables <-
-  list(
-    tar_target(
-      tables_df,
-      make_table_data(rob_raw, effects_clean, reviews_raw)
-    ),
-    tar_target(
-      reviews_tables,
-      make_desc_tables(tables_df)
-    ),
-    tar_target(
-      export_tables,
-      save_tables(reviews_tables),
-      format = "file",
-      pattern = map(reviews_tables)
-    )
-  )
-
-
 # ------------------- FUNCTIONS ----------------------
 
 make_table_data <- function(rob_df, effects_df, reviews_df) {
@@ -169,10 +146,11 @@ make_desc_tables <- function(tables_df) {
       -demographics_restrictions,
       -covidence_id
     ) %>%
-    relocate(any_of(c(
-      "sample_ages", "outcomes_assessed", "exposures_assessed"
-    )),
-    .after = latest_study_year
+    relocate(
+      any_of(c(
+        "sample_ages", "outcomes_assessed", "exposures_assessed"
+      )),
+      .after = latest_study_year
     ) %>%
     arrange(first_author, year)
 
@@ -271,10 +249,11 @@ make_desc_tables <- function(tables_df) {
       -demographics_restrictions,
       -covidence_id
     ) %>%
-    relocate(any_of(c(
-      "sample_ages", "outcomes_assessed", "exposures_assessed"
-    )),
-    .after = study_range
+    relocate(
+      any_of(c(
+        "sample_ages", "outcomes_assessed", "exposures_assessed"
+      )),
+      .after = study_range
     ) %>%
     arrange(first_author, year) %>%
     mutate_all(kableExtra::linebreak, align = "l")
@@ -368,7 +347,7 @@ make_desc_tables <- function(tables_df) {
     cols_width(
       author_year ~ pct(18),
       c(eligibility_criteria_predefined_and_specified:heterogeneity_assessed) ~
-      pct(11.7)
+        pct(11.7)
     ) %>%
     tab_options(
       heading.align = "left",

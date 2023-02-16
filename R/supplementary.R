@@ -1,22 +1,3 @@
-# ------------------- SETTINGS -----------------------
-
-# ------------------- TARGETS ------------------------
-
-make_supps <-
-  list(
-    tar_target(
-      supp_exposures,
-      make_supp_exposures(combined_effects),
-      format = "file"
-    ),
-    tar_target(
-      supp_effects,
-      make_supp_effects(combined_effects),
-      format = "file"
-    )
-  )
-
-
 # ------------------- FUNCTIONS ----------------------
 
 make_supp_exposures <-

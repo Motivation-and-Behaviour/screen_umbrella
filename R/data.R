@@ -1,88 +1,3 @@
-# ------------------- SETTINGS -----------------------
-data_sheet <- "1z_NZwDomPfrOJg2Rn8-E8cc9yoOjXzqH_Di23vWERu4"
-
-# ------------------- TARGETS ------------------------
-
-fetch_data <- list(
-  # Data sources
-  tar_target(
-    modified_date,
-    get_mod_date(data_sheet),
-    # Force run if outdated or doesn't exist
-    cue = tar_cue_force(
-      condition = ifelse(
-        tar_exist_objects("modified_date"),
-        get_mod_date(data_sheet) != tar_read(modified_date),
-        TRUE
-      )
-    )
-  ),
-  tar_target(
-    effects_raw,
-    read_sheet(data_sheet, "EffectSizesValidation", modified_date)
-  ),
-  tar_target(
-    reviews_raw,
-    read_sheet(data_sheet, "ReviewLevelValidation", modified_date)
-  ),
-  tar_target(
-    rob_raw,
-    read_sheet(data_sheet, "QualityAssessment", modified_date)
-  ),
-  tar_target(
-    studies_raw,
-    read_sheet(data_sheet, "StudyLevel", modified_date)
-  )
-)
-
-clean_and_convert <- list(
-  tar_target(
-    effects_clean,
-    process_effects(effects_raw, reviews_raw)
-  ),
-  tar_target(
-    update_sheet,
-    update_gsheet(effects_clean, data_sheet, "StudyLevelHelper")
-  ),
-  tar_target(studies_converted,
-    convert_studies(studies_raw),
-    iteration = "group"
-  )
-)
-
-reanalyse <- list(
-  tar_target(
-    meta_results,
-    run_metaanalysis(studies_converted),
-    pattern = map(studies_converted),
-    iteration = "list"
-  ),
-  tar_target(
-    meta_aggregated,
-    tidy_meta(meta_results),
-    pattern = map(meta_results)
-  ),
-  tar_target(
-    eggers_results,
-    run_eggers(meta_results),
-    pattern = map(meta_results)
-  ),
-  tar_target(
-    excess_sig_results,
-    run_excess_sig(meta_results),
-    pattern = map(meta_results)
-  ),
-  tar_target(
-    studies_results,
-    combine_study_results(meta_aggregated, eggers_results, excess_sig_results)
-  ),
-  tar_target(
-    combined_effects,
-    join_analyses(effects_clean, studies_results)
-  )
-)
-
-
 # ------------------- FUNCTIONS ----------------------
 
 ## Convert effects data ----
@@ -246,7 +161,7 @@ process_effects <- function(raw, revs) {
         "School-age Children (Middle School)"
       ) ~ "Adolescents",
       demographics_consensus %in% c("Early childhood/pre-school") ~
-      "Young children",
+        "Young children",
       TRUE ~ "Children"
     )) %>%
     mutate(moderator_age = case_when(

@@ -1,36 +1,3 @@
-# ------------------- SETTINGS -----------------------
-
-# ------------------- TARGETS ------------------------
-
-make_prisma_figure <- list(
-  tar_target(prisma_data,
-    here::here("covidence_prisma.txt"),
-    format = "file"
-  ),
-  tar_target(
-    prisma,
-    make_prisma(prisma_data, effects_clean)
-  ),
-  tar_target(export_prisma,
-    save_prisma(prisma),
-    format = "file",
-  )
-)
-
-make_forest_plots <- list(
-  tar_target(
-    plots,
-    make_plots(combined_effects)
-  ),
-  tar_target(
-    export_plots,
-    save_plots(plots),
-    format = "file",
-    pattern = map(plots)
-  )
-)
-
-
 # ------------------- FUNCTIONS ----------------------
 
 ## PRISMA ----
