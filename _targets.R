@@ -4,27 +4,9 @@ library(here)
 
 options(tidyverse.quiet = TRUE, clustermq.scheduler = "multiprocess")
 
-packages <- c(
-  "base", "broom", "bib2df", "DiagrammeR", "distill", "DT", "esc",
-  "emojifont", "ggh4x", "googledrive", "ggplot2", "ggtext", "gt", "janitor",
-  "knitr", "kableExtra", "magick", "magrittr", "metafor", "papaja", "targets",
-  "tarchetypes", "tidyMB", "tidyverse", "scales", "xfun"
-)
-
-tar_option_set(
-  packages = packages,
-  debug = "yml_base",
-  workspace_on_error = TRUE
-)
-
-googledrive::drive_auth()
-googlesheets4::gs4_auth()
-source(here::here("R", "utils.R"))
-source(here::here("R", "data.R"))
-source(here::here("R", "tables.R"))
-source(here::here("R", "plots.R"))
-source(here::here("R", "supplementary.R"))
-source(here::here("R", "reports.R"))
+# Load required functions and packages
+lapply(list.files("./R", full.names = TRUE), source)
+load_packages()
 
 list(
   # Fetch and analyse (data.R)

@@ -241,8 +241,6 @@ convert_studies <- function(raw) {
 
   # Clean data
   cleaned <- raw %>%
-    filter(ok_to_import) %>%
-    select(-ok_to_import, -starts_with("mismatches_")) %>%
     mutate(
       # Fix the nested imports
       across(

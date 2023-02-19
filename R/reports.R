@@ -1,5 +1,4 @@
 # ------------------- SETTINGS -----------------------
-authors_sheet <- "1V-j8oQXI3Y8etUnaRETvUvq9Hr8eAbAoBc_0XoLgb48"
 article_title <- "Benefits and risks associated with children’s and adolescents’ interactions with electronic screens An umbrella review" # nolint
 
 # ------------------- FUNCTIONS ----------------------
