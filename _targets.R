@@ -28,41 +28,29 @@ source(here::here("R", "reports.R"))
 
 list(
   # Fetch and analyse (data.R)
-  tar_target(
-    modified_date,
-    get_mod_date(data_sheet),
-    # Force run if outdated or doesn't exist
-    cue = tar_cue_force(
-      condition = ifelse(
-        tar_exist_objects("modified_date"),
-        get_mod_date(data_sheet) != tar_read(modified_date),
-        TRUE
-      )
-    )
-  ),
-  tar_target(
+  tar_file_read(
     effects_raw,
-    read_sheet(data_sheet, "EffectSizesValidation", modified_date)
+    "data/Effects.csv",
+    read_sheet(file = !!.x)
   ),
-  tar_target(
+  tar_file_read(
     reviews_raw,
-    read_sheet(data_sheet, "ReviewLevelValidation", modified_date)
+    "data/Reviews.csv",
+    read_sheet(file = !!.x)
   ),
-  tar_target(
-    rob_raw,
-    read_sheet(data_sheet, "QualityAssessment", modified_date)
-  ),
-  tar_target(
+  tar_file_read(
     studies_raw,
-    read_sheet(data_sheet, "StudyLevel", modified_date)
+    "data/Studies.csv",
+    read_sheet(file = !!.x)
+  ),
+  tar_file_read(
+    rob_raw,
+    "data/QualityAssessment.csv",
+    read_sheet(file = !!.x)
   ),
   tar_target(
     effects_clean,
     process_effects(effects_raw, reviews_raw)
-  ),
-  tar_target(
-    update_sheet,
-    update_gsheet(effects_clean, data_sheet, "StudyLevelHelper")
   ),
   tar_target(studies_converted,
     convert_studies(studies_raw),

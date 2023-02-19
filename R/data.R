@@ -223,26 +223,6 @@ process_effects <- function(raw, revs) {
   return(q)
 }
 
-update_gsheet <- function(effects_clean, file, sheet) {
-  ids <- effects_clean %>%
-    filter(use_effect) %>%
-    select(effect_size_id_1)
-  googlesheets4::range_clear(
-    ss = file,
-    sheet = sheet,
-    range = "A:A"
-  )
-
-  googlesheets4::range_write(
-    ids,
-    ss = file,
-    sheet = sheet,
-    col_names = FALSE
-  )
-
-  return(ids)
-}
-
 ## Study level data ----
 
 convert_studies <- function(raw) {
