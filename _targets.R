@@ -120,7 +120,7 @@ list(
   tar_target(
     packages_bib,
     create_packages_bib(
-      packages,
+      .packages(),
       here::here("reports", "packages.bib")
     ),
     format = "file"
