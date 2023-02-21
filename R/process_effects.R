@@ -9,10 +9,15 @@
 #' @author Taren Sanders
 #' @export
 process_effects <- function(effects_raw, reviews_raw) {
-  raw <- raw %>%
-    mutate(es = str_to_lower(statistical_test_consensus)) %>%
-    select(-ends_with("_r"))
-  d <- convert_effects(raw)
+  effects_clean <-
+    effects_raw %>%
+    # Remove any unusable effects (must have value and N)
+    filter(!is.na(value) & !is.na(combined_n)) %>%
+    # Translate the statistical tests to common abbreviations
+    mutate(stat_test_clean = translate_tests(statistical_test)) %>%
+    # Can only use some of the metric types
+    filter(stat_test_clean %in% c("b", "d", "r", "or", "z")) %>%
+    convert_effects()
 
   # Clean the names of the datafile, rename to something more meaningful,
   # remove empty stuff, then cut small studies or rubbish
