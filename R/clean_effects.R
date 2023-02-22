@@ -3,54 +3,39 @@
 #' .. content for \details{} ..
 #'
 #' @title
-#' @param effects_raw
-#' @param reviews_raw
+#' @param effects
+#' @param reviews
 #' @return
 #' @author Taren Sanders
 #' @export
-process_effects <- function(effects_raw, reviews_raw) {
+clean_effects <- function(effects, reviews) {
   effects_clean <-
-    effects_raw %>%
+    effects %>%
     # Remove any unusable effects (must have value and N)
     filter(!is.na(value) & !is.na(combined_n)) %>%
     # Translate the statistical tests to common abbreviations
     mutate(stat_test_clean = translate_tests(statistical_test)) %>%
     # Can only use some of the metric types
     filter(stat_test_clean %in% c("b", "d", "r", "or", "z")) %>%
-    convert_effects()
-
-  # Clean the names of the datafile, rename to something more meaningful,
-  # remove empty stuff, then cut small studies or rubbish
-  q <- clean_names(d) %>%
-    dplyr::rename(
-      r = converted_value,
+    convert_effects() %>%
+    rename(
       outcome_category = outcome_level_1,
       outcome = outcome_level_2,
       moderator_level = moderator_level_recoded,
       moderator_category = moderator_category_recoded,
-      k = k_number_of_effects_informing_this_test_consensus,
+      k = k_number_of_effects_informing_this_test,
       n = combined_n,
-      cilb = converted_ci_lower_bound,
-      ciub = converted_ci_upper_bound,
       i2 = i2_calculated,
       plain_language_outcome = outcome_plain_language_descriptor,
-      raw_value = value_consensus,
-      raw_cilb = value_ci_lower_bound_consensus,
-      raw_ciub = value_ci_upper_bound_consensus
+      raw_value = value,
+      raw_cilb = value_ci_lower_bound,
+      raw_ciub = value_ci_upper_bound
     ) %>%
-    remove_empty(which = c("rows", "cols")) %>%
-    mutate(n = as.numeric(n)) %>%
-    filter(
-      r < .99,
-      moderator_level != "fixed effects",
-      n > 1,
-      use_moderator == TRUE
-    )
+    filter(use_moderator)
 
-  # Fix variables that are nested as lists
-  q$i2 <- as.numeric(sapply(q$i2, as.numeric))
-  q$effect_size_id_1 <- as.character(sapply(q$effect_size_id_1, as.character))
-  q$moderator_level <- as.character(sapply(q$moderator_level, as.character))
+
+  # Clean the names of the datafile, rename to something more meaningful,
+  # remove empty stuff, then cut small studies or rubbish
 
   # Create the age moderation check
   revs_dems <- revs %>%

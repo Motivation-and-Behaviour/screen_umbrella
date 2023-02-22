@@ -31,8 +31,12 @@ list(
     read_sheet(file = !!.x)
   ),
   tar_target(
+    reviews_clean,
+    clean_reviews(reviews_raw)
+  ),
+  tar_target(
     effects_clean,
-    process_effects(effects_raw, reviews_raw)
+    clean_effects(effects_raw, reviews_clean)
   ),
   tar_target(studies_converted,
     convert_studies(studies_raw),
@@ -164,13 +168,5 @@ list(
           paste(reviews_raw$bibtex_key, collapse = ", @")
         )
     )
-  ),
-  tar_target(
-    uploaded_manuscripts,
-    upload_files(manuscript)
-  ),
-  tar_target(
-    uploaded_references,
-    upload_files(references)
   )
 )
