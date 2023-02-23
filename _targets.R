@@ -88,7 +88,7 @@ list(
   ),
   # Make plots (plots.R)
   tar_target(prisma_data,
-    here::here("covidence_prisma.txt"),
+    here::here("data/covidence_prisma.txt"),
     format = "file"
   ),
   tar_target(
