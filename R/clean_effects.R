@@ -39,55 +39,26 @@ clean_effects <- function(effects_raw, reviews_clean) {
     ) %>%
     rename(moderator_age = demographics_coded)
 
-  # TODO: Check for ages within the normal moderators and change moderator_age
-
+  # Check for ages within the normal moderators and change moderator_age
   age_moderator_categories <- c(
-    "age", "Age", "Educational level", "Learning domain", "Grade Level",
-    "School level"
+    "age", "Age", "Educational level", "Grade Level",
+    "School level", "Level of education"
   )
+  effects_clean <- effects_clean %>%
+    mutate(moderator_age = case_when(
+      moderator_category %in% age_moderator_categories &
+        moderator_level %in% mixed_codes ~ "mixed",
+      moderator_category %in% age_moderator_categories &
+        moderator_level %in% adolescents_codes ~ "adolescents",
+      moderator_category %in% age_moderator_categories &
+        moderator_level %in% children_codes ~ "children",
+      moderator_category %in% age_moderator_categories &
+        moderator_level %in% young_children_codes ~ "young_children",
+      TRUE ~ moderator_age
+    ))
 
-  # These are the distinct age based moderators
-  effects_clean %>%
-    select(
-      review_id, effect_size_id, moderator_age, moderator_level,
-      moderator_category
-    ) %>%
-    filter(moderator_category %in% c(
-      "age", "Age", "Educational level", "Learning domain", "Grade Level",
-      "School level"
-    )) %>%
-    distinct(moderator_level) %>%
-    dput()
-
-  new_codes <- c(
-    "13-18", "7-12", "0-6", "children",
-    "older than 8", "younger than 8", "12-17 years", "pre-school",
-    "6-11 years", "grades 4-7", "adolescence", "childhood", "Infants",
-    "Toddlers", "Preschoolers", "at least 13 years", "younger than 13 years",
-    "12 or younger", "7-17 years", "18 or younger", "Middle School",
-    "<18", "Children", "Adolescents", "Pre/elementary", "Secondary",
-    "<36 months", ">=36 months", "Imitation", "Language learning",
-    "Object retrieval", "Other", "Elementary", "Primary", "Preschool",
-    "K-3", "Kindergarten", "High School", "Elementary & Kindergarten",
-    "Secondary School", "Preparatory education", "<=14", ">14", "Elementary school",
-    "Middle/High school"
-  )
-
-  new_check <- new_codes[!new_codes %in% c(mixed_codes, adolescents_codes, children_codes, young_children_codes)] %>% dput()
-
-  effects_clean %>%
-    select(
-      review_id, effect_size_id, moderator_age, moderator_level,
-      moderator_category
-    ) %>%
-    filter(moderator_level %in% c(new_check, mixed_codes, adolescents_codes, children_codes, young_children_codes) & moderator_category %in% age_moderator_categories) %>%
-    distinct()
-
-
-
-  # if one effect from this review, keep or select "overall"
-  # group by study_id and exposure and outcome, pick max n
-  q_use <- q %>%
+  # Pick the largest review by N for each outcome/exposure pair and age group
+  effects_use <- effects_clean %>%
     group_by(
       plain_language_outcome,
       plain_language_exposure,
@@ -98,24 +69,11 @@ clean_effects <- function(effects_raw, reviews_clean) {
       use_effect = TRUE,
       main_effect = TRUE
     ) %>%
-    ungroup()
+    ungroup() %>%
+    select(effect_size_id, use_effect, main_effect)
 
-  q <- left_join(q, select(
-    q_use,
-    effect_size_id_1,
-    use_effect, main_effect
-  ), by = "effect_size_id_1") %>%
-    select(
-      author_year, covidence_review_id,
-      outcome_category, effect_size_id_1,
-      plain_language_outcome,
-      plain_language_exposure,
-      moderator_level,
-      moderator_category,
-      risk,
-      k, n, r, cilb, ciub, i2, sig, use_effect, main_effect, moderator_age,
-      starts_with("raw_"), starts_with("converted_"), std_eff_name
-    )
+  effects_clean_use <-
+    left_join(effects_clean, effects_use, by = "effect_size_id")
 
-  return(q)
+  return(effects_clean_use)
 }

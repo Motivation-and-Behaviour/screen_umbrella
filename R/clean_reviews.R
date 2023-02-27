@@ -22,13 +22,17 @@ clean_reviews <- function(reviews_raw) {
       sample_age_lowest_study_mean =
         as.numeric(case_when(
           grepl("months", sample_age_lowest_study_mean) ~
-            as.character(as.numeric(str_remove(sample_age_lowest_study_mean, " months")) / 12),
+            as.character(as.numeric(
+              str_remove(sample_age_lowest_study_mean, " months")
+            ) / 12),
           TRUE ~ sample_age_lowest_study_mean
         )),
       sample_age_highest_study_mean =
         as.numeric(case_when(
           grepl("months", sample_age_highest_study_mean) ~
-            as.character(as.numeric(str_remove(sample_age_highest_study_mean, " months")) / 12),
+            as.character(as.numeric(
+              str_remove(sample_age_highest_study_mean, " months")
+            ) / 12),
           TRUE ~ sample_age_highest_study_mean
         )),
       # Double check the coding based on the age variables
