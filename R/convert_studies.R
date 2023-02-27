@@ -8,7 +8,7 @@
 #' @author Taren Sanders
 #' @export
 convert_studies <- function(data) {
-  data %>%
+  data_converted <- data %>%
     mutate(
       r_ci_lower = if_else(
         is.na(lower_ci) & !is.na(standard_error),
@@ -18,9 +18,9 @@ convert_studies <- function(data) {
       r_ci_upper = if_else(
         is.na(upper_ci) & !is.na(standard_error),
         estimate + 1.96 * standard_error,
-        lower_ci,
+        lower_ci
       ),
-      r_converted = case_when(
+      r_estimate = case_when(
         converted_metric == "r" ~ estimate,
         converted_metric == "b" ~ b2r(estimate),
         converted_metric == "d" ~ effectsize::d_to_r(estimate),
@@ -65,8 +65,21 @@ convert_studies <- function(data) {
           effectsize::d_to_r(upper_ci / standard_deviation),
         TRUE ~ NA_real_
       ),
-      z_converted = correlation::z_fisher(r = r_converted),
+      z_estimate = correlation::z_fisher(r = r_estimate),
       z_ci_lower = suppressWarnings(correlation::z_fisher(r = r_ci_lower)),
       z_ci_upper = suppressWarnings(correlation::z_fisher(r = r_ci_upper))
     )
+
+  # The suppressed warnings are related to NaNs. Check that there were no new
+  # NaNs introduced by the conversion
+  stopifnot(
+    length(is.na(data_converted$r_estimate)) ==
+      length(is.na(data_converted$estimate)),
+    length(is.na(data_converted$r_ci_lower)) <=
+      length(is.na(data_converted$lower_ci)),
+    length(is.na(data_converted$r_ci_upper)) <=
+      length(is.na(data_converted$upper_ci))
+  )
+
+  return(data_converted)
 }

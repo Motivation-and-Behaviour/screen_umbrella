@@ -40,29 +40,52 @@ list(
     iteration = "group"
   ),
   tar_target(
-    meta_results,
-    run_metaanalysis(studies_clean),
+    meta_results_r,
+    run_metaanalysis(studies_clean, type = "r"),
     pattern = map(studies_clean),
     iteration = "list"
   ),
   tar_target(
-    meta_aggregated,
-    tidy_meta(meta_results),
-    pattern = map(meta_results)
+    meta_aggregated_r,
+    tidy_meta(meta_results_r),
+    pattern = map(meta_results_r)
   ),
   tar_target(
-    eggers_results,
-    run_eggers(meta_results),
-    pattern = map(meta_results)
+    eggers_results_r,
+    run_eggers(meta_results_r),
+    pattern = map(meta_results_r)
   ),
   tar_target(
-    excess_sig_results,
-    run_excess_sig(meta_results),
-    pattern = map(meta_results)
+    excess_sig_results_r,
+    run_excess_sig(meta_results_r),
+    pattern = map(meta_results_r)
+  ),
+  tar_target(
+    meta_results_z,
+    run_metaanalysis(studies_clean, type = "z"),
+    pattern = map(studies_clean),
+    iteration = "list"
+  ),
+  tar_target(
+    meta_aggregated_z,
+    tidy_meta(meta_results_z),
+    pattern = map(meta_results_z)
+  ),
+  tar_target(
+    eggers_results_z,
+    run_eggers(meta_results_z),
+    pattern = map(meta_results_z)
+  ),
+  tar_target(
+    excess_sig_results_z,
+    run_excess_sig(meta_results_z),
+    pattern = map(meta_results_z)
   ),
   tar_target(
     studies_results,
-    combine_study_results(meta_aggregated, eggers_results, excess_sig_results)
+    combine_study_results(
+      meta_aggregated_r, eggers_results_r, excess_sig_results_r
+    )
   ),
   tar_target(
     combined_effects,
