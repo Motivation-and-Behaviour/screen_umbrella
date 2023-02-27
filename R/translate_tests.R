@@ -16,7 +16,7 @@ translate_tests <- function(stat) {
     c(
       "adjusted smd", "average effect size", "cohen d", "cohen's d",
       "effect size (type unclear)", "g", "g+", "hedge's g", "hedges g",
-      "hedges' d", "hedges' g", "median effect size",
+      "hedges' d", "hedge's d", "hedges' g", "median effect size",
       "pooled mean effect size", "smd", "standard mean difference",
       "standardised difference in the means", "standardized mean difference",
       "standarised mean difference", "std mean difference",

@@ -34,14 +34,15 @@ list(
     effects_clean,
     clean_effects(effects_raw, reviews_clean)
   ),
-  tar_target(studies_converted,
-    convert_studies(studies_raw),
+  tar_target(
+    studies_clean,
+    clean_studies(studies_raw),
     iteration = "group"
   ),
   tar_target(
     meta_results,
-    run_metaanalysis(studies_converted),
-    pattern = map(studies_converted),
+    run_metaanalysis(studies_clean),
+    pattern = map(studies_clean),
     iteration = "list"
   ),
   tar_target(
@@ -143,7 +144,7 @@ list(
   tar_target(
     manuscript_info,
     create_manuscript_info(
-      effects_clean, prisma, tables_df, combined_effects, studies_converted
+      effects_clean, prisma, tables_df, combined_effects, studies_clean
     )
   ),
   tar_render(

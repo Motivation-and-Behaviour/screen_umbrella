@@ -1,19 +1,6 @@
 ## Study level data ----
 
 convert_studies <- function(raw) {
-  # Custom conversion functions
-  b2r <- function(beta) {
-    # conversion formula from 10.1007/s11162-011-9232-5
-    r <- case_when(
-      beta < -0.5 ~ -0.5,
-      beta > 0.5 ~ 0.5,
-      TRUE ~ beta
-    )
-    return(r)
-  }
-
-  b2r <- Vectorize(b2r)
-
   # Clean data
   cleaned <- raw %>%
     mutate(
