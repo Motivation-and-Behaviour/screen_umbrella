@@ -4,10 +4,20 @@
 #'
 #' @title
 #' @param reviews_raw
+#' @param effects_raw
 #' @return
 #' @author Taren Sanders
 #' @export
-clean_reviews <- function(reviews_raw) {
+clean_reviews <- function(reviews_raw, effects_raw) {
+  zero_effects_ids <-
+    effects_raw %>%
+    group_by(review_id) %>%
+    summarise(n_valid_effects = sum(
+      !is.na(value) & !is.na(combined_n) & use_moderator
+    )) %>%
+    filter(n_valid_effects == 0) %>%
+    pull(review_id)
+
   reviews_clean <-
     reviews_raw %>%
     mutate(
@@ -50,6 +60,9 @@ clean_reviews <- function(reviews_raw) {
     ) %>%
     # Add some other helpful columns
     mutate(
-      author_year = paste(first_author, ", ", year_of_publication, sep = "")
+      author_year = paste(first_author, ", ", year_of_publication, sep = ""),
+      no_valid_effects = if_else(review_id %in% zero_effects_ids, TRUE, FALSE)
     )
+
+  return(reviews_clean)
 }

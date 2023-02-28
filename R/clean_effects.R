@@ -12,7 +12,7 @@ clean_effects <- function(effects_raw, reviews_clean) {
   effects_clean <-
     effects_raw %>%
     # Remove any unusable effects (must have value and N)
-    filter(!is.na(value) & !is.na(combined_n)) %>%
+    filter(!is.na(value) & !is.na(combined_n) & use_moderator) %>%
     # Translate the statistical tests to common abbreviations
     mutate(stat_test_clean = translate_tests(statistical_test)) %>%
     # Can only use some of the metric types
@@ -31,7 +31,6 @@ clean_effects <- function(effects_raw, reviews_clean) {
       raw_cilb = value_ci_lower_bound,
       raw_ciub = value_ci_upper_bound
     ) %>%
-    filter(use_moderator) %>%
     # Add the demographics in from the review-level data
     left_join(
       select(reviews_clean, review_id, author_year, demographics_coded),

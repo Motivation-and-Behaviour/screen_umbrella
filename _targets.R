@@ -29,10 +29,14 @@ list(
     "data/QualityAssessment.csv",
     read_sheet(file = !!.x)
   ),
+  tar_target(prisma_path,
+    here::here("data/covidence_prisma.txt"),
+    format = "file"
+  ),
   # Clean data --------------------------------------------------------------
   tar_target(
     reviews_clean,
-    clean_reviews(reviews_raw)
+    clean_reviews(reviews_raw, effects_raw)
   ),
   tar_target(
     effects_clean,
@@ -100,28 +104,37 @@ list(
   # Make tables -------------------------------------------------------------
   tar_target(
     tables_df,
-    make_table_data(rob_raw, effects_clean, reviews_raw)
+    make_table_df(rob_raw, effects_clean, reviews_clean)
   ),
   tar_target(
-    reviews_tables,
-    make_desc_tables(tables_df)
+    table_desc_gt,
+    make_table_desc_gt(tables_df)
   ),
   tar_target(
-    export_tables,
-    save_tables(reviews_tables),
+    table_desc_latex,
+    make_table_desc_latex(tables_df)
+  ),
+  tar_target(
+    table_rob,
+    make_table_rob(tables_df)
+  ),
+  tar_target(
+    table_desc_saved,
+    save_tables(table_desc_gt, "Review characteristics.pdf"),
     format = "file",
-    pattern = map(reviews_tables)
+  ),
+  tar_target(
+    table_rob_saved,
+    save_tables(table_rob, "Quality assessment table.pdf"),
+    format = "file",
   ),
   # Make plots --------------------------------------------------------------
-  tar_target(prisma_data,
-    here::here("data/covidence_prisma.txt"),
-    format = "file"
-  ),
   tar_target(
     prisma,
-    make_prisma(prisma_data, effects_clean)
+    make_prisma(prisma_path, effects_clean, reviews_clean)
   ),
-  tar_target(export_prisma,
+  tar_target(
+    prisma_saved,
     save_prisma(prisma),
     format = "file",
   ),
