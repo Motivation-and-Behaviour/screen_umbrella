@@ -8,7 +8,7 @@ load_packages()
 
 
 list(
-  # Fetch and analyse (data.R)
+  # Read data ---------------------------------------------------------------
   tar_file_read(
     effects_raw,
     "data/Effects.csv",
@@ -29,6 +29,7 @@ list(
     "data/QualityAssessment.csv",
     read_sheet(file = !!.x)
   ),
+  # Clean data --------------------------------------------------------------
   tar_target(
     reviews_clean,
     clean_reviews(reviews_raw)
@@ -42,6 +43,7 @@ list(
     clean_studies(studies_raw),
     iteration = "group"
   ),
+  # Re-run analyses ---------------------------------------------------------
   tar_target(
     meta_results_r,
     run_metaanalysis(studies_clean, type = "r"),
@@ -87,14 +89,15 @@ list(
   tar_target(
     studies_results,
     combine_study_results(
-      meta_aggregated_r, eggers_results_r, excess_sig_results_r
+      meta_aggregated_r, eggers_results_r, excess_sig_results_r,
+      meta_aggregated_z, eggers_results_z, excess_sig_results_z
     )
   ),
   tar_target(
     combined_effects,
-    join_analyses(effects_clean, studies_results)
+    combine_effects(effects_clean, studies_results)
   ),
-  # Make tables (tables.R)
+  # Make tables -------------------------------------------------------------
   tar_target(
     tables_df,
     make_table_data(rob_raw, effects_clean, reviews_raw)
@@ -109,7 +112,7 @@ list(
     format = "file",
     pattern = map(reviews_tables)
   ),
-  # Make plots (plots.R)
+  # Make plots --------------------------------------------------------------
   tar_target(prisma_data,
     here::here("data/covidence_prisma.txt"),
     format = "file"
@@ -132,7 +135,7 @@ list(
     format = "file",
     pattern = map(plots)
   ),
-  # Make sundry supplementary material (supplementary.R)
+  # Create supplementary materials plots ------------------------------------
   tar_target(
     supp_exposures,
     make_supp_exposures(combined_effects),
@@ -143,7 +146,7 @@ list(
     make_supp_effects(combined_effects),
     format = "file"
   ),
-  # Create reports (reports.R)
+  # Create manuscript  ------------------------------------------------------
   tar_target(
     packages_bib,
     create_packages_bib(

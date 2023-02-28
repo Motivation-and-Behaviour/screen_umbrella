@@ -28,6 +28,7 @@ Suggests:
     httpgd,
     languageserver,
     lintr,
+    pingr,
     rstudioapi,
     shiny,
     shinybusy,

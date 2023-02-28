@@ -75,5 +75,29 @@ clean_effects <- function(effects_raw, reviews_clean) {
   effects_clean_use <-
     left_join(effects_clean, effects_use, by = "effect_size_id")
 
-  return(effects_clean_use)
+  effects_clean_renamed <-
+    effects_clean_use %>%
+    rename(
+      age_group = moderator_age,
+      # Raw data
+      original_effect_size = raw_value,
+      original_effect_size_type = statistical_test,
+      original_cilb = raw_cilb,
+      original_ciub = raw_ciub,
+      original_k = k,
+      original_n = n,
+      original_i2 = i2,
+      original_p_value = p_value,
+      original_se = value_raw_se,
+      original_sd = value_raw_sd,
+      # Converted data
+      converted_r = r,
+      converted_cilb = cilb,
+      converted_ciub = ciub,
+      converted_z = z,
+      converted_cilb_z = cilb_z,
+      converted_ciub_z = ciub_z
+    )
+
+  return(effects_clean_renamed)
 }
