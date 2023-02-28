@@ -25,7 +25,7 @@ run_metaanalysis <- function(studies_clean, type = "r") {
     meta_out <- rma(
       data = studies_clean,
       measure = "ZCOR",
-      ri = z_estimate,
+      ri = r_estimate,
       ni = study_n,
       slab = study_name
     )
