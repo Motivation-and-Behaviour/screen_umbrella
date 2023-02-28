@@ -1,8 +1,11 @@
+# Set options
+options(tidyverse.quiet = TRUE, clustermq.scheduler = "multiprocess")
+
 # Load required functions and packages
 lapply(list.files("./R", full.names = TRUE), source)
 load_packages()
 
-options(tidyverse.quiet = TRUE, clustermq.scheduler = "multiprocess")
+
 
 list(
   # Fetch and analyse (data.R)
