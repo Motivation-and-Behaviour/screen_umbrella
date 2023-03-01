@@ -5,8 +5,6 @@ options(tidyverse.quiet = TRUE, clustermq.scheduler = "multiprocess")
 lapply(list.files("./R", full.names = TRUE), source)
 load_packages()
 
-
-
 list(
   # Read data ---------------------------------------------------------------
   tar_file_read(
@@ -120,12 +118,12 @@ list(
   ),
   tar_target(
     table_desc_saved,
-    save_tables(table_desc_gt, "Review characteristics.pdf"),
+    save_table(table_desc_gt, "Review characteristics.pdf"),
     format = "file",
   ),
   tar_target(
     table_rob_saved,
-    save_tables(table_rob, "Quality assessment table.pdf"),
+    save_table(table_rob, "Quality assessment table.pdf"),
     format = "file",
   ),
   # Make plots --------------------------------------------------------------
@@ -139,14 +137,56 @@ list(
     format = "file",
   ),
   tar_target(
-    plots,
-    make_plots(combined_effects)
+    edu_certain_params,
+    edu_certain,
   ),
   tar_target(
-    export_plots,
-    save_plots(plots),
+    edu_uncertain_params,
+    edu_uncertain,
+  ),
+  tar_target(
+    nonedu_certain_params,
+    nonedu_certain,
+  ),
+  tar_target(
+    nonedu_uncertain_params,
+    nonedu_uncertain,
+  ),
+  tar_target(
+    plot_edu_certain,
+    make_forest_plot(combined_effects, edu_certain_params)
+  ),
+  tar_target(
+    plot_edu_uncertain,
+    make_forest_plot(combined_effects, edu_uncertain_params)
+  ),
+  tar_target(
+    plot_nonedu_certain,
+    make_forest_plot(combined_effects, nonedu_certain_params)
+  ),
+  tar_target(
+    plot_nonedu_uncertain,
+    make_forest_plot(combined_effects, nonedu_uncertain_params)
+  ),
+  tar_target(
+    plot_edu_certain_saved,
+    save_plot(plot_edu_certain, edu_certain_params),
     format = "file",
-    pattern = map(plots)
+  ),
+  tar_target(
+    plot_edu_uncertain_saved,
+    save_plot(plot_edu_uncertain, edu_uncertain_params),
+    format = "file",
+  ),
+  tar_target(
+    plot_nonedu_certain_saved,
+    save_plot(plot_nonedu_certain, nonedu_certain_params),
+    format = "file",
+  ),
+  tar_target(
+    plot_nonedu_uncertain_saved,
+    save_plot(plot_nonedu_uncertain, nonedu_uncertain_params),
+    format = "file",
   ),
   # Create supplementary materials plots ------------------------------------
   tar_target(
@@ -162,7 +202,7 @@ list(
   # Create manuscript  ------------------------------------------------------
   tar_target(
     packages_bib,
-    create_packages_bib(
+    make_packages_bib(
       .packages(),
       here::here("reports", "packages.bib")
     ),
@@ -185,7 +225,7 @@ list(
   ),
   tar_target(
     manuscript_info,
-    create_manuscript_info(
+    make_manuscript_info(
       effects_clean, prisma, tables_df, combined_effects, studies_clean
     )
   ),

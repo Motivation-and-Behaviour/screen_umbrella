@@ -22,21 +22,21 @@
   url = {https://CRAN.R-project.org/package=broom},
 }
 
-@Manual{R-bs4Dash,
-  title = {bs4Dash: A Bootstrap 4 Version of shinydashboard},
-  author = {David Granjon},
-  year = {2022},
-  note = {R package version 2.2.1},
-  url = {https://CRAN.R-project.org/package=bs4Dash},
-}
-
 @Manual{R-clustermq,
   title = {clustermq: Evaluate Function Calls on HPC Schedulers (LSF, SGE, SLURM,
 PBS/Torque)},
   author = {Michael Schubert},
   year = {2023},
-  note = {R package version 0.8.95.4},
+  note = {R package version 0.8.95.5},
   url = {https://mschubert.github.io/clustermq/},
+}
+
+@Manual{R-correlation,
+  title = {correlation: Methods for Correlation Analysis},
+  author = {Dominique Makowski and Brenton M. Wiernik and Indrajeet Patil and Daniel Lüdecke and Mattan S. Ben-Shachar},
+  year = {2022},
+  note = {R package version 0.8.3},
+  url = {https://easystats.github.io/correlation/},
 }
 
 @Manual{R-DiagrammeR,
@@ -57,9 +57,9 @@ PBS/Torque)},
 
 @Manual{R-dplyr,
   title = {dplyr: A Grammar of Data Manipulation},
-  author = {Hadley Wickham and Romain François and Lionel Henry and Kirill Müller},
-  year = {2022},
-  note = {R package version 1.0.10},
+  author = {Hadley Wickham and Romain François and Lionel Henry and Kirill Müller and Davis Vaughan},
+  year = {2023},
+  note = {R package version 1.1.0},
   url = {https://CRAN.R-project.org/package=dplyr},
 }
 
@@ -69,6 +69,14 @@ PBS/Torque)},
   year = {2023},
   note = {R package version 0.27},
   url = {https://github.com/rstudio/DT},
+}
+
+@Manual{R-effectsize,
+  title = {effectsize: Indices of Effect Size},
+  author = {Mattan S. Ben-Shachar and Dominique Makowski and Daniel Lüdecke and Indrajeet Patil and Brenton M. Wiernik and Rémi Thériault},
+  year = {2023},
+  note = {R package version 0.8.3},
+  url = {https://easystats.github.io/effectsize/},
 }
 
 @Manual{R-emojifont,
@@ -90,16 +98,16 @@ PBS/Torque)},
 @Manual{R-forcats,
   title = {forcats: Tools for Working with Categorical Variables (Factors)},
   author = {Hadley Wickham},
-  year = {2022},
-  note = {R package version 0.5.2},
+  year = {2023},
+  note = {R package version 1.0.0},
   url = {https://CRAN.R-project.org/package=forcats},
 }
 
 @Manual{R-future,
   title = {future: Unified Parallel and Distributed Processing in R for Everyone},
   author = {Henrik Bengtsson},
-  year = {2022},
-  note = {R package version 1.30.0},
+  year = {2023},
+  note = {R package version 1.31.0},
   url = {https://CRAN.R-project.org/package=future},
 }
 
@@ -114,8 +122,8 @@ PBS/Torque)},
 @Manual{R-ggplot2,
   title = {ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics},
   author = {Hadley Wickham and Winston Chang and Lionel Henry and Thomas Lin Pedersen and Kohske Takahashi and Claus Wilke and Kara Woo and Hiroaki Yutani and Dewey Dunnington},
-  year = {2022},
-  note = {R package version 3.4.0},
+  year = {2023},
+  note = {R package version 3.4.1},
   url = {https://CRAN.R-project.org/package=ggplot2},
 }
 
@@ -129,26 +137,10 @@ PBS/Torque)},
 
 @Manual{R-gt,
   title = {gt: Easily Create Presentation-Ready Display Tables},
-  author = {Richard Iannone and Joe Cheng and Barret Schloerke and Ellis Hughes and JooYoung Seo},
+  author = {Richard Iannone and Joe Cheng and Barret Schloerke},
   year = {2022},
-  note = {R package version 0.8.0},
+  note = {R package version 0.6.0},
   url = {https://CRAN.R-project.org/package=gt},
-}
-
-@Manual{R-here,
-  title = {here: A Simpler Way to Find Your Files},
-  author = {Kirill Müller},
-  year = {2020},
-  note = {R package version 1.0.1},
-  url = {https://CRAN.R-project.org/package=here},
-}
-
-@Manual{R-janitor,
-  title = {janitor: Simple Tools for Examining and Cleaning Dirty Data},
-  author = {Sam Firke},
-  year = {2021},
-  note = {R package version 2.1.0},
-  url = {https://github.com/sfirke/janitor},
 }
 
 @Manual{R-kableExtra,
@@ -186,8 +178,8 @@ PBS/Torque)},
 @Manual{R-markdown,
   title = {markdown: Render Markdown with commonmark},
   author = {JJ Allaire and Jeffrey Horner and Yihui Xie},
-  year = {2022},
-  note = {R package version 1.4},
+  year = {2023},
+  note = {R package version 1.5},
   url = {https://github.com/rstudio/markdown},
 }
 
@@ -224,14 +216,6 @@ R Markdown},
   url = {https://github.com/crsh/papaja},
 }
 
-@Manual{R-pingr,
-  title = {pingr: Check if a Remote Computer is Up},
-  author = {Gábor Csárdi},
-  year = {2022},
-  note = {R package version 2.0.2},
-  url = {https://github.com/r-lib/pingr#readme},
-}
-
 @Manual{R-purrr,
   title = {purrr: Functional Programming Tools},
   author = {Hadley Wickham and Lionel Henry},
@@ -240,52 +224,12 @@ R Markdown},
   url = {https://CRAN.R-project.org/package=purrr},
 }
 
-@Manual{R-readr,
-  title = {readr: Read Rectangular Text Data},
-  author = {Hadley Wickham and Jim Hester and Jennifer Bryan},
-  year = {2023},
-  note = {R package version 2.1.4},
-  url = {https://CRAN.R-project.org/package=readr},
-}
-
-@Manual{R-rstudioapi,
-  title = {rstudioapi: Safely Access the RStudio API},
-  author = {Kevin Ushey and JJ Allaire and Hadley Wickham and Gary Ritchie},
-  year = {2022},
-  note = {R package version 0.14},
-  url = {https://CRAN.R-project.org/package=rstudioapi},
-}
-
 @Manual{R-scales,
   title = {scales: Scale Functions for Visualization},
   author = {Hadley Wickham and Dana Seidel},
   year = {2022},
   note = {R package version 1.2.1},
   url = {https://CRAN.R-project.org/package=scales},
-}
-
-@Manual{R-shiny,
-  title = {shiny: Web Application Framework for R},
-  author = {Winston Chang and Joe Cheng and JJ Allaire and Carson Sievert and Barret Schloerke and Yihui Xie and Jeff Allen and Jonathan McPherson and Alan Dipert and Barbara Borges},
-  year = {2022},
-  note = {R package version 1.7.4},
-  url = {https://shiny.rstudio.com/},
-}
-
-@Manual{R-shinybusy,
-  title = {shinybusy: Busy Indicators and Notifications for Shiny Applications},
-  author = {Fanny Meyer and Victor Perrier},
-  year = {2022},
-  note = {R package version 0.3.1},
-  url = {https://github.com/dreamRs/shinybusy},
-}
-
-@Manual{R-shinyWidgets,
-  title = {shinyWidgets: Custom Inputs Widgets for Shiny},
-  author = {Victor Perrier and Fanny Meyer and David Granjon},
-  year = {2023},
-  note = {R package version 0.7.6},
-  url = {https://CRAN.R-project.org/package=shinyWidgets},
 }
 
 @Manual{R-stringr,
@@ -312,14 +256,6 @@ R Markdown},
   url = {https://CRAN.R-project.org/package=targets},
 }
 
-@Manual{R-tibble,
-  title = {tibble: Simple Data Frames},
-  author = {Kirill Müller and Hadley Wickham},
-  year = {2022},
-  note = {R package version 3.1.8},
-  url = {https://CRAN.R-project.org/package=tibble},
-}
-
 @Manual{R-tidyMB,
   title = {tidyMB: Functions to Improve Workflow for Motivation and Behaviour Research},
   author = {Philip Parker and Taren Sanders and Michael Noetel and James Conigrave},
@@ -336,14 +272,6 @@ R Markdown},
   url = {https://CRAN.R-project.org/package=tidyr},
 }
 
-@Manual{R-tidyverse,
-  title = {tidyverse: Easily Install and Load the Tidyverse},
-  author = {Hadley Wickham},
-  year = {2022},
-  note = {R package version 1.3.2},
-  url = {https://CRAN.R-project.org/package=tidyverse},
-}
-
 @Manual{R-tinylabels,
   title = {tinylabels: Lightweight Variable Labels},
   author = {Marius Barth},
@@ -352,20 +280,37 @@ R Markdown},
   url = {https://github.com/mariusbarth/tinylabels},
 }
 
-@Manual{R-visNetwork,
-  title = {visNetwork: Network Visualization using vis.js Library},
-  author = {{Almende B.V. and Contributors} and Benoit Thieurmel},
-  year = {2022},
-  note = {R package version 2.1.2},
-  url = {https://datastorm-open.github.io/visNetwork/},
-}
-
 @Manual{R-xfun,
   title = {xfun: Supporting Functions for Packages Maintained by Yihui Xie},
   author = {Yihui Xie},
   year = {2023},
   note = {R package version 0.37},
   url = {https://github.com/yihui/xfun},
+}
+
+@Article{correlation2020,
+  title = {Methods and Algorithms for Correlation Analysis in R.},
+  author = {Dominique Makowski and Mattan S. Ben-Shachar and Indrajeet Patil and Daniel Lüdecke},
+  doi = {10.21105/joss.02306},
+  year = {2020},
+  journal = {Journal of Open Source Software},
+  number = {51},
+  volume = {5},
+  pages = {2306},
+  url = {https://joss.theoj.org/papers/10.21105/joss.02306},
+}
+
+@Article{effectsize2020,
+  title = {{e}ffectsize: Estimation of Effect Size Indices and Standardized Parameters},
+  author = {Mattan S. Ben-Shachar and Daniel Lüdecke and Dominique Makowski},
+  year = {2020},
+  journal = {Journal of Open Source Software},
+  volume = {5},
+  number = {56},
+  pages = {2815},
+  publisher = {The Open Journal},
+  doi = {10.21105/joss.02815},
+  url = {https://doi.org/10.21105/joss.02815},
 }
 
 @Manual{esc2019,
@@ -445,16 +390,5 @@ R Markdown},
   number = {57},
   pages = {2959},
   url = {https://doi.org/10.21105/joss.02959},
-}
-
-@Article{tidyverse2019,
-  title = {Welcome to the {tidyverse}},
-  author = {Hadley Wickham and Mara Averick and Jennifer Bryan and Winston Chang and Lucy D'Agostino McGowan and Romain François and Garrett Grolemund and Alex Hayes and Lionel Henry and Jim Hester and Max Kuhn and Thomas Lin Pedersen and Evan Miller and Stephan Milton Bache and Kirill Müller and Jeroen Ooms and David Robinson and Dana Paige Seidel and Vitalie Spinu and Kohske Takahashi and Davis Vaughan and Claus Wilke and Kara Woo and Hiroaki Yutani},
-  year = {2019},
-  journal = {Journal of Open Source Software},
-  volume = {4},
-  number = {43},
-  pages = {1686},
-  doi = {10.21105/joss.01686},
 }
 
