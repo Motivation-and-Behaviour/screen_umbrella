@@ -160,12 +160,6 @@
       "Version": "1.1-3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemoteType": "standard",
-      "RemotePkgRef": "RColorBrewer",
-      "RemoteRef": "RColorBrewer",
-      "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-      "RemoteSha": "1.1-3",
       "Hash": "45f0398006e83a5b10b72a90663d8d8c",
       "Requirements": []
     },
@@ -297,14 +291,6 @@
         "humaniformat",
         "stringr"
       ]
-    },
-    "bigD": {
-      "Package": "bigD",
-      "Version": "0.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "93637e906f3fe962413912c956eb44db",
-      "Requirements": []
     },
     "bit": {
       "Package": "bit",
@@ -467,6 +453,16 @@
       "Requirements": [
         "rematch",
         "tibble"
+      ]
+    },
+    "checkmate": {
+      "Package": "checkmate",
+      "Version": "2.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "147e4db6909d8814bb30f671b49d7e06",
+      "Requirements": [
+        "backports"
       ]
     },
     "chromote": {
@@ -893,12 +889,6 @@
       "Version": "2.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemoteType": "standard",
-      "RemotePkgRef": "farver",
-      "RemoteRef": "farver",
-      "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "x86_64-w64-mingw32",
-      "RemoteSha": "2.1.1",
       "Hash": "8106d78941f34855c440ddb946b8f7a5",
       "Requirements": []
     },
@@ -1240,26 +1230,25 @@
     },
     "gt": {
       "Package": "gt",
-      "Version": "0.8.0",
+      "Version": "0.6.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d100be8d1f54dc589cc8d63366839287",
+      "Hash": "842059d3f71b14e812500b23eeea765e",
       "Requirements": [
         "base64enc",
-        "bigD",
         "bitops",
-        "cli",
+        "checkmate",
         "commonmark",
         "dplyr",
         "fs",
         "ggplot2",
         "glue",
         "htmltools",
-        "juicyjuice",
         "magrittr",
         "rlang",
         "sass",
         "scales",
+        "stringr",
         "tibble",
         "tidyselect"
       ]
@@ -1269,12 +1258,6 @@
       "Version": "0.3.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemoteType": "standard",
-      "RemotePkgRef": "gtable",
-      "RemoteRef": "gtable",
-      "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-      "RemoteSha": "0.3.1",
       "Hash": "36b4265fb818f6a342bed217549cd896",
       "Requirements": []
     },
@@ -1521,16 +1504,6 @@
       "Hash": "a4269a09a9b865579b2635c77e572374",
       "Requirements": []
     },
-    "juicyjuice": {
-      "Package": "juicyjuice",
-      "Version": "0.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "3bcd11943da509341838da9399e18bce",
-      "Requirements": [
-        "V8"
-      ]
-    },
     "kableExtra": {
       "Package": "kableExtra",
       "Version": "1.3.4",
@@ -1595,12 +1568,6 @@
       "Version": "0.4.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemoteType": "standard",
-      "RemotePkgRef": "labeling",
-      "RemoteRef": "labeling",
-      "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-      "RemoteSha": "0.4.2",
       "Hash": "3d5108641f47470611a32d0bdf357a72",
       "Requirements": []
     },
@@ -1828,12 +1795,6 @@
       "Version": "0.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemoteType": "standard",
-      "RemotePkgRef": "munsell",
-      "RemoteRef": "munsell",
-      "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-      "RemoteSha": "0.5.0",
       "Hash": "6dfe8bf774944bd5595785e3229d8771",
       "Requirements": [
         "colorspace"
@@ -2435,12 +2396,6 @@
       "Version": "1.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemoteType": "standard",
-      "RemotePkgRef": "scales",
-      "RemoteRef": "scales",
-      "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-      "RemoteSha": "1.2.1",
       "Hash": "906cb23d2f1c5680b8ce439b44c6fa63",
       "Requirements": [
         "R6",
@@ -2805,14 +2760,14 @@
       "Package": "tflow",
       "Version": "0.3.7",
       "Source": "GitHub",
-      "Remotes": "milesmcbain/fnmate, milesmcbain/capsule, milesmcbain/atcursor",
       "RemoteType": "github",
+      "Remotes": "milesmcbain/fnmate, milesmcbain/capsule, milesmcbain/atcursor",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "tflow",
       "RemoteUsername": "MilesMcBain",
       "RemoteRef": "HEAD",
       "RemoteSha": "30cb6850ee7f69d462619f066ff739dc19ff1e7c",
-      "Hash": "b6de4f3bfe337ddb7051eed54899ad5e",
+      "Hash": "9d2849af0160b0c4fdb65efa065bcf70",
       "Requirements": [
         "atcursor",
         "cli",
@@ -2853,7 +2808,7 @@
       "RemoteSha": "0880b03fccd855120cd8ae1485c7e5154d81d4e8",
       "RemoteHost": "api.github.com",
       "Remotes": "crsh/papaja",
-      "Hash": "b5c6c63c6d038725d16a72e81671c9b9",
+      "Hash": "6a1e5a46bea272388424e598c8e2d0b3",
       "Requirements": [
         "ggplot2",
         "ggthemes",
@@ -3073,12 +3028,6 @@
       "Version": "0.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemoteType": "standard",
-      "RemotePkgRef": "viridisLite",
-      "RemoteRef": "viridisLite",
-      "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-      "RemoteSha": "0.4.1",
       "Hash": "62f4b5da3e08d8e5bcba6cac15603f70",
       "Requirements": []
     },

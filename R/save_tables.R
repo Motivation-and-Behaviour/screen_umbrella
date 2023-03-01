@@ -11,6 +11,7 @@
 save_tables <- function(table, filename) {
   file_path <- here::here("tables", filename)
 
+  # Note: this only works with gt 0.6.0 (webshot not webshot2)
   gtsave(
     data = table,
     filename = file_path,
