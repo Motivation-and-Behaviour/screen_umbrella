@@ -51,16 +51,16 @@ make_plots <- function(combined_effects) {
       )),
       eggers = case_when(
         source == "reported" ~ fontawesome("fa-minus"),
-        eggers_p > 0.05 ~ fontawesome("fa-check"),
+        reanalysis_eggers_p > 0.05 ~ fontawesome("fa-check"),
         TRUE ~ fontawesome("fa-times")
       ),
       esig = case_when(
         source == "reported" ~ fontawesome("fa-minus"),
-        tes_p > 0.05 ~ fontawesome("fa-check"),
+        reanalysis_tes_p > 0.05 ~ fontawesome("fa-check"),
         TRUE ~ fontawesome("fa-times")
       ),
       font_fam = "fontawesome-webfont",
-      moderator_age = factor(moderator_age,
+      age_group = factor(age_group,
         levels = c("All", "Young children", "Children", "Adolescents")
       )
     ) %>%
@@ -68,7 +68,7 @@ make_plots <- function(combined_effects) {
       outcome_lvl_1,
       plain_language_outcome,
       plain_language_exposure,
-      moderator_age
+      age_group
     ) %>%
     mutate(row_num = as.factor(row_number())) %>%
     add_row(
@@ -86,7 +86,7 @@ make_plots <- function(combined_effects) {
       esig = "**Excess<br/>Signif.**",
       outcome_category = "**Outcome Category**",
       font_fam = "sans",
-      moderator_age = "**Age Group**"
+      age_group = "**Age Group**"
     ) %>%
     mutate(
       outcome_lvl_1 = fct_expand(outcome_lvl_1, "**Outcome**") %>%
@@ -106,7 +106,7 @@ make_plots <- function(combined_effects) {
         "**Outcome Category**"
       ) %>%
         fct_relevel("**Outcome Category**"),
-      moderator_age = fct_expand(moderator_age, "**Age Group**") %>%
+      age_group = fct_expand(age_group, "**Age Group**") %>%
         fct_relevel("**Age Group**")
     )
 
@@ -142,7 +142,7 @@ make_plots <- function(combined_effects) {
           ymin = cilb999,
           ymax = ciub999
         ),
-        size = 2,
+        linewidth = 2,
         colour = "#bdbdbd"
       ) +
       geom_linerange(
@@ -150,12 +150,12 @@ make_plots <- function(combined_effects) {
           ymin = cilb95,
           ymax = ciub95
         ),
-        size = 2,
+        linewidth = 2,
         colour = "#636363"
       ) +
       geom_hline(aes(yintercept = 0),
         lty = 1,
-        size = 0.5
+        linewidth = 0.5
       ) +
       geom_point(
         size = 2, shape = 21,
@@ -210,7 +210,7 @@ make_plots <- function(combined_effects) {
         size = 2.5,
         label.size = labsize
       ) +
-      geom_richtext(aes(label = moderator_age),
+      geom_richtext(aes(label = age_group),
         y = positions$mod,
         vjust = 0.5, hjust = 0,
         stat = "identity",
@@ -271,7 +271,7 @@ make_plots <- function(combined_effects) {
         x = "NA",
         ymin = head(positions$breaks, 1) - 0.01,
         ymax = tail(positions$breaks, 1) + 0.01,
-        size = 20,
+        linewidth = 20,
         colour = "white"
       ) +
       labs(
@@ -464,21 +464,13 @@ make_plots <- function(combined_effects) {
 }
 
 save_plots <- function(plots) {
-  file_name <- here::here("figure", plots[[1]]$filename)
-
+  file_name <- here::here("figures", plots[[1]]$filename)
 
   ggsave(
     filename = file_name,
     plot = plots[[1]]$plot,
     width = plots[[1]]$dims[[1]],
     height = plots[[1]]$dims[[2]]
-  )
-
-  # Upload to GDrive
-  drive_put(here::here("figure", plots[[1]]$filename),
-    path = as_id(
-      "https://drive.google.com/drive/folders/1xvn1B4bGH7hr6yBvDGUfEF7F_eO3Qeml"
-    )
   )
 
   return(file_name)
