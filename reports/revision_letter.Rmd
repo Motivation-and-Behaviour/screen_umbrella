@@ -77,4 +77,11 @@ We feel that this is sensible --- guidelines are based on causal assumptions, an
 The manuscript notes that the nature of the data allowed for few age-based conclusions- I fear that this is a substantial limitation that deserves more discussion. It seems difficult to characterize all children’s media use from age 0-18 in the same way, especially across such a wide range of developmental outcomes. A more nuanced treatment of developmental considerations would have been appreciated.
 ```
 
+One of the benefits of the other reviewers' and editor's suggestion to update the search is that some of this limitation has been addressed in more recent literature.
+Newer papers were more likely to provide moderation by age group, or new reviews targeting specific age groups were now available.
+Unfortunately, many of these still failed to meet our criteria for statistical certainty.
+Inspecting the results in the supplementary material still reveal fewer differences by age group than may be expected.
+In some cases this is because there is still only an effect for a single age group, as many reviews target behaviours or outcomes which are more common in one age group (e.g., sexting in adolescents, or developmental outcome in young children).
+For the effects where there were multiple age groups, differences tended to be small (e.g., body composition). 
+
 \clearpage
