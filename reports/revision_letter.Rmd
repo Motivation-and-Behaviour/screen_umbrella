@@ -63,6 +63,15 @@ Manual inspection of the reviews which did not contribute any effects suggests t
 Causal language- The present study sought to “provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes,” but I am not convinced that the studies included in the meta-analyses are designed in ways that allow us to understand causal IMPACT at all. Many have criticized this literature for being largely self-reported (with flaws inherent to this method, which are reviewed in the present manuscript's discussion), observational, and cross-sectional, with very few rigorous experimental or well-controlled longitudinal designs that would enable researchers or the public to draw robust conclusions about the direction of associations. I fear that this comprehensive review, though rigorous, does not adequately attend to the fact that we do not usually know whether screens are causing helps or harms for youth, if different types of youth behaviors may be causing them to engage more with screens (e.g., sedentary youth may seek out more screen time; depressed youth may turn more to social media as an avoidance strategy), or if indeed there are third variables driving observed associations. Although the review here does a great job of summarizing the direction and strengths of associations across studies, I fear that it does not attend to these important issues in terms of how one ought to interpret them.
 ```
 
+Yes, we agree that the body of evidence does not lend itself to strong causal conclusions.
+We note that we deliberately chose to avoid using strong causal language as much as possible, instead indicating that the evidence suggests associations with outcomes.
+We have reread the manuscript and removed any remaining causal language that we found.
+We have also added the following to the *Discussion* section:
+
+`r revise::get_revision("r1_4")`
+
+Note that we do use causal langauge when describing hypothesised mechanisms, and when describing guidelines.
+We feel that this is sensible --- guidelines are based on causal assumptions, and while our evidence does not always support them, we are refering to them in the context that they are made (i.e., to instruct parents).
 
 ```{asis}
 The manuscript notes that the nature of the data allowed for few age-based conclusions- I fear that this is a substantial limitation that deserves more discussion. It seems difficult to characterize all children’s media use from age 0-18 in the same way, especially across such a wide range of developmental outcomes. A more nuanced treatment of developmental considerations would have been appreciated.
