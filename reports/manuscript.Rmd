@@ -212,7 +212,9 @@ This evidence has led some researchers to argue that a more nuanced approach to 
 
 In 2016, the American Academy of Pediatrics used a narrative review to examine the benefits and risks of children and adolescents' electronic media [@chassiakosChildrenAdolescentsDigital2016] as a basis for updating their guidelines about screen use [@AAPMediaUseSchoolAged2016].
 Since then, a large number of systematic reviews and meta-analyses have provided evidence about the potential benefits and risks of screen use.
-Yet, no review has synthesised the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviour, and well-being.
+[Yet, no review has synthesised the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviour, and well-being.
+We aim to provide a summary on the current research into children's screen time.
+By summarising and synthesising all evidence in one overview, we provide a reference point for the field and allow for easier comparison of risks and benefits for the same behaviour.]{#r1_2}
 
 In order to synthesise the evidence and support further evidence-based guideline development and refinement, we reviewed published meta-analyses examining the effects of screen use on children and youth.
 This review synthesises evidence on any plausible outcome of electronic media exposure.

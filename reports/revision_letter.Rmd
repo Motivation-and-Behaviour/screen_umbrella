@@ -37,6 +37,16 @@ We have included this in the *Implications for Future Research* section:
 The authors note that “no review has synthesized the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviours, and wellbeing.” The authors end up concluding that there are different magnitude and directions of associations for different outcomes and exposures (and, indeed, the mechanisms of these are highly different depending on the predictor-outcome combination), which makes me wonder whether casting such a wide net is helping the reader understand more or less about the research to date on technology use and child/adolescent outcomes? I would want to hear more justification in the manuscript itself on why they assert it is helpful to try and paint them with one broad brush?
 ```
 
+\WorkInProgress
+\todo{Suggestions welcome here}
+
+Our goal with this review was to provide an overview of the field of screen time research.
+A summary of the field will, out of necessasity, be more broad that a typical systematic review.
+We beleive that there is significant value in providing a single overview to summarise the state of the field.
+We have added some additional information to the introduction on this point.
+
+`r revise::get_revision("r1_2")`
+
 
 ```{asis}
 Page 10 notes that the study “examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total sample size.” Did this take into consideration whether some meta-analyses of the same exposure-outcome pairs may have included mostly different studies (i.e., because they focused on different date ranges or some other inclusion criteria)?
@@ -45,8 +55,7 @@ Page 10 notes that the study “examined the combinations of exposure and outcom
 
 
 ```{asis}
-Causal language- The present study sought to “provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes,” but I am not convinced that the studies included in the meta-analyses are designed in ways that allow us to understand causal IMPACT at all. Many have criticized this literature for being largely self-reported (with flaws inherent to this method, which are reviewed in the present manuscript's discussion), observational, and cross-sectional, with very few rigorous experimental or well-controlled longitudinal designs that would enable researchers or the public to draw robust conclusions about the direction of associations. I fear that this comprehensive review, though rigorous, does not adequately attend to the fact that we do not usually know whether screens are causing helps or harms for youth, if different types of youth behaviors may be causing them to engage more with screens (e.g., sedentary youth may seek
-out more screen time; depressed youth may turn more to social media as an avoidance strategy), or if indeed there are third variables driving observed associations. Although the review here does a great job of summarizing the direction and strengths of associations across studies, I fear that it does not attend to these important issues in terms of how one ought to interpret them.
+Causal language- The present study sought to “provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes,” but I am not convinced that the studies included in the meta-analyses are designed in ways that allow us to understand causal IMPACT at all. Many have criticized this literature for being largely self-reported (with flaws inherent to this method, which are reviewed in the present manuscript's discussion), observational, and cross-sectional, with very few rigorous experimental or well-controlled longitudinal designs that would enable researchers or the public to draw robust conclusions about the direction of associations. I fear that this comprehensive review, though rigorous, does not adequately attend to the fact that we do not usually know whether screens are causing helps or harms for youth, if different types of youth behaviors may be causing them to engage more with screens (e.g., sedentary youth may seek out more screen time; depressed youth may turn more to social media as an avoidance strategy), or if indeed there are third variables driving observed associations. Although the review here does a great job of summarizing the direction and strengths of associations across studies, I fear that it does not attend to these important issues in terms of how one ought to interpret them.
 
 ```
 
