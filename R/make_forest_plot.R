@@ -308,6 +308,8 @@ make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
         )
       )
   }
+
+  return(base_plot)
 }
 
 trimmer <- Vectorize(function(string, max_len) {
