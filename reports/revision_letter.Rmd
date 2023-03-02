@@ -53,16 +53,19 @@ Page 10 notes that the study “examined the combinations of exposure and outcom
 
 ```
 
+We intended to include the review which best captured the information on the exposure/outcome combination.
+The assumption was that the largest review would be the most recent, unless a more recent review had been targeted at a specific population (e.g., those with a disability). 
+Manual inspection of the reviews which did not contribute any effects suggests that this heuristic was successful.
+
+\todo{Does anyone know if we based this on a previous review? It's not cited in the registration.}
 
 ```{asis}
 Causal language- The present study sought to “provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes,” but I am not convinced that the studies included in the meta-analyses are designed in ways that allow us to understand causal IMPACT at all. Many have criticized this literature for being largely self-reported (with flaws inherent to this method, which are reviewed in the present manuscript's discussion), observational, and cross-sectional, with very few rigorous experimental or well-controlled longitudinal designs that would enable researchers or the public to draw robust conclusions about the direction of associations. I fear that this comprehensive review, though rigorous, does not adequately attend to the fact that we do not usually know whether screens are causing helps or harms for youth, if different types of youth behaviors may be causing them to engage more with screens (e.g., sedentary youth may seek out more screen time; depressed youth may turn more to social media as an avoidance strategy), or if indeed there are third variables driving observed associations. Although the review here does a great job of summarizing the direction and strengths of associations across studies, I fear that it does not attend to these important issues in terms of how one ought to interpret them.
-
 ```
 
 
 ```{asis}
 The manuscript notes that the nature of the data allowed for few age-based conclusions- I fear that this is a substantial limitation that deserves more discussion. It seems difficult to characterize all children’s media use from age 0-18 in the same way, especially across such a wide range of developmental outcomes. A more nuanced treatment of developmental considerations would have been appreciated.
-
 ```
 
 \clearpage
