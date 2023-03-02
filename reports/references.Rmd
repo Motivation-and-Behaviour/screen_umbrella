@@ -7,6 +7,15 @@ nocite            : "`r params$nocite_list`"
 output: pdf_document
 ---
 
+```{r load-targets, include=FALSE}
+targets::tar_load(
+  c(
+    "manuscript_info", "combined_bib", "reviews_tables", "combined_bib", "plots"
+  ),
+  store = here::here("_targets")
+)
+```
+
 # Included Studies
 
 <div id = "refs"></div>

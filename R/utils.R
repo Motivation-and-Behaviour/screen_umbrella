@@ -1,31 +1,26 @@
-# ------------------- SETTINGS -----------------------
-
-# ------------------- TARGETS ------------------------
-
-
-
-
-# ------------------- FUNCTIONS ----------------------
-
-## Checking Dates ----
-get_mod_date <- function(id) {
-  x <- googledrive::drive_get(id = googledrive::as_id(id))
-  return(x$drive_resource[[1]]$modifiedTime)
-}
-
-
-## Reading Data ----
-read_sheet <- function(file, sheet, mod_date) {
-  d <- googlesheets4::read_sheet(
-    ss = file,
-    sheet = sheet,
-    na = c("-999", "", "#N/A")
+read_sheet <- function(file) {
+  readr::read_csv(
+    file = file, na = c("-999", "", "#N/A"), show_col_types = FALSE
   ) %>%
     janitor::clean_names()
-  return(d)
 }
 
-## For debugging
-load_all_packages <- function(packages) {
-  lapply(packages, library, character.only = TRUE)
+load_packages <- function() {
+  invisible(source("./packages.R"))
+}
+
+upload_files <- function(target_file, type = "manuscript") {
+  gdrive_path <- switch(type,
+    "manuscript" =
+      "https://drive.google.com/drive/folders/1WQiAUmDanOL2GPPBoYxUoNkHmZUjpbPj", # nolint
+    "supp" =
+      "https://drive.google.com/drive/folders/1gW5k2CIRJf1w2FP0dbUHCXwpAxtV1Gxp" # nolint
+  )
+
+  drive_val <- drive_put(
+    target_file[1],
+    path = as_id(gdrive_path)
+  )
+
+  return(drive_val)
 }

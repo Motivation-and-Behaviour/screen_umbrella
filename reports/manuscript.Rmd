@@ -152,18 +152,20 @@ knitr::opts_chunk$set(
 options(dplyr.summarise.inform = FALSE)
 
 # Uncomment to run outside of pipeline
-library(tidyverse)
-library(targets)
-library(xfun)
-library(DiagrammeR)
-library(gt)
+# library(targets)
+# library(xfun)
+# library(DiagrammeR)
+# library(gt)
 ```
 
 ```{r, load-targets}
-targets::tar_load(c(
-  "manuscript_info", "combined_bib", "reviews_tables", "combined_bib", "plots"
-),
-store = here::here("_targets")
+targets::tar_load(
+  c(
+    "manuscript_info", "combined_bib", "plots", "prisma", "table_desc_latex",
+    "edu_certain_params", "plot_edu_certain",
+    "nonedu_certain_params", "plot_nonedu_certain"
+  ),
+  store = here::here("_targets")
 )
 ```
 
@@ -343,20 +345,21 @@ Of those, `r manuscript_info$prisma$included` met the inclusion criteria and we 
 Figure \@ref(fig:prisma) presents the full results of the selection process.
 
 ```{r prisma, fig.cap="PRISMA Diagram"}
-knitr::include_graphics(here::here("figure", "PRISMA Diagram.pdf"))
+knitr::include_graphics("../figures/PRISMA Diagram.pdf", error = FALSE)
 ```
 
 The most frequently reported exposures were `r manuscript_info$freq_exposures`.
 Supplementary File 4 provides a list of all exposures identified.
 The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
-In most cases (`r paste0(manuscript_info$freq_combos$n1, "/", manuscript_info$effects_clean_n)`), there was only one exposure/outcome combination for an age group, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
+In `r manuscript_info$freq_combos$n1` cases there was only one exposure/outcome combination for an age group, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
 Full characteristics of the included studies are provided in Table \@ref(tab:desctable).
 After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations contributed from `r manuscript_info$prisma$unique_reviews` reviews.
 These effects represent the findings of `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
 
 ```{r desctable}
-reviews_tables$kable$data %>%
-  knitr::kable("latex",
+table_desc_latex %>%
+  knitr::kable(
+    "latex",
     caption = "Review characteristics for studies providing unique effects",
     col.names = c(
       "First Author", "Year", "Design Restrictions",
@@ -370,7 +373,7 @@ reviews_tables$kable$data %>%
     linesep = "",
     longtable = TRUE
   ) %>%
-  kableExtra::row_spec(1:reviews_tables$kable$nrow, hline_after = TRUE) %>%
+  kableExtra::row_spec(1:nrow(table_desc_latex), hline_after = TRUE) %>%
   kableExtra::row_spec(0, bold = TRUE) %>%
   kableExtra::column_spec(3:4, width = "2cm") %>%
   kableExtra::column_spec(5, width = "1.5cm") %>%
@@ -397,8 +400,8 @@ Effects not meeting one or more of these standards are presented in Supplementar
 The remaining `r manuscript_info$edu$n_certain` effects met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot).
 These `r manuscript_info$edu$n_certain` effects came from `r manuscript_info$edu$n_unique` meta-analytic reviews analysing data from `r manuscript_info$edu$summary$studies_n` empirical studies with `r format(manuscript_info$edu$summary$total_n, big.mark=",")` individual participants.
 
-```{r eduplot, fig.width=plots[[1]]$dims[[1]], fig.height=plots[[1]]$dims[[2]], fig.cap="Education outcomes"}
-plots[[1]]$plot
+```{r eduplot, fig.width=edu_certain_params$dims[[1]], fig.height=edu_certain_params$dims[[2]], fig.cap="Education outcomes"}
+plot_edu_certain
 ```
 
 Among the statistically credible effects, general screen use, television viewing, and video games were all negatively associated with learning.
@@ -423,20 +426,20 @@ Effects not meeting one or more of these standards are presented in Supplementar
 The remaining `r manuscript_info$health$n_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)).
 These `r manuscript_info$health$n_certain` effects came from `r manuscript_info$health$n_unique` meta-analytic reviews analysing data from `r manuscript_info$health$summary$studies_n` empirical studies with `r format(manuscript_info$health$summary$total_n, big.mark=",")` individual participants.
 
-```{r healthplot, fig.width=plots[[2]]$dims[[1]], fig.height=plots[[2]]$dims[[2]], fig.cap="Health and health-related behaviour outcomes", dev='cairo_pdf'}
-plots[[2]]$plot
+```{r healthplot, fig.width=nonedu_certain_params$dims[[1]], fig.height=nonedu_certain_params$dims[[2]], fig.cap="Health and health-related behaviour outcomes", dev='cairo_pdf'}
+plot_nonedu_certain
 ```
 
 Digital advertising of unhealthy foods—both traditional advertising and video games developed by a brand for promotion—were associated with higher unhealthy food intake.
 Social media use and sexual content were positively associated with risky behaviors (e.g., sexual activity, risk taking, and substance abuse).
-General screen use was positively associated with depression.
-Television viewing was negatively correlated with sleep duration, but only at the 95% confidence level (weak evidence).
-All forms of screen use (general, television, and video games) were associated with body composition (e.g., higher BMI), although the association was smaller for children than for adolescents or for combined populations.
-Screen-based interventions which target health behaviours appeared effective.
+General screen use was positively associated with depression, with stronger associations observed for adolescents than other groups.
+Television viewing was negatively correlated with sleep duration, but with stronger evidence only observed for younger children.
+All forms of screen use (general, television, and video games) were associated with body composition (e.g., higher BMI).
+Screen-based interventions which target health behaviours appeared mostly effective.
 
 Across the health outcomes, most (`r manuscript_info$health$n_p999` of `r manuscript_info$health$n_certain`) effects were statistically significant at the 99.9\% confidence interval level, with the remaining `r xfun::numbers_to_words(manuscript_info$health$n_p95)` significant at 95\% confidence.
-However, most of the credible effects exhibited high levels of heterogeneity, with all but one having $I^2 > 75\%$.
-Additionally, most effects were small, with the association between unhealthy food advertising and intake the largest at $r = 0.25$ ($k = 13, N = 1,756$).
+However, most of the credible effects exhibited high levels of heterogeneity, with all but two having $I^2 > 75\%$.
+Additionally, most effects were small, with the association between screen use and sleep duration the largest at $r = -0.37$ ($k = 10, N = 56,720$).
 Most of the effect sizes (`r manuscript_info$health$n_r2`/`r manuscript_info$health$n_certain`) had an absolute value of $r < 0.2$.
 
 # Discussion
