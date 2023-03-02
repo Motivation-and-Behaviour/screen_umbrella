@@ -74,6 +74,18 @@ author:
     affiliation   : "1"
     role:
       - Writing - Review & Editing
+  - name          : "Rebecca Pagano"
+    affiliation   : "12"
+    role:
+      - Writing - Review & Editing
+  - name          : "Jamie Sherson"
+    affiliation   : "12"
+    role:
+      - Writing - Review & Editing
+  - name          : "James Conigrave"
+    affiliation   : "1"
+    role:
+      - Writing - Review & Editing
   - name          : "Chris Lonsdale"
     affiliation   : "1"
     role:
@@ -105,6 +117,8 @@ affiliation:
     institution   : "Institute for Physical Activity and Nutrition, Deakin University"
   - id            : "11"
     institution   : "The Matilda Centre for Research in Mental Health and Substance Use, University of Sydney"
+  - id            : "12"
+    institution   : "School of Education, Australian Catholic University"
 
 abstract: |
   Children's engagement in screen time is a complex issue.
