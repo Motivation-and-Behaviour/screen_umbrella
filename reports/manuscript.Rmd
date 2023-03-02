@@ -127,7 +127,7 @@ abstract: |
   We converted results onto a common metric to make comparisons simple, and where possible we reanalysed study-level data to standardise the approach across meta-analyses.
   We identified `r targets::tar_read(manuscript_info)$prisma$included` meta-analyses, and extracted `r targets::tar_read(manuscript_info)$unique_effects` unique exposure/outcome combinations.
   These effects represent the findings of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_n, big.mark=",")` participants.
-  When focusing on the meta-analyses with the most statistically robust evidence, we found that general screen use (when content was not indicated), was associated with potentially harmful impacts on learning, literacy, body composition, and depression.
+  When focusing on the meta-analyses with the most statistically robust evidence, we found that general screen use (when content was not indicated), was associated with potential harm on learning, literacy, body composition, and depression.
   Like-wise, social media was consistently associated with risks to health, with no identified benefits.
   However, we also found that these harms could often be mitigated by certain kinds of content (e.g., educational), or by modifying the context (e.g., co-viewing with a parent).
   In summary, our findings point to the need for careful and nuanced guidelines that support parents to make the best decisions for their children.
@@ -534,13 +534,15 @@ For example, we did not examine moderators beyond age, nor did we rate the risk 
 Thus, our assessment of evidence quality was restricted to statistical credibility, rather than a more complete assessment of quality (e.g., GRADE [@guyattGRADEGuidelinesIntroduction2011]).
 As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics.
 For this reason, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria.
+[Our high-level approach also means that we could not engage with the specific mechanisms behind each association, and as such, we cannot comment on the evidence for causality.
+Instead, readers who wish to more deeply understand one specific relationship are directed to the cited review for that effect, where the authors could engage more deeply with the mechanisms.]{#r1_4}
 In addition, reviews provide only historical evidence which may not keep up with the changing ways children can engage with screens.
 While our synthesis of the existing evidence provides information about how screens might have influenced children in the past, it is difficult to know if these findings will translate to new forms of technology in the future.
 
 ## Conclusions
 
 Screen time is a topic of significant interest, as shown by the wide variety of academic domains involved, parents' concerns, and the growing pervasiveness into society.
-Our findings showed that the impact of screen time can be both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition).
+Our findings showed that the influence of screen time can be both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition).
 The interplay of these findings show that parents, teachers, and other caregivers need to carefully weigh the pros and cons of each specific activity for potential harms and benefits.
 However, our findings also suggest that in order to aid caregivers to make this judgement, researchers need to conduct more careful and nuanced measurement and analysis of screen time, with less emphasis on measures that aggregate screen time and instead focus on the content, context, and environment in which the exposure occurs.
 
