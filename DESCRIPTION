@@ -29,6 +29,7 @@ Suggests:
     languageserver,
     lintr,
     pingr,
+    revise,
     rstudioapi,
     shiny,
     shinybusy,
