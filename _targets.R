@@ -31,14 +31,22 @@ list(
     here::here("data/covidence_prisma.txt"),
     format = "file"
   ),
+  # Set params --------------------------------------------------------------
+  tar_target(
+    age_codes,
+    list(
+      mixed = mixed_codes, adolescents = adolescents_codes,
+      children = children_codes, young_children = young_children_codes
+    )
+  ),
   # Clean data --------------------------------------------------------------
   tar_target(
     reviews_clean,
-    clean_reviews(reviews_raw, effects_raw)
+    clean_reviews(reviews_raw, effects_raw, age_codes)
   ),
   tar_target(
     effects_clean,
-    clean_effects(effects_raw, reviews_clean)
+    clean_effects(effects_raw, reviews_clean, age_codes)
   ),
   tar_target(
     studies_clean,

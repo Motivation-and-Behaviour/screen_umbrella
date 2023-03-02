@@ -5,10 +5,11 @@
 #' @title
 #' @param reviews_raw
 #' @param effects_raw
+#' @param age_codes
 #' @return
 #' @author Taren Sanders
 #' @export
-clean_reviews <- function(reviews_raw, effects_raw) {
+clean_reviews <- function(reviews_raw, effects_raw, age_codes) {
   zero_effects_ids <-
     effects_raw %>%
     group_by(review_id) %>%
@@ -22,10 +23,10 @@ clean_reviews <- function(reviews_raw, effects_raw) {
     reviews_raw %>%
     mutate(
       demographics_coded = case_when(
-        demographics %in% mixed_codes ~ "Mixed",
-        demographics %in% adolescents_codes ~ "Adolescents",
-        demographics %in% children_codes ~ "Children",
-        demographics %in% young_children_codes ~ "Young children",
+        demographics %in% age_codes$mixed ~ "Mixed",
+        demographics %in% age_codes$adolescents ~ "Adolescents",
+        demographics %in% age_codes$children ~ "Children",
+        demographics %in% age_codes$young_children ~ "Young children",
         TRUE ~ demographics
       ),
       # Tidy up the sample age variables

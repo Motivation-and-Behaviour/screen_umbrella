@@ -28,6 +28,7 @@ mixed_codes <- c(
   "Children/adolescents",
   "Include: children and adolescents",
   "K-12",
+  "mixed",
   "None specified",
   "PreK-12th grade",
   "preschool-college",
@@ -46,6 +47,7 @@ adolescents_codes <- c(
   "13-18",
   "15-30 years old",
   "adolescence",
+  "adolescents",
   "Adolescents",
   "at least 13 years",
   "School-age Children (Middle School)",
@@ -108,5 +110,6 @@ young_children_codes <- c(
   "pre-school",
   "Preschoolers",
   "Toddlers",
-  "younger than 8"
+  "younger than 8",
+  "young_children"
 )

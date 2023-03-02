@@ -9,7 +9,12 @@
 #' @export
 tidy_meta <- function(meta_results) {
   df <- broom::tidy(meta_results, conf.int = TRUE)
-  df_999 <- broom::tidy(meta_results, conf.int = TRUE, conf.level = 0.999)
+  df_999 <-
+    broom::tidy(meta_results, conf.int = TRUE, conf.level = 0.999) %>%
+    mutate(
+      conf.low = if_else(conf.low < -1, -1, conf.low),
+      conf.high = if_else(conf.high > 1, 1, conf.high)
+    )
 
   df$conf.low_999 <- df_999$conf.low
   df$conf.high_999 <- df_999$conf.high

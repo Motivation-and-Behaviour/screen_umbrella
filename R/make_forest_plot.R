@@ -54,7 +54,7 @@ make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
       ),
       font_fam = "fontawesome-webfont",
       age_group = factor(age_group,
-        levels = c("All", "Young children", "Children", "Adolescents")
+        levels = c("Mixed", "Young children", "Children", "Adolescents")
       )
     ) %>%
     arrange(
@@ -70,7 +70,7 @@ make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
       plain_language_exposure = "**Exposure**",
       n = "**N**",
       k = "**K**",
-      i2 = "**I^2**",
+      i2 = "**I<sup>2</sup>**",
       rci = "**<i>r</i> with 95% CI**",
       author_year = "**Lead Author, Date**",
       row_num = "NA",

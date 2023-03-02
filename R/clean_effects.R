@@ -5,10 +5,11 @@
 #' @title
 #' @param effects_raw
 #' @param reviews_clean
+#' @param age_codes
 #' @return
 #' @author Taren Sanders
 #' @export
-clean_effects <- function(effects_raw, reviews_clean) {
+clean_effects <- function(effects_raw, reviews_clean, age_codes) {
   effects_clean <-
     effects_raw %>%
     # Remove any unusable effects (must have value and N)
@@ -46,13 +47,13 @@ clean_effects <- function(effects_raw, reviews_clean) {
   effects_clean <- effects_clean %>%
     mutate(moderator_age = case_when(
       moderator_category %in% age_moderator_categories &
-        moderator_level %in% mixed_codes ~ "mixed",
+        moderator_level %in% age_codes$mixed ~ "Mixed",
       moderator_category %in% age_moderator_categories &
-        moderator_level %in% adolescents_codes ~ "adolescents",
+        moderator_level %in% age_codes$adolescents ~ "Adolescents",
       moderator_category %in% age_moderator_categories &
-        moderator_level %in% children_codes ~ "children",
+        moderator_level %in% age_codes$children ~ "Children",
       moderator_category %in% age_moderator_categories &
-        moderator_level %in% young_children_codes ~ "young_children",
+        moderator_level %in% age_codes$young_children ~ "Young children",
       TRUE ~ moderator_age
     ))
 
