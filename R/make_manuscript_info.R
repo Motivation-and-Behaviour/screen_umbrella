@@ -89,7 +89,7 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
   manuscript_info$prisma$duplicates <- prisma$data$value[2]
   manuscript_info$prisma$full_text <- prisma$data$value[5]
   manuscript_info$prisma$included <- prisma$data$value[8]
-  manuscript_info$prisma$unique_reviews <- prisma$data$value[9]
+  manuscript_info$prisma$unique_reviews <- prisma$data$value[11]
 
   # Quality Data ---------------------------------------------
   qual_data <-
