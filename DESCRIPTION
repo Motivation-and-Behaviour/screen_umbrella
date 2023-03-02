@@ -39,4 +39,5 @@ Suggests:
     visNetwork
 Remotes: 
     MilesMcBain/tflow,
-    MilesMcBain/fnmate
+    MilesMcBain/fnmate,
+    tarensanders/revise
