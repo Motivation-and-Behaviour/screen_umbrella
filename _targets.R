@@ -255,5 +255,9 @@ list(
           paste(reviews_raw$bibtex_key, collapse = ", @")
         )
     )
+  ),
+  tar_render(
+    revision_letter,
+    path = here::here("reports", "revision_letter.Rmd")
   )
 )

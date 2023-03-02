@@ -1,0 +1,59 @@
+---
+title             : "Benefits and risks associated with children's and adolescents' interactions with electronic screens: An umbrella review"
+authors           : "Taren Sanders on behalf of co-authors"
+journal           : "Nature Human Behaviour"
+manuscript        : "NATHUMBEHAV-22071805"
+handling_editor   : "Charlotte Payne"
+
+class             : "draft"
+
+output            : revise::letter.pdf
+---
+
+Dear Dr `r rmarkdown::metadata$handling_editor`,
+
+Thank you for considering our manuscript for publication at _`r rmarkdown::metadata$journal`_. We appreciate the feedback that you and the reviewers have provided. In the following itemised list we respond to each comment point-by-point.
+
+```{r setup-chunk, include = FALSE}
+targets::tar_load(manuscript)
+manuscript <- revise::read_manuscript("reports/manuscript.Rmd", PDF = TRUE)
+```
+
+# Reviewer 1
+
+```{asis}
+As the authors note, “screen time” as a metric is highly criticized and problematic. This begs the question, though, of whether a wide-scale review of this sort, which retains a focus on screen time (although it also acknowledges other more nuanced metrics of exposure), is further perpetuating the issues seen by the broader field.
+```
+
+We agree with the reviewer that the term 'screen time' is problematic. 
+Indeed, as our results show, the influence of screen time on children is a less a function of a physical screen, and more a function of the activity that the screen provides. 
+But, we feel that a review such as this is needed in order to emphasise the diverse influence that screens can have. 
+If the results are not collated into a single place, it is difficult to see how the field will begin to progress away from 'screen time' as a concept. 
+We have included this in the *Implications for Future Research* section:
+
+`r revise::get_revision("r1_1")`
+
+```{asis}
+The authors note that “no review has synthesized the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviours, and wellbeing.” The authors end up concluding that there are different magnitude and directions of associations for different outcomes and exposures (and, indeed, the mechanisms of these are highly different depending on the predictor-outcome combination), which makes me wonder whether casting such a wide net is helping the reader understand more or less about the research to date on technology use and child/adolescent outcomes? I would want to hear more justification in the manuscript itself on why they assert it is helpful to try and paint them with one broad brush?
+```
+
+
+```{asis}
+Page 10 notes that the study “examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total sample size.” Did this take into consideration whether some meta-analyses of the same exposure-outcome pairs may have included mostly different studies (i.e., because they focused on different date ranges or some other inclusion criteria)?
+
+```
+
+
+```{asis}
+Causal language- The present study sought to “provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes,” but I am not convinced that the studies included in the meta-analyses are designed in ways that allow us to understand causal IMPACT at all. Many have criticized this literature for being largely self-reported (with flaws inherent to this method, which are reviewed in the present manuscript's discussion), observational, and cross-sectional, with very few rigorous experimental or well-controlled longitudinal designs that would enable researchers or the public to draw robust conclusions about the direction of associations. I fear that this comprehensive review, though rigorous, does not adequately attend to the fact that we do not usually know whether screens are causing helps or harms for youth, if different types of youth behaviors may be causing them to engage more with screens (e.g., sedentary youth may seek
+out more screen time; depressed youth may turn more to social media as an avoidance strategy), or if indeed there are third variables driving observed associations. Although the review here does a great job of summarizing the direction and strengths of associations across studies, I fear that it does not attend to these important issues in terms of how one ought to interpret them.
+
+```
+
+
+```{asis}
+The manuscript notes that the nature of the data allowed for few age-based conclusions- I fear that this is a substantial limitation that deserves more discussion. It seems difficult to characterize all children’s media use from age 0-18 in the same way, especially across such a wide range of developmental outcomes. A more nuanced treatment of developmental considerations would have been appreciated.
+
+```
+
+\clearpage

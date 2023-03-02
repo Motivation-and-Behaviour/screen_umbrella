@@ -494,6 +494,10 @@ Newer reviews were more likely to provide this information than older reviews, b
 When study level data was available, many effects were removed because the pooled sample size was small, or because there were fewer than ten studies on which to perform an Egger's test.
 It seems that much of the current screen time research is small in scale, and there is a need for larger, high-quality studies.
 
+[Our results highlight the need for the field to more carefully consider if the term 'screen time' remains appropriate for providing advice to parents.
+Instead, our results suggest that more nuanced and detailed descriptions of the behaviours to be modified may be required.
+Rather than suggesting parents limit 'screen time', for example, it may be better to suggest that parents promote interactive educational experiences but limit exposure to advertising.]{#r1_1}
+
 Screen time research has a well-established measurement problem, which impacts the individual studies of this umbrella review.
 The vast majority of screen time research relies on self-reported data, which not only lacks the nuance required for understanding the effects of screen time, but may also be inaccurate.
 In one systematic review on screen time and sleep [@haleScreenTimeSleep2015], 66 of the 67 included studies used self-reported data for *both* the exposure and outcome variable.
