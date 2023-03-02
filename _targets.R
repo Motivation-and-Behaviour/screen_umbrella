@@ -242,6 +242,11 @@ list(
     path = here::here("reports", "manuscript.Rmd")
   ),
   tar_render(
+    manuscript_md,
+    path = here::here("reports", "manuscript.Rmd"),
+    output_format = rmarkdown::md_document()
+  ),
+  tar_render(
     references,
     path = here::here("reports", "references.Rmd"),
     output_file = here::here(

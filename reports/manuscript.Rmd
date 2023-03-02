@@ -123,9 +123,9 @@ affiliation:
 abstract: |
   Children's engagement in screen time is a complex issue.
   While some forms of screen time have consistently been associated with harm, others have been associated with gains, making it difficult to weigh the risks and benefits of use.
-  In this umbrella review, we systematically collate and synthesise meta-analyses examining the effects of screen use on children and youth.
-  We converted results onto a common metric to make comparisons simple, and where possible we reanalysed study-level data to standardise the approach across meta-analyses.
-  We identified `r targets::tar_read(manuscript_info)$prisma$included` meta-analyses, and extracted `r targets::tar_read(manuscript_info)$unique_effects` unique exposure/outcome combinations.
+  In this umbrella review, we systematically collate and examined meta-analyses examining the effects of screen use on children and youth.
+  We converted results onto a common metric (Pearson's r) to make comparisons simple, and where possible we reanalysed study-level data to standardise the approach across meta-analyses.
+  We identified `r targets::tar_read(manuscript_info)$prisma$included` meta-analyses, and extracted `r targets::tar_read(manuscript_info)$unique_effects` unique exposure/outcome combinations from `r targets::tar_read(manuscript_info)$prisma$unique_reviews`.
   These effects represent the findings of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_n, big.mark=",")` participants.
   When focusing on the meta-analyses with the most statistically robust evidence, we found that general screen use (when content was not indicated), was associated with potential harm on learning, literacy, body composition, and depression.
   Like-wise, social media was consistently associated with risks to health, with no identified benefits.
@@ -187,7 +187,7 @@ targets::tar_load(
 
 Children's engagement in screen time is a complex issue.
 Parents, policymakers, and educators needing to weigh the risks that sedentary use of screens present alongside the potential benefits for learning and social connectedness.
-Hampering efforts to make an informed decision is the lack of comprehensive evidence.
+The lack of comprehensive evidence hampers efforts to make an informed decision.
 As a Lancet editorial [@thelancetSocialMediaScreen2019] suggested, "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking."
 In this study, we systematically harmonize data from existing meta-analyses of screen time on a range of outcomes, including health, education, and psychology, and identify the most statistically robust relationships.
 We show that some forms of screen time---such as social media---show consistent evidence of harm for children, with no clear evidence of a benefit.
@@ -226,12 +226,11 @@ This evidence has led some researchers to argue that a more nuanced approach to 
 
 In 2016, the American Academy of Pediatrics used a narrative review to examine the benefits and risks of children and adolescents' electronic media [@chassiakosChildrenAdolescentsDigital2016] as a basis for updating their guidelines about screen use [@AAPMediaUseSchoolAged2016].
 Since then, a large number of systematic reviews and meta-analyses have provided evidence about the potential benefits and risks of screen use.
-[Yet, no review has synthesised the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviour, and well-being.
-We aim to provide a summary on the current research into children's screen time.
+[Yet, no review has examined the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviour, and well-being.
 By summarising and synthesising all evidence in one overview, we provide a reference point for the field and allow for easier comparison of risks and benefits for the same behaviour.]{#r1_2}
 
 In order to synthesise the evidence and support further evidence-based guideline development and refinement, we reviewed published meta-analyses examining the effects of screen use on children and youth.
-This review synthesises evidence on any plausible outcome of electronic media exposure.
+This review synthesises evidence on any outcome of electronic media exposure.
 Adopting this broad approach allowed us to provide a holistic perspective on the influence of screens on children’s lives.
 By synthesising across life domains (e.g., school and home), this review provides evidence to inform guidelines and advice for parents, teachers, pediatricians and other professionals in order to maximise human functioning.
 
@@ -289,13 +288,9 @@ Using Covidence software (Veritas Health Innovation, Melbourne, Australia), two 
 Two researchers then independently reviewed full-text articles.
 We resolved disagreements at each stage of the process by consensus, with a third researcher employed, when needed.
 
-### Data collection process
-
-From each included meta-analysis, two researchers independently extracted data into a custom-designed database.
-
 ### Data items
 
-From each meta-analysis we extracted the following items: First author, year of publication, study design restrictions (e.g., cross-sectional, observational, experimental), region restrictions (e.g., specific countries), earliest and latest study publication dates, sample age (mean), lowest and highest mean age reported,  outcomes reported, and exposures reported.
+From each included meta-analysis, two researchers independently extracted data into a custom-designed database. We extracted the following items: First author, year of publication, study design restrictions (e.g., cross-sectional, observational, experimental), region restrictions (e.g., specific countries), earliest and latest study publication dates, sample age (mean), lowest and highest mean age reported,  outcomes reported, and exposures reported.
 
 ### Study risk of bias assessment
 
@@ -305,18 +300,19 @@ We did not assess risk of bias in the individual studies that were included in e
 
 ### Effect measures
 
-Two researchers independently extracted all quantitative meta-analytic effect sizes, including moderation results.
-Where possible, they also extracted effect sizes from primary studies included in each meta-analysis.
+<span id ="r2_17">Two researchers independently extracted all quantitative meta-analytic effect sizes, including moderation results.
+We excluded effect sizes which were reported as relative risk ratios, as meta-analyses did not contain sufficient information to meaningfully convert.
+We also excluded effect size estimates when the authors did not provide a sample size.
+Where possible, we also extracted effect sizes from the primary studies included in each meta-analysis.
+
 To facilitate comparisons, we converted effect sizes to Pearson’s $r$ using established formulae [@bonettTransformingOddsRatios2007;@bowmanEffectSizesStatistical2012;@jacobsEstimationBiserialCorrelation2017].
-We excluded relative risk ratios from this conversion because meta-analyses did not contain sufficient information to meaningfully convert.
-Effect sizes on the original metric are provided in Supplementary File 2.
+Effect sizes on the original metric are provided in Supplementary File 2.</span>
 
 ### Synthesis methods
 
 After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total sample size.
 In instances where effect sizes from the same combination of exposure and outcome were drawn from different populations (e.g., children vs adolescents) we retained both estimates in our dataset.
 
-We excluded effect size estimates when the authors did not provide a sample size.
 We descriptively present the remaining meta-analytic effect sizes.
 To remove the differences in approach to meta-analyses across the reviews, we reran the effect size estimate using a random effects meta-analysis via the metafor package [@R-metafor] in R [@R-base] (version `r paste(R.Version()[c("major", "minor")], collapse = ".")`) when the meta-analysis’s authors provided primary study data associated with these effects.
 When required, we imputed missing sample sizes using mean imputation from the other studies within that review.
@@ -340,7 +336,7 @@ $I^2$ values of $> 50\%$ were taken to indicate an effect was potentially hetero
 *Direction of Effect*.
 Finally, we examined the extent to which significance testing suggested screen exposure was associated with benefit, harm, or no effect on outcomes.
 We used thresholds of $P < .05$ for weak evidence and $P < 10^{-3}$ for strong evidence.
-An effect that was neither significant at $P < .05$ or $10^{-3}$ that also passed the criteria for statistical credibility was taken to indicate no association of interest.
+An effect with statistical credibility but with $P > .05$ was taken to indicate no association of interest.
 
 ### Deviations from protocol
 
@@ -369,7 +365,7 @@ Supplementary File 4 provides a list of all exposures identified.
 The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
 In `r manuscript_info$freq_combos$n1` cases there was only one exposure/outcome combination for an age group, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
 Full characteristics of the included studies are provided in Table \@ref(tab:desctable).
-After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations contributed from `r manuscript_info$prisma$unique_reviews` reviews.
+<span id ="r2_23">After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations contributed from `r manuscript_info$prisma$unique_reviews` reviews.</span>
 These effects represent the findings of `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
 
 ```{r desctable}

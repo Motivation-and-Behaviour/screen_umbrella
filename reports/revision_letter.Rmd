@@ -15,9 +15,38 @@ Dear Dr `r rmarkdown::metadata$handling_editor`,
 Thank you for considering our manuscript for publication at _`r rmarkdown::metadata$journal`_. We appreciate the feedback that you and the reviewers have provided. In the following itemised list we respond to each comment point-by-point.
 
 ```{r setup-chunk, include = FALSE}
-targets::tar_load(manuscript)
-manuscript <- revise::read_manuscript("reports/manuscript.Rmd", PDF = TRUE)
+targets::tar_load(c(manuscript, manuscript_md))
+manuscript <- revise::read_manuscript("reports/manuscript.md", PDF = TRUE)
 ```
+
+\newpage
+
+# Editor Comments
+```{asis}
+Reviewer 3 points out that your last search date is May 2020. We agree that this means the review is not as timely as it could be and ask that you update your search to September 2022, and redo your analyses with all newly included studies.
+```
+
+\WorkInProgress
+
+```{asis}
+Reviewer 2's concerns about the appropriateness of your technical approach (notably: subjective characteristics of review selection, your statistical approach, and your choice to harmonize metrics of effect sizes) are significant and we ask that you prioritise addressing these issues when redoing your analyses.
+```
+
+\WorkInProgress
+
+```{asis}
+Both reviewers 2 and 3 are concerned about the lack of information on risk of bias assessment and population characteristics. Please ensure this information is clearly available and add data on both to Table 1.
+```
+
+\WorkInProgress
+
+```{asis}
+Reviewer 1 highlights the inappropriateness of causal language given that the majority of included studies speak to association, not causation. Please remove all inappropriate use of causal language accordingly.
+```
+
+Please see response to Reviewer 1, \Comment{causal_lang}.
+
+\newpage
 
 # Reviewer 1
 
@@ -36,7 +65,6 @@ We have included this in the *Implications for Future Research* section:
 ```{asis}
 The authors note that “no review has synthesized the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviours, and wellbeing.” The authors end up concluding that there are different magnitude and directions of associations for different outcomes and exposures (and, indeed, the mechanisms of these are highly different depending on the predictor-outcome combination), which makes me wonder whether casting such a wide net is helping the reader understand more or less about the research to date on technology use and child/adolescent outcomes? I would want to hear more justification in the manuscript itself on why they assert it is helpful to try and paint them with one broad brush?
 ```
-
 \WorkInProgress
 \todo{Suggestions welcome here}
 
@@ -47,10 +75,8 @@ We have added some additional information to the introduction on this point.
 
 `r revise::get_revision("r1_2")`
 
-
 ```{asis}
 Page 10 notes that the study “examined the combinations of exposure and outcomes and removed any effects that appeared more than once, keeping the effect with the largest total sample size.” Did this take into consideration whether some meta-analyses of the same exposure-outcome pairs may have included mostly different studies (i.e., because they focused on different date ranges or some other inclusion criteria)?
-
 ```
 
 We intended to include the review which best captured the information on the exposure/outcome combination.
@@ -59,8 +85,8 @@ Manual inspection of the reviews which did not contribute any effects suggests t
 
 \todo{Does anyone know if we based this on a previous review? It's not cited in the registration.}
 
-```{asis}
-Causal language- The present study sought to “provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes,” but I am not convinced that the studies included in the meta-analyses are designed in ways that allow us to understand causal IMPACT at all. Many have criticized this literature for being largely self-reported (with flaws inherent to this method, which are reviewed in the present manuscript's discussion), observational, and cross-sectional, with very few rigorous experimental or well-controlled longitudinal designs that would enable researchers or the public to draw robust conclusions about the direction of associations. I fear that this comprehensive review, though rigorous, does not adequately attend to the fact that we do not usually know whether screens are causing helps or harms for youth, if different types of youth behaviors may be causing them to engage more with screens (e.g., sedentary youth may seek out more screen time; depressed youth may turn more to social media as an avoidance strategy), or if indeed there are third variables driving observed associations. Although the review here does a great job of summarizing the direction and strengths of associations across studies, I fear that it does not attend to these important issues in terms of how one ought to interpret them.
+```{asis causal_lang}
+Causal language- The present study sought to “provide a holistic perspective on the influence of screens on children's lives across a broad range of outcomes,” but I am not convinced that the studies included in the meta-analyses are designed in ways that allow us to understand causal IMPACT at all. Many have criticized this literature for being largely self-reported (with flaws inherent to this method, which are reviewed in the present manuscript's discussion), observational, and cross-sectional, with very few rigorous experimental or well-controlled longitudinal designs that would enable researchers or the public to draw robust conclusions about the direction of associations. I fear that this comprehensive review, though rigorous, does not adequately attend to the fact that we do not usually know whether screens are causing helps or harms for youth, if different types of youth behaviors may be causing them to engage more with screens (e.g., sedentary youth may seek out more screen time; depressed youth may turn more to social media as an avoidance strategy), or if indeed there are third variables driving observed associations. Although the review here does a great job of summarizing the direction and strengths of associations across studies, I fear that it does not attend to these important issues in terms of how one ought to interpret them.
 ```
 
 Yes, we agree that the body of evidence does not lend itself to strong causal conclusions.
@@ -74,7 +100,7 @@ Note that we do use causal langauge when describing hypothesised mechanisms, and
 We feel that this is sensible --- guidelines are based on causal assumptions, and while our evidence does not always support them, we are refering to them in the context that they are made (i.e., to instruct parents).
 
 ```{asis}
-The manuscript notes that the nature of the data allowed for few age-based conclusions- I fear that this is a substantial limitation that deserves more discussion. It seems difficult to characterize all children’s media use from age 0-18 in the same way, especially across such a wide range of developmental outcomes. A more nuanced treatment of developmental considerations would have been appreciated.
+The manuscript notes that the nature of the data allowed for few age-based conclusions- I fear that this is a substantial limitation that deserves more discussion. It seems difficult to characterize all children's media use from age 0-18 in the same way, especially across such a wide range of developmental outcomes. A more nuanced treatment of developmental considerations would have been appreciated.
 ```
 
 One of the benefits of the other reviewers' and editor's suggestion to update the search is that some of this limitation has been addressed in more recent literature.
@@ -83,5 +109,316 @@ Unfortunately, many of these still failed to meet our criteria for statistical c
 Inspecting the results in the supplementary material still reveal fewer differences by age group than may be expected.
 In some cases this is because there is still only an effect for a single age group, as many reviews target behaviours or outcomes which are more common in one age group (e.g., sexting in adolescents, or developmental outcome in young children).
 For the effects where there were multiple age groups, differences tended to be small (e.g., body composition). 
+
+\newpage
+# Reviewer 2
+
+```{asis}
+I appreciate the opportunity to review this manuscript focusing on the impact of screen use on child well-being. This umbrella review organized findings from meta-analyses by child outcomes and screen types, converted pooled data into Pearson correlations as a unified estimate to facilitate cross-study comparisons, and reached a conclusion that general screen use and social media were associated with harmful impacts on child learning, literacy, body composition, and depression, and the potential risks could be mitigated by the content and context of screen use. This conclusion is somewhat similar to that of another umbrella review conducted by Stiglic and Viner in 2019 (PMID: 30606703). However, the current one made advances on including studies examining educational screen time and social media and harmonizing data from meta-analyses. 
+```
+
+We are grateful to the reviewer for seeing the value in our review.
+
+```{asis}
+Abstract: 
+
+Page 3 Line 38: In my opinion, “examined” is a better than “synthesized”. Because the data from meta-analyses were not pooled.
+
+Page 3 Line 39: I suggest replacing “common metric” with “Pearson's r”.
+
+Page 3 line 41-42: “extracted 165 unique exposure/outcome combinations from 66 studies.”
+```
+
+We have made all of these changes.
+
+```{asis}
+Summary:
+Page 4 line 59: the lack of comprehensive evidence hampers efforts to make an informed decision.
+```
+
+We have made this change.
+
+```{asis}
+Introduction:
+Page 5 line 84-86: please further justify how a review study would make the limited evidence base less lacking or generate new findings.
+```
+
+The quote from the *Lancet* editorial is that the understanding is lacking, rather than the evidence.
+Our understanding is lacking partly because benefits of screen time (as seen in some educational literature) and reviewed seperately from harms.
+Our review aims to address this.
+See additional context in the *Introduction*:
+
+`r revise::get_revision("r1_2")`
+
+```{asis}
+Page 5 line 87-90: I suggest improving the logic flow and citing more recent studies (2016 or newer) to highlight the potentially new additions of the current review. 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 5 line 91-94: Please provide a more in-depth explanation on the advantages of a review study to include a broad spectrum of health outcomes. 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 6 line 96-104: these guidelines provide age-staged recommendations and mainly target on recreational screen time. New evidence to support or reject these recommendations are important breakthroughs. So how does the current review contribute to the refinement of these guidelines? It could be proposed here to strengthen the justification of this study, and also need to be addressed in the discussion section. 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 6 line 104-107: this is not a direct contrast. Longer screen time is needed to pose mental health risks, but short screen time can lead to other health issues. While guidelines are built on a comprehensive examination of health outcomes. Thus, I consider here as a weak argument/transition. The organization of the introduction section need to be improved. 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 6 line 117-119: Stiglic and Viner's umbrella review summarized evidence across a broad range of outcome domains. Please further justify the current study in addition to theirs.
+```
+
+\WorkInProgress
+
+```{asis outcomes}
+Page 7 line 122: please define “any plausible outcomes” to make the scope more scientifically sound and robust. In addition, the result section included findings of behavioral outcomes (physical activity and sleep duration) which I was not considered as academic, health, and social-psychological outcomes. Thus, it is better to be clear about the types of outcomes at the beginning of the manuscript. 
+```
+
+We did not *a-priori* choose which outcomes would be included.
+Instead, we chose to summarise the literature on for any meta-analysis where screen exposure was the independent variable.
+We have removed the word "plausible", as we agree that makes the sentence less clear and this phrasing is more aligned with the eligibility critiera.
+Our intention in the introduction is not to preempt the results, which means we do not outline the outcomes found in the introduction.
+
+```{asis}
+Page 7 line 123: the authors stated the application of “a broad approach”, while highlighted the importance of nuanced findings and guidelines. The introduction section would be improved by balancing these two important aspects. 
+```
+
+\WorkInProgress
+
+```{asis}
+Methods:
+Page 8 line 146-148: the effects of screen use on youth with a clinical condition are likely be different from those of the general population. If this review included any, the population characteristics should be specified in the result section or in the figures. 
+```
+
+\WorkInProgress
+\todo{Will add to table 1}
+
+```{asis}
+Page 8 line 152: please define outcomes.
+```
+
+Per /comment{outcomes} above, we did not pre-specify outcomes and feel it would be inappropriate to revise our inclusion criteria.
+
+```{asis}
+Page 10 line 181-187: these two sections could be combined. 
+```
+
+We agree and have made this change.
+
+```{asis}
+Page 10 line 190: Table 1 does not contain RoB info. 
+```
+
+\WorkInProgress
+\todo{Will add to table 1}
+
+```{asis}
+Page 10 line 195-196: the description of data conversion is not transparent. Pearson's r assumes linear relationship. But associations between screen use and well-being are often non-monotonic (Twenge 2020, PMID: 32303719). In addition, meta-analyses reporting odd ratios defined exposure outcomes in various ways. For example, Zhang et. al. 2016 compared the obesity risk by the lowest and highest TV viewing time, whereas Poorolajal et. al. 2020 compared watching TV > 1-2h/d with an unclear group. Can the harmonization of OR into R guarantee that the two values are comparable? Therefore, further justification is needed. 
+```
+
+\WorkInProgress
+\todo{For linear - yeah, but this is always a problem in meta-analyses.
+Need to think about ORs.}
+
+```{asis}
+Page 10 Line 201-206: The inclusion/exclusion criteria are here and there (page 10 line 197-198, page 11 line 221-222, etc.). Please provide specific and full criteria of effect size inclusion/exclusion in one section.
+
+Page 11 line 211 and 223-226: same issue as above. 
+```
+
+We agree this is could be confusing to the reader.
+The previous sections outlined the inclusion criteria for including a *review*, whereas these sections focus on reasons for excluding an *effect size* from the review.
+We did not require all effect sizes within a review to be eligible or usable for the review to still be included.
+
+`r revise::get_revision("r2_17")`
+
+```{asis}
+Page 11 line 222: Egger's test is not suitable for evaluating publication bias of ORs.
+```
+
+\WorkInProgress
+
+```{asis}
+Page 11 line 229-231: An effect with statistical credibility but showing P < .05 indicate no association of interest. 
+```
+
+We have made this change.
+
+```{asis}
+Page 12 line 232-233: “include systematic reviews without meta-analyses” conflicts “alongside the main meta-analytic findings”.
+```
+
+We are not clear on what the reviewer means here.
+Per the quoted sentence, we intended to include all systematic reviews (not just meta-analyses), but the volume of meta-analyses was such that we felt this was unneeded.
+This was a change from our protocol, and thus reported as such.
+We are happy to revise this section if the reviewer has a suggestion.
+
+```{asis}
+Page 12 line 235: Harmonizing the metric of effect size does not guarantee the comparability of the strength of associations. Please fully justify the current practice with a thorough analysis of the pros and cons.
+```
+
+\WorkInProgress
+
+```{asis}
+Page 12 line 238-243: A significant P was not a criterion to consider studies as credible in other reviews. Not sure why it is a reason for altering the original plan. 
+```
+
+\WorkInProgress
+\todo{We cite a paper in the protocol on this.}
+
+```{asis}
+Results
+Page 12 line 247-248: please add a description that 66 studies contributed unique effect sizes to the current review. 
+```
+
+This information is available here (not that the updated search increased the number of reviews):
+
+`r revise::get_revision("r2_23")`
+
+```{asis}
+Figure 1: 1) what's the difference between references and studies in this figure? For those seven entries categorized as “non-studies”, what are they? 2) “other(explain)” is not self-explanatory. 3) what's the difference between non-target samples and wrong population? In addition, the total number in this box is 1848. 4) “larger study available”: I'm not confident about using sample size as a sole criterium of selecting studies. 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 12 line 249-256: 1) I suggest adding a summary table (counts and percentages) of the basic characteristics of the included references/studies which including year range of publication, types of study designs, sample age categories, outcome types, and exposure types, quality assessment scores, etc. 2) The current description is quite confusing to me, for example, what does “cases” mean? How did you calculate up 197 cases? What appeared twice or more times, the combination of exposure/outcome by age group? 3) table 1: I suggest adding data of the original effect sizes. 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 26 line 260-268, Information on quality assessment was provided in a supplementary file, not table 1. Please revise. 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 27 line 291: Please provide pre-determined criteria of the magnitude of effects with supporting references. 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 28 line 299-304: 119-31-30-43 = 15, not 17. 
+Three methodological issues needs to be clarified or justified. 
+1. The selection of reviews to generate “unique” comparisons appeared to be subjective/unclear.
+2. The statistical approach extensively reduced the evidence pool. For example, 46 unique effects on education outcomes was reduced to 12 and 119 unique effects on health outcomes was reduced to 17. 
+3. Harmonizing the metrics of effect sizes into r may be invalid and placing the converted effect sizes in forest plot is somewhat deceiving. Because across-study comparisons are not guaranteed due to variations in study design, setups of exposure and outcome variables.
+```
+
+\WorkInProgress
+
+```{asis}
+Discussion
+Page 31 line 362-368: I think these are important nuances. If the analytical plan was subjective altered in order to generate more consistent associations. Then, the practice can introduce selection bias. I suggest adding qualitative syntheses of those studies removed by not meeting the “statistical credibility” criteria. 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 31 line 380-383: both guidelines mentioned recreational sedentary screen time. It is not in all instances. 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 32 line 389-391: I assume that the data of primary studies was retrieved by the team whenever possible. But “failed to provide study-level data” make me wonder did not those reviews provide reference information of the included studies? 
+```
+
+\WorkInProgress
+
+```{asis}
+Page 32 line 395: from my point of view, the evidence strength generated from data from ten loosely designed cross-sectional studies is weaker than 5 rigorously designed intervention studies or longitudinal studies. I wonder how the quality and quantity of studies were balanced in the current study.
+```
+
+\WorkInProgress
+
+\newpage
+
+## Reviewer 3
+
+```{asis}
+OVERALL IMPRESSION
+
+The article by Sanders et al is an umbrella review of the literature on benefits and risks associated with screen interaction in children and adolescents. This is a noteworthy and hotly debated topic, with significant social and political implications. Therefore, the current study can certainly inform and impact policy and society in general. 
+
+Overall, the methodology is sound and follows current guidelines on how to carry out systematic reviews and meta-analysis. Moreover, an umbrella review is an apt choice to summarize the wide and heterogeneous literature on the topic. It is the first of its kind, and therefore represents an significant evidence-based advance in summarizing a complex topic. All in all, there are not any unexpected or highly controversial results but the final document is a good quality common-sense summary of the literature that should probably be read by anybody with extreme positions in the topic. 
+
+The umbrella review was registered in PROSPERO and the (rather small) deviations from the protocol are adequately reasoned by the authors. Indeed, I would like to praise authors for centering their efforts in interpreting mainly “credible” effects that are either significant or non-significant. 
+```
+
+\WorkInProgress
+
+```{asis}
+MAJOR COMMENTS
+
+My biggest issue with the article as it stands is in regards to the date of the last search. This was carried out in May 2020, so two years and a half have already passed, so the review is quite outdated. Moreover, these two years and half with the Covid pandemic have likely changed how many children interact with technologies and screens. I suspect that many primary articles have been published on the issue at hand, and, quite likely some meta-analyses too. I would recommend the authors to update their search and results, even acknowledging that that means quite a lot of work. That being said, this update might yield some meta-analyses that include primary articles carried out during the pandemic, when the positive and negative outcomes in relation to screen-time might be correlated with factors that differ greatly from previous years, and this should probably be mentioned in the discussion. 
+```
+
+\WorkInProgress
+
+```{asis}
+Another main issue that I have with the article is that I feel that a better description of supplementary materials is needed. I have not been able to find a consistent description of the materials that can be found in them. Moreover, in the case of the CSV documents a variable dictionary would be most welcome. Somewhat relatedly, in line 190 (and 260) it says “see table 1”, so I was hoping to see some summary on the risk of bias evaluation in the table. I have not been able to find it there. In the Prisma checklist item 18 it says that risk of bias assessments can be found in OSF, but no mention of OSF is provided in the main text. After going through all the supplementary materials, I have been able to find the ratings in a file. My reading from all this is that the article has gone through several iterations and some systematizing and cleaning should be carried out to present in a more clear way the supplementary materials (an index of contents with a short description,
+table and figure captions, variable dictionary…)
+```
+
+\WorkInProgress
+
+```{asis}
+MINOR COMMENTS
+
+The selection of the “the National Health, Lung and Blood Institute's Quality Assessment of Systematic Reviews and Meta-Analyses” as opposed to the more standardized AMSTAR-2 is slighthly suprising (even if it does not likely have any real consequences in the final product).
+```
+
+\WorkInProgress
+
+```{asis}
+The paragraph on age within the eligibility criteria is unclear to me: “(i.e., the highest individual study from the meta-analysis had a mean age was < 18 years).”: is it a mean age below eighteen (hence, potentially including some adults), or is it the oldest participant being under 18 (more clear-cut, but on the other hand limiting the number of outcomes)?
+```
+
+\WorkInProgress
+
+```{asis}
+“In this review we adopted a population-level perspective, meaning that we examined electronic media exposure that occurs during typical daily living activities (e.g., home, school-based electronic media exposure).”: I do not think this paragraph is fully clear. 
+```
+
+\WorkInProgress
+
+```{asis}
+“Outcomes: We included all reported outcomes.”: it might be worth adding “on benefits and risks”
+Lines 200-204: it is unclear to me whether this refers to effects found within the same meta-analysis, across meta-analysis on the same outcome, or both. Some additional clarification would be welcome. 
+```
+
+\WorkInProgress
+
+```{asis}
+While PRISMA is named along the review, it is not specifically indicated that it was followed. I would recommend that authors explicitely say it. 
+```
+
+\WorkInProgress
+
+```{asis}
+Education outcomes: text indicates 12 effects from 8 reviews, but figure 2 only shows 11 effects from 7 reviews. A similar issue happens with Helath related outcomes: text indicates 17 effects, but I only see 15 in figure 3. What is going on?
+```
+
+\WorkInProgress
+
+```{asis}
+“For example, a meta-analysis of the effect of television watching on learning among adolescents diagnosed with depression would be included.” This seems a strange choice, as it mixes very different populations. At the very least, the type of population should be indicated in table 1, and the impact of this discussed in the discussion.
+```
+
+\WorkInProgress
+
 
 \clearpage
