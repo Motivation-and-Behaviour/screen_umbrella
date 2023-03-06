@@ -244,7 +244,7 @@ list(
   tar_render(
     manuscript_md,
     path = here::here("reports", "manuscript.Rmd"),
-    output_format = rmarkdown::md_document()
+    output_format = rmarkdown::md_document(pandoc_args = "--wrap=none")
   ),
   tar_render(
     references,

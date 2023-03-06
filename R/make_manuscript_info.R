@@ -244,7 +244,9 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
 
   edu_certain <-
     combined_effects %>%
-    filter(outcome_category == "education" & certainty == "meets criteria")
+    filter(outcome_category == "education" &
+      certainty == "meets criteria" &
+      use_effect)
 
   manuscript_info$edu$n_effect <- edu_effect %>% nrow()
   manuscript_info$edu$n_certain <- edu_certain %>% nrow()
@@ -304,7 +306,8 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
 
   health_certain <-
     combined_effects %>%
-    filter(outcome_category != "education" & certainty == "meets criteria")
+    filter(outcome_category != "education" &
+      certainty == "meets criteria" & use_effect)
 
   manuscript_info$health$n_effect <- health_effect %>% nrow()
   manuscript_info$health$n_certain <- health_certain %>% nrow()
