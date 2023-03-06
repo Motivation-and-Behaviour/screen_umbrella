@@ -8,18 +8,17 @@
 #' @author Taren Sanders
 #' @export
 make_table_desc_gt <- function(tables_df) {
+  rob_cols <- c("#b7e1cd", "#fce8b2", "#f4c7c3")
+
   desc_df <- tables_df %>%
-    filter(table == "main") %>%
-    select(
-      -c(eligibility_criteria_predefined_and_specified:heterogeneity_assessed)
-    )
+    filter(table == "main")
 
   base_table <-
     desc_df %>%
     group_by(review_id) %>%
     mutate(
       outcomes_assessed = map(bullet_list(plain_language_outcome), gt::html),
-      exposures_assessed = map(bullet_list(plain_language_exposure), gt::html),
+      exposures_assessed = map(bullet_list(plain_language_exposure), gt::html)
     ) %>%
     ungroup() %>%
     select(
@@ -48,6 +47,17 @@ make_table_desc_gt <- function(tables_df) {
       ),
       sample_ages = map(sample_ages, gt::html)
     ) %>%
+    mutate_at(
+      vars(
+        "eligibility_criteria_predefined_and_specified":"heterogeneity_assessed"
+      ),
+      ~ case_match(
+        .x,
+        "low" ~ "L",
+        "unclear" ~ "U",
+        "high" ~ "H"
+      )
+    ) %>%
     # Reorder the columns
     select(
       -starts_with("sample_age_mean"),
@@ -60,7 +70,7 @@ make_table_desc_gt <- function(tables_df) {
       )),
       .after = latest_study_year
     ) %>%
-    arrange(first_author, year)
+    arrange(str_to_lower(first_author), year)
 
   # Make the table
   gt_table <-
@@ -71,8 +81,26 @@ make_table_desc_gt <- function(tables_df) {
     tab_header(html("<strong>Review Characteristics</strong>"),
       subtitle = "Review characteristics and quality assessment for meta-analyses providing unique effects" # nolint
     ) %>%
+    data_color(
+      columns =
+        eligibility_criteria_predefined_and_specified:heterogeneity_assessed,
+      colors = scales::col_factor(
+        palette = rob_cols,
+        levels = c("L", "U", "H")
+      )
+    ) %>%
     cols_merge_range(
       col_begin = earliest_study_year, col_end = latest_study_year
+    ) %>%
+    tab_spanner(
+      label = "Review Characteristics",
+      columns =
+        first_author:exposures_assessed
+    ) %>%
+    tab_spanner(
+      label = "Quality Assessment",
+      columns =
+        eligibility_criteria_predefined_and_specified:heterogeneity_assessed
     ) %>%
     cols_label(
       first_author = "First Author",
@@ -80,33 +108,85 @@ make_table_desc_gt <- function(tables_df) {
       design_restrictions = "Design Restrictions",
       regions_restrictions = "Regions Restrictions",
       earliest_study_year = html(
-        "Study Range<br><small>Earliest - Latest</small>"
+        "Year Range<br><small>Earliest - Latest</small>"
       ),
       sample_ages = html(
         "Sample Age Restrictions<br><small>(Age Range)</small>"
       ),
       outcomes_assessed = "Outcomes Assessed",
-      exposures_assessed = "Exposures Assessed"
+      exposures_assessed = "Exposures Assessed",
+      eligibility_criteria_predefined_and_specified = html("Elig. <br>Crit."),
+      literature_search_strategy_comprehensive_and_systematic = "Lit. Search",
+      dual_independent_screening_review = "Dual Screen",
+      dual_independent_quality_assessment = "Dual Qual.",
+      included_studies_listed_with_important_characteristics_and_results_of_each = "Studies Listed", # nolint
+      publication_bias_assessed = "Pub. Bias",
+      heterogeneity_assessed = "Hetero."
     ) %>%
     cols_align(
       columns =
         first_author:exposures_assessed,
       align = "left"
     ) %>%
+    cols_align(
+      columns =
+        eligibility_criteria_predefined_and_specified:heterogeneity_assessed,
+      align = "center"
+    ) %>%
     tab_footnote(
       footnote = "Where provided",
       locations = cells_column_labels(sample_ages)
+    ) %>%
+    # ROB footnotes
+    tab_footnote(
+      footnote = "Eligibility criteria predefined and specified",
+      locations =
+        cells_column_labels(eligibility_criteria_predefined_and_specified)
+    ) %>%
+    tab_footnote(
+      footnote = "Literature search strategy comprehensive and systematic",
+      locations =
+        cells_column_labels(
+          literature_search_strategy_comprehensive_and_systematic
+        )
+    ) %>%
+    tab_footnote(
+      footnote = "Dual independent screening & review",
+      locations = cells_column_labels(dual_independent_screening_review)
+    ) %>%
+    tab_footnote(
+      footnote = "Dual independent quality assessment",
+      locations = cells_column_labels(dual_independent_quality_assessment)
+    ) %>%
+    tab_footnote(
+      footnote = "Included studies listed with important characteristics and results of each", # nolint
+      locations =
+        cells_column_labels(included_studies_listed_with_important_characteristics_and_results_of_each) # nolint
+    ) %>%
+    tab_footnote(
+      footnote = "Publication bias assessed",
+      locations = cells_column_labels(publication_bias_assessed)
+    ) %>%
+    tab_footnote(
+      footnote = "Heterogeneity assessed",
+      locations = cells_column_labels(heterogeneity_assessed)
+    ) %>%
+    tab_footnote(
+      footnote = "Items are from the National Health, Lung and Blood Institute’s Quality Assessment of Systematic Reviews and Meta-Analyses tool. Note that we excluded the first item of the tool.", # nolint
+      locations = cells_column_spanners("Quality Assessment")
     ) %>%
     # Styling
     cols_width(
       first_author ~ pct(6),
       year ~ pct(3),
-      design_restrictions ~ pct(10),
-      regions_restrictions ~ pct(10),
-      earliest_study_year ~ pct(8),
+      design_restrictions ~ pct(9),
+      regions_restrictions ~ pct(7),
+      earliest_study_year ~ pct(7),
       sample_ages ~ pct(8),
-      outcomes_assessed ~ pct(17),
-      exposures_assessed ~ pct(17)
+      outcomes_assessed ~ pct(13),
+      exposures_assessed ~ pct(13),
+      c(eligibility_criteria_predefined_and_specified:heterogeneity_assessed) ~
+        pct(4)
     ) %>%
     tab_options(
       heading.align = "left",
@@ -121,7 +201,7 @@ make_table_desc_gt <- function(tables_df) {
       footnotes.padding = px(0),
       column_labels.padding = px(3),
       data_row.padding = px(1),
-      table.font.size = pct(80)
+      table.font.size = pct(70)
     ) %>%
     tab_style(
       style = list(cell_text(weight = "bold", align = "left")),
@@ -131,6 +211,8 @@ make_table_desc_gt <- function(tables_df) {
       style = list(cell_text(weight = "bold")),
       locations = cells_column_spanners(everything())
     )
+
+  return(gt_table)
 }
 
 
