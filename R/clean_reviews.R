@@ -6,10 +6,11 @@
 #' @param reviews_raw
 #' @param effects_raw
 #' @param age_codes
+#' @param demo_codes
 #' @return
 #' @author Taren Sanders
 #' @export
-clean_reviews <- function(reviews_raw, effects_raw, age_codes) {
+clean_reviews <- function(reviews_raw, effects_raw, age_codes, demo_codes) {
   zero_effects_ids <-
     effects_raw %>%
     group_by(review_id) %>%
@@ -57,6 +58,25 @@ clean_reviews <- function(reviews_raw, effects_raw, age_codes) {
         sample_age_lowest_study_mean >= 4 & sample_age_highest_study_mean < 13 ~
           "Children",
         TRUE ~ demographics_coded
+      )
+    ) %>%
+    # Fix the demographics variable for the tables
+    mutate(
+      demographics = case_when( # nolint start
+        demographics %in% demo_codes$demo_all ~ "All",
+        demographics %in% demo_codes$demo_adol ~ "Adolescents",
+        demographics %in% demo_codes$demo_child ~ "Children",
+        demographics %in% demo_codes$demo_child_adol ~ "Children; Adolescents",
+        demographics %in% demo_codes$demo_early ~ "Early childhood; Pre-school",
+        demographics %in% demo_codes$demo_early_child ~ "Early childhood; Pre-school; School-age Children (Early Primary, Elementary)",
+        demographics %in% demo_codes$demo_sch_all ~ "School-age Children",
+        demographics %in% demo_codes$demo_sch_elm ~ "School-age Children (Primary, Elementary)",
+        demographics %in% demo_codes$demo_sch_early_elm ~ "School-age Children (Early Primary, Elementary)",
+        demographics %in% demo_codes$demo_sch_elm_mid ~ "School-age Children (Primary, Elementary, Middle School)",
+        demographics %in% demo_codes$demo_sch_elm_mid ~ "School-age Children (High School)",
+        demographics %in% demo_codes$demo_sch_mid ~ "School-age Children (Middle School)",
+        demographics %in% demo_codes$demo_sch_mid_high ~ "School-age Children (Middle, High School)",
+        TRUE ~ demographics # nolint end
       )
     ) %>%
     # Add incl/excl criteria

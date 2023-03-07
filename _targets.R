@@ -32,17 +32,12 @@ list(
     format = "file"
   ),
   # Set params --------------------------------------------------------------
-  tar_target(
-    age_codes,
-    list(
-      mixed = mixed_codes, adolescents = adolescents_codes,
-      children = children_codes, young_children = young_children_codes
-    )
-  ),
+  tar_target(age_codes, age_codes_list),
+  tar_target(demo_codes, demo_codes_list),
   # Clean data --------------------------------------------------------------
   tar_target(
     reviews_clean,
-    clean_reviews(reviews_raw, effects_raw, age_codes)
+    clean_reviews(reviews_raw, effects_raw, age_codes, demo_codes)
   ),
   tar_target(
     effects_clean,
