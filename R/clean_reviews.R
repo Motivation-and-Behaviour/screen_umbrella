@@ -59,6 +59,40 @@ clean_reviews <- function(reviews_raw, effects_raw, age_codes) {
         TRUE ~ demographics_coded
       )
     ) %>%
+    # Add incl/excl criteria
+    mutate(across(
+      c(health_condition, health_behaviour, education, psychological),
+      ~ if_else(.x %in% na_codes, NA, .x)
+    )) %>%
+    mutate(
+      sample_incl_health_cond =
+        str_to_sentence(str_extract(health_condition, "(?<=Include: )(.*)")),
+      sample_incl_health_beh =
+        str_to_sentence(str_extract(health_behaviour, "(?<=Include: )(.*)")),
+      sample_incl_edu =
+        str_to_sentence(str_extract(education, "(?<=Include: )(.*)")),
+      sample_incl_psych =
+        str_to_sentence(str_extract(psychological, "(?<=Include: )(.*)"))
+    ) %>%
+    unite(
+      sample_incl, sample_incl_health_cond:sample_incl_psych,
+      sep = "\n", na.rm = TRUE
+    ) %>%
+    mutate(
+      sample_excl_health_cond =
+        str_to_sentence(str_extract(health_condition, "(?<=Exclude: )(.*)")),
+      sample_excl_health_beh =
+        str_to_sentence(str_extract(health_behaviour, "(?<=Exclude: )(.*)")),
+      sample_excl_edu =
+        str_to_sentence(str_extract(education, "(?<=Exclude: )(.*)")),
+      sample_excl_psych =
+        str_to_sentence(str_extract(psychological, "(?<=Exclude: )(.*)"))
+    ) %>%
+    unite(
+      sample_excl, sample_excl_health_cond:sample_excl_psych,
+      sep = "\n", na.rm = TRUE
+    ) %>%
+    mutate(across(c(sample_incl, sample_excl), ~ if_else(. == "", NA, .))) %>%
     # Add some other helpful columns
     mutate(
       author_year = paste(first_author, ", ", year_of_publication, sep = ""),
