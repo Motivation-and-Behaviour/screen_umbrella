@@ -175,7 +175,7 @@ options(dplyr.summarise.inform = FALSE)
 ```{r, load-targets}
 targets::tar_load(
   c(
-    "manuscript_info", "combined_bib", "plots", "prisma", "table_desc_latex",
+    "manuscript_info", "combined_bib", "plots", "prisma",
     "edu_certain_params", "plot_edu_certain",
     "nonedu_certain_params", "plot_nonedu_certain"
   ),
@@ -300,7 +300,7 @@ From each included meta-analysis, two researchers independently extracted data i
 
 ### Study risk of bias assessment
 
-For each meta-analysis, two researchers independently completed the National Health, Lung and Blood Institute’s Quality Assessment of Systematic Reviews and Meta-Analyses tool [@NHLBIQualityAssessmentSystematic2014] (see Table \@ref(tab:desctable)).
+For each meta-analysis, two researchers independently completed the National Health, Lung and Blood Institute’s Quality Assessment of Systematic Reviews and Meta-Analyses tool [@NHLBIQualityAssessmentSystematic2014] (see Table 1).
 We resolved disagreements by consensus, with a third researcher employed when needed.
 We did not assess risk of bias in the individual studies that were included in each meta-analysis.
 
@@ -371,40 +371,13 @@ The most frequently reported exposures were `r manuscript_info$freq_exposures`.
 Supplementary File 4 provides a list of all exposures identified.
 The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
 In `r manuscript_info$freq_combos$n1` cases there was only one exposure/outcome combination for an age group, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
-Full characteristics of the included studies are provided in Table \@ref(tab:desctable).
+Full characteristics of the included studies are provided in Table 1.
 <span id ="r2_23">After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations contributed from `r manuscript_info$prisma$unique_reviews` reviews.</span>
 These effects represent the findings of `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
 
-```{r desctable}
-table_desc_latex %>%
-  knitr::kable(
-    "latex",
-    caption = "Review characteristics for studies providing unique effects",
-    col.names = c(
-      "First Author", "Year", "Design Restrictions",
-      "Regions Restrictions", "Study Range",
-      "Sample Age Restrictions",
-      "Outcomes Assessed", "Exposures Assessed"
-    ),
-    escape = FALSE,
-    booktabs = TRUE,
-    align = c("l", "c", "l", "l", "c", "l", "l", "l"),
-    linesep = "",
-    longtable = TRUE
-  ) %>%
-  kableExtra::row_spec(1:nrow(table_desc_latex), hline_after = TRUE) %>%
-  kableExtra::row_spec(0, bold = TRUE) %>%
-  kableExtra::column_spec(3:4, width = "2cm") %>%
-  kableExtra::column_spec(5, width = "1.5cm") %>%
-  kableExtra::column_spec(6:8, width = "3cm") %>%
-  kableExtra::kable_styling(
-    latex_options = c("repeat_header"),
-    font_size = 5
-  ) %>%
-  kableExtra::landscape()
-```
+**TABLE 1**
 
-The quality of the included meta-analyses was mixed (see Table \@ref(tab:desctable)).
+The quality of the included meta-analyses was mixed (see Table 1).
 Most assessed heterogeneity `r manuscript_info$qual$low_hetero`, reported the characteristics of the included studies `r manuscript_info$qual$low_char`, and used a comprehensive and systematic search strategy `r manuscript_info$qual$low_search`.
 Most reviews did not clearly report if their eligibility criteria were predefined `r manuscript_info$qual$unclear_elig`.
 Many papers also did not complete dual independent screening of abstracts and full text `r manuscript_info$qual$high_dualscreen` or did not clearly report the method of screening `r manuscript_info$qual$unclear_dualscreen`.

@@ -49,7 +49,9 @@ Reviewer 2's concerns about the appropriateness of your technical approach (nota
 Both reviewers 2 and 3 are concerned about the lack of information on risk of bias assessment and population characteristics. Please ensure this information is clearly available and add data on both to Table 1.
 ```
 
-\WorkInProgress
+We apologise that the quality assessment information was not included in the original submission.
+We have added this information to Table 1, along with the information about the sample characteristics requested by the reviewers.
+We note that this increases the size of the table, and we have removed it from the text of the manuscript and instead included it as a seperate file.
 
 ```{asis e4}
 Reviewer 1 highlights the inappropriateness of causal language given that the majority of included studies speak to association, not causation. Please remove all inappropriate use of causal language accordingly.
@@ -212,7 +214,7 @@ Page 8 line 146-148: the effects of screen use on youth with a clinical conditio
 ```
 
 \WorkInProgress
-\todo{Will add to table 1}
+\todo{Havea added to table 1. Should we indicate on forest plots?}
 
 ```{asis r2_13}
 Page 8 line 152: please define outcomes.
@@ -230,8 +232,10 @@ We agree and have made this change.
 Page 10 line 190: Table 1 does not contain RoB info. 
 ```
 
-\WorkInProgress
-\todo{Will add to table 1}
+Our apologies for this oversight.
+We initially intended to include the quality assessment in Table 1, but felt it made the table too large and moved it to a seperate table.
+It seems we inadvertently did not upload the seperate file when submitting the review.
+We have now included the quality assessment in Table 1.
 
 ```{asis r2_16}
 Page 10 line 195-196: the description of data conversion is not transparent. Pearson's r assumes linear relationship. But associations between screen use and well-being are often non-monotonic (Twenge 2020, PMID: 32303719). In addition, meta-analyses reporting odd ratios defined exposure outcomes in various ways. For example, Zhang et. al. 2016 compared the obesity risk by the lowest and highest TV viewing time, whereas Poorolajal et. al. 2020 compared watching TV > 1-2h/d with an unclear group. Can the harmonization of OR into R guarantee that the two values are comparable? Therefore, further justification is needed. 
@@ -308,17 +312,22 @@ Page 12 line 249-256: 1) I suggest adding a summary table (counts and percentage
 
 \WorkInProgress
 
+3. While we agree that this information might be useful for some readers, we found that this made the table difficult to read.
+Some reviews presented multiple effect sizes, and once the information to describe each effect was added (e.e.g., the specifc outcome, exposure, age group, and moderator), the table became overwhelming.
+We have included all of this information in the supplementary file.
+
 ```{asis r2_26}
 Page 26 line 260-268, Information on quality assessment was provided in a supplementary file, not table 1. Please revise. 
 ```
 
-\WorkInProgress
+As noted in \comment{r2_15}, this has been corrected.
 
 ```{asis r2_27}
 Page 27 line 291: Please provide pre-determined criteria of the magnitude of effects with supporting references. 
 ```
 
 \WorkInProgress
+\todo{I think this is misleading. It differs by field, outcome, etc.}
 
 ```{asis r2_28}
 Page 28 line 299-304: 119-31-30-43 = 15, not 17. 
@@ -361,13 +370,16 @@ Page 32 line 389-391: I assume that the data of primary studies was retrieved by
 ```
 
 There were two ways that the data from the primary studies could be included in our review:
+
 * The data were provided in the paper (i.e., in forest plots, tables, or supplementary files); or
 * The authors provided the data when contacted.
 
 `r get_revision("r2_32")`
 
-We did not retrive data from the primary studies when the data were not provided in the paper or by the author.
-We did originally consider it, but the scope was such that it was not feasible.
+We did not retrive data from the primary studies when the data were not provided in the paper or by contacting the author.
+Our results include more than 3,000 primary studies, and even after accounting for those that provided data in the paper, it would not be feasible to extract all of the remaining data.
+
+\todo{I kind of want to say "also those reviews are probably bad anyway, because it's not hard to put data in forest plots", but I'm not sure there's a professional way to say that.}
 
 ```{asis r2_33}
 Page 32 line 395: from my point of view, the evidence strength generated from data from ten loosely designed cross-sectional studies is weaker than 5 rigorously designed intervention studies or longitudinal studies. I wonder how the quality and quantity of studies were balanced in the current study.
@@ -413,7 +425,10 @@ The historic nature of reviews is an issue we acknowledge in our limitations:
 Another main issue that I have with the article is that I feel that a better description of supplementary materials is needed. I have not been able to find a consistent description of the materials that can be found in them. Moreover, in the case of the CSV documents a variable dictionary would be most welcome. Somewhat relatedly, in line 190 (and 260) it says “see table 1”, so I was hoping to see some summary on the risk of bias evaluation in the table. I have not been able to find it there. In the Prisma checklist item 18 it says that risk of bias assessments can be found in OSF, but no mention of OSF is provided in the main text. After going through all the supplementary materials, I have been able to find the ratings in a file. My reading from all this is that the article has gone through several iterations and some systematizing and cleaning should be carried out to present in a more clear way the supplementary materials (an index of contents with a short description, table and figure captions, variable dictionary…)
 ```
 
-\WorkInProgress
+Our apologies for this oversight.
+Per our response to Reviewer 2 (\comment{r2_15}), we initially intended to include the quality assessment in Table 1.
+We removed it because it made the table very large, but did not include the new file with the seperate table.
+We have now included the quality assessment in Table 1.
 
 ```{asis r3_4}
 MINOR COMMENTS
@@ -478,7 +493,12 @@ This is the same issue raised by Reviewer 2 (\comment{r2_28}), and we have corre
 “For example, a meta-analysis of the effect of television watching on learning among adolescents diagnosed with depression would be included.” This seems a strange choice, as it mixes very different populations. At the very least, the type of population should be indicated in table 1, and the impact of this discussed in the discussion.
 ```
 
-\WorkInProgress
+Yes, we agree that this information is important.
+We have included information about the sample in Table 1.
+We also note that our criteria for choosing effect sizes in the case of duplicates (i.e., taking the one with the largest N) meant that we would generally take the effect size for the 'typical' population.
+More concretely: in the example cited we would typically choose the effect size of television watching on learning for the general population, rather than for those who are depressed, because the sample size would be larger for the former.
+
+\todo{should 'clinical pops' be indicated in the forest plots?}
 
 
 \clearpage

@@ -1,8 +1,10 @@
-# Summary
+Summary
+=======
 
 Children’s engagement in screen time is a complex issue. Parents, policymakers, and educators needing to weigh the risks that sedentary use of screens present alongside the potential benefits for learning and social connectedness. The lack of comprehensive evidence hampers efforts to make an informed decision. As a Lancet editorial<sup>1</sup> suggested, “Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking.” In this study, we systematically harmonize data from existing meta-analyses of screen time on a range of outcomes, including health, education, and psychology, and identify the most statistically robust relationships. We show that some forms of screen time—such as social media—show consistent evidence of harm for children, with no clear evidence of a benefit. Other relationships are more complex. Video games, for example, are associated with poorer body composition and learning outcomes. However, video games for a specific educational purpose (such as numeracy) are associated with improvements in that subject area. Caregivers must therefore weigh the health risk against the educational benefit. The findings of this study provide parents and other caregivers with the information to make these informed decisions.
 
-# Background
+Background
+==========
 
 In the 16th century, hysteria reigned around a new technology that threatened to be “confusing and harmful” to the mind. The cause of such concern? The widespread availability of books brought about by the invention of the printing press.<sup>2</sup> In the early 19th century, concerns about schooling “exhausting the children’s brains” followed, with the medical community accepting that excessive study could be a cause of madness.<sup>3</sup> By the 20th century, the invention of the radio was accompanied by assertions that it would distract children from their reading (which by this point was no longer considered confusing and harmful) leading to impaired learning.<sup>4</sup>
 
@@ -16,7 +18,8 @@ In 2016, the American Academy of Pediatrics used a narrative review to examine t
 
 In order to synthesise the evidence and support further evidence-based guideline development and refinement, we reviewed published meta-analyses examining the effects of screen use on children and youth. This review synthesises evidence on any outcome of electronic media exposure. Adopting this broad approach allowed us to provide a holistic perspective on the influence of screens on children’s lives. By synthesising across life domains (e.g., school and home), this review provides evidence to inform guidelines and advice for parents, teachers, pediatricians and other professionals in order to maximise human functioning.
 
-# Methods
+Methods
+=======
 
 We prospectively registered our methods on the International Prospective Register of Systematic Reviews (PROSPERO; CRD42017076051). We followed the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) guidelines.<sup>21</sup>
 
@@ -46,7 +49,7 @@ From each included meta-analysis, two researchers independently extracted data i
 
 ### Study risk of bias assessment
 
-For each meta-analysis, two researchers independently completed the National Health, Lung and Blood Institute’s Quality Assessment of Systematic Reviews and Meta-Analyses tool<sup>22</sup> (see Table @ref(tab:desctable)). We resolved disagreements by consensus, with a third researcher employed when needed. We did not assess risk of bias in the individual studies that were included in each meta-analysis.
+For each meta-analysis, two researchers independently completed the National Health, Lung and Blood Institute’s Quality Assessment of Systematic Reviews and Meta-Analyses tool<sup>22</sup> (see Table 1). We resolved disagreements by consensus, with a third researcher employed when needed. We did not assess risk of bias in the individual studies that were included in each meta-analysis.
 
 ### Effect measures
 
@@ -74,7 +77,8 @@ We initially planned to include systematic reviews without meta-analyses in a na
 
 We altered our evidence assessment plan when we identified that, as written, it could not classify precise evidence of null effects (i.e., from large reviews with low heterogeneity and low risk of publication bias) as ‘credible’ because a highly-significant *P*-value was a criteria. This would have significantly harmed knowledge gained from our review as it would have restricted our ability to show where the empirical evidence strongly indicated that there was no association between screen time and a given outcome.
 
-# Results
+Results
+=======
 
 ### Search Results
 
@@ -82,9 +86,11 @@ The searches yielded 50,656 results, of which 28,675 were duplicates. After scre
 
 ![PRISMA Diagram](../figures/PRISMA%20Diagram.pdf)
 
-The most frequently reported exposures were general screen use (*n* = 45), general TV programs and movies (*n* = 28), physically active video games (*n* = 22), and literacy (abracadabra; in schools) intervention (*n* = 15). Supplementary File 4 provides a list of all exposures identified. The most frequently reported outcomes were general learning (*n* = 46), body composition (*n* = 37), general physical activity (*n* = 22), depression psychological health (*n* = 17), and sleep duration (*n* = 15). In 175 cases there was only one exposure/outcome combination for an age group, with 37 appearing twice, and 26 appearing three or more times. Full characteristics of the included studies are provided in Table @ref(tab:desctable). <span id="r2_23">After removing reviews with duplicate exposure/outcome combinations, our process yielded 275 unique effect/outcome combinations contributed from 118 reviews.</span> These effects represent the findings of 3,103 primary studies comprised of 3,141,213 participants.
+The most frequently reported exposures were general screen use (*n* = 45), general TV programs and movies (*n* = 28), physically active video games (*n* = 22), and literacy (abracadabra; in schools) intervention (*n* = 15). Supplementary File 4 provides a list of all exposures identified. The most frequently reported outcomes were general learning (*n* = 46), body composition (*n* = 37), general physical activity (*n* = 22), depression psychological health (*n* = 17), and sleep duration (*n* = 15). In 175 cases there was only one exposure/outcome combination for an age group, with 37 appearing twice, and 26 appearing three or more times. Full characteristics of the included studies are provided in Table 1. <span id="r2_23">After removing reviews with duplicate exposure/outcome combinations, our process yielded 275 unique effect/outcome combinations contributed from 118 reviews.</span> These effects represent the findings of 3,103 primary studies comprised of 3,141,213 participants.
 
-The quality of the included meta-analyses was mixed (see Table @ref(tab:desctable)). Most assessed heterogeneity (*n* low risk = 110/118, 93% of meta-analyses), reported the characteristics of the included studies (*n* low risk = 102/118, 86%), and used a comprehensive and systematic search strategy (*n* low risk = 86/118, 73%). Most reviews did not clearly report if their eligibility criteria were predefined (*n* unclear = 84/118, 71%). Many papers also did not complete dual independent screening of abstracts and full text (*n* high risk = 21/118, 18%) or did not clearly report the method of screening (*n* unclear = 42/118, 36%). A similar trend was observed for dual independent quality assessment (*n* high risk = 54/118, 46%; n high risk = 28/118, 24%). Overall, only 8 meta-analyses were graded as low risk of bias on all criteria.
+**TABLE 1**
+
+The quality of the included meta-analyses was mixed (see Table 1). Most assessed heterogeneity (*n* low risk = 110/118, 93% of meta-analyses), reported the characteristics of the included studies (*n* low risk = 102/118, 86%), and used a comprehensive and systematic search strategy (*n* low risk = 86/118, 73%). Most reviews did not clearly report if their eligibility criteria were predefined (*n* unclear = 84/118, 71%). Many papers also did not complete dual independent screening of abstracts and full text (*n* high risk = 21/118, 18%) or did not clearly report the method of screening (*n* unclear = 42/118, 36%). A similar trend was observed for dual independent quality assessment (*n* high risk = 54/118, 46%; n high risk = 28/118, 24%). Overall, only 8 meta-analyses were graded as low risk of bias on all criteria.
 
 ### Education Outcomes
 
@@ -94,7 +100,7 @@ There were 80 unique effects associated with education outcomes, including gener
 
 Among the statistically credible effects, general screen use, television viewing, and video games were all negatively associated with learning. E-books that included narration, as well as touch screen education interventions, and augmented reality education interventions were positively associated with learning. General screen use was negatively associated with literacy outcomes. However, if the screen use involved co-viewing (e.g., watching with a parent), or the content of television programs was educational, the association with literacy was positive and significant at the 95% confidence level (weak evidence). Numeracy outcomes were positively associated with screen-based mathematics interventions and video games that contained numeracy content.
 
-As shown in Figure @ref(fig:eduplot), most of the credible results (14 of 24 effects) showed statistically significant associations, with 99.9% confidence intervals not encompassing zero (strong evidence). The remaining seven associations were significant at the 95% confidence level (weak evidence). All credible effects related to education outcomes were small-to-moderate. Screen-based interventions designed to influence an outcome (e.g., a computer based program designed to enhance learning)<sup>32</sup> tended to have larger effect sizes than exposures that were not specifically intended to influence any of the measured outcomes (e.g., the association between television viewing and learning).<sup>33</sup> The largest effect size observed was for augmented reality-based education interventions on general learning (*r* = 0.33, *k* = 15, *N* = 1, 474). Most effects showed high levels of heterogeneity (21 of 24 with *I*<sup>2</sup> &gt; 50%).
+As shown in Figure @ref(fig:eduplot), most of the credible results (14 of 24 effects) showed statistically significant associations, with 99.9% confidence intervals not encompassing zero (strong evidence). The remaining seven associations were significant at the 95% confidence level (weak evidence). All credible effects related to education outcomes were small-to-moderate. Screen-based interventions designed to influence an outcome (e.g., a computer based program designed to enhance learning<sup>32</sup>) tended to have larger effect sizes than exposures that were not specifically intended to influence any of the measured outcomes (e.g., the association between television viewing and learning<sup>33</sup>). The largest effect size observed was for augmented reality-based education interventions on general learning (*r* = 0.33, *k* = 15, *N* = 1, 474). Most effects showed high levels of heterogeneity (21 of 24 with *I*<sup>2</sup> &gt; 50%).
 
 ### Health and Health-related Behaviours
 
@@ -106,7 +112,8 @@ Digital advertising of unhealthy foods—both traditional advertising and video 
 
 Across the health outcomes, most (19 of 29) effects were statistically significant at the 99.9% confidence interval level, with the remaining six significant at 95% confidence. However, most of the credible effects exhibited high levels of heterogeneity, with all but two having *I*<sup>2</sup> &gt; 75%. Additionally, most effects were small, with the association between screen use and sleep duration the largest at *r* =  − 0.37 (*k* = 10, *N* = 56, 720). Most of the effect sizes (25/29) had an absolute value of *r* &lt; 0.2.
 
-# Discussion
+Discussion
+==========
 
 The primary goal of this review was to provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes. We found that when meta-analyses examined general screen use, and did not specify the content, context or device, there was strong evidence showing potentially harmful associations with general learning, literacy, body composition, and depression. However, when meta-analyses included a more nuanced examination of exposures, a more complex picture appeared.
 
@@ -120,128 +127,133 @@ Largely owing to a small number of studies or missing individual study data, the
 
 Among studies that met our criteria for statistical certainty heterogeneity was high, with almost all effects having *I*<sup>2</sup> &gt; 50%. Much of this heterogeneity is likely explained by differences in measures across pooled studies, or in some cases, the generic nature of some of the exposures. For example, “TV programs and movies” covers a substantial range of content, which may explain the heterogeneous association with education outcomes.
 
-## Implications for Policy and Practice
+Implications for Policy and Practice
+------------------------------------
 
 Broadly, our findings align with the recommendations of others who suggest that current guidelines may be too simplistic, mischaracterise the strength of the evidence, or do not acknowledge the important nuances of the issue.<sup>44–46</sup> Our findings suggest that screen use is a complex issue, with associations based not just on duration and device type, but also on the content and the environment in which the exposure occurs. Many current guidelines simplify this complex relationship as something that should be minimised in all instances.<sup>12,13</sup> We suggest that future guidelines need to embrace the complexity of the issue, to give parents and clinicians specific information to weigh the pros and cons of interactions with screens.
 
-## Implications for Future Research
+Implications for Future Research
+--------------------------------
 
 Screen use research is extensive, varied, and rapidly growing. Reviews tended to be general (e.g., all screen time) and even when more targeted (e.g., social media) nuances related to specific content (e.g., Instagram vs Facebook) have not been meta-analysed or have not produced credible evidence. Fewer than 20% of the effects identified met our criteria for statistical credibility. Most studies which did not meet our critiera failed to provide study-level data (or did not provide sufficent data, such as including effect estimates but not sample sizes). Newer reviews were more likely to provide this information than older reviews, but it highlights the importance of data and code sharing as recommended in the PRISMA guidelines.<sup>21</sup> When study level data was available, many effects were removed because the pooled sample size was small, or because there were fewer than ten studies on which to perform an Egger’s test. It seems that much of the current screen time research is small in scale, and there is a need for larger, high-quality studies.
 
 <span id="r1_1">Our results highlight the need for the field to more carefully consider if the term ‘screen time’ remains appropriate for providing advice to parents. Instead, our results suggest that more nuanced and detailed descriptions of the behaviours to be modified may be required. Rather than suggesting parents limit ‘screen time’, for example, it may be better to suggest that parents promote interactive educational experiences but limit exposure to advertising.</span>
 
-Screen time research has a well-established measurement problem, which impacts the individual studies of this umbrella review. The vast majority of screen time research relies on self-reported data, which not only lacks the nuance required for understanding the effects of screen time, but may also be inaccurate. In one systematic review on screen time and sleep,<sup>7</sup> 66 of the 67 included studies used self-reported data for *both* the exposure and outcome variable. It has been established that self-reported screen time data has questionnable validity. In a meta-analysis of 47 studies comparing self-reported media use with logged measures, Parry et al<sup>47</sup> found that the measures were only moderately correlated (*r* = 0.38), with self-reported problematic usage fairing worse (*r* = 0.25). Indeed, of 622 studies which measured the screen time of 0—6 year-olds, only 69 provided any sort of psychometric properties for their measure, with only 19 studies reporting validity.<sup>48</sup> While some researchers have started using newer methods of capturing screen behaviours—such as wearable cameras<sup>49</sup> or device-based loggers—<sup>50</sup>these are still not widely adopted. It may be that the field of screen time research cannot be sufficiently advanced until accurate, validated, and nuanced measures are more widely available and adopted.
+Screen time research has a well-established measurement problem, which impacts the individual studies of this umbrella review. The vast majority of screen time research relies on self-reported data, which not only lacks the nuance required for understanding the effects of screen time, but may also be inaccurate. In one systematic review on screen time and sleep,<sup>7</sup> 66 of the 67 included studies used self-reported data for *both* the exposure and outcome variable. It has been established that self-reported screen time data has questionnable validity. In a meta-analysis of 47 studies comparing self-reported media use with logged measures, Parry et al<sup>47</sup> found that the measures were only moderately correlated (*r* = 0.38), with self-reported problematic usage fairing worse (*r* = 0.25). Indeed, of 622 studies which measured the screen time of 0—6 year-olds, only 69 provided any sort of psychometric properties for their measure, with only 19 studies reporting validity.<sup>48</sup> While some researchers have started using newer methods of capturing screen behaviours—such as wearable cameras<sup>49</sup> or device-based loggers<sup>50</sup>—these are still not widely adopted. It may be that the field of screen time research cannot be sufficiently advanced until accurate, validated, and nuanced measures are more widely available and adopted.
 
-## Strengths and Limitations
+Strengths and Limitations
+-------------------------
 
 Our primary goal for this umbrella review was to provide a high-level synthesis of screen time research, by examining a range of exposures and the associations with a broad scope of outcomes. Our results represent the findings from 3,103 primary studies comprised of 3,141,213 participants. To ensure findings could be compared on a common metric, we extracted and reanalysed individual study data where possible.
 
-Our high-level approach limits the feasibility of examining fine-grained details of the individual studies. For example, we did not examine moderators beyond age, nor did we rate the risk of bias for the individual studies. Thus, our assessment of evidence quality was restricted to statistical credibility, rather than a more complete assessment of quality (e.g., GRADE).<sup>51</sup> As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics. For this reason, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria. <span id="r1_4">Our high-level approach also means that we could not engage with the specific mechanisms behind each association, and as such, we cannot comment on the evidence for causality. Instead, readers who wish to more deeply understand one specific relationship are directed to the cited review for that effect, where the authors could engage more deeply with the mechanisms.</span> <span id="r3_2_2">In addition, reviews provide only historical evidence which may not keep up with the changing ways children can engage with screens. While our synthesis of the existing evidence provides information about how screens might have influenced children in the past, it is difficult to know if these findings will translate to new forms of technology in the future.</span>
+Our high-level approach limits the feasibility of examining fine-grained details of the individual studies. For example, we did not examine moderators beyond age, nor did we rate the risk of bias for the individual studies. Thus, our assessment of evidence quality was restricted to statistical credibility, rather than a more complete assessment of quality (e.g., GRADE<sup>51</sup>). As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics. For this reason, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria. <span id="r1_4">Our high-level approach also means that we could not engage with the specific mechanisms behind each association, and as such, we cannot comment on the evidence for causality. Instead, readers who wish to more deeply understand one specific relationship are directed to the cited review for that effect, where the authors could engage more deeply with the mechanisms.</span> <span id="r3_2_2">In addition, reviews provide only historical evidence which may not keep up with the changing ways children can engage with screens. While our synthesis of the existing evidence provides information about how screens might have influenced children in the past, it is difficult to know if these findings will translate to new forms of technology in the future.</span>
 
-## Conclusions
+Conclusions
+-----------
 
 Screen time is a topic of significant interest, as shown by the wide variety of academic domains involved, parents’ concerns, and the growing pervasiveness into society. Our findings showed that the influence of screen time can be both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition). The interplay of these findings show that parents, teachers, and other caregivers need to carefully weigh the pros and cons of each specific activity for potential harms and benefits. However, our findings also suggest that in order to aid caregivers to make this judgement, researchers need to conduct more careful and nuanced measurement and analysis of screen time, with less emphasis on measures that aggregate screen time and instead focus on the content, context, and environment in which the exposure occurs.
 
-# References
+References
+==========
 
-<span class="csl-left-margin">1. </span><span class="csl-right-inline">The Lancet. Social media, screen time, and young people’s mental health. *The Lancet* **393**, 611 (2019).</span>
+1\. The Lancet. Social media, screen time, and young people’s mental health. *The Lancet* **393**, 611 (2019).
 
-<span class="csl-left-margin">2. </span><span class="csl-right-inline">Blair, A. Reading Strategies for Coping With Information Overload ca.1550-1700. *Journal of the History of Ideas* **64**, 11–28 (2003).</span>
+2\. Blair, A. Reading Strategies for Coping With Information Overload ca.1550-1700. *Journal of the History of Ideas* **64**, 11–28 (2003).
 
-<span class="csl-left-margin">3. </span><span class="csl-right-inline">Bell, A. N. *The sanitarian*. vol. 11 (AN Bell, 1883).</span>
+3\. Bell, A. N. *The sanitarian*. vol. 11 (AN Bell, 1883).
 
-<span class="csl-left-margin">4. </span><span class="csl-right-inline">Dill, K. E. *The Oxford handbook of media psychology*. (Oxford University Press, 2013).</span>
+4\. Dill, K. E. *The Oxford handbook of media psychology*. (Oxford University Press, 2013).
 
-<span class="csl-left-margin">5. </span><span class="csl-right-inline">Wartella, E. A. & Jennings, N. Children and computers: New technology. Old concerns. *The future of children* 31–43 (2000).</span>
+5\. Wartella, E. A. & Jennings, N. Children and computers: New technology. Old concerns. *The future of children* 31–43 (2000).
 
-<span class="csl-left-margin">6. </span><span class="csl-right-inline">Rhodes, A. *Top ten child health problems: What the public thinks*. (2015).</span>
+6\. Rhodes, A. *Top ten child health problems: What the public thinks*. (2015).
 
-<span class="csl-left-margin">7. </span><span class="csl-right-inline">Hale, L. & Guan, S. Screen time and sleep among school-aged children and adolescents: A systematic literature review. *Sleep Medicine Reviews* **21**, 50–58 (2015).</span>
+7\. Hale, L. & Guan, S. Screen time and sleep among school-aged children and adolescents: A systematic literature review. *Sleep Medicine Reviews* **21**, 50–58 (2015).
 
-<span class="csl-left-margin">8. </span><span class="csl-right-inline">Sweetser, P., Johnson, D., Ozdowska, A. & Wyeth, P. Active versus passive screen time for young children. *Australasian Journal of Early Childhood* **37**, 94–98 (2012).</span>
+8\. Sweetser, P., Johnson, D., Ozdowska, A. & Wyeth, P. Active versus passive screen time for young children. *Australasian Journal of Early Childhood* **37**, 94–98 (2012).
 
-<span class="csl-left-margin">9. </span><span class="csl-right-inline">Li, X. & Atkins, M. S. Early childhood computer experience and cognitive and motor development. *Pediatrics* **113**, 1715–1722 (2004).</span>
+9\. Li, X. & Atkins, M. S. Early childhood computer experience and cognitive and motor development. *Pediatrics* **113**, 1715–1722 (2004).
 
-<span class="csl-left-margin">10. </span><span class="csl-right-inline">Warburton, W. & Highfield, K. Children and technology in a smart device world. in *Children, Families and Communities* 195–221 (Oxford University Press, 2017).</span>
+10\. Warburton, W. & Highfield, K. Children and technology in a smart device world. in *Children, Families and Communities* 195–221 (Oxford University Press, 2017).
 
-<span class="csl-left-margin">11. </span><span class="csl-right-inline">Nature Human Behaviour. Screen time: How much is too much? *Nature* **565**, 265–266 (2019).</span>
+11\. Nature Human Behaviour. Screen time: How much is too much? *Nature* **565**, 265–266 (2019).
 
-<span class="csl-left-margin">12. </span><span class="csl-right-inline">World Health Organization. *Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age*. 33 p. (World Health Organization, 2019).</span>
+12\. World Health Organization. *Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age*. 33 p. (World Health Organization, 2019).
 
-<span class="csl-left-margin">13. </span><span class="csl-right-inline">Australian Government. *Physical activity and exercise guidelines for all Australians*. (2021).</span>
+13\. Australian Government. *Physical activity and exercise guidelines for all Australians*. (2021).
 
-<span class="csl-left-margin">14. </span><span class="csl-right-inline">Canadian Society for Exercise Physiology. *Canadian 24-Hour Movement Guidelines for Children and Youth: An Integration of Physical Activity, Sedentary Behaviour, and Sleep*. (2016).</span>
+14\. Canadian Society for Exercise Physiology. *Canadian 24-Hour Movement Guidelines for Children and Youth: An Integration of Physical Activity, Sedentary Behaviour, and Sleep*. (2016).
 
-<span class="csl-left-margin">15. </span><span class="csl-right-inline">Council On Communication and Media. Media Use in School-Aged Children and Adolescents. *Pediatrics* **138**, e20162592 (2016).</span>
+15\. Council On Communication and Media. Media Use in School-Aged Children and Adolescents. *Pediatrics* **138**, e20162592 (2016).
 
-<span class="csl-left-margin">16. </span><span class="csl-right-inline">Ferguson, C. J. Everything in Moderation: Moderate Use of Screens Unassociated with Child Behavior Problems. *Psychiatric Quarterly* **88**, 797–805 (2017).</span>
+16\. Ferguson, C. J. Everything in Moderation: Moderate Use of Screens Unassociated with Child Behavior Problems. *Psychiatric Quarterly* **88**, 797–805 (2017).
 
-<span class="csl-left-margin">17. </span><span class="csl-right-inline">Przybylski, A. K. & Weinstein, N. A Large-Scale Test of the Goldilocks Hypothesis: Quantifying the Relations Between Digital-Screen Use and the Mental Well-Being of Adolescents. *Psychological Science* **28**, 204–215 (2017).</span>
+17\. Przybylski, A. K. & Weinstein, N. A Large-Scale Test of the Goldilocks Hypothesis: Quantifying the Relations Between Digital-Screen Use and the Mental Well-Being of Adolescents. *Psychological Science* **28**, 204–215 (2017).
 
-<span class="csl-left-margin">18. </span><span class="csl-right-inline">Sanders, T., Parker, P. D., del Pozo-Cruz, B., Noetel, M. & Lonsdale, C. Type of screen time moderates effects on outcomes in 4013 children: Evidence from the Longitudinal Study of Australian Children. *International Journal of Behavioral Nutrition and Physical Activity* **16**, 117 (2019).</span>
+18\. Sanders, T., Parker, P. D., del Pozo-Cruz, B., Noetel, M. & Lonsdale, C. Type of screen time moderates effects on outcomes in 4013 children: Evidence from the Longitudinal Study of Australian Children. *International Journal of Behavioral Nutrition and Physical Activity* **16**, 117 (2019).
 
-<span class="csl-left-margin">19. </span><span class="csl-right-inline">Kaye, L. K., Orben, A., Ellis, D. A., Hunter, S. C. & Houghton, S. The Conceptual and Methodological Mayhem of ‘Screen Time’. *International Journal of Environmental Research and Public Health* **17**, 3661 (2020).</span>
+19\. Kaye, L. K., Orben, A., Ellis, D. A., Hunter, S. C. & Houghton, S. The Conceptual and Methodological Mayhem of ‘Screen Time’. *International Journal of Environmental Research and Public Health* **17**, 3661 (2020).
 
-<span class="csl-left-margin">20. </span><span class="csl-right-inline">Chassiakos, Y. L. R. *et al.* Children and Adolescents and Digital Media. *Pediatrics* **138**, e20162593 (2016).</span>
+20\. Chassiakos, Y. L. R. *et al.* Children and Adolescents and Digital Media. *Pediatrics* **138**, e20162593 (2016).
 
-<span class="csl-left-margin">21. </span><span class="csl-right-inline">Page, M. J. *et al.* *The PRISMA 2020 statement: An updated guideline for reporting systematic reviews*. (2020) doi:[10.31222/osf.io/v7gm2](https://doi.org/10.31222/osf.io/v7gm2).</span>
+21\. Page, M. J. *et al.* *The PRISMA 2020 statement: An updated guideline for reporting systematic reviews*. (2020) doi:[10.31222/osf.io/v7gm2](https://doi.org/10.31222/osf.io/v7gm2).
 
-<span class="csl-left-margin">22. </span><span class="csl-right-inline">National Health, Lung, and Blood Institute. *Quality Assessment of Systematic Reviews and Meta-Analyses*. (2014).</span>
+22\. National Health, Lung, and Blood Institute. *Quality Assessment of Systematic Reviews and Meta-Analyses*. (2014).
 
-<span class="csl-left-margin">23. </span><span class="csl-right-inline">Bonett, D. G. Transforming odds ratios into correlations for meta-analytic research. *American Psychologist* **62**, 254–255 (2007).</span>
+23\. Bonett, D. G. Transforming odds ratios into correlations for meta-analytic research. *American Psychologist* **62**, 254–255 (2007).
 
-<span class="csl-left-margin">24. </span><span class="csl-right-inline">Bowman, N. A. Effect Sizes and Statistical Methods for Meta-Analysis in Higher Education. *Research in Higher Education* **53**, 375–382 (2012).</span>
+24\. Bowman, N. A. Effect Sizes and Statistical Methods for Meta-Analysis in Higher Education. *Research in Higher Education* **53**, 375–382 (2012).
 
-<span class="csl-left-margin">25. </span><span class="csl-right-inline">Jacobs, P. & Viechtbauer, W. Estimation of the biserial correlation and its sampling variance for use in meta-analysis: Biserial Correlation. *Research Synthesis Methods* **8**, 161–180 (2017).</span>
+25\. Jacobs, P. & Viechtbauer, W. Estimation of the biserial correlation and its sampling variance for use in meta-analysis: Biserial Correlation. *Research Synthesis Methods* **8**, 161–180 (2017).
 
-<span class="csl-left-margin">26. </span><span class="csl-right-inline">Viechtbauer, W. *Metafor: Meta-analysis package for r*. (2022).</span>
+26\. Viechtbauer, W. *Metafor: Meta-analysis package for r*. (2022).
 
-<span class="csl-left-margin">27. </span><span class="csl-right-inline">R Core Team. *R: A language and environment for statistical computing*. (R Foundation for Statistical Computing, 2022).</span>
+27\. R Core Team. *R: A language and environment for statistical computing*. (R Foundation for Statistical Computing, 2022).
 
-<span class="csl-left-margin">28. </span><span class="csl-right-inline">Egger, M., Smith, G. D., Schneider, M. & Minder, C. Bias in meta-analysis detected by a simple, graphical test. *BMJ* **315**, 629–634 (1997).</span>
+28\. Egger, M., Smith, G. D., Schneider, M. & Minder, C. Bias in meta-analysis detected by a simple, graphical test. *BMJ* **315**, 629–634 (1997).
 
-<span class="csl-left-margin">29. </span><span class="csl-right-inline">Page, M. J., Higgins, J. P. & Sterne, J. A. Chapter 13: Assessing risk of bias due to missing results in a synthesis. in *Cochrane Handbook for Systematic Reviews of Interventions* (eds. Higgins, J. P. et al.) (Cochrane, 2021).</span>
+29\. Page, M. J., Higgins, J. P. & Sterne, J. A. Chapter 13: Assessing risk of bias due to missing results in a synthesis. in *Cochrane Handbook for Systematic Reviews of Interventions* (eds. Higgins, J. P. et al.) (Cochrane, 2021).
 
-<span class="csl-left-margin">30. </span><span class="csl-right-inline">Ioannidis, J. P. & Trikalinos, T. A. An exploratory test for an excess of significant findings. *Clinical Trials* **4**, 245–253 (2007).</span>
+30\. Ioannidis, J. P. & Trikalinos, T. A. An exploratory test for an excess of significant findings. *Clinical Trials* **4**, 245–253 (2007).
 
-<span class="csl-left-margin">31. </span><span class="csl-right-inline">Papadimitriou, N. *et al.* An umbrella review of the evidence associating diet and cancer risk at 11 anatomical sites. *Nature Communications* **12**, 4579 (2021).</span>
+31\. Papadimitriou, N. *et al.* An umbrella review of the evidence associating diet and cancer risk at 11 anatomical sites. *Nature Communications* **12**, 4579 (2021).
 
-<span class="csl-left-margin">32. </span><span class="csl-right-inline">Xie, H. *et al.* Can Touchscreen Devices be Used to Facilitate Young Children’s Learning? A Meta-Analysis of Touchscreen Learning Effect. *Frontiers in Psychology* **9**, 2580 (2018).</span>
+32\. Xie, H. *et al.* Can Touchscreen Devices be Used to Facilitate Young Children’s Learning? A Meta-Analysis of Touchscreen Learning Effect. *Frontiers in Psychology* **9**, 2580 (2018).
 
-<span class="csl-left-margin">33. </span><span class="csl-right-inline">Adelantado-Renau, M. *et al.* Association Between Screen Media Use and Academic Performance Among Children and Adolescents: A Systematic Review and <span class="nocase">Meta-analysis</span>. *JAMA Pediatrics* **173**, 1058 (2019).</span>
+33\. Adelantado-Renau, M. *et al.* Association Between Screen Media Use and Academic Performance Among Children and Adolescents: A Systematic Review and Meta-analysis. *JAMA Pediatrics* **173**, 1058 (2019).
 
-<span class="csl-left-margin">34. </span><span class="csl-right-inline">Madigan, S., McArthur, B. A., Anhorn, C., Eirich, R. & Christakis, D. A. Associations Between Screen Use and Child Language Skills: A Systematic Review and <span class="nocase">Meta-analysis</span>. *JAMA Pediatrics* **174**, 665 (2020).</span>
+34\. Madigan, S., McArthur, B. A., Anhorn, C., Eirich, R. & Christakis, D. A. Associations Between Screen Use and Child Language Skills: A Systematic Review and Meta-analysis. *JAMA Pediatrics* **174**, 665 (2020).
 
-<span class="csl-left-margin">35. </span><span class="csl-right-inline">Poorolajal, J., Sahraei, F., Mohamdadi, Y., Doosti-Irani, A. & Moradi, L. Behavioral factors influencing childhood obesity: A systematic review and meta-analysis. *Obesity Research & Clinical Practice* **14**, 109–118 (2020).</span>
+35\. Poorolajal, J., Sahraei, F., Mohamdadi, Y., Doosti-Irani, A. & Moradi, L. Behavioral factors influencing childhood obesity: A systematic review and meta-analysis. *Obesity Research & Clinical Practice* **14**, 109–118 (2020).
 
-<span class="csl-left-margin">36. </span><span class="csl-right-inline">Byun, J. & Joung, E. Digital game-based learning for K-12 mathematics education: A meta-analysis. *School Science and Mathematics* **118**, 113–126 (2018).</span>
+36\. Byun, J. & Joung, E. Digital game-based learning for K-12 mathematics education: A meta-analysis. *School Science and Mathematics* **118**, 113–126 (2018).
 
-<span class="csl-left-margin">37. </span><span class="csl-right-inline">Vannucci, A., Simpson, E. G., Gagnon, S. & Ohannessian, C. M. Social media use and risky behaviors in adolescents: A meta-analysis. *Journal of Adolescence* **79**, 258–274 (2020).</span>
+37\. Vannucci, A., Simpson, E. G., Gagnon, S. & Ohannessian, C. M. Social media use and risky behaviors in adolescents: A meta-analysis. *Journal of Adolescence* **79**, 258–274 (2020).
 
-<span class="csl-left-margin">38. </span><span class="csl-right-inline">Yoon, S., Kleinman, M., Mertz, J. & Brannick, M. Is social network site usage related to depression? A meta-analysis of Facebookdepression relations. *Journal of Affective Disorders* **248**, 65–72 (2019).</span>
+38\. Yoon, S., Kleinman, M., Mertz, J. & Brannick, M. Is social network site usage related to depression? A meta-analysis of FacebookDepression relations. *Journal of Affective Disorders* **248**, 65–72 (2019).
 
-<span class="csl-left-margin">39. </span><span class="csl-right-inline">Vahedi, Z. & Zannella, L. The association between self-reported depressive symptoms and the use of social networking sites (SNS): A meta-analysis. *Current Psychology* **40**, 2174–2189 (2021).</span>
+39\. Vahedi, Z. & Zannella, L. The association between self-reported depressive symptoms and the use of social networking sites (SNS): A meta-analysis. *Current Psychology* **40**, 2174–2189 (2021).
 
-<span class="csl-left-margin">40. </span><span class="csl-right-inline">Seetharaman, G. W., Jeff Horwitz and Deepa. Facebook Knows Instagram Is Toxic for Teen Girls, Company Documents Show. *Wall Street Journal* (2021).</span>
+40\. Seetharaman, G. W., Jeff Horwitz and Deepa. Facebook Knows Instagram Is Toxic for Teen Girls, Company Documents Show. *Wall Street Journal* (2021).
 
-<span class="csl-left-margin">41. </span><span class="csl-right-inline">Tekedere, H. & Göke, H. Examining the Effectiveness of Augmented Reality Applications in Education: A Meta-Analysis. *International Journal of Environmental and Science Education* **11**, 9469–9481 (2016).</span>
+41\. Tekedere, H. & Göke, H. Examining the Effectiveness of Augmented Reality Applications in Education: A Meta-Analysis. *International Journal of Environmental and Science Education* **11**, 9469–9481 (2016).
 
-<span class="csl-left-margin">42. </span><span class="csl-right-inline">Sadeghirad, B., Duhaney, T., Motaghipisheh, S., Campbell, N. R. C. & Johnston, B. C. Influence of unhealthy food and beverage marketing on children’s dietary intake and preference: A systematic review and meta-analysis of randomized trials. *Obesity Reviews* **17**, 945–959 (2016).</span>
+42\. Sadeghirad, B., Duhaney, T., Motaghipisheh, S., Campbell, N. R. C. & Johnston, B. C. Influence of unhealthy food and beverage marketing on children’s dietary intake and preference: A systematic review and meta-analysis of randomized trials. *Obesity Reviews* **17**, 945–959 (2016).
 
-<span class="csl-left-margin">43. </span><span class="csl-right-inline">Marshall, S. J., Biddle, S. J. H., Gorely, T., Cameron, N. & Murdey, I. Relationships between media use, body fatness and physical activity in children and youth: A meta-analysis. *International Journal of Obesity* **28**, 1238–1246 (2004).</span>
+43\. Marshall, S. J., Biddle, S. J. H., Gorely, T., Cameron, N. & Murdey, I. Relationships between media use, body fatness and physical activity in children and youth: A meta-analysis. *International Journal of Obesity* **28**, 1238–1246 (2004).
 
-<span class="csl-left-margin">44. </span><span class="csl-right-inline">Elson, M. *et al.* Do policy statements on media effects faithfully represent the science? *Advances in Methods and Practices in Psychological Science* **2**, 12–25 (2019).</span>
+44\. Elson, M. *et al.* Do policy statements on media effects faithfully represent the science? *Advances in Methods and Practices in Psychological Science* **2**, 12–25 (2019).
 
-<span class="csl-left-margin">45. </span><span class="csl-right-inline">Ashton, J. J. & Beattie, R. M. Screen time in children and adolescents: Is there evidence to guide parents and policy? *The Lancet Child & Adolescent Health* **3**, 292–294 (2019).</span>
+45\. Ashton, J. J. & Beattie, R. M. Screen time in children and adolescents: Is there evidence to guide parents and policy? *The Lancet Child & Adolescent Health* **3**, 292–294 (2019).
 
-<span class="csl-left-margin">46. </span><span class="csl-right-inline">Royal College of Paediatrics and Child Health. *The health impacts of screen time: A guide for clinicians and parents.* (2019).</span>
+46\. Royal College of Paediatrics and Child Health. *The health impacts of screen time: A guide for clinicians and parents.* (2019).
 
-<span class="csl-left-margin">47. </span><span class="csl-right-inline">Parry, D. A. *et al.* A systematic review and meta-analysis of discrepancies between logged and self-reported digital media use. *Nature Human Behaviour* **5**, 1535–1547 (2021).</span>
+47\. Parry, D. A. *et al.* A systematic review and meta-analysis of discrepancies between logged and self-reported digital media use. *Nature Human Behaviour* **5**, 1535–1547 (2021).
 
-<span class="csl-left-margin">48. </span><span class="csl-right-inline">Byrne, R., Terranova, C. O. & Trost, S. G. Measurement of screen time among young children aged 0 years: A systematic review. *Obesity Reviews* **22**, (2021).</span>
+48\. Byrne, R., Terranova, C. O. & Trost, S. G. Measurement of screen time among young children aged 0 years: A systematic review. *Obesity Reviews* **22**, (2021).
 
-<span class="csl-left-margin">49. </span><span class="csl-right-inline">Smith, C., Galland, B. C., de Bruin, W. E. & Taylor, R. W. Feasibility of automated cameras to measure screen use in adolescents. *American journal of preventive medicine* **57**, 417–424 (2019).</span>
+49\. Smith, C., Galland, B. C., de Bruin, W. E. & Taylor, R. W. Feasibility of automated cameras to measure screen use in adolescents. *American journal of preventive medicine* **57**, 417–424 (2019).
 
-<span class="csl-left-margin">50. </span><span class="csl-right-inline">Ryding, F. C. & Kuss, D. J. Passive objective measures in the assessment of problematic smartphone use: A systematic review. *Addictive Behaviors Reports* **11**, 100257 (2020).</span>
+50\. Ryding, F. C. & Kuss, D. J. Passive objective measures in the assessment of problematic smartphone use: A systematic review. *Addictive Behaviors Reports* **11**, 100257 (2020).
 
-<span class="csl-left-margin">51. </span><span class="csl-right-inline">Guyatt, G. *et al.* GRADE guidelines: 1. Introduction evidence profiles and summary of findings tables. *Journal of Clinical Epidemiology* **64**, 383–394 (2011).</span>
+51\. Guyatt, G. *et al.* GRADE guidelines: 1. IntroductionGRADE evidence profiles and summary of findings tables. *Journal of Clinical Epidemiology* **64**, 383–394 (2011).
