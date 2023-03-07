@@ -113,3 +113,12 @@ young_children_codes <- c(
   "younger than 8",
   "young_children"
 )
+
+# Inclusion/exclusion criteria:
+
+na_codes <- c(
+  "None",
+  "none specified",
+  "None specified",
+  "None Specified"
+)
