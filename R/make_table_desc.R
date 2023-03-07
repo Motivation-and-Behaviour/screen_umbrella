@@ -47,6 +47,19 @@ make_table_desc_gt <- function(tables_df) {
       ),
       sample_ages = map(sample_ages, gt::html)
     ) %>%
+    mutate(
+      sample_restrictions = case_when(
+        !is.na(sample_incl) & !is.na(sample_excl) ~
+          paste0("Include: ", sample_incl, "\n", "Exclude: ", sample_excl),
+        !is.na(sample_incl) & is.na(sample_excl) ~
+          paste0("Include: ", sample_incl),
+        is.na(sample_incl) & !is.na(sample_excl) ~
+          paste0("Exclude: ", sample_excl),
+        TRUE ~ "None specified"
+      ),
+      sample_restrictions = map(sample_restrictions, gt::html)
+    ) %>%
+    relocate(sample_restrictions, .after = design_restrictions) %>%
     mutate_at(
       vars(
         "eligibility_criteria_predefined_and_specified":"heterogeneity_assessed"
@@ -62,7 +75,9 @@ make_table_desc_gt <- function(tables_df) {
     select(
       -starts_with("sample_age_mean"),
       -demographics_restrictions,
-      -review_id
+      -review_id,
+      -sample_incl,
+      -sample_excl
     ) %>%
     relocate(
       any_of(c(
@@ -106,7 +121,7 @@ make_table_desc_gt <- function(tables_df) {
       first_author = "First Author",
       year = "Year",
       design_restrictions = "Design Restrictions",
-      regions_restrictions = "Regions Restrictions",
+      sample_restrictions = "Sample Restrictions",
       earliest_study_year = html(
         "Year Range<br><small>Earliest - Latest</small>"
       ),
@@ -180,9 +195,9 @@ make_table_desc_gt <- function(tables_df) {
       first_author ~ pct(6),
       year ~ pct(3),
       design_restrictions ~ pct(9),
-      regions_restrictions ~ pct(7),
-      earliest_study_year ~ pct(7),
-      sample_ages ~ pct(8),
+      sample_restrictions ~ pct(9),
+      earliest_study_year ~ pct(6),
+      sample_ages ~ pct(7),
       outcomes_assessed ~ pct(13),
       exposures_assessed ~ pct(13),
       c(eligibility_criteria_predefined_and_specified:heterogeneity_assessed) ~
