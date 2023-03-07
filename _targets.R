@@ -116,17 +116,8 @@ list(
     make_table_desc_latex(tables_df)
   ),
   tar_target(
-    table_rob,
-    make_table_rob(tables_df)
-  ),
-  tar_target(
     table_desc_saved,
     save_table(table_desc_gt, "Review characteristics.pdf"),
-    format = "file",
-  ),
-  tar_target(
-    table_rob_saved,
-    save_table(table_rob, "Quality assessment table.pdf"),
     format = "file",
   ),
   # Make plots --------------------------------------------------------------
