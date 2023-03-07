@@ -135,9 +135,9 @@ We are grateful to the reviewer for seeing the value in our review.
 ```{asis r2_2}
 Abstract: 
 
-Page 3 Line 38: In my opinion, “examined” is a better than “synthesized”. Because the data from meta-analyses were not pooled.
+Page 3 Line 38: In my opinion, “examined” is a better than “synthesized”. Because the data from meta-analyses were not pooled. 
 
-Page 3 Line 39: I suggest replacing “common metric” with “Pearson's r”.
+Page 3 Line 39: I suggest replacing “common metric” with “Pearson's r”. 
 
 Page 3 line 41-42: “extracted 165 unique exposure/outcome combinations from 66 studies.”
 ```
@@ -145,14 +145,14 @@ Page 3 line 41-42: “extracted 165 unique exposure/outcome combinations from 66
 We have made all of these changes.
 
 ```{asis r2_3}
-Summary:
+Summary: 
 Page 4 line 59: the lack of comprehensive evidence hampers efforts to make an informed decision.
 ```
 
 We have made this change.
 
 ```{asis r2_4}
-Introduction:
+Introduction: 
 Page 5 line 84-86: please further justify how a review study would make the limited evidence base less lacking or generate new findings.
 ```
 
@@ -209,7 +209,7 @@ Page 7 line 123: the authors stated the application of “a broad approach”, w
 \WorkInProgress
 
 ```{asis r2_12}
-Methods:
+Methods: 
 Page 8 line 146-148: the effects of screen use on youth with a clinical condition are likely be different from those of the general population. If this review included any, the population characteristics should be specified in the result section or in the figures. 
 ```
 
@@ -312,8 +312,10 @@ Page 12 line 249-256: 1) I suggest adding a summary table (counts and percentage
 
 \WorkInProgress
 
+1. \todo{I don't really want to add this - I think tables of counts are dumb. Thoughts?}
+2. \todo{Yes, we should not have used the term "cases". Clear this up}
 3. While we agree that this information might be useful for some readers, we found that this made the table difficult to read.
-Some reviews presented multiple effect sizes, and once the information to describe each effect was added (e.e.g., the specifc outcome, exposure, age group, and moderator), the table became overwhelming.
+Some reviews presented multiple effect sizes, and once the information to describe each effect was added (e.g., the specifc outcome, exposure, age group, and moderator), the table became overwhelming.
 We have included all of this information in the supplementary file.
 
 ```{asis r2_26}
@@ -345,8 +347,8 @@ Three methodological issues needs to be clarified or justified.
 
 \WorkInProgress
 
-1. (Not sure what to address)
-2. xyz
+1. \todo{Argue not subjective (pre-specified, objective), and we say in limitations that others might choose other options}
+2. \todo{Agree - we pre-specified our approaching thinking that it balanced the need to be conservative with the need to be inclusive. But, many effects fail this (fairly low) bar. Add more on this to the discussion.}
 3. We can understand the reviewer's concerns regarding the conversions of the effect sizes (although we disagree with the characterisation of our results as "somewhat deceiving").
 We think it is worth considering the counter-factual to our approach: had we not converted effect sizes to a common metric, it would not be possible to make any comparisons between the effect sizes.
 
@@ -386,7 +388,7 @@ Page 32 line 395: from my point of view, the evidence strength generated from da
 ```
 
 \WorkInProgress
-todo{include study design in the forest plots?}
+\todo{include study design in the forest plots?}
 
 \newpage
 
