@@ -18,7 +18,7 @@ convert_effects <- function(data) {
       ciub = if_else(
         is.na(value_ci_lower_bound) & !is.na(value_raw_se),
         value + 1.96 * value_raw_se,
-        value_ci_lower_bound,
+        value_ci_upper_bound,
       ),
       r = case_when(
         is.na(value) ~ NA_real_,
