@@ -34,14 +34,15 @@ list(
   # Set params --------------------------------------------------------------
   tar_target(age_codes, age_codes_list),
   tar_target(demo_codes, demo_codes_list),
+  tar_target(sample_codes, sample_codes_list),
   # Clean data --------------------------------------------------------------
   tar_target(
     reviews_clean,
-    clean_reviews(reviews_raw, effects_raw, age_codes, demo_codes)
+    clean_reviews(reviews_raw, effects_raw, age_codes, demo_codes, sample_codes)
   ),
   tar_target(
     effects_clean,
-    clean_effects(effects_raw, reviews_clean, age_codes)
+    clean_effects(effects_raw, reviews_clean, age_codes, sample_codes)
   ),
   tar_target(
     studies_clean,

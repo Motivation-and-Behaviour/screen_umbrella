@@ -6,10 +6,11 @@
 #' @param effects_raw
 #' @param reviews_clean
 #' @param age_codes
+#' @param sample_codes
 #' @return
 #' @author Taren Sanders
 #' @export
-clean_effects <- function(effects_raw, reviews_clean, age_codes) {
+clean_effects <- function(effects_raw, reviews_clean, age_codes, sample_codes) {
   age_moderator_categories <- c(
     "age", "Age", "Educational level", "Grade Level",
     "School level", "Level of education"
@@ -36,22 +37,33 @@ clean_effects <- function(effects_raw, reviews_clean, age_codes) {
     ) %>%
     # Add the demographics in from the review-level data
     left_join(
-      select(reviews_clean, review_id, author_year, demographics_coded),
+      select(
+        reviews_clean,
+        review_id, author_year, demographics_coded, atypical_sample
+      ),
       by = "review_id"
     ) %>%
     rename(moderator_age = demographics_coded) %>%
     # Check for ages within the normal moderators and change moderator_age
-    mutate(moderator_age = case_when(
-      moderator_category %in% age_moderator_categories &
-        moderator_level %in% age_codes$mixed ~ "Mixed",
-      moderator_category %in% age_moderator_categories &
-        moderator_level %in% age_codes$adolescents ~ "Adolescents",
-      moderator_category %in% age_moderator_categories &
-        moderator_level %in% age_codes$children ~ "Children",
-      moderator_category %in% age_moderator_categories &
-        moderator_level %in% age_codes$young_children ~ "Young children",
-      TRUE ~ moderator_age
-    ))
+    mutate(
+      moderator_age = case_when(
+        moderator_category %in% age_moderator_categories &
+          moderator_level %in% age_codes$mixed ~ "Mixed",
+        moderator_category %in% age_moderator_categories &
+          moderator_level %in% age_codes$adolescents ~ "Adolescents",
+        moderator_category %in% age_moderator_categories &
+          moderator_level %in% age_codes$children ~ "Children",
+        moderator_category %in% age_moderator_categories &
+          moderator_level %in% age_codes$young_children ~ "Young children",
+        TRUE ~ moderator_age
+      ),
+      atypical_sample = if_else(
+        moderator_level %in% sample_codes$clin_sample_incl |
+          moderator_level %in% sample_codes$edu_sample_incl,
+        TRUE,
+        atypical_sample
+      )
+    )
 
   effects_converted <-
     effects_clean %>%

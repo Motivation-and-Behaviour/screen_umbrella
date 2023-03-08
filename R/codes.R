@@ -206,3 +206,25 @@ na_codes <- c(
   "None specified",
   "None Specified"
 )
+
+# Atypical Sample -----------------------------------------------------------
+sample_codes_list <- list(
+  clin_sample_incl = c(
+    "Atypically developing",
+    "Autism",
+    "Autism spectrum disorder",
+    "Chronic disease",
+    "Non-typically developing children",
+    "Overweight and obesity only",
+    "Overweight/obese",
+    "Students with disabilities (excluding hearing, visual, and physical impairments)" # nolint
+  ),
+  edu_sample_incl = c(
+    "Learning disabilities or difficulties",
+    "Math difficulties",
+    "Poor readers",
+    "Struggling readers",
+    "Students with dyscalculia",
+    "Students with math difficulties"
+  )
+)
