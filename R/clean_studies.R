@@ -20,9 +20,11 @@ clean_studies <- function(studies_raw) {
 
   data <- studies_clean %>%
     mutate(converted_metric = translate_tests(metric)) %>%
-    filter(converted_metric %in% c("b", "d", "r", "or", "z", "md")) %>%
+    filter(converted_metric %in% c("b", "d", "r", "z", "md")) %>%
     convert_studies() %>%
     drop_na(r_estimate, study_n) %>%
     group_by(effect_size_id) %>%
     tar_group()
+
+  return(data)
 }

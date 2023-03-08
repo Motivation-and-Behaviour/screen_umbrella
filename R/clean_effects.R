@@ -10,15 +10,17 @@
 #' @author Taren Sanders
 #' @export
 clean_effects <- function(effects_raw, reviews_clean, age_codes) {
+  age_moderator_categories <- c(
+    "age", "Age", "Educational level", "Grade Level",
+    "School level", "Level of education"
+  )
+
   effects_clean <-
     effects_raw %>%
     # Remove any unusable effects (must have value and N)
     filter(!is.na(value) & !is.na(combined_n) & use_moderator) %>%
     # Translate the statistical tests to common abbreviations
     mutate(stat_test_clean = translate_tests(statistical_test)) %>%
-    # Can only use some of the metric types
-    filter(stat_test_clean %in% c("b", "d", "r", "or", "z")) %>%
-    convert_effects() %>%
     rename(
       outcome_category = outcome_level_1,
       outcome = outcome_level_2,
@@ -37,14 +39,8 @@ clean_effects <- function(effects_raw, reviews_clean, age_codes) {
       select(reviews_clean, review_id, author_year, demographics_coded),
       by = "review_id"
     ) %>%
-    rename(moderator_age = demographics_coded)
-
-  # Check for ages within the normal moderators and change moderator_age
-  age_moderator_categories <- c(
-    "age", "Age", "Educational level", "Grade Level",
-    "School level", "Level of education"
-  )
-  effects_clean <- effects_clean %>%
+    rename(moderator_age = demographics_coded) %>%
+    # Check for ages within the normal moderators and change moderator_age
     mutate(moderator_age = case_when(
       moderator_category %in% age_moderator_categories &
         moderator_level %in% age_codes$mixed ~ "Mixed",
@@ -57,8 +53,15 @@ clean_effects <- function(effects_raw, reviews_clean, age_codes) {
       TRUE ~ moderator_age
     ))
 
+  effects_converted <-
+    effects_clean %>%
+    # Can only use some of the metric types
+    filter(stat_test_clean %in% c("b", "d", "r", "z")) %>%
+    convert_effects()
+
   # Pick the largest review by N for each outcome/exposure pair and age group
-  effects_use <- effects_clean %>%
+  effects_use <-
+    effects_converted %>%
     group_by(
       plain_language_outcome,
       plain_language_exposure,
@@ -70,7 +73,10 @@ clean_effects <- function(effects_raw, reviews_clean, age_codes) {
       main_effect = TRUE
     ) %>%
     ungroup() %>%
-    select(effect_size_id, use_effect, main_effect)
+    select(
+      effect_size_id, r, cilb, ciub, z, cilb_z, ciub_z, use_effect,
+      main_effect
+    )
 
   effects_clean_use <-
     left_join(effects_clean, effects_use, by = "effect_size_id")

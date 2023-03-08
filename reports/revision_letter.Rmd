@@ -243,9 +243,18 @@ We have now included the quality assessment in Table 1.
 Page 10 line 195-196: the description of data conversion is not transparent. Pearson's r assumes linear relationship. But associations between screen use and well-being are often non-monotonic (Twenge 2020, PMID: 32303719). In addition, meta-analyses reporting odd ratios defined exposure outcomes in various ways. For example, Zhang et. al. 2016 compared the obesity risk by the lowest and highest TV viewing time, whereas Poorolajal et. al. 2020 compared watching TV > 1-2h/d with an unclear group. Can the harmonization of OR into R guarantee that the two values are comparable? Therefore, further justification is needed. 
 ```
 
-\WorkInProgress
-\todo{For linear - yeah, but this is always a problem in meta-analyses.
-Need to think about ORs.}
+We agree that the relationship between some outcomes and screen time may not always be linear.
+However, our previous research (e.g., 10.1186/s12966-019-0881-7) looking at a range of health and education outcomes in a high-quality dataset found little evidence for curvilinear relationships.
+We therefore felt that the linear model was appropriate for the majority of the outcomes in this review.
+Additionally, almost none of the reviews we included reported information that would allow us to calculate non-linear effects.
+We agree that this is an important limitation though, and have added information on this to the *Discussion* section:
+
+`r get_revision("r2_16")`
+
+Regarding odds ratios, we initially included these based on several papers that suggested that a conversion to *r* was possible (e.g., 10.1037/0003-066X.62.3.254). 
+On further consideration, we agree with the reviewer that it is difficult to ensure that this conversion produces comparable estimates when the categories used across studies is inconsistent.
+We have therefore removed effect sizes calculated from odds ratios from our results.
+In our efforts to remain completely transparent, these data remain available in the supplementary material.
 
 ```{asis r2_17}
 Page 10 Line 201-206: The inclusion/exclusion criteria are here and there (page 10 line 197-198, page 11 line 221-222, etc.). Please provide specific and full criteria of effect size inclusion/exclusion in one section.
@@ -263,7 +272,7 @@ We did not require all effect sizes within a review to be eligible or usable for
 Page 11 line 222: Egger's test is not suitable for evaluating publication bias of ORs.
 ```
 
-\WorkInProgress
+Per \comment{r2_16}, we decided not to include ORs in the meta-analyses.
 
 ```{asis r2_19}
 Page 11 line 229-231: An effect with statistical credibility but showing P < .05 indicate no association of interest. 

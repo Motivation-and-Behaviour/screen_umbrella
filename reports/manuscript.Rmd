@@ -511,8 +511,12 @@ For example, we did not examine moderators beyond age, nor did we rate the risk 
 Thus, our assessment of evidence quality was restricted to statistical credibility, rather than a more complete assessment of quality (e.g., GRADE [@guyattGRADEGuidelinesIntroduction2011]).
 As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics.
 For this reason, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria.
+
 <span id="r1_4">Our high-level approach also means that we could not engage with the specific mechanisms behind each association, and as such, we cannot comment on the evidence for causality.
 Instead, readers who wish to more deeply understand one specific relationship are directed to the cited review for that effect, where the authors could engage more deeply with the mechanisms.</span>
+<span id="r2_16">We converted all effect sizes to a common metric (Pearson's r) to allow for comparisons of magnitude, but acknowledge that this assumes a linear relationship.
+Some previous research suggests that associations are typically linear [@sandersTypeScreenTime2019].
+However, others have identified instances where non-linear relationships exist, especially for very high levels of screen time [@twengeMoreTimeTechnology2019; @przybylskiLargeScaleTestGoldilocks2017; @kellySocialMediaUse2018].</span>
 <span id = "r3_2_2">In addition, reviews provide only historical evidence which may not keep up with the changing ways children can engage with screens.
 While our synthesis of the existing evidence provides information about how screens might have influenced children in the past, it is difficult to know if these findings will translate to new forms of technology in the future.</span>
 
