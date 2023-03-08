@@ -312,7 +312,7 @@ We excluded effect sizes which were reported as relative risk ratios, as meta-an
 We also excluded effect size estimates when the authors did not provide a sample size.
 Where possible, we also extracted effect sizes from the primary studies included in each meta-analysis.
 
-To facilitate comparisons, we converted effect sizes to Pearson’s $r$ using established formulae [@bonettTransformingOddsRatios2007;@bowmanEffectSizesStatistical2012;@jacobsEstimationBiserialCorrelation2017].
+To facilitate comparisons, we converted effect sizes to Pearson’s $r$ using established formulae [@bowmanEffectSizesStatistical2012;@jacobsEstimationBiserialCorrelation2017].
 Effect sizes on the original metric are provided in Supplementary File 2.</span>
 
 ### Synthesis methods
