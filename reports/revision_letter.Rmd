@@ -58,6 +58,8 @@ Reviewer 1 highlights the inappropriateness of causal language given that the ma
 ```
 
 Please see response to Reviewer 1, \Comment{r1_4}.
+We agree that the use of causal langauge from an evidence-base that is mostly cross-sectional would be misleading.
+We did not intend to make causal statements, and have reviewed the manuscript for any remaining instances.
 
 \newpage
 

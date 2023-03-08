@@ -226,7 +226,8 @@ This evidence has led some researchers to argue that a more nuanced approach to 
 
 In 2016, the American Academy of Pediatrics used a narrative review to examine the benefits and risks of children and adolescents' electronic media [@chassiakosChildrenAdolescentsDigital2016] as a basis for updating their guidelines about screen use [@AAPMediaUseSchoolAged2016].
 Since then, a large number of systematic reviews and meta-analyses have provided evidence about the potential benefits and risks of screen use.
-<span id = "r1_2">Yet, no review has examined the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviour, and well-being.
+While there have been other overviews of reviews on screen time, these have tended to focus on a single domain (e.g., health [@stiglicEffectsScreentimeHealth2019]), focus on a particular exposure (e.g., social media [@valkenburgSocialMediaUse2022;@arias-delatorreRelationshipDepressionUse2020]) or provide only a narrative summary of the literature [@orbenTeenagersScreensSocial2020].
+<span id = "r1_2">No review has yet examined the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviour, and well-being.
 By summarising and synthesising all evidence in one overview, we provide a reference point for the field and allow for easier comparison of risks and benefits for the same behaviour.</span>
 
 In order to synthesise the evidence and support further evidence-based guideline development and refinement, we reviewed published meta-analyses examining the effects of screen use on children and youth.
@@ -441,7 +442,7 @@ We found that when meta-analyses examined general screen use, and did not specif
 However, when meta-analyses included a more nuanced examination of exposures, a more complex picture appeared.
 
 As an example, consider children watching television programs---an often cited form of screen time harm.
-We found robust evidence for a small association with poorer academic performance and literacy skills for general television watching[@adelantado-renauAssociationScreenMedia2019].
+We found statistically robust evidence for a small association with poorer academic performance and literacy skills for general television watching[@adelantado-renauAssociationScreenMedia2019].
 However, we also found evidence that if the content of the program was educational, or the child was watching the program with a parent (i.e., co-viewing), this exposure was instead associated with better literacy [@madiganAssociationsScreenUse2020].
 Thus, parents may play an important role in selecting content that is likely to benefit their children or, perhaps, interact with their children in ways that may foster literacy (e.g., asking their children questions about the program).
 Similar nuanced findings were observed for video games.
@@ -449,12 +450,12 @@ The credible evidence we identified showed that video game playing was associate
 However, when the video game were designed specifically to teach numeracy, playing these games showed learning benefits [@byunDigitalGamebasedLearning2018].
 One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 5 & 6) therefore this hypothesis could not be addressed.
 
-Social media was one type of exposure that showed consistent risks to health, with no indication of potential benefit.
+Social media was one type of exposure that showed consistent associations with poor health, with no indication of potential benefit.
 Social media showed strong evidence of harmful associations with risk taking in general, as well as unsafe sex and substance abuse [@vannucciSocialMediaUse2020].
 These results align with meta-analytic evidence from adults indicating that social media use is also associated with increased risk of depression [@yoonSocialNetworkSite2019;@vahediAssociationSelfreportedDepressive2021].
 Recent evidence from social media companies themselves suggest there may also be negative effects of social media on the mental health of young people, especially teenage girls [@seetharamanFacebookKnowsInstagram2021].
 
-One category of exposure appeared to consistently confer benefits: screen-based interventions designed to promote learning or health behaviours.
+One category of exposure appeared to consistently associated with benefits: screen-based interventions designed to promote learning or health behaviours.
 This finding indicates that interventions can be effectively delivered using electronic media platforms, but does not necessarily indicate that screens are more effective than other methods (e.g., face-to-face, printed material).
 Rather, it reinforces that the content of the screen time may be the most important aspect.
 The way that a young person interacts with digital screens may also be important.
