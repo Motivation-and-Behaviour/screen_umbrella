@@ -1,6 +1,8 @@
 # These are the recoding rules for the variables in the dataset that are used in
 # more than one place.
 
+# nolint start
+
 # Ages ----------------------------------------------------------------------
 age_codes_list <- list(
   mixed = c(
@@ -80,7 +82,7 @@ age_codes_list <- list(
     "children",
     "Children",
     "Early childhood; School-age Children (Primary/Elementary)",
-    "Early childhood/pre-school; School-age Children (Early Primary/Elementary)", # nolint
+    "Early childhood/pre-school; School-age Children (Early Primary/Elementary)",
     "Elementary school students",
     "grades 4-7",
     "K - Grade 8",
@@ -212,19 +214,122 @@ sample_codes_list <- list(
   clin_sample_incl = c(
     "Atypically developing",
     "Autism",
-    "Autism spectrum disorder",
     "Chronic disease",
-    "Non-typically developing children",
-    "Overweight and obesity only",
-    "Overweight/obese",
-    "Students with disabilities (excluding hearing, visual, and physical impairments)" # nolint
+    "Overweight and obese",
+    "Disabilities"
   ),
   edu_sample_incl = c(
     "Learning disabilities or difficulties",
     "Math difficulties",
     "Poor readers",
-    "Struggling readers",
-    "Students with dyscalculia",
-    "Students with math difficulties"
+    "Dyscalculia"
   )
 )
+
+# Study Design --------------------------------------------------------------
+design_codes_list <- list(
+  design_unspec = c(
+    "Include: All quantitative designs",
+    "Include: All quantitative designs; Experimental",
+    "Include: Cohort; Case-control; Cross-sectional; Intervention trials. \nExclude: Case reports; Retrospective studies.",
+    "Include: Empirical",
+    "Include: Experimental, correlational, or longitudinal",
+    "Include: Experimental; Correlational",
+    "Include: Experimental; Cross-sectional; Longitudial",
+    "Include: Experimental; Observational",
+    "Include: Experimental; Quasi-experiment; Cross-sectional; Longitudial",
+    "Include: Observational or experimental designs",
+    "Include: Quantitative designs",
+    "Include: Randomised controlled trials; Quasi-experimental; Observational",
+    "Include: experimental or observational",
+    "Include: longitudinal, cohort, case-control, cross-sectional, or controlled trials",
+    "Include: observational and intervention studies",
+    "Include: quantitative designs",
+    "None",
+    "None specified"
+  ),
+  design_obs_mixed = c(
+    "Include: Cohort; Case-control; Cross-sectional",
+    "Include: Cohort; Case-control; Cross-sectional\nExclude: Interventions",
+    "Include: Correlational studies",
+    "Include: Cross-sectional or longitudinal",
+    "Include: Cross-sectional; Case-control; Longitudinal",
+    "Include: Cross-sectional; Longitudinal; Case-control",
+    "Include: Observational",
+    "Include: Observational\nExclude: Experimental",
+    "Include: Observational\nExclude: Qualitative",
+    "Include: Observational designs",
+    "Include: cross-sectional, case-control, and cohort studies",
+    "Include: observational cross-sectional, case-control, or longitudinal designs",
+    "Include: observational designs"
+  ),
+  design_obs_cross = c(
+    "Include: Cross-sectional",
+    "Include: Cross-sectional only",
+    "Include: Cross-sectional studies",
+    "Include: cross-sectional",
+    "Include: cross-sectional only",
+    "cross-sectional",
+    "Cross-sectional"
+  ),
+  design_obs_long = c(
+    "Include: Longitudinal",
+    "Include: Longitudinal designs only",
+    "Include: Longitudinal; Retrospective",
+    "Include: Prospective design",
+    "Include: longitudinal or cohort designs",
+    "longitudinal",
+    "Prospective",
+    "Longitudinal"
+  ),
+  design_exp = c(
+    "Include: Cross-over or parallel randomized controlled trials",
+    "Include: Experimental",
+    "Include: Experimental\nExclude: Designs with no control group",
+    "Include: Experimental designs",
+    "Include: Experimental or quasi-experimental designs",
+    "Include: Experimental with a control group or reference norm",
+    "Include: Experimental with control group",
+    "Include: Experimental; Quasi-experimental",
+    "Include: Experimental; Quasi-experimental (with control group)",
+    "Include: Experimental; Quasi-experimental; Pre-test post-test",
+    "Include: Experimental; Single case",
+    "Include: Experimental; quasi-experimental",
+    "Include: Group-control experimental design",
+    "Include: Intervention",
+    "Include: Interventions",
+    "Include: Interventions (pre-post or controlled). \nExclude: Cross-sectional",
+    "Include: Interventions (with comparison)",
+    "Include: Pretest–posttest with control group",
+    "Include: Randomised controlled trials",
+    "Include: Randomised controlled trials\nExclude: Uncontrolled, cross-sectional and animal studies",
+    "Include: Randomised controlled trials and quasi-RCTs.",
+    "Include: Randomised controlled trials and quasi-RCTs. \nExclude: One group pretest–posttest; One group posttest only design",
+    "Include: Randomised controlled trials; Quasi-experimental\n\nExclude: Cohort",
+    "Include: Randomized controlled trials",
+    "Include: Randomized controlled trials; Quasi-experimental studies; Nonrandomized trials. Exclude: Small pilot; Feasibility trials without follow-up trial",
+    "Include: Within subject design; between subject design",
+    "Include: desgins with a control group",
+    "Include: designs with control groups",
+    "Include: experiemental designs with control group",
+    "Include: experimental and quasi-experimental designs",
+    "Include: experimental designs",
+    "Include: experimental or quasi-experimental",
+    "Include: experimental or quasi-experimental with control group",
+    "Include: experimental with control group",
+    "Include: experimental, quasi-experimental, or pre-post test",
+    "Include: pre-post designs with or without control group",
+    "Include: random assignment or quasi-experimental",
+    "Include: randomised experimental designs",
+    "Include: randomized and non-randomized controlled with control group with no intervention or traditional exercise intervention",
+    "Include: randomized controlled trials",
+    "Include: randomized controlled trials, quasi-experimental studies, and single-case control studies",
+    "Include: studies with control group",
+    "include: randomized and non-randomized controlled trials (control group with no intervention or traditional exercise intervention)",
+    "RCTs",
+    "Quasi-experimental",
+    "Parallel RCT", "True experiments"
+  )
+)
+
+# nolint end

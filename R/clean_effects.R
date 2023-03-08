@@ -7,13 +7,19 @@
 #' @param reviews_clean
 #' @param age_codes
 #' @param sample_codes
+#' @param design_codes
 #' @return
 #' @author Taren Sanders
 #' @export
-clean_effects <- function(effects_raw, reviews_clean, age_codes, sample_codes) {
+clean_effects <- function(
+    effects_raw, reviews_clean, age_codes, sample_codes,
+    design_codes) {
   age_moderator_categories <- c(
-    "age", "Age", "Educational level", "Grade Level",
-    "School level", "Level of education"
+    "age", "Age", "Educational level", "Grade Level", "School level",
+    "Level of education"
+  )
+  design_moderator_categories <- c(
+    "study design", "Study Type", "Study Design", "Study design", "Design"
   )
 
   effects_clean <-
@@ -39,7 +45,7 @@ clean_effects <- function(effects_raw, reviews_clean, age_codes, sample_codes) {
     left_join(
       select(
         reviews_clean,
-        review_id, author_year, demographics_coded, atypical_sample
+        review_id, author_year, demographics_coded, sample_type, study_design
       ),
       by = "review_id"
     ) %>%
@@ -57,11 +63,29 @@ clean_effects <- function(effects_raw, reviews_clean, age_codes, sample_codes) {
           moderator_level %in% age_codes$young_children ~ "Young children",
         TRUE ~ moderator_age
       ),
-      atypical_sample = if_else(
+      sample_type = if_else(
         moderator_level %in% sample_codes$clin_sample_incl |
           moderator_level %in% sample_codes$edu_sample_incl,
-        TRUE,
-        atypical_sample
+        moderator_level,
+        sample_type
+      ),
+      study_design = case_when(
+        moderator_category %in% design_moderator_categories &
+          moderator_level %in% design_codes$design_unspec ~
+          "Mixed or unspecified",
+        moderator_category %in% design_moderator_categories &
+          moderator_level %in% design_codes$design_obs_mixed ~
+          "Observational - mixed",
+        moderator_category %in% design_moderator_categories &
+          moderator_level %in% design_codes$design_obs_cross ~
+          "Cross-sectional only",
+        moderator_category %in% design_moderator_categories &
+          moderator_level %in% design_codes$design_obs_long ~
+          "Longitudinal only",
+        moderator_category %in% design_moderator_categories &
+          moderator_level %in% design_codes$design_exp ~
+          "Experimental",
+        TRUE ~ study_design
       )
     )
 
@@ -77,7 +101,8 @@ clean_effects <- function(effects_raw, reviews_clean, age_codes, sample_codes) {
     group_by(
       plain_language_outcome,
       plain_language_exposure,
-      moderator_age
+      moderator_age,
+      study_design
     ) %>%
     slice_max(n, with_ties = TRUE) %>%
     mutate(
