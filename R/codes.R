@@ -246,7 +246,12 @@ design_codes_list <- list(
     "Include: observational and intervention studies",
     "Include: quantitative designs",
     "None",
-    "None specified"
+    "None specified",
+    "Exclude: Qualitative; Case studies",
+    "Exclude: Non-empirical studies; Qualitative; Systematic reviews or meta-analyses",
+    "Exclude: clinical trials, reliability or validity studies, perspectives or theories with no empircal data, qualitative studies, and case studies of one patient.",
+    "Exclude: Qualitative designs",
+    "Exclude: Qualitative; focus groups"
   ),
   design_obs_mixed = c(
     "Include: Cohort; Case-control; Cross-sectional",

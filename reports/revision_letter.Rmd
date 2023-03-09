@@ -398,6 +398,14 @@ Our results include more than 3,000 primary studies, and even after accounting f
 Page 32 line 395: from my point of view, the evidence strength generated from data from ten loosely designed cross-sectional studies is weaker than 5 rigorously designed intervention studies or longitudinal studies. I wonder how the quality and quantity of studies were balanced in the current study.
 ```
 
+We agree that study design should have been a larger factor when choosing which effects to use.
+
+We note that while limiting to certain study designs may improve the quality of the evidence, we are simply summarising what previous reviews have done.
+that is, if previous reviews have not limited their evidence to certain designs (or moderated by design), we do not have that information to present.
+We also found that there were not a lot of reviews which examined the same exposure and outcome, but differed on choice of study design.
+When we included study design as part of our method of choosing effects, it only increased the number of effects by 5 (from 241 to 246).
+That is, there are not a lot of instances where the same exposure and outcome are examined in different study designs.
+
 \WorkInProgress
 \todo{include study design in the forest plots?}
 
