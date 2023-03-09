@@ -25,21 +25,24 @@ convert_effects <- function(data) {
         stat_test_clean == "r" ~ raw_value,
         stat_test_clean == "b" ~ b2r(raw_value),
         stat_test_clean == "d" ~ effectsize::d_to_r(raw_value),
-        stat_test_clean == "z" ~ correlation::z_fisher(z = raw_value)
+        stat_test_clean == "z" ~ correlation::z_fisher(z = raw_value),
+        TRUE ~ NA_real_
       ),
       cilb = case_when(
         is.na(cilb) ~ NA_real_,
         stat_test_clean == "r" ~ cilb,
         stat_test_clean == "b" ~ b2r(cilb),
         stat_test_clean == "d" ~ effectsize::d_to_r(cilb),
-        stat_test_clean == "z" ~ correlation::z_fisher(z = cilb)
+        stat_test_clean == "z" ~ correlation::z_fisher(z = cilb),
+        TRUE ~ NA_real_
       ),
       ciub = case_when(
         is.na(ciub) ~ NA_real_,
         stat_test_clean == "r" ~ ciub,
         stat_test_clean == "b" ~ b2r(ciub),
         stat_test_clean == "d" ~ effectsize::d_to_r(ciub),
-        stat_test_clean == "z" ~ correlation::z_fisher(z = ciub)
+        stat_test_clean == "z" ~ correlation::z_fisher(z = ciub),
+        TRUE ~ NA_real_
       ),
       z = correlation::z_fisher(r = r),
       cilb_z = suppressWarnings(correlation::z_fisher(r = cilb)),

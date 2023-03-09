@@ -91,13 +91,18 @@ clean_effects <- function(
 
   effects_converted <-
     effects_clean %>%
+    convert_effects()
+
+  # Identify effects that are usable
+  effects_usable <-
+    effects_converted %>%
     # Can only use some of the metric types
     filter(stat_test_clean %in% c("b", "d", "r", "z")) %>%
-    convert_effects()
+    mutate(usable = TRUE)
 
   # Pick the largest review by N for each outcome/exposure pair and age group
   effects_use <-
-    effects_converted %>%
+    effects_usable %>%
     group_by(
       plain_language_outcome,
       plain_language_exposure,
@@ -105,18 +110,17 @@ clean_effects <- function(
       study_design
     ) %>%
     slice_max(n, with_ties = TRUE) %>%
-    mutate(
-      use_effect = TRUE,
-      main_effect = TRUE
-    ) %>%
+    mutate(use_effect = TRUE) %>%
     ungroup() %>%
-    select(
-      effect_size_id, r, cilb, ciub, z, cilb_z, ciub_z, use_effect,
-      main_effect
-    )
+    select(effect_size_id, r, cilb, ciub, z, cilb_z, ciub_z, use_effect)
 
   effects_clean_use <-
-    left_join(effects_clean, effects_use, by = "effect_size_id")
+    left_join(
+      effects_clean,
+      select(effects_usable, effect_size_id, usable),
+      by = "effect_size_id"
+    ) %>%
+    left_join(effects_use, by = "effect_size_id")
 
   effects_clean_renamed <-
     effects_clean_use %>%

@@ -125,7 +125,9 @@ abstract: |
   While some forms of screen time have consistently been associated with harm, others have been associated with gains, making it difficult to weigh the risks and benefits of use.
   In this umbrella review, we systematically collate and examined meta-analyses examining the effects of screen use on children and youth.
   We converted results onto a common metric (Pearson's r) to make comparisons simple, and where possible we reanalysed study-level data to standardise the approach across meta-analyses.
-  We identified `r targets::tar_read(manuscript_info)$prisma$included` meta-analyses, and extracted `r targets::tar_read(manuscript_info)$unique_effects` unique exposure/outcome combinations from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` reviews.
+  We identified `r targets::tar_read(manuscript_info)$prisma$included` meta-analyses, and extracted `r targets::tar_read(manuscript_info)$unique_combos` unique combinations of exposures and outcomes.
+  If duplicate effect sizes from the same combination of exposure and outcome were drawn from different age groups or study designs we retained them, otherwise we chose the effect size with the largest total sample size.
+  We removed effect sizes that could not be harmonized, resulting in `r targets::tar_read(manuscript_info)$unique_effects` from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` reviews.
   These effects represent the findings of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_n, big.mark=",")` participants.
   When focusing on the meta-analyses with the most statistically robust evidence, we found that general screen use (when content was not indicated), was associated with potential harm on learning, literacy, body composition, and depression.
   Like-wise, social media was consistently associated with risks to health, with no identified benefits.
@@ -214,7 +216,7 @@ A Lancet editorial [@thelancetSocialMediaScreen2019] suggested that, "Our unders
 
 While some forms of screen use (e.g., television viewing) may be detrimental to health and wellbeing [@haleScreenTimeSleep2015;@sweetserActivePassiveScreen2012], evidence for other forms of screen exposure (e.g., video games or online communication, such as Zoom&trade;) remains less certain and, in some cases, may even be beneficial [@liEarlyChildhoodComputer2004;@warburton2017children].
 Thus, according to a Nature Human Behaviour editorial, research to determine the effect of screen exposure on youth is "a defining question of our age" [@naturehumanbehaviourScreenTimeHow2019].
-With concerns over the impact of screen use including education, health, social development, and psychological well-being, a broad overview that identifies potential benefits and risks is needed.
+With concerns over the impact of screen use including education, health, social development, and psychological well-being, an overview that identifies potential benefits and risks is needed.
 
 Citing the negative effects of screens on health (e.g., increased risk of obesity) and health-related behaviours (e.g., sleep), guidelines from the World Health Organisation [@whoGuidelinesPhysicalActivity2019] and numerous government agencies [@australiangovernmentPhysicalActivityExercise2021;@Canadian24HourMovement2016] and statements by expert groups [@AAPMediaUseSchoolAged2016] have recommended that young people's time spent using electronic media devices for entertainment purposes should be limited.
 For example, the Australian Government guidelines regarding sedentary behaviour recommend that young children (under the age of two) should not spend any time watching screens.
@@ -226,14 +228,16 @@ This evidence has led some researchers to argue that a more nuanced approach to 
 
 In 2016, the American Academy of Pediatrics used a narrative review to examine the benefits and risks of children and adolescents' electronic media [@chassiakosChildrenAdolescentsDigital2016] as a basis for updating their guidelines about screen use [@AAPMediaUseSchoolAged2016].
 Since then, a large number of systematic reviews and meta-analyses have provided evidence about the potential benefits and risks of screen use.
+<span id = "r2_9">
 While there have been other overviews of reviews on screen time, these have tended to focus on a single domain (e.g., health [@stiglicEffectsScreentimeHealth2019]), focus on a particular exposure (e.g., social media [@valkenburgSocialMediaUse2022;@arias-delatorreRelationshipDepressionUse2020]) or provide only a narrative summary of the literature [@orbenTeenagersScreensSocial2020].
 <span id = "r1_2">No review has yet examined the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviour, and well-being.
-By summarising and synthesising all evidence in one overview, we provide a reference point for the field and allow for easier comparison of risks and benefits for the same behaviour.</span>
+By summarising and synthesising all evidence in one overview, we provide a reference point for the field and allow for easier comparison of risks and benefits for the same behaviour.</span></span>
 
 In order to synthesise the evidence and support further evidence-based guideline development and refinement, we reviewed published meta-analyses examining the effects of screen use on children and youth.
-This review synthesises evidence on any outcome of electronic media exposure.
-Adopting this broad approach allowed us to provide a holistic perspective on the influence of screens on children’s lives.
-By synthesising across life domains (e.g., school and home), this review provides evidence to inform guidelines and advice for parents, teachers, pediatricians and other professionals in order to maximise human functioning.
+<span id = "r2_6">This review synthesises evidence on any outcome of electronic media exposure.
+We deliberately do not pre-specify outcomes, in order to get a comprehensive list of areas where there is meta-analytical evidence.
+Adopting this broad approach allowed us to provide a holistic perspective on the influence of screens on children's lives.
+By synthesising across life domains (e.g., school and home), this review provides evidence to inform guidelines and advice for parents, teachers, pediatricians and other professionals in order to maximise human functioning.</span>
 
 \newpage
 
@@ -248,7 +252,7 @@ We followed the Preferred Reporting Items for Systematic Reviews and Meta-Analys
 To be eligible for inclusion, meta-analyses needed to include meta-analytic effect sizes for children or adolescents (age 0-18 years).
 <span id = "r3_5">We included meta-analyses containing studies that combined data from adults and youth if meta-analytic effect size estimates specific to participants aged 18 years or less could be extracted (i.e., the highest mean age for any individual study included in the meta-analysis was < 18 years).
 A meta-analysis was still included if the age range exceed 18 years, provided that the mean age was less than 18.
-We excluded meta-analyses that only contained evidence gathered from adults (age >18 years). </span>
+We excluded meta-analyses that only contained evidence gathered from adults (age >18 years).</span>
 
 *Exposure*: 
 We included meta-analyses examining all types of electronic screens including (but not necessarily limited to) television, gaming consoles, computers, tablets, and mobile phones.
@@ -256,7 +260,7 @@ We also included analyses of all types of content on these devices, including (b
 <span id = "r3_6">
 In this review we focused on electronic media exposure that would be considered typical for children and youth.
 That is, exposure that may occur in the home setting, or during schooling.
-Consistent with this approach, we excluded technology-based treatments for clinical conditions. 
+Consistent with this approach, we excluded technology-based treatments for clinical conditions.
 </span>
 However, we included studies examining the effect of screen exposure on non-clinical outcomes (e.g., learning) for children and youth with a clinical condition.
 For example, a meta-analysis of the effect of television watching on learning among adolescents diagnosed with depression would be included.
@@ -274,7 +278,7 @@ We included meta-analyses regardless of the study designs included in the review
 We excluded systematic reviews of qualitative evidence.
 We did not formulate inclusion/exclusion criteria related to the risk of bias of the review.
 We did, however, employ a risk of bias tool to help interpret the results.
-We included full-text, peer-reviewed meta-analyses published or ‘in-press’ in English.
+We included full-text, peer-reviewed meta-analyses published or 'in-press' in English.
 We excluded conference abstracts and meta-analyses that were unpublished.
 
 ### Information sources
@@ -297,28 +301,31 @@ We resolved disagreements at each stage of the process by consensus, with a thir
 
 ### Data items
 
-From each included meta-analysis, two researchers independently extracted data into a custom-designed database. We extracted the following items: First author, year of publication, study design restrictions (e.g., cross-sectional, observational, experimental), region restrictions (e.g., specific countries), earliest and latest study publication dates, sample age (mean), lowest and highest mean age reported,  outcomes reported, and exposures reported.
+From each included meta-analysis, two researchers independently extracted data into a custom-designed database.
+We extracted the following items: First author, year of publication, study design restrictions (e.g., cross-sectional, observational, experimental), region restrictions (e.g., specific countries), earliest and latest study publication dates, sample age (mean), lowest and highest mean age reported,  outcomes reported, and exposures reported.
 
 ### Study risk of bias assessment
 
-For each meta-analysis, two researchers independently completed the National Health, Lung and Blood Institute’s Quality Assessment of Systematic Reviews and Meta-Analyses tool [@NHLBIQualityAssessmentSystematic2014] (see Table 1).
+For each meta-analysis, two researchers independently completed the National Health, Lung and Blood Institute's Quality Assessment of Systematic Reviews and Meta-Analyses tool [@NHLBIQualityAssessmentSystematic2014] (see Table 1).
 We resolved disagreements by consensus, with a third researcher employed when needed.
 We did not assess risk of bias in the individual studies that were included in each meta-analysis.
 
 ### Effect measures
 
 <span id ="r2_17">Two researchers independently extracted all quantitative meta-analytic effect sizes, including moderation results.
-We excluded effect sizes which were reported as relative risk ratios, as meta-analyses did not contain sufficient information to meaningfully convert.
+We excluded effect sizes which were reported as relative risk ratios or odds ratios, as meta-analyses did not contain sufficient information to meaningfully convert to a correlation.
 We also excluded effect size estimates when the authors did not provide a sample size.
 Where possible, we also extracted effect sizes from the primary studies included in each meta-analysis.
 
-To facilitate comparisons, we converted effect sizes to Pearson’s $r$ using established formulae [@bowmanEffectSizesStatistical2012;@jacobsEstimationBiserialCorrelation2017].
+To facilitate comparisons, we converted effect sizes to Pearson's $r$ using established formulae [@bowmanEffectSizesStatistical2012;@jacobsEstimationBiserialCorrelation2017].
 Effect sizes on the original metric are provided in Supplementary File 2.</span>
+<span id ="r2_27">Throughout the results section we interpret the size of the effects using Funder and Ozer's guidelines [@funderEvaluatingEffectSize2019]: very small (0.05 < r <= 0.1), small (0.1 < r <= 0.2), medium (0.2 < r <= 0.2), large (0.3 < r <= 0.4), and very large (r >= 0.4).
+These are similar to other interpretations based on empircal data [@gignacEffectSizeGuidelines2016].</span>
 
 ### Synthesis methods
 
 <span id = "r3_8">After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared multiple times (i.e., in multiple meta-analyses, or with multiple sub-groups in the same meta-analysis), keeping the effect with the largest total sample size.
-In instances where effect sizes from the same combination of exposure and outcome were drawn from different populations (e.g., children vs adolescents) we retained both estimates in our dataset.
+In instances where effect sizes from the same combination of exposure and outcome were drawn from different age-groups (e.g., children vs adolescents), or were drawn using different study designs (e.g., cross-sectional vs longitudinal) we retained both estimates in our dataset.
 </span>
 
 We descriptively present the remaining meta-analytic effect sizes.
@@ -371,9 +378,9 @@ knitr::include_graphics("../figures/PRISMA Diagram.pdf", error = FALSE)
 The most frequently reported exposures were `r manuscript_info$freq_exposures`.
 Supplementary File 4 provides a list of all exposures identified.
 The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
-In `r manuscript_info$freq_combos$n1` cases there was only one exposure/outcome combination for an age group, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
-Full characteristics of the included studies are provided in Table 1.
-<span id ="r2_23">After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations contributed from `r manuscript_info$prisma$unique_reviews` reviews.</span>
+<span id ="r2_25">Of the `r manuscript_info$unique_combos` unique exposure/outcome combinations, `r manuscript_info$freq_combos$n1` occured in only one review, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
+Full characteristics of the included studies are provided in Table 1.</span>
+<span id ="r2_23">After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations (retaining multiple effects for different age groups or study designs) contributed from `r manuscript_info$prisma$unique_reviews` reviews.</span>
 These effects represent the findings of `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
 
 **TABLE 1**
@@ -468,7 +475,7 @@ Conversely, TV programs and movies were more strongly associated with lower phys
 
 Among studies that met our criteria for statistical certainty heterogeneity was high, with almost all effects having $I^2 > 50\%$.
 Much of this heterogeneity is likely explained by differences in measures across pooled studies, or in some cases, the generic nature of some of the exposures.
-For example, "TV programs and movies" covers a substantial range of content, which may explain the heterogeneous association with education outcomes. 
+For example, "TV programs and movies" covers a substantial range of content, which may explain the heterogeneous association with education outcomes.
 
 ## Implications for Policy and Practice
 
@@ -481,11 +488,11 @@ We suggest that future guidelines need to embrace the complexity of the issue, t
 
 Screen use research is extensive, varied, and rapidly growing.
 Reviews tended to be general (e.g., all screen time) and even when more targeted (e.g., social media) nuances related to specific content (e.g., Instagram vs Facebook) have not been meta-analysed or have not produced credible evidence.
-Fewer than 20\% of the effects identified met our criteria for statistical credibility.
+<span id = "r2_29">Fewer than 20\% of the effects identified met our criteria for statistical credibility.
 Most studies which did not meet our critiera failed to provide study-level data (or did not provide sufficent data, such as including effect estimates but not sample sizes).
 Newer reviews were more likely to provide this information than older reviews, but it highlights the importance of data and code sharing as recommended in the PRISMA guidelines [@pagePRISMA2020Statement2020].
 When study level data was available, many effects were removed because the pooled sample size was small, or because there were fewer than ten studies on which to perform an Egger's test.
-It seems that much of the current screen time research is small in scale, and there is a need for larger, high-quality studies.
+It seems that much of the current screen time research is small in scale, and there is a need for larger, high-quality studies.<span>
 
 <span id = "r1_1">Our results highlight the need for the field to more carefully consider if the term 'screen time' remains appropriate for providing advice to parents.
 Instead, our results suggest that more nuanced and detailed descriptions of the behaviours to be modified may be required.
@@ -516,7 +523,9 @@ For this reason, we provide the complete results in the supplementary material, 
 Instead, readers who wish to more deeply understand one specific relationship are directed to the cited review for that effect, where the authors could engage more deeply with the mechanisms.</span>
 <span id="r2_16">We converted all effect sizes to a common metric (Pearson's r) to allow for comparisons of magnitude, but acknowledge that this assumes a linear relationship.
 Some previous research suggests that associations are typically linear [@sandersTypeScreenTime2019].
-However, others have identified instances where non-linear relationships exist, especially for very high levels of screen time [@twengeMoreTimeTechnology2019; @przybylskiLargeScaleTestGoldilocks2017; @kellySocialMediaUse2018].</span>
+However, others have identified instances where non-linear relationships exist, especially for very high levels of screen time [@twengeMoreTimeTechnology2019; @przybylskiLargeScaleTestGoldilocks2017; @kellySocialMediaUse2018].
+Additionally, our conversion may not always adequately account for differences in study design or measures of exposures and outcomes.
+Care is needed, therefore, when interpreting the effect sizes.</span>
 <span id = "r3_2_2">In addition, reviews provide only historical evidence which may not keep up with the changing ways children can engage with screens.
 While our synthesis of the existing evidence provides information about how screens might have influenced children in the past, it is difficult to know if these findings will translate to new forms of technology in the future.</span>
 
