@@ -32,11 +32,11 @@ upload_all_files <- function(files = c(
                              )) {
   file_details <- list(
     "manuscript" = list(
-      path = "reports/manuscript.pdf",
+      path = c("reports/manuscript.pdf", "reports/manuscript.docx"),
       type = "main"
     ),
     "revision_letter" = list(
-      path = "reports/revision_letter.pdf",
+      path = c("reports/revision_letter.pdf", "reports/revision_letter.docx"),
       type = "main"
     ),
     "prisma" = list(

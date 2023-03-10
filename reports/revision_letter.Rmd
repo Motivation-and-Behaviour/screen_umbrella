@@ -4,9 +4,7 @@ authors           : "Taren Sanders on behalf of co-authors"
 journal           : "Nature Human Behaviour"
 manuscript        : "NATHUMBEHAV-22071805"
 handling_editor   : "Charlotte Payne"
-
-class             : "draft"
-
+link-citations    : true
 output            : revise::letter.pdf
 header-includes:
     - \usepackage[utf8x]{inputenc}
@@ -35,7 +33,7 @@ Reviewer 3 points out that your last search date is May 2020. We agree that this
 ```
 
 We have updated the search to September 2022.
-We found a substantial amount of new literature had been published since our inital search, with an additional 108 meta-analyses included in the review.
+We found a substantial amount of new literature had been published since our initial search, with an additional 108 meta-analyses included in the review.
 While many of these were updates to existing reviews, we also included 110 new exposure/outcome combinations (or existing combinations for new age groups) that were not found in the original search.
 We think that this increase in research demonstrates the level of interest in this area.
 
@@ -55,14 +53,14 @@ Both reviewers 2 and 3 are concerned about the lack of information on risk of bi
 
 We apologise that the quality assessment information was not included in the original submission.
 We have added this information to Table 1, along with the information about the sample characteristics requested by the reviewers.
-We note that this increases the size of the table, and we have removed it from the text of the manuscript and instead included it as a seperate file.
+We note that this increases the size of the table, and we have removed it from the text of the manuscript and instead included it as a separate file.
 
 ```{asis e4}
 Reviewer 1 highlights the inappropriateness of causal language given that the majority of included studies speak to association, not causation. Please remove all inappropriate use of causal language accordingly.
 ```
 
 Please see response to Reviewer 1, \Comment{r1_4}.
-We agree that the use of causal langauge from an evidence-base that is mostly cross-sectional would be misleading.
+We agree that the use of causal language from an evidence-base that is mostly cross-sectional would be misleading.
 We did not intend to make causal statements, and have reviewed the manuscript for any remaining instances.
 
 \newpage
@@ -88,8 +86,8 @@ The authors note that “no review has synthesized the evidence available across
 \todo{Suggestions welcome here}
 
 Our goal with this review was to provide an overview of the field of screen time research.
-A summary of an entire field will, out of necessasity, be more broad that a typical systematic review.
-We beleive that there is significant value in providing a single overview to summarise the state of the field.
+A summary of an entire field will, out of necessity, be more broad that a typical systematic review.
+We believe that there is significant value in providing a single overview to summarise the state of the field.
 We have added some additional information to the introduction on this point:
 
 `r get_revision("r1_2")`
@@ -100,7 +98,7 @@ Page 10 notes that the study “examined the combinations of exposure and outcom
 
 We intended to include the review which captured the most information on the exposure/outcome combination for each effect size.
 The assumption was that the largest review would be the most recent, and that he newer reviews would contain the studies located in previous reviews. 
-Manual inspection of the reviews which did not contribute any effects suggests that this was sucessful - older reviews tended to only be included if they focused on the general population while a newer review focused on a sub-population.
+Manual inspection of the reviews which did not contribute any effects suggests that this was successful - older reviews tended to only be included if they focused on the general population while a newer review focused on a sub-population.
 
 ```{asis r1_4}
 Causal language- The present study sought to “provide a holistic perspective on the influence of screens on children's lives across a broad range of outcomes,” but I am not convinced that the studies included in the meta-analyses are designed in ways that allow us to understand causal IMPACT at all. Many have criticized this literature for being largely self-reported (with flaws inherent to this method, which are reviewed in the present manuscript's discussion), observational, and cross-sectional, with very few rigorous experimental or well-controlled longitudinal designs that would enable researchers or the public to draw robust conclusions about the direction of associations. I fear that this comprehensive review, though rigorous, does not adequately attend to the fact that we do not usually know whether screens are causing helps or harms for youth, if different types of youth behaviors may be causing them to engage more with screens (e.g., sedentary youth may seek out more screen time; depressed youth may turn more to social media as an avoidance strategy), or if indeed there are third variables driving observed associations. Although the review here does a great job of summarizing the direction and strengths of associations across studies, I fear that it does not attend to these important issues in terms of how one ought to interpret them.
@@ -113,8 +111,8 @@ We have also added the following to the *Discussion* section:
 
 `r get_revision("r1_4")`
 
-Note that we do use causal langauge when describing hypothesised mechanisms, and when describing guidelines.
-We feel that this is sensible --- guidelines are based on causal assumptions, and while our evidence does not always support them, we are refering to them in the context that they are made (i.e., to instruct parents).
+Note that we do use causal language when describing hypothesised mechanisms, and when describing guidelines.
+We feel that this is sensible --- guidelines are based on causal assumptions, and while our evidence does not always support them, we are referring to them in the context that they are made (i.e., to instruct parents).
 
 ```{asis r1_5}
 The manuscript notes that the nature of the data allowed for few age-based conclusions- I fear that this is a substantial limitation that deserves more discussion. It seems difficult to characterize all children's media use from age 0-18 in the same way, especially across such a wide range of developmental outcomes. A more nuanced treatment of developmental considerations would have been appreciated.
@@ -161,7 +159,7 @@ Page 5 line 84-86: please further justify how a review study would make the limi
 ```
 
 The quote from the *Lancet* editorial is that the understanding is lacking, rather than the evidence.
-Our understanding is lacking partly because benefits of screen time (as seen in some educational literature) and reviewed seperately from harms.
+Our understanding is lacking partly because benefits of screen time (as seen in some educational literature) and reviewed separately from harms.
 Our review aims to address this.
 See additional context in the *Introduction*:
 
@@ -183,7 +181,7 @@ One of the key strengths of our review is that it summarises what is available i
 That is, our review provides a comprehensive summary of what meta-analytic evidence exists.
 We have added some additional text to this effect in the *Introduction*:
 
-`r get_revision("r1_6")`
+`r get_revision("r2_6")`
 
 ```{asis r2_7}
 Page 6 line 96-104: these guidelines provide age-staged recommendations and mainly target on recreational screen time. New evidence to support or reject these recommendations are important breakthroughs. So how does the current review contribute to the refinement of these guidelines? It could be proposed here to strengthen the justification of this study, and also need to be addressed in the discussion section. 
@@ -203,7 +201,7 @@ Page 6 line 104-107: this is not a direct contrast. Longer screen time is needed
 \todo{Open to suggestions here.}
 
 We had difficulty understanding the reviewers exact concern here.
-We are happy to revise this further if the reviewer does not feel that the other changes made to the introduction improve the set of arguements.
+We are happy to revise this further if the reviewer does not feel that the other changes made to the introduction improve the set of arguments.
 
 ```{asis r2_9}
 Page 6 line 117-119: Stiglic and Viner's umbrella review summarized evidence across a broad range of outcome domains. Please further justify the current study in addition to theirs.
@@ -219,7 +217,7 @@ Page 7 line 122: please define “any plausible outcomes” to make the scope mo
 
 We did not *a-priori* choose which outcomes would be included.
 Instead, we chose to summarise the literature on for any meta-analysis where screen exposure was the independent variable.
-We have removed the word "plausible", as we agree that makes the sentence unclear and the revised phrasing is more aligned with the eligibility critiera.
+We have removed the word "plausible", as we agree that makes the sentence unclear and the revised phrasing is more aligned with the eligibility criteria.
 Our intention in the introduction is not to preempt the results, which means we do not outline the outcomes found in the introduction.
 
 ```{asis r2_11}
@@ -257,8 +255,8 @@ Page 10 line 190: Table 1 does not contain RoB info.
 ```
 
 Our apologies for this oversight.
-We initially intended to include the quality assessment in Table 1, but felt it made the table too large and moved it to a seperate table.
-It seems we inadvertently did not upload the seperate file when submitting the review.
+We initially intended to include the quality assessment in Table 1, but felt it made the table too large and moved it to a separate table.
+It seems we inadvertently did not upload the separate file when submitting the review.
 We have now included the quality assessment in Table 1.
 
 ```{asis r2_16}
@@ -410,8 +408,8 @@ We can certainly see how others might use a different method for eliminating dup
 
 `r get_revision("r3_8")`
 
-2. We were also suprised by the volume of effects which did not meet the criteria for statistical credibility.
-We were suprised, for example, that almost a quarter of all effects did not provide study-level data (as might be presented in a forest plot), which we thought would be a low bar to clear.
+2. We were also surprised by the volume of effects which did not meet the criteria for statistical credibility.
+We were surprised, for example, that almost a quarter of all effects did not provide study-level data (as might be presented in a forest plot), which we thought would be a low bar to clear.
 Almost 40% of those that did have study-level data were derived from samples of less than 1,000 participants (a threshold that has been used by others; 10.1038/s41467-021-24861-8).
 And, it seems unwise to place too much emphasis on results where there is an indication of publication bias (i.e., statistically significant Egger's test).
 Given that we pre-specified this criteria, we think that it would be inappropriate to lower the standard because the majority of reviews did not reach it.
@@ -421,7 +419,7 @@ Instead, we think it reflects the need for the field to raise its standards, esp
 
 3. We understand the reviewer's concerns regarding the conversions of the effect sizes (although we disagree with the characterisation of our results as "somewhat deceiving").
 We chose Pearson's *r* as we wanted to focus not on the precise size of the association, but instead on the *direction* and the *magnitude*.
-We think it is worth considering the counter-factual to our approach: had we not converted effect sizes to a common metric readers would likely still make comparisons, but these would be subjective.
+We think it is worth considering the counterfactual to our approach: had we not converted effect sizes to a common metric readers would likely still make comparisons, but these would be subjective.
 We agree that readers should interpret the effect sizes carefully, and have included text to this effect in the *Discussion*:
 
 `r get_revision("r2_16")`
@@ -432,7 +430,7 @@ Page 31 line 362-368: I think these are important nuances. If the analytical pla
 ```
 
 We are unclear what the reviewer is referring to here, although we think many of the concerns were addressed in \comment{r2_29}.
-We feel that a qualitative sytheses of more than 200 effect sizes is outside the scope of this paper.
+We feel that a qualitative synthesis of more than 200 effect sizes is outside the scope of this paper.
 
 
 ```{asis r2_31}
@@ -453,7 +451,7 @@ There were two ways that the data from the primary studies could be included in 
 
 `r get_revision("r2_32")`
 
-We did not retrive data from the primary studies when the data were not provided in the paper or by contacting the author.
+We did not retrieve data from the primary studies when the data were not provided in the paper or by contacting the author.
 Our results include more than 3,000 primary studies, and even after accounting for those that provided data in the paper, it would not be feasible to extract all of the remaining data.
 
 
@@ -510,7 +508,7 @@ Another main issue that I have with the article is that I feel that a better des
 
 Our apologies for this oversight.
 Per our response to Reviewer 2 (\comment{r2_15}), we initially intended to include the quality assessment in Table 1.
-We removed it because it made the table very large, but did not include the new file with the seperate table.
+We removed it because it made the table very large, but did not include the new file with the separate table.
 We have now included the quality assessment in Table 1.
 
 \todo{Add a data dictionary}
@@ -533,7 +531,7 @@ It is the former, which we have now clarified here:
 
 `r get_revision("r3_5")`
 
-We chose this as most reviews provided mean ages for individual studies but not age ranges, which meant we would not have been able to consistently apply the critiera.
+We chose this as most reviews provided mean ages for individual studies but not age ranges, which meant we would not have been able to consistently apply the criteria.
 
 ```{asis r3_6}
 “In this review we adopted a population-level perspective, meaning that we examined electronic media exposure that occurs during typical daily living activities (e.g., home, school-based electronic media exposure).”: I do not think this paragraph is fully clear. 

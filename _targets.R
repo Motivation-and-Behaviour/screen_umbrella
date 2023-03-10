@@ -240,6 +240,11 @@ list(
     output_format = rmarkdown::md_document(pandoc_args = "--wrap=none")
   ),
   tar_render(
+    manuscript_docx,
+    path = here::here("reports", "manuscript.Rmd"),
+    output_format = papaja::apa6_docx()
+  ),
+  tar_render(
     references,
     path = here::here("reports", "references.Rmd"),
     output_file = here::here(
@@ -257,5 +262,10 @@ list(
   tar_render(
     revision_letter,
     path = here::here("reports", "revision_letter.Rmd")
+  ),
+  tar_render(
+    revision_letter_docx,
+    path = here::here("reports", "revision_letter.Rmd"),
+    output_format = revise::letter.docx()
   )
 )

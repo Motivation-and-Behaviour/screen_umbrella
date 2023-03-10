@@ -110,7 +110,7 @@ affiliation:
   - id            : "7"
     institution   : "School of Medicine and Health, Sydney University"
   - id            : "8"
-    institution   : "Faculty of Health Sciences, Curtin University"
+    institution   : "Health and Wellbeing Centre for Research Innovation, School of Human Movement and Nutrition Sciences, University of Queensland"
   - id            : "9"
     institution   : "Department of Movement and Sport Science, Ghent University"
   - id            : "10"
@@ -151,7 +151,7 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "man"
 csl               : nature.csl
-output            : papaja::apa6_pdf
+output            : papaja::apa6_docx
 header-includes:
     - \usepackage{makecell}
     - \usepackage{booktabs}
@@ -320,7 +320,7 @@ Where possible, we also extracted effect sizes from the primary studies included
 To facilitate comparisons, we converted effect sizes to Pearson's $r$ using established formulae [@bowmanEffectSizesStatistical2012;@jacobsEstimationBiserialCorrelation2017].
 Effect sizes on the original metric are provided in Supplementary File 2.</span>
 <span id ="r2_27">Throughout the results section we interpret the size of the effects using Funder and Ozer's guidelines [@funderEvaluatingEffectSize2019]: very small (0.05 < r <= 0.1), small (0.1 < r <= 0.2), medium (0.2 < r <= 0.2), large (0.3 < r <= 0.4), and very large (r >= 0.4).
-These are similar to other interpretations based on empircal data [@gignacEffectSizeGuidelines2016].</span>
+These are similar to other interpretations based on empirical data [@gignacEffectSizeGuidelines2016].</span>
 
 ### Synthesis methods
 
@@ -378,7 +378,7 @@ knitr::include_graphics("../figures/PRISMA Diagram.pdf", error = FALSE)
 The most frequently reported exposures were `r manuscript_info$freq_exposures`.
 Supplementary File 4 provides a list of all exposures identified.
 The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
-<span id ="r2_25">Of the `r manuscript_info$unique_combos` unique exposure/outcome combinations, `r manuscript_info$freq_combos$n1` occured in only one review, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
+<span id ="r2_25">Of the `r manuscript_info$unique_combos` unique exposure/outcome combinations, `r manuscript_info$freq_combos$n1` occurred in only one review, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
 Full characteristics of the included studies are provided in Table 1.</span>
 <span id ="r2_23">After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations (retaining multiple effects for different age groups or study designs) contributed from `r manuscript_info$prisma$unique_reviews` reviews.</span>
 These effects represent the findings of `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
@@ -489,7 +489,7 @@ We suggest that future guidelines need to embrace the complexity of the issue, t
 Screen use research is extensive, varied, and rapidly growing.
 Reviews tended to be general (e.g., all screen time) and even when more targeted (e.g., social media) nuances related to specific content (e.g., Instagram vs Facebook) have not been meta-analysed or have not produced credible evidence.
 <span id = "r2_29">Fewer than 20\% of the effects identified met our criteria for statistical credibility.
-Most studies which did not meet our critiera failed to provide study-level data (or did not provide sufficent data, such as including effect estimates but not sample sizes).
+Most studies which did not meet our criteria failed to provide study-level data (or did not provide sufficient data, such as including effect estimates but not sample sizes).
 Newer reviews were more likely to provide this information than older reviews, but it highlights the importance of data and code sharing as recommended in the PRISMA guidelines [@pagePRISMA2020Statement2020].
 When study level data was available, many effects were removed because the pooled sample size was small, or because there were fewer than ten studies on which to perform an Egger's test.
 It seems that much of the current screen time research is small in scale, and there is a need for larger, high-quality studies.<span>
@@ -501,7 +501,7 @@ Rather than suggesting parents limit 'screen time', for example, it may be bette
 Screen time research has a well-established measurement problem, which impacts the individual studies of this umbrella review.
 The vast majority of screen time research relies on self-reported data, which not only lacks the nuance required for understanding the effects of screen time, but may also be inaccurate.
 In one systematic review on screen time and sleep [@haleScreenTimeSleep2015], 66 of the 67 included studies used self-reported data for *both* the exposure and outcome variable.
-It has been established that self-reported screen time data has questionnable validity.
+It has been established that self-reported screen time data has questionable validity.
 In a meta-analysis of 47 studies comparing self-reported media use with logged measures, Parry et al [@parrySystematicReviewMetaanalysis2021] found that the measures were only moderately correlated ($r = 0.38$), with self-reported problematic usage fairing worse ($r = 0.25$).
 Indeed, of 622 studies which measured the screen time of 0---6 year-olds, only 69 provided any sort of psychometric properties for their measure, with only 19 studies reporting validity [@byrneMeasurementScreenTime2021].
 While some researchers have started using newer methods of capturing screen behaviours---such as wearable cameras [@smithFeasibilityAutomatedCameras2019] or device-based loggers [@rydingPassiveObjectiveMeasures2020]---these are still not widely adopted.
