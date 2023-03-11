@@ -151,7 +151,7 @@ draft             : no
 documentclass     : "apa6"
 classoption       : "man"
 csl               : nature.csl
-output            : papaja::apa6_docx
+output            : papaja::apa6_pdf
 header-includes:
     - \usepackage{makecell}
     - \usepackage{booktabs}

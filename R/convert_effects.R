@@ -16,9 +16,9 @@ convert_effects <- function(data) {
         raw_cilb
       ),
       ciub = if_else(
-        is.na(raw_cilb) & !is.na(value_raw_se),
+        is.na(raw_ciub) & !is.na(value_raw_se),
         raw_value + 1.96 * value_raw_se,
-        raw_cilb,
+        raw_ciub,
       ),
       r = case_when(
         is.na(raw_value) ~ NA_real_,

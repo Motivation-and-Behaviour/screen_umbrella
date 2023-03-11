@@ -18,7 +18,7 @@ convert_studies <- function(data) {
       r_ci_upper = if_else(
         is.na(upper_ci) & !is.na(standard_error),
         estimate + 1.96 * standard_error,
-        lower_ci
+        upper_ci
       ),
       r_estimate = case_when(
         converted_metric == "r" ~ estimate,
