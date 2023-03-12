@@ -91,7 +91,6 @@ For example, prohibiting screen use might reduce exposure to advertising but may
 As a result, we think casting a wide net and using a meta-review methodology is one of the few ways of pragmatically outlining and quantifying the trade-offs.
 As Cochrane says, "Overviews are an increasingly popular form of evidence synthesis, as they aim to provide 'user-friendly' summaries of the breadth of research relevant to a decision without decision makers needing to assimilate the results of multiple systematic reviews themselves (https://training.cochrane.org/handbook/current/chapter-v).
 
-
 `r get_revision("r1_2")`
 
 ```{asis r1_3}
@@ -189,27 +188,36 @@ We have revised the introduction with new papers, with a particular focus on oth
 Page 5 line 91-94: Please provide a more in-depth explanation on the advantages of a review study to include a broad spectrum of health outcomes. 
 ```
 
-One of the key strengths of our review is that it summarises what is available in the literature, rather than trying to *a-priori* predict what areas should be investigated.
-That is, our review provides a comprehensive summary of what meta-analytic evidence exists.
+Screen use is associated with a range of widespread outcomes.
+Many reviews focus on a single exposure outcome pairing and miss the trade-offs that are inherent in focusing on just one area (see Reviewer 1, \comment{r1_2} for further discussion).
+By focusing on a broad range of outcomes (health and non-health), without trying to *a-priori* predict what areas should be investigated, we simultaneously quantify and compare these trade-offs.
+
 We have added some additional text to this effect in the *Introduction*:
 
 `r get_revision("r2_6")`
+
+and 
+
+`r get_revision("r1_2")`
 
 ```{asis r2_7}
 Page 6 line 96-104: these guidelines provide age-staged recommendations and mainly target on recreational screen time. New evidence to support or reject these recommendations are important breakthroughs. So how does the current review contribute to the refinement of these guidelines? It could be proposed here to strengthen the justification of this study, and also need to be addressed in the discussion section. 
 ```
 
-We feel that we have amply addressed the contribution of this review to the field.
-Guidelines should reflect both the most recent evidence, and the most comprehensive evidence.
+Guidelines are important and useful, but they should reflect both the most recent and the most comprehensive evidence.
 Many of the previous reviews used to justify guidelines focused on narrow ranges of outcomes (e.g., the impact on adiposity).
-We think this is a mistake - you cannot make an informed decision about an action if you only examine the risks, you must also examine potential benefits.
+We think this is a mistake---you cannot make an informed decision about an action if you only examine the risks, you must weigh these against any potential benefits.
+We have included a discussion of this in the *Discussion* section:
+
+`r get_revision("r2_7")`
 
 ```{asis r2_8}
 Page 6 line 104-107: this is not a direct contrast. Longer screen time is needed to pose mental health risks, but short screen time can lead to other health issues. While guidelines are built on a comprehensive examination of health outcomes. Thus, I consider here as a weak argument/transition. The organization of the introduction section need to be improved. 
 ```
 
-We had difficulty understanding the reviewers exact concern here.
-We are happy to revise this further if the reviewer does not feel that the other changes made to the introduction improve the set of arguments.
+We appreciate it is not a direct contrast to compare overall limits of screen time against deleterious effects of screen time over 3-4 hours. As a result, we have removed the words 'in contrast':
+
+`r get_revision("r2_8")`
 
 ```{asis r2_9}
 Page 6 line 117-119: Stiglic and Viner's umbrella review summarized evidence across a broad range of outcome domains. Please further justify the current study in addition to theirs.
@@ -219,6 +227,8 @@ We have included information on this in our summary of previous umbrella reviews
 
 `r get_revision("r2_9")`
 
+As mentioned in other author responses, we have made a stronger effort to organise the review toward a cohesive purpose.
+
 ```{asis r2_10}
 Page 7 line 122: please define “any plausible outcomes” to make the scope more scientifically sound and robust. In addition, the result section included findings of behavioral outcomes (physical activity and sleep duration) which I was not considered as academic, health, and social-psychological outcomes. Thus, it is better to be clear about the types of outcomes at the beginning of the manuscript. 
 ```
@@ -226,16 +236,23 @@ Page 7 line 122: please define “any plausible outcomes” to make the scope mo
 We did not *a-priori* choose which outcomes would be included.
 Instead, we chose to summarise the literature on for any meta-analysis where screen exposure was the independent variable.
 We have removed the word "plausible", as we agree that makes the sentence unclear and the revised phrasing is more aligned with the eligibility criteria.
-Our intention in the introduction is not to preempt the results, which means we do not outline the outcomes found in the introduction.
+We have tried not to preempt the results section in the introduction, but do now refer to some expected outcomes.
+For example:
+
+`r get_revision("r2_9")`
 
 ```{asis r2_11}
 Page 7 line 123: the authors stated the application of “a broad approach”, while highlighted the importance of nuanced findings and guidelines. The introduction section would be improved by balancing these two important aspects. 
 ```
 
 We agree that "broad approach" does not correctly convey our meaning.
-We intended to indicate that in order to make nuanced recommendations, you must have all of the information.
+We intended to indicate that in order to make nuanced recommendations, you must have all of the information regarding benefits and risks.
 Our approach allowed for a broad set of exposures and outcomes in order to capture all of this information, which is what we intended to convey.
 We think our changes elsewhere (see \comment{r1_2} to Reviewer 1, and \comment{r2_6} above) address this.
+
+`r get_revision("r1_2")`
+
+`r get_revision("r2_6")`
 
 ```{asis r2_12}
 Methods: 
@@ -251,7 +268,10 @@ This information is also available in Table 1.
 Page 8 line 152: please define outcomes.
 ```
 
-Per \comment{r2_10} above, we did not pre-specify outcomes and feel it would be inappropriate to revise our inclusion criteria.
+As per \comment{r2_10} above, we did not pre-specify outcomes and do not want to mislead readers on the process.
+We have indicated some anticiapted outcomes, however.
+
+`r get_revision("r2_9")`
 
 ```{asis r2_14}
 Page 10 line 181-187: these two sections could be combined. 
@@ -291,9 +311,11 @@ Page 10 Line 201-206: The inclusion/exclusion criteria are here and there (page 
 Page 11 line 211 and 223-226: same issue as above. 
 ```
 
-We agree this is could be confusing to the reader.
-The previous sections outlined the inclusion criteria for including a *review*, whereas these sections focus on reasons for excluding an *effect size* from the review.
+We agree this could be confusing to the reader.
+The reason that we had inclusion/exclusion criteria across two sections is that we have separate criteria for reviews, and for the effect sizes within reviews.
+The first section outlines the inclusion criteria for including a *review*, whereas the subsequent sections focus on reasons for excluding an *effect size* from the review.
 We did not require all effect sizes within a review to be eligible or usable for the review to still be included.
+This section now reads:
 
 `r get_revision("r2_17")`
 
@@ -313,25 +335,31 @@ We have made this change.
 Page 12 line 232-233: “include systematic reviews without meta-analyses” conflicts “alongside the main meta-analytic findings”.
 ```
 
-We are not clear on what the reviewer means here.
-Per the quoted sentence, we intended to include all systematic reviews (not just meta-analyses), but the volume of meta-analyses was such that we felt this was unneeded.
-This was a change from our protocol, and thus reported as such.
-We are happy to revise this section if the reviewer has a suggestion.
+We agree our phrasing here was unclear. We meant that we intended to narratively summarise systematic reviews, as well as meta-analytic studies. We have changed this phrase to:
+
+`r get_revision("r2_20")`
 
 ```{asis r2_21}
 Page 12 line 235: Harmonizing the metric of effect size does not guarantee the comparability of the strength of associations. Please fully justify the current practice with a thorough analysis of the pros and cons.
 ```
 
-\WorkInProgress
+It is true that harmonising effect sizes does not perfectly retain the original information.
+Different measures are able to capture different aspects of the underlying phenomenon.
+However, it is better to harmonise for the purposes of crude comparisons than to try and subjectively compare completely different classes of effect sizes. We make this point in the limitations:
+
+`r get_revision("r2_16")`
+
+In this study we had to choose between subjectively comparing various classes of effect sizes, or attempt to harmonise all effects so quantitative comparisons could easily be made. We elected to harmise the effect sizes so that we could better illustrate differences between studies. However, harmonisation is imperfect, and so to better understand the exact effect from meta-analyses we refer readers back to the original meta-analyses.
 
 ```{asis r2_22}
 Page 12 line 238-243: A significant P was not a criterion to consider studies as credible in other reviews. Not sure why it is a reason for altering the original plan. 
 ```
 
-It's possible the reviewer has misunderstood.
-In our original plan, we wrote that $P < 0.001$ would be *one of* the criteria for indicating strong evidence (alongside other metrics, such as sample size and heterogeneity).
+We appreciate we may have not explained this clearly.
+We have brought our methods into line with other reviews.
+In our protocol, we wrote that $P < 0.001$ would be *one of* the criteria for indicating strong evidence (alongside other metrics, such as sample size and heterogeneity).
 We realised that this would restrict our 'strong' evidence to only statistically significant effects.
-What would mean that we could not include evidence for no effect as strong evidence, which is clearly a mistake.
+But using this criteria meant that we could never classify non-significant findings as strong evidence regardless of their precision, which is clearly a mistake.
 Our deviation from the protocol (removing the requirement for a P-value threshold) was intended to rectify this.
 
 
@@ -365,13 +393,11 @@ The updated PRISMA diagram has the correct value in this box.
 To create a non-subjective method for choosing which effect size to report we chose to use the sample size, under the assumption that the larger study size would provide the most information.
 Inspection of the effects that were excluded reveal that this decision is not that impactful: we would have ended up with almost exactly the same set of results had we instead chosen to use the number of included studies (*k*) or the most recent review by publication year.
 
-`r get_revision("r3_8")`
+`r get_revision("r2_24")`
 
 ```{asis r2_25}
 Page 12 line 249-256: 1) I suggest adding a summary table (counts and percentages) of the basic characteristics of the included references/studies which including year range of publication, types of study designs, sample age categories, outcome types, and exposure types, quality assessment scores, etc. 2) The current description is quite confusing to me, for example, what does “cases” mean? How did you calculate up 197 cases? What appeared twice or more times, the combination of exposure/outcome by age group? 3) table 1: I suggest adding data of the original effect sizes. 
 ```
-
-\WorkInProgress
 
 1. We have added a table to summarise the effects (including some information on the reviews these effects were drawn from) as Supplementary File 9.
 2. We agree that this section was not entirely clear, and we should not have introduced the term 'cases'.
@@ -380,7 +406,7 @@ We have revised the language in this section:
 `r get_revision("r2_25")`
 
 3. While we agree that this information might be useful for some readers, we found that this made the table difficult to read.
-Most reviews presented multiple effect sizes, and once the information to describe each effect was added (e.g., the specifc outcome, exposure, age group, and moderator), the table became overwhelming.
+Most reviews presented multiple effect sizes, and once the information to describe each effect was added (e.g., the specific outcome, exposure, age group, and moderator), the table became overwhelming.
 All of the effect sizes (in their original, converted, and recalculated forms) are available in the supplementary material.
 
 ```{asis r2_26}
@@ -411,12 +437,14 @@ Three methodological issues needs to be clarified or justified.
 3. Harmonizing the metrics of effect sizes into r may be invalid and placing the converted effect sizes in forest plot is somewhat deceiving. Because across-study comparisons are not guaranteed due to variations in study design, setups of exposure and outcome variables.
 ```
 
-1. We agree that the our reporting of the method could have been clearer, and have revised the text in this section to more clearly explain our method.
-We disagree with the reviewer that the method was "subjective".
+1. We agree that our reporting of the method could have been clearer, and have revised the text in this section to more clearly explain our method.
+We designed this method to make it as objective as possible.
 If we had multiple effects for the same exposure/outcome combination, and which had the same sample age restrictions and the same study design restrictions, we chose the one with the largest sample size.
-We can certainly see how others might use a different method for eliminating duplicate effects (and we state this in the discussion section), but it is difficult to see how using the sample size could be considered "subjective".
+We can certainly see how others might use a different method for eliminating duplicate effects (and we state this in the discussion section), and we tested whether those methods would have led to different included reviews.
 
 `r get_revision("r3_8")`
+
+`r get_revision("r2_24")`
 
 2. We were also surprised by the volume of effects which did not meet the criteria for statistical credibility.
 We were surprised, for example, that almost a quarter of all effects did not provide study-level data (as might be presented in a forest plot), which we thought would be a low bar to clear.
@@ -427,10 +455,10 @@ Instead, we think it reflects the need for the field to raise its standards, esp
 
 `r get_revision("r3_8")`
 
-3. We understand the reviewer's concerns regarding the conversions of the effect sizes (although we disagree with the characterisation of our results as "somewhat deceiving").
-We chose Pearson's *r* as we wanted to focus not on the precise size of the association, but instead on the *direction* and the *magnitude*.
-We think it is worth considering the counterfactual to our approach: had we not converted effect sizes to a common metric readers would likely still make comparisons, but these would be subjective.
-We agree that readers should interpret the effect sizes carefully, and have included text to this effect in the *Discussion*:
+3. We understand the reviewer's concerns regarding the conversions of the effect sizes.
+We appreciate that making conversions between effect sizes relies upon some assumptions.
+We made the decision what it was better to include these studies rather than omit them, and better to convert the effects rather than presenting different tables for each effect size.
+Still, we agree that readers should interpret the effect sizes carefully, and have included text to this effect in the *Discussion*:
 
 `r get_revision("r2_16")`
 
@@ -440,15 +468,18 @@ Discussion
 Page 31 line 362-368: I think these are important nuances. If the analytical plan was subjective altered in order to generate more consistent associations. Then, the practice can introduce selection bias. I suggest adding qualitative syntheses of those studies removed by not meeting the “statistical credibility” criteria. 
 ```
 
-We are unclear what the reviewer is referring to here, although we think many of the concerns were addressed in \comment{r2_29}.
-We feel that a qualitative synthesis of more than 200 effect sizes is outside the scope of this paper.
-
+We agree that the differences between the effects at different ages are important nuances.
+We altered the analytical plan to make it more credible and reliable, but also want to make it so researchers can explore findings that we are less confident in
+While we could offer a narrative synthesis of the 200+ effect sizes that did not meet our credibility criteria, we judged this was beyond the scope of this paper.
+Doing so would involve some filtering and judgement, exacerbating the selection bias the reviewer points to.
+As a result, we have presented those findings in supplementary materials for researchers and practitioners to explore the nuances relevant to them
 
 ```{asis r2_31}
 Page 31 line 380-383: both guidelines mentioned recreational sedentary screen time. It is not in all instances. 
 ```
 
-Even within recreational screen time, our findings do not support guidelines which focus just on minimisation. 
+We agree both guidelines focus on merely reducing recreational screen time and have removed "in all instances".
+Even within recreational screen time, however, our findings do not support guidelines which focus just on minimisation. 
 Video games, for example, are a recreational form of screen time which appear to have some benefits for educational and cognitive outcomes. 
 
 ```{asis r2_32}
@@ -533,7 +564,8 @@ The selection of the “the National Health, Lung and Blood Institute's Quality 
 
 Our rationale for choosing the NHLBI was that we felt it could be applied equally to all fields than AMSTAR-2.
 Reporting standards differ by discipline, and several of the items in AMSTAR-2 are typically only reported in medical fields.
-While these should maybe be reported in all fields, we felt that the NHLBI was a more appropriate standard for our review.
+AMSTAR-2 and NHLBI overlap on many items, and as AMSTAR-2 taks 20-30min per review we didn't feel that the extra length produced substantially more value.
+We felt that the NHLBI was the appropriate standard for our review.
 
 ```{asis r3_5}
 The paragraph on age within the eligibility criteria is unclear to me: “(i.e., the highest individual study from the meta-analysis had a mean age was < 18 years).”: is it a mean age below eighteen (hence, potentially including some adults), or is it the oldest participant being under 18 (more clear-cut, but on the other hand limiting the number of outcomes)?

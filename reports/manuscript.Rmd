@@ -212,12 +212,13 @@ Thus, according to a Nature Human Behaviour editorial, research to determine the
 With concerns over the impact of screen use including education, health, social development, and psychological well-being, an overview that identifies potential benefits and risks is needed.
 
 Citing the negative effects of screens on health (e.g., increased risk of obesity) and health-related behaviours (e.g., sleep), guidelines from the World Health Organisation [@whoGuidelinesPhysicalActivity2019] and numerous government agencies [@australiangovernmentPhysicalActivityExercise2021;@Canadian24HourMovement2016] and statements by expert groups [@AAPMediaUseSchoolAged2016] have recommended that young people's time spent using electronic media devices for entertainment purposes should be limited.
-For example, the Australian Government guidelines regarding sedentary behaviour recommend that young children (under the age of two) should not spend any time watching screens.
+<span id = "r2_8">For example, the Australian Government guidelines regarding sedentary behaviour recommend that young children (under the age of two) should not spend any time watching screens.
 They also recommend that children aged 2-5 years should spend no more than one hour engaged in recreational sedentary screen use per day, while children aged 5-12 and adolescents should spend no more than two hours.
 However, recent evidence suggests that longer exposures may not have adverse effects on children's behaviour or mental health---and might, in fact, benefit their well-being---as long as exposure does not reach extreme levels (e.g., 7 hours per day)[@fergusonEverythingModerationModerate2017].
 Some research also indicates that content (e.g., video games vs television programs) plays an important role in determining the potential benefit or harm of youths' exposure to screen-based media [@przybylskiLargeScaleTestGoldilocks2017].
 Indeed, educational screen time is positively related to educational outcomes [@sandersTypeScreenTime2019].
 This evidence has led some researchers to argue that a more nuanced approach to screen time guidelines is required [@kayeConceptualMethodologicalMayhem2020].
+</span>
 
 In 2016, the American Academy of Pediatrics used a narrative review to examine the benefits and risks of children and adolescents' electronic media [@chassiakosChildrenAdolescentsDigital2016] as a basis for updating their guidelines about screen use [@AAPMediaUseSchoolAged2016].
 Since then, a large number of systematic reviews and meta-analyses have provided evidence about the potential benefits and risks of screen use.
@@ -227,11 +228,12 @@ While there have been other overviews of reviews on screen time, these have tend
 Focusing on a single domain or exposure makes it difficult to understand what trade-offs are involved in any guidelines around screen use.
 For example, prohibiting screen use might reduce exposure to advertising but may also thwart learning opportunities from interactive educational tools. Reviews on either of these exposures or outcomes would likely miss being able to quantify these trade-offs.
 Overviews are one method of evidence synthesis that helps address these trade-offs, by providing 'user-friendly' summaries of a field of research [@pollockChapterOverviewsReviews2022].
-These overviews provide a reference point for the field and allow for easier comparison of risks and benefits for the same behaviour.</span></span>
+These overviews provide a reference point for the field and allow for easier comparison of risks and benefits for the same behaviour.
+By analogy, reading is a sedentary behaviour, and only by comparing the health risks against the educational benefits can researchers and policymakers make clear recommendations about what young people should do.</span></span>
 
 In order to synthesise the evidence and support further evidence-based guideline development and refinement, we reviewed published meta-analyses examining the effects of screen use on children and youth.
 <span id = "r2_6">This review synthesises evidence on any outcome of electronic media exposure.
-We deliberately do not pre-specify outcomes, in order to get a comprehensive list of areas where there is meta-analytical evidence.
+We deliberately did not pre-specify outcomes, in order to get a comprehensive list of areas where there is meta-analytical evidence.
 Adopting this broad approach allowed us to provide a holistic perspective on the influence of screens on children's lives.
 By synthesising across life domains (e.g., school and home), this review provides evidence to inform guidelines and advice for parents, teachers, pediatricians and other professionals in order to maximise human functioning.</span>
 
@@ -351,9 +353,12 @@ An effect with statistical credibility but with $P > .05$ was taken to indicate 
 
 ### Deviations from protocol
 
-We initially planned to describe the findings of systematic reviews that did not include meta-analyses in a narrative summary alongside the main findings from meta-analytic studies.
-However, we determined that combining results from the meta-analyses allowed readers to compare relative strength of associations more easily.
+<span id = "r2_20">
+As described above, we have summarised the meta-analytic findings from all included systematic reviews.
+In our protocol, we originally planned to also conduct a narrative synthesis of all systematic reviews, even those without meta-analyses.
+However, we determined that combining results from the meta-analyses alone allow readers to compare relative strength of associations more easily.
 Readers interested in the relevant systematic reviews (i.e., without meta-analysis) can consult the list of references in Supplementary File 4.
+</span>
 
 We altered our evidence assessment plan when we identified that, as written, it could not classify precise evidence of null effects (i.e., from large reviews with low heterogeneity and low risk of publication bias) as 'credible' because a highly-significant *P*-value was a criteria.
 This would have significantly harmed knowledge gained from our review as it would have restricted our ability to show where the empirical evidence strongly indicated that there was no association between screen time and a given outcome.
@@ -482,8 +487,14 @@ For example, "TV programs and movies" covers a substantial range of content, whi
 
 Broadly, our findings align with the recommendations of others who suggest that current guidelines may be too simplistic, mischaracterise the strength of the evidence, or do not acknowledge the important nuances of the issue [@elsonPolicyStatementsMedia2019;@ashtonScreenTimeChildren2019;@royalcollegeofpaediatricsandchildhealthHealthImpactsScreen2019].
 Our findings suggest that screen use is a complex issue, with associations based not just on duration and device type, but also on the content and the environment in which the exposure occurs.
-Many current guidelines simplify this complex relationship as something that should be minimised in all instances [@australiangovernmentPhysicalActivityExercise2021;@whoGuidelinesPhysicalActivity2019].
+Many current guidelines simplify this complex relationship as something that should be minimised [@australiangovernmentPhysicalActivityExercise2021;@whoGuidelinesPhysicalActivity2019].
 We suggest that future guidelines need to embrace the complexity of the issue, to give parents and clinicians specific information to weigh the pros and cons of interactions with screens.
+
+<span id = "r2_7">
+In particular, our results support the the continuing trend of guidelines moving away from recommendations to reduce 'screen time', and instead focusing on the type of screen time.
+For example, our findings suggest that guidelines should discourage high levels of social media and internet use.
+Guidelines may also consider adapting recommendations that promote the use of educational apps and video games, although these recommendations need to be balanced against the (very small) risks to adiposity.
+</span> 
 
 ## Implications for Future Research
 
@@ -518,14 +529,17 @@ Our high-level approach limits the feasibility of examining fine-grained details
 For example, we did not examine moderators beyond age, nor did we rate the risk of bias for the individual studies.
 Thus, our assessment of evidence quality was restricted to statistical credibility, rather than a more complete assessment of quality (e.g., GRADE [@guyattGRADEGuidelinesIntroduction2011]).
 As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics.
-For this reason, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria.
+<span id = "r2_24">In addition, when faced with duplicate outcome/exposure combinations we chose to keep the one with the largest pooled sample size, assuming that this would capture the most comprehensive and most recent review.
+Inspection of the excluded effect sizes suggests that this decision was not that impactful: our results would have been almost exactly the same has we used the number of included studies (*k*) or the most recent review by publication year.
+However, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria.</span>
 
 <span id="r1_4">Our high-level approach also means that we could not engage with the specific mechanisms behind each association, and as such, we cannot make strong claims on the directions of causality.
 These likely depend on the specific exposure and outcome.
 It is tempting for people to draw inferences that the associations are due to screen time causing these outcomes, but we cannot rule out reverse causality, a third variable, or some combination of influences.
 Many of the individual reviews go into more detail about the strength of the evidence for causal associations, but those judgements were difficult to synthesise across more than 200 reviews.
 Readers who wish to more deeply understand one specific relationship are directed to the cited review for that effect, where the authors could engage more deeply with the mechanisms.</span>
-<span id="r2_16">We converted all effect sizes to a common metric (Pearson's r) to allow for comparisons of magnitude, but acknowledge that this assumes a linear relationship.
+
+<span id="r2_16">We converted all effect sizes to a common metric (Pearson's r) to allow for comparisons of magnitude, but acknowledge that this assumes a linear relationship between the variables.
 Some previous research suggests that associations are typically linear [@sandersTypeScreenTime2019].
 However, others have identified instances where non-linear relationships exist, especially for very high levels of screen time [@twengeMoreTimeTechnology2019; @przybylskiLargeScaleTestGoldilocks2017; @kellySocialMediaUse2018].
 Additionally, our conversion may not always adequately account for differences in study design or measures of exposures and outcomes.
