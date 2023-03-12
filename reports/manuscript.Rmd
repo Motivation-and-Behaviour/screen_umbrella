@@ -127,10 +127,10 @@ abstract: |
   We converted results onto a common metric (Pearson's r) to make comparisons simple, and where possible we reanalysed study-level data to standardise the approach across meta-analyses.
   We identified `r targets::tar_read(manuscript_info)$prisma$included` meta-analyses, and extracted `r targets::tar_read(manuscript_info)$unique_combos` unique combinations of exposures and outcomes.
   If duplicate effect sizes from the same combination of exposure and outcome were drawn from different age groups or study designs we retained them, otherwise we chose the effect size with the largest total sample size.
-  We removed effect sizes that could not be harmonized, resulting in `r targets::tar_read(manuscript_info)$unique_effects` from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` reviews.
+  We removed effect sizes that could not be harmonised, resulting in `r targets::tar_read(manuscript_info)$unique_effects` effects from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` reviews.
   These effects represent the findings of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_n, big.mark=",")` participants.
   When focusing on the meta-analyses with the most statistically robust evidence, we found that general screen use (when content was not indicated), was associated with potential harm on learning, literacy, body composition, and depression.
-  Like-wise, social media was consistently associated with risks to health, with no identified benefits.
+  Likewise, social media was consistently associated with risks to health, with no identified benefits.
   However, we also found that these harms could often be mitigated by certain kinds of content (e.g., educational), or by modifying the context (e.g., co-viewing with a parent).
   In summary, our findings point to the need for careful and nuanced guidelines that support parents to make the best decisions for their children.
 
@@ -166,20 +166,13 @@ knitr::opts_chunk$set(
 )
 
 options(dplyr.summarise.inform = FALSE)
-
-# Uncomment to run outside of pipeline
-# library(targets)
-# library(xfun)
-# library(DiagrammeR)
-# library(gt)
 ```
 
 ```{r, load-targets}
 targets::tar_load(
   c(
-    "manuscript_info", "combined_bib", "plots", "prisma",
-    "edu_certain_params", "plot_edu_certain",
-    "nonedu_certain_params", "plot_nonedu_certain"
+    "manuscript_info", "combined_bib", "prisma", "edu_certain_params",
+    "plot_edu_certain", "nonedu_certain_params", "plot_nonedu_certain"
   ),
   store = here::here("_targets")
 )
@@ -188,10 +181,10 @@ targets::tar_load(
 # Summary
 
 Children's engagement in screen time is a complex issue.
-Parents, policymakers, and educators needing to weigh the risks that sedentary use of screens present alongside the potential benefits for learning and social connectedness.
+Parents, policymakers, and educators need to weigh the risks that sedentary use of screens present alongside the potential benefits for learning and social connectedness.
 The lack of comprehensive evidence hampers efforts to make an informed decision.
 As a Lancet editorial [@thelancetSocialMediaScreen2019] suggested, "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking."
-In this study, we systematically harmonize data from existing meta-analyses of screen time on a range of outcomes, including health, education, and psychology, and identify the most statistically robust relationships.
+In this study, we systematically harmonise data from existing meta-analyses of screen time on a range of outcomes, including health, education, and psychology, and identify the most statistically robust relationships.
 We show that some forms of screen time---such as social media---show consistent evidence of harm for children, with no clear evidence of a benefit.
 Other relationships are more complex.
 Video games, for example, are associated with poorer body composition and learning outcomes.
@@ -210,7 +203,7 @@ In the early 19th century, concerns about schooling "exhausting the children's b
 By the 20th century, the invention of the radio was accompanied by assertions that it would distract children from their reading (which by this point was no longer considered confusing and harmful) leading to impaired learning [@dill2013oxford].
 
 Today, the same arguments that were once leveled against reading, schooling, and radio are being made about screen use (e.g., television, mobile phones, and computers) [@wartellaChildrenComputersNew2000].
-Excessive screen time use is the number one concern parents have about their children's health and behaviour, ahead of nutrition, bullying, and physical inactivity [@rhodes2015top].
+Excessive screen time use is the number one concern parents in Western countries have about their children's health and behaviour, ahead of nutrition, bullying, and physical inactivity [@rhodes2015top].
 Yet, the evidence to support parents' concerns is inadequate.
 A Lancet editorial [@thelancetSocialMediaScreen2019] suggested that, "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking."
 
@@ -220,8 +213,8 @@ With concerns over the impact of screen use including education, health, social 
 
 Citing the negative effects of screens on health (e.g., increased risk of obesity) and health-related behaviours (e.g., sleep), guidelines from the World Health Organisation [@whoGuidelinesPhysicalActivity2019] and numerous government agencies [@australiangovernmentPhysicalActivityExercise2021;@Canadian24HourMovement2016] and statements by expert groups [@AAPMediaUseSchoolAged2016] have recommended that young people's time spent using electronic media devices for entertainment purposes should be limited.
 For example, the Australian Government guidelines regarding sedentary behaviour recommend that young children (under the age of two) should not spend any time watching screens.
-They also recommend that children aged 2-5 years should spend a maximum of one hour engaged in recreational sedentary screen use per day, while children aged 5-12 and adolescents should spend no more than two hours.
-In contrast, some recent evidence suggests that exposure to electronic entertainment media that exceeds these guidelines (e.g., 3-4 hours per day) may not have meaningful adverse effects on children's behaviour or mental health, and might, in fact, benefit their well-being, as long as this exposure does not reach extreme levels (e.g., 7 hours per day)[@fergusonEverythingModerationModerate2017].
+They also recommend that children aged 2-5 years should spend no more than one hour engaged in recreational sedentary screen use per day, while children aged 5-12 and adolescents should spend no more than two hours.
+However, recent evidence suggests that longer exposures may not have adverse effects on children's behaviour or mental health---and might, in fact, benefit their well-being---as long as exposure does not reach extreme levels (e.g., 7 hours per day)[@fergusonEverythingModerationModerate2017].
 Some research also indicates that content (e.g., video games vs television programs) plays an important role in determining the potential benefit or harm of youths' exposure to screen-based media [@przybylskiLargeScaleTestGoldilocks2017].
 Indeed, educational screen time is positively related to educational outcomes [@sandersTypeScreenTime2019].
 This evidence has led some researchers to argue that a more nuanced approach to screen time guidelines is required [@kayeConceptualMethodologicalMayhem2020].
@@ -340,7 +333,7 @@ Where authors did not provide data in a format that could be re-analysed, we use
 
 *Statistical Credibility*.
 We employed a statistical classification approach to grade the credibility of the effect sizes in the literature.
-To be considered 'credible' an effect needed to be derived from a combined sample of >1,000 [@papadimitriouUmbrellaReviewEvidence2021] and have non-significant tests of publication bias (i.e., Egger’s test and excess significance test).
+To be considered 'credible' an effect needed to be derived from a combined sample of >1,000 participants [@papadimitriouUmbrellaReviewEvidence2021] and have non-significant tests of publication bias (i.e., Egger’s test and excess significance test).
 We performed these analyses, and therefore the review needed to provide usable study-level data in order to be included.
 
 *Consistency of Effect within the Population*.
@@ -355,7 +348,7 @@ An effect with statistical credibility but with $P > .05$ was taken to indicate 
 
 ### Deviations from protocol
 
-We initially planned to include systematic reviews without meta-analyses in a narrative summary alongside the main meta-analytic findings.
+We initially planned to describe the findings of systematic reviews that did not include meta-analyses in a narrative summary alongside the main findings from meta-analytic studies.
 However, we determined that combining results from the meta-analyses allowed readers to compare relative strength of associations more easily.
 Readers interested in the relevant systematic reviews (i.e., without meta-analysis) can consult the list of references in Supplementary File 4.
 
@@ -463,14 +456,14 @@ Social media showed strong evidence of harmful associations with risk taking in 
 These results align with meta-analytic evidence from adults indicating that social media use is also associated with increased risk of depression [@yoonSocialNetworkSite2019;@vahediAssociationSelfreportedDepressive2021].
 Recent evidence from social media companies themselves suggest there may also be negative effects of social media on the mental health of young people, especially teenage girls [@seetharamanFacebookKnowsInstagram2021].
 
-One category of exposure appeared to consistently associated with benefits: screen-based interventions designed to promote learning or health behaviours.
+One category of exposure appeared to be consistently associated with benefits: screen-based interventions designed to promote learning or health behaviours.
 This finding indicates that interventions can be effectively delivered using electronic media platforms, but does not necessarily indicate that screens are more effective than other methods (e.g., face-to-face, printed material).
 Rather, it reinforces that the content of the screen time may be the most important aspect.
 The way that a young person interacts with digital screens may also be important.
 We found evidence that touch screens had strong evidence for benefits on learning [@xieCanTouchscreenDevices2018], as did augmented reality [@tekedereExaminingEffectivenessAugmented2016].
 
 Largely owing to a small number of studies or missing individual study data, there were few age-based conclusions that could be drawn from reviews which met our criteria for statistical certainty.
-If we expand to include those reviews which did not meet this threshold, there remained no clear pattern although there were some age-specific differences in associations (data avilable in Supplementary Materials).
+If we expand to include those reviews which did not meet this threshold, there remained no clear pattern although there were some age-specific differences in associations (data available in Supplementary Materials).
 For example, advertising of unhealthy food was associated with unhealthy food choice for young children, but was not statistically significant for other age groups [@sadeghiradInfluenceUnhealthyFood2016].
 Conversely, TV programs and movies were more strongly associated with lower physical activity for adolescents than for younger age groups [@marshallRelationshipsMediaUse2004].
 
