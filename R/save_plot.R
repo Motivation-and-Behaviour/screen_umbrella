@@ -9,7 +9,7 @@
 #' @author Taren Sanders
 #' @export
 save_plot <- function(plot, plot_params) {
-  file_name <- here::here("figures", plot_params$filename)
+  file_name <- plot_params$filename
 
   ggsave(
     filename = file_name,

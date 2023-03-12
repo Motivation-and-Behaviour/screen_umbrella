@@ -12,7 +12,7 @@
 make_prisma <- function(prisma_path, effects_clean, reviews_clean) {
   prisma_data <- readr::read_file(prisma_path)
 
-  prisma_df <-
+  prisma_df_raw <-
     # Convert each to a separate line
     tibble(text = unlist(str_split(prisma_data, pattern = "\\n"))) %>%
     filter(
@@ -33,16 +33,28 @@ make_prisma <- function(prisma_path, effects_clean, reviews_clean) {
       step = 0,
       text = str_replace_all(text, "\t", ""),
       value = str_extract(text, "^[0-9]+") %>% as.numeric(),
-      text = str_remove(text, "^[0-9]+") %>% str_trim()
+      text = str_remove(text, "^[0-9]+") %>% str_trim(),
+      # Fix first line strangeness
+      value = if_else(
+        str_detect(text, "as [0-9]+ studies"),
+        str_extract(text, "[0-9]+") %>% as.numeric(),
+        value
+      ),
+      text = if_else(
+        str_detect(text, "as [0-9]+ studies"),
+        str_remove(text, "as [0-9]+ studies") %>% str_trim(),
+        text
+      )
     )
 
   step <- 0
-  for (i in seq_len(nrow(prisma_df))) {
-    if (prisma_df$type[i] == "main") step <- step + 1
-    prisma_df$step[i] <- step
+  for (i in seq_len(nrow(prisma_df_raw))) {
+    if (prisma_df_raw$type[i] == "main") step <- step + 1
+    prisma_df_raw$step[i] <- step
   }
 
-  prisma_df <- prisma_df %>%
+  prisma_df <-
+    prisma_df_raw %>%
     exclusion_collapse(
       c("Not a systematic review", "Not a review"),
       "Not a systematic review"
@@ -64,16 +76,18 @@ make_prisma <- function(prisma_path, effects_clean, reviews_clean) {
         "Individual level data only",
         "Analysis not moderated by age",
         "Only one eligible sample.",
-        "The sample includes adolescent groups, however the analysis are not moderated by age. Individual level data provided." # nolint
+        "The sample includes adolescent groups, however the analysis are not moderated by age. Individual level data provided.", # nolint
+        "Wrong population"
       ),
-      "All meta-analyses results include non-target samples (e.g., adults)"
+      "Wrong population"
     ) %>%
     exclusion_collapse(
       c(
         "Clinical outcome",
-        "Wrong exposure - clinical health intervention"
+        "Wrong exposure - clinical health intervention",
+        "Wrong exposure - other (explain)"
       ),
-      "Wrong exposure - clinical health intervention"
+      "Wrong exposure"
     ) %>%
     arrange(step, desc(value))
 
@@ -91,7 +105,7 @@ make_prisma <- function(prisma_path, effects_clean, reviews_clean) {
     filter(!review_id %in% c(contributing_reviews, missing_key)) %>%
     pull(review_id)
 
-  prisma_df <-
+  prisma_df_cleaned <-
     prisma_df %>%
     add_row(
       text = "studies removed",
@@ -117,12 +131,7 @@ make_prisma <- function(prisma_path, effects_clean, reviews_clean) {
       type = "main",
       step = prisma_df$step[nrow(prisma_df)] + 1,
       value = length(contributing_reviews)
-    )
-
-  # Generate PRISMA Diagram
-
-  # Convert excl_reason to new column
-  prisma_df <- prisma_df %>%
+    ) %>%
     mutate(text = paste(value, text, sep = " ")) %>%
     group_by(step, type) %>%
     mutate(text = if_else(type == "exclude_reason",
@@ -134,7 +143,9 @@ make_prisma <- function(prisma_path, effects_clean, reviews_clean) {
     )) %>%
     distinct(step, type, .keep_all = TRUE)
 
-  labels <- prisma_df$text
+  # Generate PRISMA Diagram
+
+  labels <- prisma_df_cleaned$text
 
   prisma <- paste("digraph flowchart {
       # node definitions with substituted label text
@@ -168,7 +179,7 @@ make_prisma <- function(prisma_path, effects_clean, reviews_clean) {
   )
 
   prisma_diag <- DiagrammeR::grViz(prisma, width = 1000, height = 700)
-  prisma_data <- list(data = prisma_df, diag = prisma_diag)
+  prisma_data <- list(data = prisma_df_cleaned, diag = prisma_diag)
 
   return(prisma_data)
 }

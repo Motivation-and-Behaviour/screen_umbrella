@@ -18,16 +18,12 @@ convert_studies <- function(data) {
       r_ci_upper = if_else(
         is.na(upper_ci) & !is.na(standard_error),
         estimate + 1.96 * standard_error,
-        lower_ci
+        upper_ci
       ),
       r_estimate = case_when(
         converted_metric == "r" ~ estimate,
         converted_metric == "b" ~ b2r(estimate),
         converted_metric == "d" ~ effectsize::d_to_r(estimate),
-        converted_metric == "or" ~
-          suppressWarnings(effectsize::oddsratio_to_r(estimate)),
-        converted_metric == "lor" ~
-          effectsize::oddsratio_to_r(estimate, log = TRUE),
         converted_metric == "z" ~ correlation::z_fisher(z = estimate),
         # Calculate d from mean difference where possible
         converted_metric == "md" & !is.na(estimate) &
@@ -39,10 +35,6 @@ convert_studies <- function(data) {
         converted_metric == "r" ~ lower_ci,
         converted_metric == "b" ~ b2r(lower_ci),
         converted_metric == "d" ~ effectsize::d_to_r(lower_ci),
-        converted_metric == "or" ~
-          suppressWarnings(effectsize::oddsratio_to_r(lower_ci)),
-        converted_metric == "lor" ~
-          effectsize::oddsratio_to_r(lower_ci, log = TRUE),
         converted_metric == "z" ~ correlation::z_fisher(z = lower_ci),
         # Calculate d from mean difference where possible
         converted_metric == "md" & !is.na(lower_ci) &
@@ -54,10 +46,6 @@ convert_studies <- function(data) {
         converted_metric == "r" ~ upper_ci,
         converted_metric == "b" ~ b2r(upper_ci),
         converted_metric == "d" ~ effectsize::d_to_r(upper_ci),
-        converted_metric == "or" ~
-          suppressWarnings(effectsize::oddsratio_to_r(upper_ci)),
-        converted_metric == "lor" ~
-          effectsize::oddsratio_to_r(upper_ci, log = TRUE),
         converted_metric == "z" ~ correlation::z_fisher(z = upper_ci),
         # Calculate d from mean difference where possible
         converted_metric == "md" & !is.na(upper_ci) &

@@ -49,3 +49,5 @@ vignettes/*.pdf
 
 _targets/
 scratch.R
+*.Identifier
+reports/*.log

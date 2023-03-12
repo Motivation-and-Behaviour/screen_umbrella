@@ -3,12 +3,12 @@
 21974 studies screened against title and abstract
 	19417 studies excluded
 2557 studies assessed for full-text eligibility
-	2333 studies excluded
-		658  Systematic review without meta-analysis
-		565  Not a systematic review
-		235  Wrong exposure - clinical health intervention 
-		159  Doesn&#39;t examine exposure-outcome relationship
-		159  Not a full-text
+	2339 studies excluded
+		659  Systematic review without meta-analysis
+		566  Not a systematic review
+		237  Wrong exposure - clinical health intervention 
+		160  Not a full-text
+		159  Doesn't examine exposure-outcome relationship
 		147  Not published in English
 		126  Wrong exposure - other (explain)
 		101  Wrong population
@@ -16,8 +16,8 @@
 		36  Duplicated reference
 		36  Not a review
 		14  Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.
+		12  Analysis not moderated by age
 		12  Review of reviews
-		11  Analysis not moderated by age
 		6  Only one eligible sample.
 		3  Full-text article could not be retrieved
 		2  Clinical outcome
@@ -26,4 +26,4 @@
 		1  The sample includes adolescent groups, however the analysis are not moderated by age. Individual level data provided.
 	0 studies ongoing
 	0 studies awaiting classification
-224 studies included
+218 studies included

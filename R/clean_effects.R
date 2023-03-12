@@ -6,19 +6,28 @@
 #' @param effects_raw
 #' @param reviews_clean
 #' @param age_codes
+#' @param sample_codes
+#' @param design_codes
 #' @return
 #' @author Taren Sanders
 #' @export
-clean_effects <- function(effects_raw, reviews_clean, age_codes) {
+clean_effects <- function(
+    effects_raw, reviews_clean, age_codes, sample_codes,
+    design_codes) {
+  age_moderator_categories <- c(
+    "age", "Age", "Educational level", "Grade Level", "School level",
+    "Level of education"
+  )
+  design_moderator_categories <- c(
+    "study design", "Study Type", "Study Design", "Study design", "Design"
+  )
+
   effects_clean <-
     effects_raw %>%
     # Remove any unusable effects (must have value and N)
     filter(!is.na(value) & !is.na(combined_n) & use_moderator) %>%
     # Translate the statistical tests to common abbreviations
     mutate(stat_test_clean = translate_tests(statistical_test)) %>%
-    # Can only use some of the metric types
-    filter(stat_test_clean %in% c("b", "d", "r", "or", "z")) %>%
-    convert_effects() %>%
     rename(
       outcome_category = outcome_level_1,
       outcome = outcome_level_2,
@@ -34,46 +43,85 @@ clean_effects <- function(effects_raw, reviews_clean, age_codes) {
     ) %>%
     # Add the demographics in from the review-level data
     left_join(
-      select(reviews_clean, review_id, author_year, demographics_coded),
+      select(
+        reviews_clean,
+        review_id, author_year, demographics_coded, sample_type, study_design
+      ),
       by = "review_id"
     ) %>%
-    rename(moderator_age = demographics_coded)
+    rename(moderator_age = demographics_coded) %>%
+    # Check for ages within the normal moderators and change moderator_age
+    mutate(
+      moderator_age = case_when(
+        moderator_category %in% age_moderator_categories &
+          moderator_level %in% age_codes$mixed ~ "Mixed",
+        moderator_category %in% age_moderator_categories &
+          moderator_level %in% age_codes$adolescents ~ "Adolescents",
+        moderator_category %in% age_moderator_categories &
+          moderator_level %in% age_codes$children ~ "Children",
+        moderator_category %in% age_moderator_categories &
+          moderator_level %in% age_codes$young_children ~ "Young children",
+        TRUE ~ moderator_age
+      ),
+      sample_type = if_else(
+        moderator_level %in% sample_codes$clin_sample_incl |
+          moderator_level %in% sample_codes$edu_sample_incl,
+        moderator_level,
+        sample_type
+      ),
+      study_design = case_when(
+        moderator_category %in% design_moderator_categories &
+          moderator_level %in% design_codes$design_unspec ~
+          "Mixed or unspecified",
+        moderator_category %in% design_moderator_categories &
+          moderator_level %in% design_codes$design_obs_mixed ~
+          "Observational - mixed",
+        moderator_category %in% design_moderator_categories &
+          moderator_level %in% design_codes$design_obs_cross ~
+          "Cross-sectional only",
+        moderator_category %in% design_moderator_categories &
+          moderator_level %in% design_codes$design_obs_long ~
+          "Longitudinal only",
+        moderator_category %in% design_moderator_categories &
+          moderator_level %in% design_codes$design_exp ~
+          "Experimental",
+        TRUE ~ study_design
+      )
+    )
 
-  # Check for ages within the normal moderators and change moderator_age
-  age_moderator_categories <- c(
-    "age", "Age", "Educational level", "Grade Level",
-    "School level", "Level of education"
-  )
-  effects_clean <- effects_clean %>%
-    mutate(moderator_age = case_when(
-      moderator_category %in% age_moderator_categories &
-        moderator_level %in% age_codes$mixed ~ "Mixed",
-      moderator_category %in% age_moderator_categories &
-        moderator_level %in% age_codes$adolescents ~ "Adolescents",
-      moderator_category %in% age_moderator_categories &
-        moderator_level %in% age_codes$children ~ "Children",
-      moderator_category %in% age_moderator_categories &
-        moderator_level %in% age_codes$young_children ~ "Young children",
-      TRUE ~ moderator_age
-    ))
+  effects_converted <-
+    effects_clean %>%
+    convert_effects()
+
+  # Identify effects that are usable
+  effects_usable <-
+    effects_converted %>%
+    # Can only use some of the metric types
+    filter(stat_test_clean %in% c("b", "d", "r", "z")) %>%
+    mutate(usable = TRUE)
 
   # Pick the largest review by N for each outcome/exposure pair and age group
-  effects_use <- effects_clean %>%
+  effects_use <-
+    effects_usable %>%
     group_by(
       plain_language_outcome,
       plain_language_exposure,
-      moderator_age
+      moderator_age,
+      study_design
     ) %>%
     slice_max(n, with_ties = TRUE) %>%
-    mutate(
-      use_effect = TRUE,
-      main_effect = TRUE
-    ) %>%
+    mutate(use_effect = TRUE) %>%
     ungroup() %>%
-    select(effect_size_id, use_effect, main_effect)
+    select(effect_size_id, r, cilb, ciub, z, cilb_z, ciub_z, use_effect)
 
   effects_clean_use <-
-    left_join(effects_clean, effects_use, by = "effect_size_id")
+    left_join(
+      effects_clean,
+      select(effects_usable, effect_size_id, usable),
+      by = "effect_size_id"
+    ) %>%
+    left_join(effects_use, by = "effect_size_id") %>%
+    mutate(use_effect = if_else(is.na(use_effect), FALSE, use_effect), study_level_available = if_else(is.na(study_level_available), FALSE, study_level_available))
 
   effects_clean_renamed <-
     effects_clean_use %>%

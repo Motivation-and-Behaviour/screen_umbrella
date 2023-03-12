@@ -1,4 +1,4 @@
-#' .. content for \description{} (no empty lines) ..
+t #' .. content for \description{} (no empty lines) ..
 #'
 #' .. content for \details{} ..
 #'
@@ -61,7 +61,8 @@ make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
       outcome_lvl_1,
       plain_language_outcome,
       plain_language_exposure,
-      age_group
+      age_group,
+      study_design
     ) %>%
     mutate(row_num = as.factor(row_number())) %>%
     add_row(
@@ -79,7 +80,9 @@ make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
       esig = "**Excess<br/>Signif.**",
       outcome_category = "**Outcome Category**",
       font_fam = "sans",
-      age_group = "**Age Group**"
+      age_group = "**Age Group**",
+      sample_type = "**Population**",
+      study_design = "**Study Design**"
     ) %>%
     mutate(
       outcome_lvl_1 = fct_expand(outcome_lvl_1, "**Outcome**") %>%
@@ -199,6 +202,20 @@ make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
     ) +
     geom_richtext(aes(label = age_group),
       y = plot_params$pos$mod,
+      vjust = 0.5, hjust = 0,
+      stat = "identity",
+      size = 2.5,
+      label.size = labsize
+    ) +
+    geom_richtext(aes(label = study_design),
+      y = plot_params$pos$design,
+      vjust = 0.5, hjust = 0,
+      stat = "identity",
+      size = 2.5,
+      label.size = labsize
+    ) +
+    geom_richtext(aes(label = sample_type),
+      y = plot_params$pos$pop,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,

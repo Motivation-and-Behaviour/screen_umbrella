@@ -39,7 +39,7 @@ translate_tests <- function(stat) {
       "r = uncorrected sample-weighted mean effect size"
     ) ~ "r",
     c("rate ratio", "relative risk", "risk ratio") ~ "rr",
-    c("fisher z", "fisher's z", "z fischer", "z fisher") ~ "z",
+    c("fisher z", "fisher's z", "z fischer", "z fisher", "fisher’s z") ~ "z",
     c("mean tau-u", "tau-u") ~ NA,
     .default = str_trim(str_to_lower(stat))
   )

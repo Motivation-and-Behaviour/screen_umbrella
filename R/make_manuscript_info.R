@@ -17,14 +17,12 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
 
   # Results --------------------------------------------------
 
-  ## Number of effects
-  manuscript_info$effects_clean_n <- nrow(effects_clean)
-
-  ## Number of unique effects
-  manuscript_info$unique_effects <- nrow(effects_clean %>% filter(use_effect))
-
   ## List of frequent exposures
-  manuscript_info$freq_exposures <- effects_clean %>%
+  manuscript_info$freq_exposures <-
+    effects_clean %>%
+    select(review_id, plain_language_outcome, plain_language_exposure) %>%
+    # Each review can only have one combo, so as to not overcount moderators
+    distinct() %>%
     group_by(plain_language_exposure) %>%
     summarise(n = n()) %>%
     arrange(desc(n)) %>%
@@ -32,8 +30,8 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
       plain_language_exposure = rename_effects(plain_language_exposure),
       plain_language_exposure = case_when(
         plain_language_exposure ==
-          "lifestyle risk behaviour (at school) intervention" ~
-          "screen-based lifestyle risk behaviour interventions (at school)",
+          "to promote health intervention" ~
+          "screen-based interventions to promote health",
         plain_language_exposure == "general tv programs and movies" ~
           "general TV programs and movies",
         TRUE ~ plain_language_exposure
@@ -45,27 +43,44 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
     knitr::combine_words()
 
   ## List of frequent outcomes
-  manuscript_info$freq_outcomes <- effects_clean %>%
+  manuscript_info$freq_outcomes <-
+    effects_clean %>%
+    select(review_id, plain_language_outcome, plain_language_exposure) %>%
+    # Each review can only have one combo, so as to not overcount moderators
+    distinct() %>%
     group_by(plain_language_outcome) %>%
     summarise(n = n()) %>%
     arrange(desc(n)) %>%
     mutate(
       plain_language_outcome = rename_effects(plain_language_outcome),
       plain_language_outcome = case_when(
-        plain_language_outcome == "duration sleep" ~ "sleep duration",
+        plain_language_outcome == "depression psychological health" ~
+          "depression",
         TRUE ~ plain_language_outcome
       ),
       out = paste0(plain_language_outcome, " (*n* = ", n, ")")
     ) %>%
-    head(5) %>%
+    head(4) %>%
     pull(out) %>%
     knitr::combine_words()
 
+  ## Unique combos
+  manuscript_info$unique_effects <- effects_clean %>%
+    filter(use_effect) %>%
+    nrow()
+
+
   ## Frequent combinations
-  freq_combos <- effects_clean %>%
+  freq_combos <-
+    effects_clean %>%
+    select(review_id, plain_language_outcome, plain_language_exposure) %>%
+    # Each review can only have one combo, so as to not overcount moderators
+    distinct() %>%
     group_by(plain_language_exposure, plain_language_outcome) %>%
     summarise(n = n(), .groups = "keep") %>%
     arrange(desc(n))
+
+  manuscript_info$unique_combos <- nrow(freq_combos)
 
   manuscript_info$freq_combos$n1 <- sum(freq_combos$n == 1)
   manuscript_info$freq_combos$n2 <- sum(freq_combos$n == 2)
@@ -244,7 +259,9 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
 
   edu_certain <-
     combined_effects %>%
-    filter(outcome_category == "education" & certainty == "meets criteria")
+    filter(outcome_category == "education" &
+      certainty == "meets criteria" &
+      use_effect)
 
   manuscript_info$edu$n_effect <- edu_effect %>% nrow()
   manuscript_info$edu$n_certain <- edu_certain %>% nrow()
@@ -304,7 +321,8 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
 
   health_certain <-
     combined_effects %>%
-    filter(outcome_category != "education" & certainty == "meets criteria")
+    filter(outcome_category != "education" &
+      certainty == "meets criteria" & use_effect)
 
   manuscript_info$health$n_effect <- health_effect %>% nrow()
   manuscript_info$health$n_certain <- health_certain %>% nrow()
