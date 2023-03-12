@@ -83,8 +83,6 @@ We have included this in the *Implications for Future Research* section:
 The authors note that “no review has synthesized the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviours, and wellbeing.” The authors end up concluding that there are different magnitude and directions of associations for different outcomes and exposures (and, indeed, the mechanisms of these are highly different depending on the predictor-outcome combination), which makes me wonder whether casting such a wide net is helping the reader understand more or less about the research to date on technology use and child/adolescent outcomes? I would want to hear more justification in the manuscript itself on why they assert it is helpful to try and paint them with one broad brush?
 ```
 
-\todo{Suggestions welcome here}
-
 Our goal with this review was to provide an overview of the field of screen time research.
 A summary of an entire field will, out of necessity, be more broad that a typical systematic review.
 We believe that there is significant value in providing a single overview to summarise the state of the field.
@@ -148,6 +146,7 @@ We have made all of these changes.
 
 ```{asis r2_3}
 Summary: 
+
 Page 4 line 59: the lack of comprehensive evidence hampers efforts to make an informed decision.
 ```
 
@@ -155,6 +154,7 @@ We have made this change.
 
 ```{asis r2_4}
 Introduction: 
+
 Page 5 line 84-86: please further justify how a review study would make the limited evidence base less lacking or generate new findings.
 ```
 
@@ -175,8 +175,6 @@ We have revised the introduction with new papers, with a particular focus on oth
 Page 5 line 91-94: Please provide a more in-depth explanation on the advantages of a review study to include a broad spectrum of health outcomes. 
 ```
 
-\todo{I'm open to suggestions for what to include here}
-
 One of the key strengths of our review is that it summarises what is available in the literature, rather than trying to *a-priori* predict what areas should be investigated.
 That is, our review provides a comprehensive summary of what meta-analytic evidence exists.
 We have added some additional text to this effect in the *Introduction*:
@@ -187,8 +185,6 @@ We have added some additional text to this effect in the *Introduction*:
 Page 6 line 96-104: these guidelines provide age-staged recommendations and mainly target on recreational screen time. New evidence to support or reject these recommendations are important breakthroughs. So how does the current review contribute to the refinement of these guidelines? It could be proposed here to strengthen the justification of this study, and also need to be addressed in the discussion section. 
 ```
 
-\todo{Open to suggestions here. I feel like the other changes cover this.}
-
 We feel that we have amply addressed the contribution of this review to the field.
 Guidelines should reflect both the most recent evidence, and the most comprehensive evidence.
 Many of the previous reviews used to justify guidelines focused on narrow ranges of outcomes (e.g., the impact on adiposity).
@@ -197,8 +193,6 @@ We think this is a mistake - you cannot make an informed decision about an actio
 ```{asis r2_8}
 Page 6 line 104-107: this is not a direct contrast. Longer screen time is needed to pose mental health risks, but short screen time can lead to other health issues. While guidelines are built on a comprehensive examination of health outcomes. Thus, I consider here as a weak argument/transition. The organization of the introduction section need to be improved. 
 ```
-
-\todo{Open to suggestions here.}
 
 We had difficulty understanding the reviewers exact concern here.
 We are happy to revise this further if the reviewer does not feel that the other changes made to the introduction improve the set of arguments.
@@ -231,6 +225,7 @@ We think our changes elsewhere (see \comment{r1_2} to Reviewer 1, and \comment{r
 
 ```{asis r2_12}
 Methods: 
+
 Page 8 line 146-148: the effects of screen use on youth with a clinical condition are likely be different from those of the general population. If this review included any, the population characteristics should be specified in the result section or in the figures. 
 ```
 
@@ -328,6 +323,7 @@ Our deviation from the protocol (removing the requirement for a P-value threshol
 
 ```{asis r2_23}
 Results
+
 Page 12 line 247-248: please add a description that 66 studies contributed unique effect sizes to the current review. 
 ```
 
@@ -363,7 +359,7 @@ Page 12 line 249-256: 1) I suggest adding a summary table (counts and percentage
 
 \WorkInProgress
 
-1. \todo{I don't really want to add this - I don't think it adds much value}
+1. We have added a table to summarise the effects (including some information on the reviews these effects were drawn from) as Supplementary File 9.
 2. We agree that this section was not entirely clear, and we should not have introduced the term 'cases'.
 We have revised the language in this section:
 
@@ -426,6 +422,7 @@ We agree that readers should interpret the effect sizes carefully, and have incl
 
 ```{asis r2_30}
 Discussion
+
 Page 31 line 362-368: I think these are important nuances. If the analytical plan was subjective altered in order to generate more consistent associations. Then, the practice can introduce selection bias. I suggest adding qualitative syntheses of those studies removed by not meeting the “statistical credibility” criteria. 
 ```
 
@@ -511,7 +508,8 @@ Per our response to Reviewer 2 (\comment{r2_15}), we initially intended to inclu
 We removed it because it made the table very large, but did not include the new file with the separate table.
 We have now included the quality assessment in Table 1.
 
-\todo{Add a data dictionary}
+We agree that the supplementary materials are difficult to navigate.
+We have added a codebook (as Supplementary File 3) as suggested.
 
 ```{asis r3_4}
 MINOR COMMENTS

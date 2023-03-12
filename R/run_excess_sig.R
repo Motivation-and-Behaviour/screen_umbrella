@@ -14,7 +14,7 @@ run_excess_sig <- function(meta_results) {
     tes_obser = exc_sig$O,
     tes_expect = exc_sig$E,
     tes_ratio = exc_sig$OEratio,
-    tes_power = list(exc_sig$power),
+    tes_power = paste0(round(exc_sig$power, 3), collapse = "; "),
     tes_p = exc_sig$pval,
     tes_theta = exc_sig$theta,
     tes_thetalim = exc_sig$theta.lim

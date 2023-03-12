@@ -357,7 +357,7 @@ An effect with statistical credibility but with $P > .05$ was taken to indicate 
 
 We initially planned to include systematic reviews without meta-analyses in a narrative summary alongside the main meta-analytic findings.
 However, we determined that combining results from the meta-analyses allowed readers to compare relative strength of associations more easily.
-Readers interested in the relevant systematic reviews (i.e., without meta-analysis) can consult the list of references in Supplementary File 3.
+Readers interested in the relevant systematic reviews (i.e., without meta-analysis) can consult the list of references in Supplementary File 4.
 
 We altered our evidence assessment plan when we identified that, as written, it could not classify precise evidence of null effects (i.e., from large reviews with low heterogeneity and low risk of publication bias) as 'credible' because a highly-significant *P*-value was a criteria.
 This would have significantly harmed knowledge gained from our review as it would have restricted our ability to show where the empirical evidence strongly indicated that there was no association between screen time and a given outcome.
@@ -376,12 +376,13 @@ knitr::include_graphics("../figures/PRISMA Diagram.pdf", error = FALSE)
 ```
 
 The most frequently reported exposures were `r manuscript_info$freq_exposures`.
-Supplementary File 4 provides a list of all exposures identified.
+Supplementary File 5 provides a list of all exposures identified.
 The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
 <span id ="r2_25">Of the `r manuscript_info$unique_combos` unique exposure/outcome combinations, `r manuscript_info$freq_combos$n1` occurred in only one review, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
 Full characteristics of the included studies are provided in Table 1.</span>
 <span id ="r2_23">After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations (retaining multiple effects for different age groups or study designs) contributed from `r manuscript_info$prisma$unique_reviews` reviews.</span>
 These effects represent the findings of `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
+The characteristics of the included effects are available in Supplementary File 9.
 
 **TABLE 1**
 
@@ -396,7 +397,7 @@ Overall, only `r manuscript_info$qual$all_low` meta-analyses were graded as low 
 
 There were `r manuscript_info$edu$n_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science.
 We removed `r manuscript_info$edu$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$edu$n_samplesize` effects with samples < 1,000, and `r manuscript_info$edu$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
-Effects not meeting one or more of these standards are presented in Supplementary File 5.
+Effects not meeting one or more of these standards are presented in Supplementary File 6.
 The remaining `r manuscript_info$edu$n_certain` effects met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot).
 These `r manuscript_info$edu$n_certain` effects came from `r manuscript_info$edu$n_unique` meta-analytic reviews analysing data from `r manuscript_info$edu$summary$studies_n` empirical studies with `r format(manuscript_info$edu$summary$total_n, big.mark=",")` individual participants.
 
@@ -422,7 +423,7 @@ Most effects showed high levels of heterogeneity (`r manuscript_info$edu$n_i2` o
 We identified `r manuscript_info$health$n_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
 We removed `r manuscript_info$health$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$health$n_samplesize` effects with samples < 1,000, and `r manuscript_info$health$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
 No remaining studies showed evidence of excessive significance.
-Effects not meeting one or more of these standards are presented in Supplementary File 6.
+Effects not meeting one or more of these standards are presented in Supplementary File 7.
 The remaining `r manuscript_info$health$n_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)).
 These `r manuscript_info$health$n_certain` effects came from `r manuscript_info$health$n_unique` meta-analytic reviews analysing data from `r manuscript_info$health$summary$studies_n` empirical studies with `r format(manuscript_info$health$summary$total_n, big.mark=",")` individual participants.
 
@@ -455,7 +456,7 @@ Thus, parents may play an important role in selecting content that is likely to 
 Similar nuanced findings were observed for video games.
 The credible evidence we identified showed that video game playing was associated with poorer body composition and learning [@adelantado-renauAssociationScreenMedia2019;@poorolajalBehavioralFactorsInfluencing2020].
 However, when the video game were designed specifically to teach numeracy, playing these games showed learning benefits [@byunDigitalGamebasedLearning2018].
-One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 5 & 6) therefore this hypothesis could not be addressed.
+One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 6 & 7) therefore this hypothesis could not be addressed.
 
 Social media was one type of exposure that showed consistent associations with poor health, with no indication of potential benefit.
 Social media showed strong evidence of harmful associations with risk taking in general, as well as unsafe sex and substance abuse [@vannucciSocialMediaUse2020].

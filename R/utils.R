@@ -51,15 +51,17 @@ upload_all_files <- function(files = c(
       type = "figs"
     ),
     "supp_files" = list(
-      path = c(
-        "figures/Supplementary File 5 - Education Outcomes.pdf",
-        "figures/Supplementary File 6 - Health-related Outcomes.pdf",
+      path = c( # nolint start
         "supplementary_files/Supplementary File 1 - Search Strategy.pdf",
-        "supplementary_files/Supplementary File 2 - Complete Effects Data.csv", # nolint
-        "supplementary_files/Supplementary File 3 - List of reviews without meta-analyses.csv", # nolint
-        "supplementary_files/Supplementary File 4 - List of Exposures.csv",
-        "supplementary_files/Supplementary File 7 - Included Studies.pdf"
-      ),
+        "supplementary_files/Supplementary File 2 - Complete Effects Data.csv",
+        "supplementary_files/Supplementary File 3 - Effect Size Codebook.pdf",
+        "supplementary_files/Supplementary File 4 - List of reviews without meta-analyses.csv",
+        "supplementary_files/Supplementary File 5 - List of Exposures.csv",
+        "supplementary_files/Supplementary File 6 - Education Outcomes.pdf",
+        "supplementary_files/Supplementary File 7 - Health-related Outcomes.pdf",
+        "supplementary_files/Supplementary File 8 - Included Studies.pdf",
+        "supplementary_files/Supplementary File 9 - Effect Characteristics.pdf"
+      ), # nolint end
       type = "supp"
     ),
     "tables" = list(

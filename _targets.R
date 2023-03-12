@@ -78,31 +78,9 @@ list(
     pattern = map(meta_results_r)
   ),
   tar_target(
-    meta_results_z,
-    run_metaanalysis(studies_clean, type = "z"),
-    pattern = map(studies_clean),
-    iteration = "list"
-  ),
-  tar_target(
-    meta_aggregated_z,
-    tidy_meta(meta_results_z),
-    pattern = map(meta_results_z)
-  ),
-  tar_target(
-    eggers_results_z,
-    run_eggers(meta_results_z),
-    pattern = map(meta_results_z)
-  ),
-  tar_target(
-    excess_sig_results_z,
-    run_excess_sig(meta_results_z),
-    pattern = map(meta_results_z)
-  ),
-  tar_target(
     studies_results,
     combine_study_results(
-      meta_aggregated_r, eggers_results_r, excess_sig_results_r,
-      meta_aggregated_z, eggers_results_z, excess_sig_results_z
+      meta_aggregated_r, eggers_results_r, excess_sig_results_r
     )
   ),
   tar_target(
@@ -124,7 +102,19 @@ list(
   ),
   tar_target(
     table_desc_saved,
-    save_table(table_desc_gt, "Review characteristics.pdf"),
+    save_table(table_desc_gt, "tables/Review characteristics.pdf"),
+    format = "file",
+  ),
+  tar_target(
+    table_effects,
+    make_table_effects(combined_effects)
+  ),
+  tar_target(
+    table_effects_saved,
+    save_table(
+      table_effects,
+      "supplementary_files/Supplementary File 9 - Effect Characteristics.pdf"
+    ),
     format = "file",
   ),
   # Make plots --------------------------------------------------------------
@@ -249,7 +239,7 @@ list(
     path = here::here("reports", "references.Rmd"),
     output_file = here::here(
       "supplementary_files",
-      "Supplementary File 7 - Included Studies.pdf"
+      "Supplementary File 8 - Included Studies.pdf"
     ),
     params = list(
       nocite_list =
