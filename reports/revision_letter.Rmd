@@ -44,7 +44,7 @@ Reviewer 2's concerns about the appropriateness of your technical approach (nota
 ```
 
 Please see our response to Reviewer 2, in particular \comment{r2_29}.
-The reviewer raised some important concerns, especially regarding odds ratios which we have decided should not have been included.
+The reviewer raised some important concerns, especially regarding the interpretability of odds ratios which we have decided should not have been included (see \comment{r2_16}).
 For the other issues, we have provided stronger justification for our decisions.
 
 ```{asis e3}
@@ -71,8 +71,10 @@ We did not intend to make causal statements, and have reviewed the manuscript fo
 As the authors note, “screen time” as a metric is highly criticized and problematic. This begs the question, though, of whether a wide-scale review of this sort, which retains a focus on screen time (although it also acknowledges other more nuanced metrics of exposure), is further perpetuating the issues seen by the broader field.
 ```
 
-We agree with the reviewer that the term 'screen time' is problematic. 
-Indeed, as our results show, the influence of screen time on children is a less a function of a physical screen, and more a function of the activity that the screen provides. 
+We agree with the reviewer that the term 'screen time' is problematic as it fails to acknowledge the diversity of experiences screens provide.
+Indeed, our motivation for conducting this review was to counter this narrative in the literature.
+To do this, it was necessary to invoke the concept of 'screen time'.
+As our results show, the influence of screen time on children is less a function of a physical screen, and more a function of the activity that the screen provides.
 But, we feel that a review such as this is needed in order to emphasise the diverse influence that screens can have. 
 If the results are not collated into a single place, it is difficult to see how the field will begin to progress away from 'screen time' as a concept. 
 We have included this in the *Implications for Future Research* section:
@@ -83,10 +85,12 @@ We have included this in the *Implications for Future Research* section:
 The authors note that “no review has synthesized the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviours, and wellbeing.” The authors end up concluding that there are different magnitude and directions of associations for different outcomes and exposures (and, indeed, the mechanisms of these are highly different depending on the predictor-outcome combination), which makes me wonder whether casting such a wide net is helping the reader understand more or less about the research to date on technology use and child/adolescent outcomes? I would want to hear more justification in the manuscript itself on why they assert it is helpful to try and paint them with one broad brush?
 ```
 
-Our goal with this review was to provide an overview of the field of screen time research.
-A summary of an entire field will, out of necessity, be more broad that a typical systematic review.
-We believe that there is significant value in providing a single overview to summarise the state of the field.
-We have added some additional information to the introduction on this point:
+We acknowledge that the field contains a range of different effects with different magnitudes and directions.
+We want to make clear what trade-offs are involved in any guidelines around screen use.
+For example, prohibiting screen use might reduce exposure to advertising but may also thwart learning opportunities from interactive educational tools. Reviews on either of these exposures or outcomes would likely miss being able to quantify these trade-offs.
+As a result, we think casting a wide net and using a meta-review methodology is one of the few ways of pragmatically outlining and quantifying the trade-offs.
+As Cochrane says, "Overviews are an increasingly popular form of evidence synthesis, as they aim to provide 'user-friendly' summaries of the breadth of research relevant to a decision without decision makers needing to assimilate the results of multiple systematic reviews themselves (https://training.cochrane.org/handbook/current/chapter-v).
+
 
 `r get_revision("r1_2")`
 
@@ -95,33 +99,38 @@ Page 10 notes that the study “examined the combinations of exposure and outcom
 ```
 
 We intended to include the review which captured the most information on the exposure/outcome combination for each effect size.
-The assumption was that the largest review would be the most recent, and that he newer reviews would contain the studies located in previous reviews. 
-Manual inspection of the reviews which did not contribute any effects suggests that this was successful - older reviews tended to only be included if they focused on the general population while a newer review focused on a sub-population.
+The assumption was that the largest review would be the most recent, and that newer reviews would contain the studies located in previous reviews. 
+We inspected the reviews that did not contribute any effects.
+This inspection suggested our assumptions were correct: older reviews tended to only be included if they focused on the general population while a newer review focused on a specific sub-population.
 
 ```{asis r1_4}
 Causal language- The present study sought to “provide a holistic perspective on the influence of screens on children's lives across a broad range of outcomes,” but I am not convinced that the studies included in the meta-analyses are designed in ways that allow us to understand causal IMPACT at all. Many have criticized this literature for being largely self-reported (with flaws inherent to this method, which are reviewed in the present manuscript's discussion), observational, and cross-sectional, with very few rigorous experimental or well-controlled longitudinal designs that would enable researchers or the public to draw robust conclusions about the direction of associations. I fear that this comprehensive review, though rigorous, does not adequately attend to the fact that we do not usually know whether screens are causing helps or harms for youth, if different types of youth behaviors may be causing them to engage more with screens (e.g., sedentary youth may seek out more screen time; depressed youth may turn more to social media as an avoidance strategy), or if indeed there are third variables driving observed associations. Although the review here does a great job of summarizing the direction and strengths of associations across studies, I fear that it does not attend to these important issues in terms of how one ought to interpret them.
 ```
 
 Yes, we agree that the body of evidence does not lend itself to strong causal conclusions.
+A strength of our study is that it points out issues with how research has been conducted in this field, which we hope will make future research more ambitious.
 We note that we deliberately chose to avoid using strong causal language as much as possible, instead indicating that the evidence suggests associations with outcomes.
-We have reread the manuscript and removed any remaining causal language that we found.
+We have carefully reread the manuscript and removed any remaining unjustified causal language.
 We have also added the following to the *Discussion* section:
 
 `r get_revision("r1_4")`
 
 Note that we do use causal language when describing hypothesised mechanisms, and when describing guidelines.
-We feel that this is sensible --- guidelines are based on causal assumptions, and while our evidence does not always support them, we are referring to them in the context that they are made (i.e., to instruct parents).
+We feel that this is sensible---guidelines are based on causal assumptions, and while our evidence does not always support them, we are referring to them in the context that they are made (i.e., to instruct parents).
 
 ```{asis r1_5}
 The manuscript notes that the nature of the data allowed for few age-based conclusions- I fear that this is a substantial limitation that deserves more discussion. It seems difficult to characterize all children's media use from age 0-18 in the same way, especially across such a wide range of developmental outcomes. A more nuanced treatment of developmental considerations would have been appreciated.
 ```
 
-One of the benefits of the other reviewers' and editor's suggestion to update the search is that some of this limitation has been addressed in more recent literature.
-Newer papers were more likely to provide moderation by age group, or new reviews targeting specific age groups were now available.
-Unfortunately, many of these still failed to meet our criteria for statistical certainty.
-Inspecting the results in the supplementary material still reveal fewer differences by age group than may be expected.
-In some cases this is because there is still only an effect for a single age group, as many reviews target behaviours or outcomes which are more common in one age group (e.g., sexting in adolescents, or developmental outcome in young children).
-For the effects where there were multiple age groups, differences tended to be small (e.g., body composition). 
+We agree that it would be useful to break down findings by age.
+However, for us to accomplish this we need meta-analyses which examine the developmental span for each exposure and outcome combination.
+While the addition of further reviews based on the reviewers' and editor's suggestion to update the search helped address this limiation (ewer papers were more likely to provide moderation by age group, and new reviews targeting specific age groups have been added), there were still too few age-based comparisons to make strong claims.
+This is because many reviews target behaviours or outcomes which are more common in one age group (e.g., sexting in adolescents, or developmental outcome in young children).
+For the effects where there were multiple age groups (e.g., body composition), differences tended to be small. 
+
+We have included some additional information on this in the *Discussion* section:
+
+`r get_revision("r1_5")`
 
 \newpage
 # Reviewer 2
@@ -158,10 +167,13 @@ Introduction:
 Page 5 line 84-86: please further justify how a review study would make the limited evidence base less lacking or generate new findings.
 ```
 
-The quote from the *Lancet* editorial is that the understanding is lacking, rather than the evidence.
+The reviewer was pointing to the following quote from the *Lancet*: "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking.".
+It is not that the evidence is lacking, per se, but that our *understanding* is weak.
 Our understanding is lacking partly because benefits of screen time (as seen in some educational literature) and reviewed separately from harms.
-Our review aims to address this.
-See additional context in the *Introduction*:
+Our review aims to address this (see also Reviewer 1, \comment{r1_2}).
+We think synthesising the trade-offs in one review can help us understand when screen time might be associated with good/poor outcomes, helping to better understand why.
+
+We have added this additional context to the *Introduction*:
 
 `r get_revision("r1_2")`
 
@@ -169,7 +181,9 @@ See additional context in the *Introduction*:
 Page 5 line 87-90: I suggest improving the logic flow and citing more recent studies (2016 or newer) to highlight the potentially new additions of the current review. 
 ```
 
-We have revised the introduction with new papers, with a particular focus on other umbrella reviews.
+We have revised the introduction with new papers, with a particular focus on other umbrella reviews. See the below for an example of the changes:
+
+`r get_revision("r2_9")`
 
 ```{asis r2_6}
 Page 5 line 91-94: Please provide a more in-depth explanation on the advantages of a review study to include a broad spectrum of health outcomes. 
