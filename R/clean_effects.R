@@ -121,7 +121,11 @@ clean_effects <- function(
       by = "effect_size_id"
     ) %>%
     left_join(effects_use, by = "effect_size_id") %>%
-    mutate(use_effect = if_else(is.na(use_effect), FALSE, use_effect), study_level_available = if_else(is.na(study_level_available), FALSE, study_level_available))
+    mutate(
+      use_effect = if_else(is.na(use_effect), FALSE, use_effect),
+      study_level_available =
+        if_else(is.na(study_level_available), FALSE, study_level_available)
+    )
 
   effects_clean_renamed <-
     effects_clean_use %>%
