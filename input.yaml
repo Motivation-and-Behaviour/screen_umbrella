@@ -1,0 +1,21 @@
+# Run using pdfcombine (tdegeus/pdfcombine)
+
+files:
+    - file: "supplementary_files/Supplementary File 1 - Search Strategy.pdf"
+      title: "Supplementary File 1 - Search Strategy"
+    - file: "supplementary_files/Supplementary File 3 - Effect Size Codebook.pdf"
+      title: "Supplementary File 3 - Effect Size Codebook"
+    - file: "supplementary_files/Supplementary File 6 - Education Outcomes.pdf"
+      title: "Supplementary File 6 - Education Outcomes.pdf"
+    - file: "supplementary_files/Supplementary File 7 - Health-related Outcomes.pdf"
+      title: "Supplementary File 7 - Health-related Outcomes.pdf"
+    - file: "supplementary_files/Supplementary File 8 - Included Studies.pdf"
+      title: "Supplementary File 8 - Included Studies.pdf"
+    - file: "supplementary_files/Supplementary File 9 - Effect Characteristics.pdf"
+      title: "Supplementary File 9 - Effect Characteristics.pdf"
+
+title: Combined Supplementary Files
+author: Taren Sanders
+meta: True
+output: Supplementary_Files.pdf
+
