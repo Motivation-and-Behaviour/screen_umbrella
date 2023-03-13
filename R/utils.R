@@ -40,13 +40,13 @@ upload_all_files <- function(files = c(
       type = "main"
     ),
     "prisma" = list(
-      path = "figures/PRISMA Diagram.pdf",
+      path = "figures/Figure 1 - PRISMA Diagram.pdf",
       type = "figs"
     ),
     "main_plots" = list(
       path = c(
-        "figures/Forest plot for Education.pdf",
-        "figures/Forest plot for Health-related Outcomes.pdf"
+        "figures/Figure 2 - Forest plot for Education.pdf",
+        "figures/Figure 3 - Forest plot for Health-related Outcomes.pdf"
       ),
       type = "figs"
     ),
@@ -65,7 +65,7 @@ upload_all_files <- function(files = c(
       type = "supp"
     ),
     "tables" = list(
-      path = "tables/Review characteristics.pdf",
+      path = "tables/Table 1 - Review characteristics.pdf",
       type = "tabs"
     )
   )

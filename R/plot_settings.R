@@ -1,7 +1,7 @@
 # Settings for each of the outcome plots
 
 edu_certain <- list(
-  filename = "figures/Forest plot for Education.pdf",
+  filename = "figures/Figure 2 - Forest plot for Education.pdf",
   title = "Associations Between Exposures and Education Outcomes",
   categories = "Education",
   certain = TRUE,
@@ -60,7 +60,7 @@ edu_uncertain <- list(
 )
 
 nonedu_certain <- list(
-  filename = "figures/Forest plot for Health-related Outcomes.pdf",
+  filename = "figures/Figure 3 - Forest plot for Health-related Outcomes.pdf",
   title = "Associations Between Exposures and Health-related Outcomes",
   categories = c("Psychology", "Health Behaviour", "Physical Health"),
   certain = TRUE,

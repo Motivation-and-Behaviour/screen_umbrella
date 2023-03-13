@@ -188,9 +188,9 @@ save_prisma <- function(prisma_data) {
   prisma_data$diag %>%
     DiagrammeRsvg::export_svg() %>%
     charToRaw() %>%
-    rsvg::rsvg_pdf(here::here("figures", "PRISMA Diagram.pdf"))
+    rsvg::rsvg_pdf(here::here("figures", "Figure 1 - PRISMA Diagram.pdf"))
 
-  return(here::here("figures", "PRISMA Diagram.pdf"))
+  return(here::here("figures", "Figure 1 - PRISMA Diagram.pdf"))
 }
 
 exclusion_collapse <- function(data, old_rows, new_row) {

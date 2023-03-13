@@ -102,7 +102,7 @@ list(
   ),
   tar_target(
     table_desc_saved,
-    save_table(table_desc_gt, "tables/Review characteristics.pdf"),
+    save_table(table_desc_gt, "tables/Table 1 - Review characteristics.pdf"),
     format = "file",
   ),
   tar_target(
