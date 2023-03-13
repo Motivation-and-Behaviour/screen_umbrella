@@ -48,3 +48,6 @@ vignettes/*.pdf
 .DS_Store
 
 _targets/
+scratch.R
+*.Identifier
+reports/*.log

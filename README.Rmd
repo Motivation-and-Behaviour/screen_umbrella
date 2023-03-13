@@ -22,14 +22,7 @@ Contains all of the project files to conduct the analysis and generate the manus
 
 1. Clone the repository, ensuring that you are using the latest version.
 1. Open directory and run `renv::restore()` to download/update the required packages.
-1. You must run `googledrive::drive_auth()` and `googlesheets4::gs4_auth()` before running targets in order the cache your oAuth token.
 1. To build the project, run `targets::tar_make()`.
-
-### Notes
-
-You should be able to run the analysis to examine the reproducability. However, some of the pipeline targets also write data to Google Sheets, which will cause these targets to fail. If you are not a project contributor, you may need to manually exclude these targets.
-
-You can also run the build in parallel using `targets::tar_make_clustermq(workers=<num_workers>)`. This can be faster, but not always. There's usually no benefit beyond 3 or 4 workers.
 
 ## Links
 

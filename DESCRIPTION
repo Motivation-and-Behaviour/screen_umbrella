@@ -1,0 +1,43 @@
+Package: screen_umbrella
+Title: Analysis for the Screen Time Umbrella Review
+Version: 0.0.0.9000
+Authors@R: 
+    c(person("Taren", "Sanders", 
+            email = "taren.sanders@acu.edu.au", 
+            role = c("aut", "cre"),
+            comment = c(ORCID = "0000-0002-4504-6008")),
+    person("Michael", "Noetel", 
+            email = "m.noetel@uq.edu.au", 
+            role = c("aut"),
+            comment = c(ORCID = "0000-0002-6563-8203")),
+    person("Philip", "Parker", 
+            email = "phil.parker@acu.edu.au", 
+            role = c("aut"),
+            comment = c(ORCID = "0000-0002-4604-8566")),
+            )
+Description: This package contains the analysis code, data, and manuscript for the Screen Time Umbrella Review.
+License: CC BY 4.0
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Suggests: 
+    bs4Dash,
+    devtools,
+    fnmate (>= 0.0.6),
+    googledrive,
+    httpgd,
+    languageserver,
+    lintr,
+    pingr,
+    revise,
+    rstudioapi,
+    shiny,
+    shinybusy,
+    shinyWidgets,
+    styler,
+    tflow (>= 0.3.7),
+    visNetwork
+Remotes: 
+    MilesMcBain/tflow,
+    MilesMcBain/fnmate,
+    tarensanders/revise

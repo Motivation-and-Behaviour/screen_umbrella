@@ -1,0 +1,29 @@
+50656 references imported for screening as 50649 studies
+	28675 duplicates removed
+21974 studies screened against title and abstract
+	19417 studies excluded
+2557 studies assessed for full-text eligibility
+	2339 studies excluded
+		659  Systematic review without meta-analysis
+		566  Not a systematic review
+		237  Wrong exposure - clinical health intervention 
+		160  Not a full-text
+		159  Doesn't examine exposure-outcome relationship
+		147  Not published in English
+		126  Wrong exposure - other (explain)
+		101  Wrong population
+		59  Individual level data only
+		36  Duplicated reference
+		36  Not a review
+		14  Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.
+		12  Analysis not moderated by age
+		12  Review of reviews
+		6  Only one eligible sample.
+		3  Full-text article could not be retrieved
+		2  Clinical outcome
+		2  DUPLICATE TO MERGE LATER
+		1  Sys review of qual studies
+		1  The sample includes adolescent groups, however the analysis are not moderated by age. Individual level data provided.
+	0 studies ongoing
+	0 studies awaiting classification
+218 studies included
