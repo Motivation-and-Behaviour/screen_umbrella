@@ -502,3 +502,5 @@ The authors declare no conflicts of interest.
 *Figure 3: Health and health-related behaviour outcomes. Results for `r manuscript_info$health$n_certain` unique effect sizes related to health and health-related behaviour outcomes which met the criteria for statistical certainty. Findings are presented as correlations with both 95% and 99.9% confidence intervals.*
 
 # Tables
+
+*Table 1: Review characteristics and quality assessment for meta-analyses providing unique effects*

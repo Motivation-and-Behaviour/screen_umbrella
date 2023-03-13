@@ -287,3 +287,5 @@ Figure legends
 
 Tables
 ======
+
+*Table 1: Review characteristics and quality assessment for meta-analyses providing unique effects*
