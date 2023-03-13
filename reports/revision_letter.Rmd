@@ -77,9 +77,13 @@ To do this, it was necessary to invoke the concept of 'screen time'.
 As our results show, the influence of screen time on children is less a function of a physical screen, and more a function of the activity that the screen provides.
 But, we feel that a review such as this is needed in order to emphasise the diverse influence that screens can have. 
 If the results are not collated into a single place, it is difficult to see how the field will begin to progress away from 'screen time' as a concept. 
-We have included this in the *Implications for Future Research* section:
+We have included this in the *Discussion* section:
 
 `r get_revision("r1_1")`
+
+We also note that in reviewing the manuscript, we sometimes used the term 'screen time' and in other places used 'screen use'.
+For the sake of being consistent, we have changed these to all be 'screen use' (which we think is more consistent with what is meant), and we also use this term for the rest of this letter.
+This is just a stylistic change---we don't think that changing between 'time' and 'use' is what the reviewer means.
 
 ```{asis r1_2}
 The authors note that “no review has synthesized the evidence available across a broad range of outcome domains, such as physical health, education, physical and cognitive development, behaviours, and wellbeing.” The authors end up concluding that there are different magnitude and directions of associations for different outcomes and exposures (and, indeed, the mechanisms of these are highly different depending on the predictor-outcome combination), which makes me wonder whether casting such a wide net is helping the reader understand more or less about the research to date on technology use and child/adolescent outcomes? I would want to hear more justification in the manuscript itself on why they assert it is helpful to try and paint them with one broad brush?
@@ -168,9 +172,9 @@ Page 5 line 84-86: please further justify how a review study would make the limi
 
 The reviewer was pointing to the following quote from the *Lancet*: "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking.".
 It is not that the evidence is lacking, per se, but that our *understanding* is weak.
-Our understanding is lacking partly because benefits of screen time (as seen in some educational literature) and reviewed separately from harms.
+Our understanding is lacking partly because benefits of screen use (as seen in some educational literature) and reviewed separately from harms.
 Our review aims to address this (see also Reviewer 1, \comment{r1_2}).
-We think synthesising the trade-offs in one review can help us understand when screen time might be associated with good/poor outcomes, helping to better understand why.
+We think synthesising the trade-offs in one review can help us understand when screen use might be associated with good/poor outcomes, helping to better understand why.
 
 We have added this additional context to the *Introduction*:
 
@@ -215,7 +219,7 @@ We have included a discussion of this in the *Discussion* section:
 Page 6 line 104-107: this is not a direct contrast. Longer screen time is needed to pose mental health risks, but short screen time can lead to other health issues. While guidelines are built on a comprehensive examination of health outcomes. Thus, I consider here as a weak argument/transition. The organization of the introduction section need to be improved. 
 ```
 
-We appreciate it is not a direct contrast to compare overall limits of screen time against deleterious effects of screen time over 3-4 hours. As a result, we have removed the words 'in contrast':
+We appreciate it is not a direct contrast to compare overall limits of screen use against deleterious effects of screen use over 3-4 hours. As a result, we have removed the words 'in contrast':
 
 `r get_revision("r2_8")`
 
@@ -292,7 +296,7 @@ We have now included the quality assessment in Table 1.
 Page 10 line 195-196: the description of data conversion is not transparent. Pearson's r assumes linear relationship. But associations between screen use and well-being are often non-monotonic (Twenge 2020, PMID: 32303719). In addition, meta-analyses reporting odd ratios defined exposure outcomes in various ways. For example, Zhang et. al. 2016 compared the obesity risk by the lowest and highest TV viewing time, whereas Poorolajal et. al. 2020 compared watching TV > 1-2h/d with an unclear group. Can the harmonization of OR into R guarantee that the two values are comparable? Therefore, further justification is needed. 
 ```
 
-We agree that the relationship between some outcomes and screen time may not always be linear.
+We agree that the relationship between some outcomes and screen use may not always be linear.
 However, our previous research (e.g., 10.1186/s12966-019-0881-7) looking at a range of health and education outcomes in a high-quality dataset found little evidence for curvilinear relationships.
 We therefore felt that the linear model was appropriate for the majority of the outcomes in this review.
 Additionally, almost none of the reviews we included reported information that would allow us to calculate non-linear effects.
@@ -478,9 +482,9 @@ As a result, we have presented those findings in supplementary materials for res
 Page 31 line 380-383: both guidelines mentioned recreational sedentary screen time. It is not in all instances. 
 ```
 
-We agree both guidelines focus on merely reducing recreational screen time and have removed "in all instances".
-Even within recreational screen time, however, our findings do not support guidelines which focus just on minimisation. 
-Video games, for example, are a recreational form of screen time which appear to have some benefits for educational and cognitive outcomes. 
+We agree both guidelines focus on merely reducing recreational screen use and have removed "in all instances".
+Even within recreational screen use, however, our findings do not support guidelines which focus just on minimisation. 
+Video games, for example, are a recreational form of screen use which appear to have some benefits for educational and cognitive outcomes. 
 
 ```{asis r2_32}
 Page 32 line 389-391: I assume that the data of primary studies was retrieved by the team whenever possible. But “failed to provide study-level data” make me wonder did not those reviews provide reference information of the included studies? 

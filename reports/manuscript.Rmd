@@ -1,146 +1,94 @@
 ---
-title             : "Benefits and risks associated with children's and adolescents' interactions with electronic screens: An umbrella review"
+title             : "An umbrella review of the benefits and risks associated with youths' interactions with electronic screens"
 shorttitle        : "Benefits and risks of electronic screens"
 
 author: 
-  - name          : "Taren Sanders"
+  - name          : "Taren Sanders*"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
     address       : "33 Berry St, North Sydney, NSW, Australia"
     email         : "Taren.Sanders@acu.edu.au"
-    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
-      - Conceptualization
-      - Data curation
-      - Writing - Original Draft
   - name          : "Michael Noetel"
     affiliation   : "2"
-    role:
-      - Conceptualization
-      - Writing - Original Draft
   - name          : "Philip Parker"
     affiliation   : "1"
-    role:
-      - Conceptualization
-      - Writing - Original Draft
   - name          : "Borja Del Pozo Cruz"
     affiliation   : "3"
-    role:
-      - Writing - Review & Editing
   - name          : "Stuart Biddle"
     affiliation   : "4"
-    role:
-      - Writing - Review & Editing
   - name          : "Rimante Ronto"
     affiliation   : "5"
-    role:
-      - Writing - Review & Editing
   - name          : "Ryan Hulteen"
     affiliation   : "6"
-    role:
-      - Writing - Review & Editing
   - name          : "Rhiannon Parker"
     affiliation   : "7"
-    role:
-      - Writing - Review & Editing
   - name          : "George Thomas"
     affiliation   : "8"
-    role:
-      - Writing - Review & Editing
   - name          : "Katrien De Cocker"
     affiliation   : "9"
-    role:
-      - Writing - Review & Editing
   - name          : "Jo Salmon"
     affiliation   : "10"
-    role:
-      - Writing - Review & Editing
   - name          : "Kylie Hesketh"
     affiliation   : "10"
-    role:
-      - Writing - Review & Editing
   - name          : "Nicole Weeks"
     affiliation   : "1"
-    role:
-      - Writing - Review & Editing
   - name          : "Hugh Arnott"
     affiliation   : "1"
-    role:
-      - Writing - Review & Editing
   - name          : "Emma Devine"
     affiliation   : "11"
-    role:
-      - Writing - Review & Editing
   - name          : "Roberta Vasconcellos"
     affiliation   : "1"
-    role:
-      - Writing - Review & Editing
   - name          : "Rebecca Pagano"
     affiliation   : "12"
-    role:
-      - Writing - Review & Editing
   - name          : "Jamie Sherson"
     affiliation   : "12"
-    role:
-      - Writing - Review & Editing
   - name          : "James Conigrave"
     affiliation   : "1"
-    role:
-      - Writing - Review & Editing
   - name          : "Chris Lonsdale"
     affiliation   : "1"
-    role:
-      - Conceptualization
-      - Writing - Original Draft
-      - Project Administration
                           
-
 affiliation:
   - id            : "1"
-    institution   : "Institute for Positive Psychology and Education, Australian Catholic University"
+    institution   : "Institute for Positive Psychology and Education, Australian Catholic University, North Sydney, Australia"
   - id            : "2"
-    institution   : "School of Health and Behavioural Sciences, Australian Catholic University"
+    institution   : "School of Psychology, University of Queensland, Brisbane, Australia"
   - id            : "3"
-    institution   : "Department of Sport Science and Clinical Biomechanics, University of Southern Denmark"
+    institution   : "Department of Sport Science and Clinical Biomechanics, University of Southern Denmark, Odense, Denmark"
   - id            : "4"
-    institution   : "Centre for Health Research, University of Southern Queensland"
+    institution   : "Centre for Health Research, University of Southern Queensland, Springfield, Australia"
   - id            : "5"
-    institution   : "Department of Health Systems and Populations, Faculty of Medicine, Health and Human Sciences, Macquarie University"
+    institution   : "Department of Health Systems and Populations, Faculty of Medicine, Health and Human Sciences, Macquarie University, Macquarie Park, Australia"
   - id            : "6"
-    institution   : "School of Kinesiology, Louisiana State University"
+    institution   : "School of Kinesiology, Louisiana State University, Baton Rouge, USA"
   - id            : "7"
-    institution   : "School of Medicine and Health, Sydney University"
+    institution   : "School of Medicine and Health, Sydney University, Sydney, Australia"
   - id            : "8"
-    institution   : "Health and Wellbeing Centre for Research Innovation, School of Human Movement and Nutrition Sciences, University of Queensland"
+    institution   : "Health and Wellbeing Centre for Research Innovation, School of Human Movement and Nutrition Sciences, University of Queensland, Brisbane, Australia"
   - id            : "9"
-    institution   : "Department of Movement and Sport Science, Ghent University"
+    institution   : "Department of Movement and Sport Science, Ghent University, Ghent, Belgium"
   - id            : "10"
-    institution   : "Institute for Physical Activity and Nutrition, Deakin University"
+    institution   : "Institute for Physical Activity and Nutrition, Deakin University, Geelong, Australia"
   - id            : "11"
-    institution   : "The Matilda Centre for Research in Mental Health and Substance Use, University of Sydney"
+    institution   : "The Matilda Centre for Research in Mental Health and Substance Use, University of Sydney, Sydney, Australia"
   - id            : "12"
-    institution   : "School of Education, Australian Catholic University"
+    institution   : "School of Education, Australian Catholic University, North Sydney, Australia"
 
 abstract: |
-  Children's engagement in screen time is a complex issue.
-  While some forms of screen time have consistently been associated with harm, others have been associated with gains, making it difficult to weigh the risks and benefits of use.
-  In this umbrella review, we systematically collate and examined meta-analyses examining the effects of screen use on children and youth.
-  We converted results onto a common metric (Pearson's r) to make comparisons simple, and where possible we reanalysed study-level data to standardise the approach across meta-analyses.
-  We identified `r targets::tar_read(manuscript_info)$prisma$included` meta-analyses, and extracted `r targets::tar_read(manuscript_info)$unique_combos` unique combinations of exposures and outcomes.
-  If duplicate effect sizes from the same combination of exposure and outcome were drawn from different age groups or study designs we retained them, otherwise we chose the effect size with the largest total sample size.
-  We removed effect sizes that could not be harmonised, resulting in `r targets::tar_read(manuscript_info)$unique_effects` effects from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` reviews.
-  These effects represent the findings of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(targets::tar_read(manuscript_info)$effects_sum$sum_n, big.mark=",")` participants.
-  When focusing on the meta-analyses with the most statistically robust evidence, we found that general screen use (when content was not indicated), was associated with potential harm on learning, literacy, body composition, and depression.
-  Likewise, social media was consistently associated with risks to health, with no identified benefits.
-  However, we also found that these harms could often be mitigated by certain kinds of content (e.g., educational), or by modifying the context (e.g., co-viewing with a parent).
-  In summary, our findings point to the need for careful and nuanced guidelines that support parents to make the best decisions for their children.
-
+  The influence of electronic screens on children and adolescents’ health and education is not well understood.
+  In this review, we harmonised `r targets::tar_read(manuscript_info)$unique_effects` effects representing unique combinations of exposures and outcomes from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` meta-analyses (`r format(targets::tar_read(manuscript_info)$effects_sum$sum_k, big.mark=",")` primary studies; `r format(targets::tar_read(manuscript_info)$effects_sum$sum_n, big.mark=",")` participants).
+  Some types of screen use, such as social media, were consistently correlated with risks to health.
+  However, other forms of screen use showed associations with benefits.
+  For example, experimental evidence showed that video games improve aspects of cognitive function.
+  Some types of screen use have complex associations with outcomes.
+  For example, general screen use (i.e., content not indicated) showed correlations with harm for body composition, depression, and learning.
+  However, when parents watched with their children or the content was educational, general screen use was associated with greater learning.
+  More nuanced guidelines are needed to help parents, teachers, and practitioners ensure that youth benefit from their interactions with screens.
   
-keywords          : "screen time; youth; health; education"
 wordcount         : "`r wordcountaddin::word_count(here::here('reports', 'manuscript.Rmd'))`"
 
 bibliography      : ["combined.bib"]
 
-floatsintext      : yes
+floatsintext      : no
 figurelist        : no
 tablelist         : no
 footnotelist      : no
@@ -178,23 +126,7 @@ targets::tar_load(
 )
 ```
 
-# Summary
-
-Children's engagement in screen time is a complex issue.
-Parents, policymakers, and educators need to weigh the risks that sedentary use of screens present alongside the potential benefits for learning and social connectedness.
-The lack of comprehensive evidence hampers efforts to make an informed decision.
-As a Lancet editorial [@thelancetSocialMediaScreen2019] suggested, "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking."
-In this study, we systematically harmonise data from existing meta-analyses of screen time on a range of outcomes, including health, education, and psychology, and identify the most statistically robust relationships.
-We show that some forms of screen time---such as social media---show consistent evidence of harm for children, with no clear evidence of a benefit.
-Other relationships are more complex.
-Video games, for example, are associated with poorer body composition and learning outcomes.
-However, video games for a specific educational purpose (such as numeracy) are associated with improvements in that subject area.
-Caregivers must therefore weigh the health risk against the educational benefit.
-The findings of this study provide parents and other caregivers with the information to make these informed decisions.
-
-\newpage
-
-# Background
+# Introduction
 
 In the 16th century, hysteria reigned around a new technology that threatened to be "confusing and harmful" to the mind.
 The cause of such concern?
@@ -202,8 +134,8 @@ The widespread availability of books brought about by the invention of the print
 In the early 19th century, concerns about schooling "exhausting the children's brains" followed, with the medical community accepting that excessive study could be a cause of madness [@bell1883sanitarian].
 By the 20th century, the invention of the radio was accompanied by assertions that it would distract children from their reading (which by this point was no longer considered confusing and harmful) leading to impaired learning [@dill2013oxford].
 
-Today, the same arguments that were once leveled against reading, schooling, and radio are being made about screen use (e.g., television, mobile phones, and computers) [@wartellaChildrenComputersNew2000].
-Excessive screen time use is the number one concern parents in Western countries have about their children's health and behaviour, ahead of nutrition, bullying, and physical inactivity [@rhodes2015top].
+Today, the same arguments that were once levelled against reading, schooling, and radio are being made about screen use (e.g., television, mobile phones, and computers) [@wartellaChildrenComputersNew2000].
+Excessive screen use is the number one concern parents in Western countries have about their children's health and behaviour, ahead of nutrition, bullying, and physical inactivity [@rhodes2015top].
 Yet, the evidence to support parents' concerns is inadequate.
 A Lancet editorial [@thelancetSocialMediaScreen2019] suggested that, "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking."
 
@@ -216,14 +148,14 @@ Citing the negative effects of screens on health (e.g., increased risk of obesit
 They also recommend that children aged 2-5 years should spend no more than one hour engaged in recreational sedentary screen use per day, while children aged 5-12 and adolescents should spend no more than two hours.
 However, recent evidence suggests that longer exposures may not have adverse effects on children's behaviour or mental health---and might, in fact, benefit their well-being---as long as exposure does not reach extreme levels (e.g., 7 hours per day)[@fergusonEverythingModerationModerate2017].
 Some research also indicates that content (e.g., video games vs television programs) plays an important role in determining the potential benefit or harm of youths' exposure to screen-based media [@przybylskiLargeScaleTestGoldilocks2017].
-Indeed, educational screen time is positively related to educational outcomes [@sandersTypeScreenTime2019].
-This evidence has led some researchers to argue that a more nuanced approach to screen time guidelines is required [@kayeConceptualMethodologicalMayhem2020].
+Indeed, educational screen use is positively related to educational outcomes [@sandersTypeScreenTime2019].
+This evidence has led some researchers to argue that a more nuanced approach to screen use guidelines is required [@kayeConceptualMethodologicalMayhem2020].
 </span>
 
 In 2016, the American Academy of Pediatrics used a narrative review to examine the benefits and risks of children and adolescents' electronic media [@chassiakosChildrenAdolescentsDigital2016] as a basis for updating their guidelines about screen use [@AAPMediaUseSchoolAged2016].
 Since then, a large number of systematic reviews and meta-analyses have provided evidence about the potential benefits and risks of screen use.
 <span id = "r2_9">
-While there have been other overviews of reviews on screen time, these have tended to focus on a single domain (e.g., health [@stiglicEffectsScreentimeHealth2019]), focus on a particular exposure (e.g., social media [@valkenburgSocialMediaUse2022;@arias-delatorreRelationshipDepressionUse2020]) or provide only a narrative summary of the literature [@orbenTeenagersScreensSocial2020].
+While there have been other overviews of reviews on screen use, these have tended to focus on a single domain (e.g., health [@stiglicEffectsScreentimeHealth2019]), focus on a particular exposure (e.g., social media [@valkenburgSocialMediaUse2022;@arias-delatorreRelationshipDepressionUse2020]) or provide only a narrative summary of the literature [@orbenTeenagersScreensSocial2020].
 <span id = "r1_2">
 Focusing on a single domain or exposure makes it difficult to understand what trade-offs are involved in any guidelines around screen use.
 For example, prohibiting screen use might reduce exposure to advertising but may also thwart learning opportunities from interactive educational tools. Reviews on either of these exposures or outcomes would likely miss being able to quantify these trade-offs.
@@ -239,20 +171,188 @@ By synthesising across life domains (e.g., school and home), this review provide
 
 \newpage
 
+# Results
+
+The searches yielded `r format(manuscript_info$prisma$search, big.mark=",")` results, of which `r format(manuscript_info$prisma$duplicates, big.mark=",")` were duplicates.
+After screening titles and abstracts, we assessed `r format(manuscript_info$prisma$full_text, big.mark=",")` full-texts for inclusion.
+Of those, `r manuscript_info$prisma$included` met the inclusion criteria and we extracted the data from all of these meta-analyses.
+Figure 1 presents the full results of the selection process.
+
+The most frequently reported exposures were `r manuscript_info$freq_exposures`.
+Supplementary File 5 provides a list of all exposures identified.
+The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
+<span id ="r2_25">Of the `r manuscript_info$unique_combos` unique exposure/outcome combinations, `r manuscript_info$freq_combos$n1` occurred in only one review, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
+Full characteristics of the included studies are provided in Table 1.</span>
+<span id ="r2_23">After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations (retaining multiple effects for different age groups or study designs) contributed from `r manuscript_info$prisma$unique_reviews` reviews.</span>
+These effects represent the findings of `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies, involving `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
+The characteristics of the included effects are available in Supplementary File 9.
+
+**TABLE 1**
+
+The quality of the included meta-analyses was mixed (see Table 1).
+Most assessed heterogeneity `r manuscript_info$qual$low_hetero`, reported the characteristics of the included studies `r manuscript_info$qual$low_char`, and used a comprehensive and systematic search strategy `r manuscript_info$qual$low_search`.
+Most reviews did not clearly report if their eligibility criteria were predefined `r manuscript_info$qual$unclear_elig`.
+Many papers also did not complete dual independent screening of abstracts and full text `r manuscript_info$qual$high_dualscreen` or did not clearly report the method of screening `r manuscript_info$qual$unclear_dualscreen`.
+A similar trend was observed for dual independent quality assessment `r manuscript_info$qual$dualqualstr`.
+Overall, only `r manuscript_info$qual$all_low` meta-analyses were graded as low risk of bias on all criteria.
+
+There were `r manuscript_info$edu$n_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science.
+We removed `r manuscript_info$edu$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$edu$n_samplesize` effects with samples < 1,000, and `r manuscript_info$edu$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
+Effects not meeting one or more of these standards are presented in Supplementary File 6.
+The remaining `r manuscript_info$edu$n_certain` effects met our criteria for statistical credibility and are described in Figure 2.
+These `r manuscript_info$edu$n_certain` effects came from `r manuscript_info$edu$n_unique` meta-analytic reviews analysing data from `r manuscript_info$edu$summary$studies_n` empirical studies with `r format(manuscript_info$edu$summary$total_n, big.mark=",")` individual participants.
+
+Among the statistically credible effects, general screen use, television viewing, and video games were all negatively associated with learning.
+E-books that included narration, as well as touch screen education interventions, and augmented reality education interventions were positively associated with learning.
+General screen use was negatively associated with literacy outcomes.
+However, if the screen use involved co-viewing (e.g., watching with a parent), or the content of television programs was educational, the association with literacy was positive and significant at the 95\% confidence level (weak evidence).
+Numeracy outcomes were positively associated with screen-based mathematics interventions and video games that contained numeracy content.
+
+As shown in Figure 2, most of the credible results (`r manuscript_info$edu$n_p999` of `r manuscript_info$edu$n_certain` effects) showed statistically significant associations, with 99.9\% confidence intervals not encompassing zero (strong evidence).
+The remaining `r xfun::numbers_to_words(manuscript_info$edu$n_p95)` associations were significant at the 95% confidence level (weak evidence).
+All credible effects related to education outcomes were small-to-moderate.
+Screen-based interventions designed to influence an outcome (e.g., a computer based program designed to enhance learning [@xieCanTouchscreenDevices2018]) tended to have larger effect sizes than exposures that were not specifically intended to influence any of the measured outcomes (e.g., the association between television viewing and learning [@adelantado-renauAssociationScreenMedia2019]).
+The largest effect size observed was for augmented reality-based education interventions on general learning ($r = 0.33, k = 15, N = 1,474$).
+Most effects showed high levels of heterogeneity (`r manuscript_info$edu$n_i2` of `r manuscript_info$edu$n_certain` with $I^2 > 50\%$).
+
+We identified `r manuscript_info$health$n_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
+We removed `r manuscript_info$health$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$health$n_samplesize` effects with samples < 1,000, and `r manuscript_info$health$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
+No remaining studies showed evidence of excessive significance.
+Effects not meeting one or more of these standards are presented in Supplementary File 7.
+The remaining `r manuscript_info$health$n_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure 3).
+These `r manuscript_info$health$n_certain` effects came from `r manuscript_info$health$n_unique` meta-analytic reviews analysing data from `r manuscript_info$health$summary$studies_n` empirical studies with `r format(manuscript_info$health$summary$total_n, big.mark=",")` individual participants.
+
+Digital advertising of unhealthy foods—both traditional advertising and video games developed by a brand for promotion—were associated with higher unhealthy food intake.
+Social media use and sexual content were positively associated with risky behaviors (e.g., sexual activity, risk taking, and substance abuse).
+General screen use was positively associated with depression, with stronger associations observed for adolescents than other groups.
+Television viewing was negatively correlated with sleep duration, but with stronger evidence only observed for younger children.
+All forms of screen use (general, television, and video games) were associated with body composition (e.g., higher BMI).
+Screen-based interventions which target health behaviours appeared mostly effective.
+
+Across the health outcomes, most (`r manuscript_info$health$n_p999` of `r manuscript_info$health$n_certain`) effects were statistically significant at the 99.9\% confidence interval level, with the remaining `r xfun::numbers_to_words(manuscript_info$health$n_p95)` significant at 95\% confidence.
+However, most of the credible effects exhibited high levels of heterogeneity, with all but two having $I^2 > 75\%$.
+Additionally, most effects were small, with the association between screen use and sleep duration the largest at $r = -0.37$ ($k = 10, N = 56,720$).
+Most of the effect sizes (`r manuscript_info$health$n_r2`/`r manuscript_info$health$n_certain`) had an absolute value of $r < 0.2$.
+
+# Discussion
+
+The primary goal of this review was to provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes.
+We found that when meta-analyses examined general screen use, and did not specify the content, context or device, there was strong evidence showing potentially harmful associations with general learning, literacy, body composition, and depression.
+However, when meta-analyses included a more nuanced examination of exposures, a more complex picture appeared.
+
+As an example, consider children watching television programs---an often cited form of screen use harm.
+We found statistically robust evidence for a small association with poorer academic performance and literacy skills for general television watching[@adelantado-renauAssociationScreenMedia2019].
+However, we also found evidence that if the content of the program was educational, or the child was watching the program with a parent (i.e., co-viewing), this exposure was instead associated with better literacy [@madiganAssociationsScreenUse2020].
+Thus, parents may play an important role in selecting content that is likely to benefit their children or, perhaps, interact with their children in ways that may foster literacy (e.g., asking their children questions about the program).
+Similar nuanced findings were observed for video games.
+The credible evidence we identified showed that video game playing was associated with poorer body composition and learning [@adelantado-renauAssociationScreenMedia2019;@poorolajalBehavioralFactorsInfluencing2020].
+However, when the video game were designed specifically to teach numeracy, playing these games showed learning benefits [@byunDigitalGamebasedLearning2018].
+One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 6 & 7) therefore this hypothesis could not be addressed.
+
+Social media was one type of exposure that showed consistent associations with poor health, with no indication of potential benefit.
+Social media showed strong evidence of harmful associations with risk taking in general, as well as unsafe sex and substance abuse [@vannucciSocialMediaUse2020].
+These results align with meta-analytic evidence from adults indicating that social media use is also associated with increased risk of depression [@yoonSocialNetworkSite2019;@vahediAssociationSelfreportedDepressive2021].
+Recent evidence from social media companies themselves suggest there may also be negative effects of social media on the mental health of young people, especially teenage girls [@seetharamanFacebookKnowsInstagram2021].
+
+One category of exposure appeared to be consistently associated with benefits: screen-based interventions designed to promote learning or health behaviours.
+This finding indicates that interventions can be effectively delivered using electronic media platforms, but does not necessarily indicate that screens are more effective than other methods (e.g., face-to-face, printed material).
+Rather, it reinforces that the content of the screen use may be the most important aspect.
+The way that a young person interacts with digital screens may also be important.
+We found evidence that touch screens had strong evidence for benefits on learning [@xieCanTouchscreenDevices2018], as did augmented reality [@tekedereExaminingEffectivenessAugmented2016].
+
+<span id = "r1_5">
+Largely owing to a small number of studies or missing individual study data, there were few age-based conclusions that could be drawn from reviews which met our criteria for statistical certainty.
+If we expand to include those reviews which did not meet this threshold, there remained no clear pattern although there were some age-specific differences in associations (data available in Supplementary Materials).
+For example, advertising of unhealthy food was associated with unhealthy food choice for young children, but was not statistically significant for other age groups [@sadeghiradInfluenceUnhealthyFood2016].
+Conversely, TV programs and movies were more strongly associated with lower physical activity for adolescents than for younger age groups [@marshallRelationshipsMediaUse2004].
+Given the differences in development across childhood and adolescence and the different ways children of various ages use screens, further examination of age-based differences is needed.
+However, in the absence of this work, our study has shown how children are affected by screens in general.
+</span>
+
+Among studies that met our criteria for statistical certainty heterogeneity was high, with almost all effects having $I^2 > 50\%$.
+Much of this heterogeneity is likely explained by differences in measures across pooled studies, or in some cases, the generic nature of some of the exposures.
+For example, "TV programs and movies" covers a substantial range of content, which may explain the heterogeneous association with education outcomes.
+
+Our results have several implications for policy and practice.
+Broadly, our findings align with the recommendations of others who suggest that current guidelines may be too simplistic, mischaracterise the strength of the evidence, or do not acknowledge the important nuances of the issue [@elsonPolicyStatementsMedia2019;@ashtonScreenTimeChildren2019;@royalcollegeofpaediatricsandchildhealthHealthImpactsScreen2019].
+Our findings suggest that screen use is a complex issue, with associations based not just on duration and device type, but also on the content and the environment in which the exposure occurs.
+Many current guidelines simplify this complex relationship as something that should be minimised [@australiangovernmentPhysicalActivityExercise2021;@whoGuidelinesPhysicalActivity2019].
+We suggest that future guidelines need to embrace the complexity of the issue, to give parents and clinicians specific information to weigh the pros and cons of interactions with screens.
+
+<span id = "r2_7">
+In particular, our results support the the continuing trend of guidelines moving away from recommendations to reduce 'screen use', and instead focusing on the type of screen use.
+For example, our findings suggest that guidelines should discourage high levels of social media and internet use.
+Guidelines may also consider adapting recommendations that promote the use of educational apps and video games, although these recommendations need to be balanced against the (very small) risks to adiposity.
+</span> 
+
+Our results also have implications for future research.
+Screen use research is extensive, varied, and rapidly growing.
+Reviews tended to be general (e.g., all screen use) and even when more targeted (e.g., social media) nuances related to specific content (e.g., Instagram vs Facebook) have not been meta-analysed or have not produced credible evidence.
+<span id = "r2_29">Fewer than 20\% of the effects identified met our criteria for statistical credibility.
+Most studies which did not meet our criteria failed to provide study-level data (or did not provide sufficient data, such as including effect estimates but not sample sizes).
+Newer reviews were more likely to provide this information than older reviews, but it highlights the importance of data and code sharing as recommended in the PRISMA guidelines [@pagePRISMA2020Statement2020].
+When study level data was available, many effects were removed because the pooled sample size was small, or because there were fewer than ten studies on which to perform an Egger's test.
+It seems that much of the current screen use research is small in scale, and there is a need for larger, high-quality studies.<span>
+
+<span id = "r1_1">Our results highlight the need for the field to more carefully consider if the term 'screen use' remains appropriate for providing advice to parents.
+Instead, our results suggest that more nuanced and detailed descriptions of the behaviours to be modified may be required.
+Rather than suggesting parents limit 'screen use', for example, it may be better to suggest that parents promote interactive educational experiences but limit exposure to advertising.</span>
+
+Screen use research has a well-established measurement problem, which impacts the individual studies of this umbrella review.
+The vast majority of screen use research relies on self-reported data, which not only lacks the nuance required for understanding the effects of screen use, but may also be inaccurate.
+In one systematic review on screen use and sleep [@haleScreenTimeSleep2015], 66 of the 67 included studies used self-reported data for *both* the exposure and outcome variable.
+It has been established that self-reported screen use data has questionable validity.
+In a meta-analysis of 47 studies comparing self-reported media use with logged measures, Parry et al [@parrySystematicReviewMetaanalysis2021] found that the measures were only moderately correlated ($r = 0.38$), with self-reported problematic usage fairing worse ($r = 0.25$).
+Indeed, of 622 studies which measured the screen use of 0---6 year-olds, only 69 provided any sort of psychometric properties for their measure, with only 19 studies reporting validity [@byrneMeasurementScreenTime2021].
+While some researchers have started using newer methods of capturing screen behaviours---such as wearable cameras [@smithFeasibilityAutomatedCameras2019] or device-based loggers [@rydingPassiveObjectiveMeasures2020]---these are still not widely adopted.
+It may be that the field of screen use research cannot be sufficiently advanced until accurate, validated, and nuanced measures are more widely available and adopted.
+
+There were a number of strengths and limitations to our work.
+Our primary goal for this umbrella review was to provide a high-level synthesis of screen use research, by examining a range of exposures and the associations with a broad scope of outcomes.
+Our results represent the findings from `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
+To ensure findings could be compared on a common metric, we extracted and reanalysed individual study data where possible.
+
+Our high-level approach limits the feasibility of examining fine-grained details of the individual studies.
+For example, we did not examine moderators beyond age, nor did we rate the risk of bias for the individual studies.
+Thus, our assessment of evidence quality was restricted to statistical credibility, rather than a more complete assessment of quality (e.g., GRADE [@guyattGRADEGuidelinesIntroduction2011]).
+As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics.
+<span id = "r2_24">In addition, when faced with duplicate outcome/exposure combinations we chose to keep the one with the largest pooled sample size, assuming that this would capture the most comprehensive and most recent review.
+Inspection of the excluded effect sizes suggests that this decision was not that impactful: our results would have been almost exactly the same has we used the number of included studies (*k*) or the most recent review by publication year.
+However, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria.</span>
+
+<span id="r1_4">Our high-level approach also means that we could not engage with the specific mechanisms behind each association, and as such, we cannot make strong claims on the directions of causality.
+These likely depend on the specific exposure and outcome.
+It is tempting to draw inferences that the associations are due to screen use causing these outcomes, but we cannot rule out reverse causality, a third variable, or some combination of influences.
+Many of the individual reviews go into more detail about the strength of the evidence for causal associations, but those judgements were difficult to synthesise across more than 200 reviews.
+Readers who wish to more deeply understand one specific relationship are directed to the cited review for that effect, where the authors could engage more deeply with the mechanisms.</span>
+
+<span id="r2_16">We converted all effect sizes to a common metric (Pearson's r) to allow for comparisons of magnitude, but acknowledge that this assumes a linear relationship between the variables.
+Some previous research suggests that associations are typically linear [@sandersTypeScreenTime2019].
+However, others have identified instances where non-linear relationships exist, especially for very high levels of screen use [@twengeMoreTimeTechnology2019; @przybylskiLargeScaleTestGoldilocks2017; @kellySocialMediaUse2018].
+Additionally, our conversion may not always adequately account for differences in study design or measures of exposures and outcomes.
+Care is needed, therefore, when interpreting the effect sizes.</span>
+<span id = "r3_2_2">In addition, reviews provide only historical evidence which may not keep up with the changing ways children can engage with screens.
+While our synthesis of the existing evidence provides information about how screens might have influenced children in the past, it is difficult to know if these findings will translate to new forms of technology in the future.</span>
+
+Screen use is a topic of significant interest, as shown by the wide variety of academic domains involved, parents' concerns, and the growing pervasiveness into society.
+Our findings showed that the influence of screen use can be both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition).
+The interplay of these findings show that parents, teachers, and other caregivers need to carefully weigh the pros and cons of each specific activity for potential harms and benefits.
+However, our findings also suggest that in order to aid caregivers to make this judgement, researchers need to conduct more careful and nuanced measurement and analysis of screen use, with less emphasis on measures that aggregate screen use and instead focus on the content, context, and environment in which the exposure occurs.
+
 # Methods
 
-We prospectively registered our methods on the International Prospective Register of Systematic Reviews (PROSPERO; CRD42017076051).
+We prospectively registered our methods on the International Prospective Register of Systematic Reviews (PROSPERO; CRD42017076051) in October 2017.
 We followed the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) guidelines [@pagePRISMA2020Statement2020].
 
 ### Eligibility criteria
 
-*Population*: 
+Population: 
 To be eligible for inclusion, meta-analyses needed to include meta-analytic effect sizes for children or adolescents (age 0-18 years).
 <span id = "r3_5">We included meta-analyses containing studies that combined data from adults and youth if meta-analytic effect size estimates specific to participants aged 18 years or less could be extracted (i.e., the highest mean age for any individual study included in the meta-analysis was < 18 years).
 A meta-analysis was still included if the age range exceed 18 years, provided that the mean age was less than 18.
 We excluded meta-analyses that only contained evidence gathered from adults (age >18 years).</span>
 
-*Exposure*: 
+Exposure: 
 We included meta-analyses examining all types of electronic screens including (but not necessarily limited to) television, gaming consoles, computers, tablets, and mobile phones.
 We also included analyses of all types of content on these devices, including (but not necessarily limited to) recreational content (e.g., television programs, movies, games), homework, and communication (e.g., video chat).
 <span id = "r3_6">
@@ -267,7 +367,7 @@ However, a meta-analysis of interventions designed to *treat* clinical depressio
 *Outcomes*: We included all reported outcomes on benefits and risks.
 </span>
 
-*Publications*: 
+Publications: 
 We included meta-analyses (or meta-regressions) of quantitative evidence.
 To be included, meta-analyses needed to analyse data from studies identified in a systematic review.
 For our purposes, a systematic review was one in which the authors attempted to acquire all the research evidence that pertained to their research question(s).
@@ -336,17 +436,17 @@ Where authors did not provide data in a format that could be re-analysed, we use
 
 ### Evidence assessment criteria
 
-*Statistical Credibility*.
+Statistical Credibility:
 We employed a statistical classification approach to grade the credibility of the effect sizes in the literature.
 To be considered 'credible' an effect needed to be derived from a combined sample of >1,000 participants [@papadimitriouUmbrellaReviewEvidence2021] and have non-significant tests of publication bias (i.e., Egger’s test and excess significance test).
 We performed these analyses, and therefore the review needed to provide usable study-level data in order to be included.
 
-*Consistency of Effect within the Population*.
+Consistency of Effect within the Population:
 We also examined the consistency of the effect size using the $I^2$ measure.
 We considered $I^2 < 50\%$ to indicate effects that were relatively consistent across the population of interest.
 $I^2$ values of $> 50\%$ were taken to indicate an effect was potentially heterogeneous within the population.
 
-*Direction of Effect*.
+Direction of Effect:
 Finally, we examined the extent to which significance testing suggested screen exposure was associated with benefit, harm, or no effect on outcomes.
 We used thresholds of $P < .05$ for weak evidence and $P < 10^{-3}$ for strong evidence.
 An effect with statistical credibility but with $P > .05$ was taken to indicate no association of interest.
@@ -361,202 +461,44 @@ Readers interested in the relevant systematic reviews (i.e., without meta-analys
 </span>
 
 We altered our evidence assessment plan when we identified that, as written, it could not classify precise evidence of null effects (i.e., from large reviews with low heterogeneity and low risk of publication bias) as 'credible' because a highly-significant *P*-value was a criteria.
-This would have significantly harmed knowledge gained from our review as it would have restricted our ability to show where the empirical evidence strongly indicated that there was no association between screen time and a given outcome.
+This would have significantly harmed knowledge gained from our review as it would have restricted our ability to show where the empirical evidence strongly indicated that there was no association between screen use and a given outcome.
 
-# Results
+## Data availability statement
 
-### Search Results
+All data for this review are available from the authors' GitHub repository (https://github.com/motivation-and-Behaviour/screen_umbrella) or from the Open Science Foundation (https://osf.io/3ubqp/).
 
-The searches yielded `r format(manuscript_info$prisma$search, big.mark=",")` results, of which `r format(manuscript_info$prisma$duplicates, big.mark=",")` were duplicates.
-After screening titles and abstracts, we assessed `r format(manuscript_info$prisma$full_text, big.mark=",")` full-texts for inclusion.
-Of those, `r manuscript_info$prisma$included` met the inclusion criteria and we extracted the data from all of these meta-analyses.
-Figure \@ref(fig:prisma) presents the full results of the selection process.
+## Code availability statement
 
-```{r prisma, fig.cap="PRISMA Diagram"}
-knitr::include_graphics("../figures/PRISMA Diagram.pdf", error = FALSE)
-```
-
-The most frequently reported exposures were `r manuscript_info$freq_exposures`.
-Supplementary File 5 provides a list of all exposures identified.
-The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
-<span id ="r2_25">Of the `r manuscript_info$unique_combos` unique exposure/outcome combinations, `r manuscript_info$freq_combos$n1` occurred in only one review, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
-Full characteristics of the included studies are provided in Table 1.</span>
-<span id ="r2_23">After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations (retaining multiple effects for different age groups or study designs) contributed from `r manuscript_info$prisma$unique_reviews` reviews.</span>
-These effects represent the findings of `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
-The characteristics of the included effects are available in Supplementary File 9.
-
-**TABLE 1**
-
-The quality of the included meta-analyses was mixed (see Table 1).
-Most assessed heterogeneity `r manuscript_info$qual$low_hetero`, reported the characteristics of the included studies `r manuscript_info$qual$low_char`, and used a comprehensive and systematic search strategy `r manuscript_info$qual$low_search`.
-Most reviews did not clearly report if their eligibility criteria were predefined `r manuscript_info$qual$unclear_elig`.
-Many papers also did not complete dual independent screening of abstracts and full text `r manuscript_info$qual$high_dualscreen` or did not clearly report the method of screening `r manuscript_info$qual$unclear_dualscreen`.
-A similar trend was observed for dual independent quality assessment `r manuscript_info$qual$dualqualstr`.
-Overall, only `r manuscript_info$qual$all_low` meta-analyses were graded as low risk of bias on all criteria.
-
-### Education Outcomes
-
-There were `r manuscript_info$edu$n_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science.
-We removed `r manuscript_info$edu$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$edu$n_samplesize` effects with samples < 1,000, and `r manuscript_info$edu$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
-Effects not meeting one or more of these standards are presented in Supplementary File 6.
-The remaining `r manuscript_info$edu$n_certain` effects met our criteria for statistical credibility and are described in Figure \@ref(fig:eduplot).
-These `r manuscript_info$edu$n_certain` effects came from `r manuscript_info$edu$n_unique` meta-analytic reviews analysing data from `r manuscript_info$edu$summary$studies_n` empirical studies with `r format(manuscript_info$edu$summary$total_n, big.mark=",")` individual participants.
-
-```{r eduplot, fig.width=edu_certain_params$dims[[1]], fig.height=edu_certain_params$dims[[2]], fig.cap="Education outcomes"}
-plot_edu_certain
-```
-
-Among the statistically credible effects, general screen use, television viewing, and video games were all negatively associated with learning.
-E-books that included narration, as well as touch screen education interventions, and augmented reality education interventions were positively associated with learning.
-General screen use was negatively associated with literacy outcomes.
-However, if the screen use involved co-viewing (e.g., watching with a parent), or the content of television programs was educational, the association with literacy was positive and significant at the 95\% confidence level (weak evidence).
-Numeracy outcomes were positively associated with screen-based mathematics interventions and video games that contained numeracy content.
-
-As shown in Figure \@ref(fig:eduplot), most of the credible results (`r manuscript_info$edu$n_p999` of `r manuscript_info$edu$n_certain` effects) showed statistically significant associations, with 99.9\% confidence intervals not encompassing zero (strong evidence).
-The remaining `r xfun::numbers_to_words(manuscript_info$edu$n_p95)` associations were significant at the 95% confidence level (weak evidence).
-All credible effects related to education outcomes were small-to-moderate.
-Screen-based interventions designed to influence an outcome (e.g., a computer based program designed to enhance learning [@xieCanTouchscreenDevices2018]) tended to have larger effect sizes than exposures that were not specifically intended to influence any of the measured outcomes (e.g., the association between television viewing and learning [@adelantado-renauAssociationScreenMedia2019]).
-The largest effect size observed was for augmented reality-based education interventions on general learning ($r = 0.33, k = 15, N = 1,474$).
-Most effects showed high levels of heterogeneity (`r manuscript_info$edu$n_i2` of `r manuscript_info$edu$n_certain` with $I^2 > 50\%$).
-
-### Health and Health-related Behaviours
-
-We identified `r manuscript_info$health$n_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
-We removed `r manuscript_info$health$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$health$n_samplesize` effects with samples < 1,000, and `r manuscript_info$health$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
-No remaining studies showed evidence of excessive significance.
-Effects not meeting one or more of these standards are presented in Supplementary File 7.
-The remaining `r manuscript_info$health$n_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure \@ref(fig:healthplot)).
-These `r manuscript_info$health$n_certain` effects came from `r manuscript_info$health$n_unique` meta-analytic reviews analysing data from `r manuscript_info$health$summary$studies_n` empirical studies with `r format(manuscript_info$health$summary$total_n, big.mark=",")` individual participants.
-
-```{r healthplot, fig.width=nonedu_certain_params$dims[[1]], fig.height=nonedu_certain_params$dims[[2]], fig.cap="Health and health-related behaviour outcomes", dev='cairo_pdf'}
-plot_nonedu_certain
-```
-
-Digital advertising of unhealthy foods—both traditional advertising and video games developed by a brand for promotion—were associated with higher unhealthy food intake.
-Social media use and sexual content were positively associated with risky behaviors (e.g., sexual activity, risk taking, and substance abuse).
-General screen use was positively associated with depression, with stronger associations observed for adolescents than other groups.
-Television viewing was negatively correlated with sleep duration, but with stronger evidence only observed for younger children.
-All forms of screen use (general, television, and video games) were associated with body composition (e.g., higher BMI).
-Screen-based interventions which target health behaviours appeared mostly effective.
-
-Across the health outcomes, most (`r manuscript_info$health$n_p999` of `r manuscript_info$health$n_certain`) effects were statistically significant at the 99.9\% confidence interval level, with the remaining `r xfun::numbers_to_words(manuscript_info$health$n_p95)` significant at 95\% confidence.
-However, most of the credible effects exhibited high levels of heterogeneity, with all but two having $I^2 > 75\%$.
-Additionally, most effects were small, with the association between screen use and sleep duration the largest at $r = -0.37$ ($k = 10, N = 56,720$).
-Most of the effect sizes (`r manuscript_info$health$n_r2`/`r manuscript_info$health$n_certain`) had an absolute value of $r < 0.2$.
-
-# Discussion
-
-The primary goal of this review was to provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes.
-We found that when meta-analyses examined general screen use, and did not specify the content, context or device, there was strong evidence showing potentially harmful associations with general learning, literacy, body composition, and depression.
-However, when meta-analyses included a more nuanced examination of exposures, a more complex picture appeared.
-
-As an example, consider children watching television programs---an often cited form of screen time harm.
-We found statistically robust evidence for a small association with poorer academic performance and literacy skills for general television watching[@adelantado-renauAssociationScreenMedia2019].
-However, we also found evidence that if the content of the program was educational, or the child was watching the program with a parent (i.e., co-viewing), this exposure was instead associated with better literacy [@madiganAssociationsScreenUse2020].
-Thus, parents may play an important role in selecting content that is likely to benefit their children or, perhaps, interact with their children in ways that may foster literacy (e.g., asking their children questions about the program).
-Similar nuanced findings were observed for video games.
-The credible evidence we identified showed that video game playing was associated with poorer body composition and learning [@adelantado-renauAssociationScreenMedia2019;@poorolajalBehavioralFactorsInfluencing2020].
-However, when the video game were designed specifically to teach numeracy, playing these games showed learning benefits [@byunDigitalGamebasedLearning2018].
-One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 6 & 7) therefore this hypothesis could not be addressed.
-
-Social media was one type of exposure that showed consistent associations with poor health, with no indication of potential benefit.
-Social media showed strong evidence of harmful associations with risk taking in general, as well as unsafe sex and substance abuse [@vannucciSocialMediaUse2020].
-These results align with meta-analytic evidence from adults indicating that social media use is also associated with increased risk of depression [@yoonSocialNetworkSite2019;@vahediAssociationSelfreportedDepressive2021].
-Recent evidence from social media companies themselves suggest there may also be negative effects of social media on the mental health of young people, especially teenage girls [@seetharamanFacebookKnowsInstagram2021].
-
-One category of exposure appeared to be consistently associated with benefits: screen-based interventions designed to promote learning or health behaviours.
-This finding indicates that interventions can be effectively delivered using electronic media platforms, but does not necessarily indicate that screens are more effective than other methods (e.g., face-to-face, printed material).
-Rather, it reinforces that the content of the screen time may be the most important aspect.
-The way that a young person interacts with digital screens may also be important.
-We found evidence that touch screens had strong evidence for benefits on learning [@xieCanTouchscreenDevices2018], as did augmented reality [@tekedereExaminingEffectivenessAugmented2016].
-
-<span id = "r1_5">
-Largely owing to a small number of studies or missing individual study data, there were few age-based conclusions that could be drawn from reviews which met our criteria for statistical certainty.
-If we expand to include those reviews which did not meet this threshold, there remained no clear pattern although there were some age-specific differences in associations (data available in Supplementary Materials).
-For example, advertising of unhealthy food was associated with unhealthy food choice for young children, but was not statistically significant for other age groups [@sadeghiradInfluenceUnhealthyFood2016].
-Conversely, TV programs and movies were more strongly associated with lower physical activity for adolescents than for younger age groups [@marshallRelationshipsMediaUse2004].
-Given the differences in development across childhood and adolescence and the different ways children of various ages use screens, further examination of age-based differences is needed.
-However, in the absence of this work, our study has shown how children are affected by screens in general.
-</span>
-
-Among studies that met our criteria for statistical certainty heterogeneity was high, with almost all effects having $I^2 > 50\%$.
-Much of this heterogeneity is likely explained by differences in measures across pooled studies, or in some cases, the generic nature of some of the exposures.
-For example, "TV programs and movies" covers a substantial range of content, which may explain the heterogeneous association with education outcomes.
-
-## Implications for Policy and Practice
-
-Broadly, our findings align with the recommendations of others who suggest that current guidelines may be too simplistic, mischaracterise the strength of the evidence, or do not acknowledge the important nuances of the issue [@elsonPolicyStatementsMedia2019;@ashtonScreenTimeChildren2019;@royalcollegeofpaediatricsandchildhealthHealthImpactsScreen2019].
-Our findings suggest that screen use is a complex issue, with associations based not just on duration and device type, but also on the content and the environment in which the exposure occurs.
-Many current guidelines simplify this complex relationship as something that should be minimised [@australiangovernmentPhysicalActivityExercise2021;@whoGuidelinesPhysicalActivity2019].
-We suggest that future guidelines need to embrace the complexity of the issue, to give parents and clinicians specific information to weigh the pros and cons of interactions with screens.
-
-<span id = "r2_7">
-In particular, our results support the the continuing trend of guidelines moving away from recommendations to reduce 'screen time', and instead focusing on the type of screen time.
-For example, our findings suggest that guidelines should discourage high levels of social media and internet use.
-Guidelines may also consider adapting recommendations that promote the use of educational apps and video games, although these recommendations need to be balanced against the (very small) risks to adiposity.
-</span> 
-
-## Implications for Future Research
-
-Screen use research is extensive, varied, and rapidly growing.
-Reviews tended to be general (e.g., all screen time) and even when more targeted (e.g., social media) nuances related to specific content (e.g., Instagram vs Facebook) have not been meta-analysed or have not produced credible evidence.
-<span id = "r2_29">Fewer than 20\% of the effects identified met our criteria for statistical credibility.
-Most studies which did not meet our criteria failed to provide study-level data (or did not provide sufficient data, such as including effect estimates but not sample sizes).
-Newer reviews were more likely to provide this information than older reviews, but it highlights the importance of data and code sharing as recommended in the PRISMA guidelines [@pagePRISMA2020Statement2020].
-When study level data was available, many effects were removed because the pooled sample size was small, or because there were fewer than ten studies on which to perform an Egger's test.
-It seems that much of the current screen time research is small in scale, and there is a need for larger, high-quality studies.<span>
-
-<span id = "r1_1">Our results highlight the need for the field to more carefully consider if the term 'screen time' remains appropriate for providing advice to parents.
-Instead, our results suggest that more nuanced and detailed descriptions of the behaviours to be modified may be required.
-Rather than suggesting parents limit 'screen time', for example, it may be better to suggest that parents promote interactive educational experiences but limit exposure to advertising.</span>
-
-Screen time research has a well-established measurement problem, which impacts the individual studies of this umbrella review.
-The vast majority of screen time research relies on self-reported data, which not only lacks the nuance required for understanding the effects of screen time, but may also be inaccurate.
-In one systematic review on screen time and sleep [@haleScreenTimeSleep2015], 66 of the 67 included studies used self-reported data for *both* the exposure and outcome variable.
-It has been established that self-reported screen time data has questionable validity.
-In a meta-analysis of 47 studies comparing self-reported media use with logged measures, Parry et al [@parrySystematicReviewMetaanalysis2021] found that the measures were only moderately correlated ($r = 0.38$), with self-reported problematic usage fairing worse ($r = 0.25$).
-Indeed, of 622 studies which measured the screen time of 0---6 year-olds, only 69 provided any sort of psychometric properties for their measure, with only 19 studies reporting validity [@byrneMeasurementScreenTime2021].
-While some researchers have started using newer methods of capturing screen behaviours---such as wearable cameras [@smithFeasibilityAutomatedCameras2019] or device-based loggers [@rydingPassiveObjectiveMeasures2020]---these are still not widely adopted.
-It may be that the field of screen time research cannot be sufficiently advanced until accurate, validated, and nuanced measures are more widely available and adopted.
-
-## Strengths and Limitations
-
-Our primary goal for this umbrella review was to provide a high-level synthesis of screen time research, by examining a range of exposures and the associations with a broad scope of outcomes.
-Our results represent the findings from `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
-To ensure findings could be compared on a common metric, we extracted and reanalysed individual study data where possible.
-
-Our high-level approach limits the feasibility of examining fine-grained details of the individual studies.
-For example, we did not examine moderators beyond age, nor did we rate the risk of bias for the individual studies.
-Thus, our assessment of evidence quality was restricted to statistical credibility, rather than a more complete assessment of quality (e.g., GRADE [@guyattGRADEGuidelinesIntroduction2011]).
-As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics.
-<span id = "r2_24">In addition, when faced with duplicate outcome/exposure combinations we chose to keep the one with the largest pooled sample size, assuming that this would capture the most comprehensive and most recent review.
-Inspection of the excluded effect sizes suggests that this decision was not that impactful: our results would have been almost exactly the same has we used the number of included studies (*k*) or the most recent review by publication year.
-However, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria.</span>
-
-<span id="r1_4">Our high-level approach also means that we could not engage with the specific mechanisms behind each association, and as such, we cannot make strong claims on the directions of causality.
-These likely depend on the specific exposure and outcome.
-It is tempting for people to draw inferences that the associations are due to screen time causing these outcomes, but we cannot rule out reverse causality, a third variable, or some combination of influences.
-Many of the individual reviews go into more detail about the strength of the evidence for causal associations, but those judgements were difficult to synthesise across more than 200 reviews.
-Readers who wish to more deeply understand one specific relationship are directed to the cited review for that effect, where the authors could engage more deeply with the mechanisms.</span>
-
-<span id="r2_16">We converted all effect sizes to a common metric (Pearson's r) to allow for comparisons of magnitude, but acknowledge that this assumes a linear relationship between the variables.
-Some previous research suggests that associations are typically linear [@sandersTypeScreenTime2019].
-However, others have identified instances where non-linear relationships exist, especially for very high levels of screen time [@twengeMoreTimeTechnology2019; @przybylskiLargeScaleTestGoldilocks2017; @kellySocialMediaUse2018].
-Additionally, our conversion may not always adequately account for differences in study design or measures of exposures and outcomes.
-Care is needed, therefore, when interpreting the effect sizes.</span>
-<span id = "r3_2_2">In addition, reviews provide only historical evidence which may not keep up with the changing ways children can engage with screens.
-While our synthesis of the existing evidence provides information about how screens might have influenced children in the past, it is difficult to know if these findings will translate to new forms of technology in the future.</span>
-
-## Conclusions
-
-Screen time is a topic of significant interest, as shown by the wide variety of academic domains involved, parents' concerns, and the growing pervasiveness into society.
-Our findings showed that the influence of screen time can be both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition).
-The interplay of these findings show that parents, teachers, and other caregivers need to carefully weigh the pros and cons of each specific activity for potential harms and benefits.
-However, our findings also suggest that in order to aid caregivers to make this judgement, researchers need to conduct more careful and nuanced measurement and analysis of screen time, with less emphasis on measures that aggregate screen time and instead focus on the content, context, and environment in which the exposure occurs.
-
+All code used in these analyses are available on the authors' GitHub repository (https://github.com/motivation-and-Behaviour/screen_umbrella).
 
 \newpage
 
 # References
 
 <div id = "refs"></div>
+
+\newpage
+
+# Acknowledgements
+
+The authors received no specific funding for this work.
+
+# Author contributions
+
+TS, MN, PP, and CL conceptualised the review and drafted the manuscript.
+TS, MN, and PP conducted the analyses.
+All authors contributed to data extraction, interpretation, and editing of the manuscript.
+
+# Competing interests
+
+The authors declare no conflicts of interest.
+
+# Figure legends
+
+*Figure 1: PRISMA Diagram.*
+
+*Figure 2: Education outcomes. Results for `r manuscript_info$edu$n_certain` unique effect sizes related to educational outcomes which met the criteria for statistical certainty. Findings are presented as correlations with both 95% and 99.9% confidence intervals.*
+
+*Figure 3: Health and health-related behaviour outcomes. Results for `r manuscript_info$health$n_certain` unique effect sizes related to health and health-related behaviour outcomes which met the criteria for statistical certainty. Findings are presented as correlations with both 95% and 99.9% confidence intervals.*
+
+# Tables
