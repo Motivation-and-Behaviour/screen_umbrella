@@ -187,13 +187,13 @@ make_table_desc_gt <- function(tables_df) {
       locations = cells_column_labels(heterogeneity_assessed)
     ) %>%
     tab_footnote(
-      footnote = "Items are from the National Health, Lung and Blood Institute’s Quality Assessment of Systematic Reviews and Meta-Analyses tool. Note that we excluded the first item of the tool.", # nolint
+      footnote = "Items are from the National Health, Lung and Blood Institute’s Quality Assessment of Systematic Reviews and Meta-Analyses tool. Note that we excluded the first item of the tool. U = Unclear; L = Low; H = High", # nolint
       locations = cells_column_spanners("Quality Assessment")
     ) %>%
     # Styling
     cols_width(
-      first_author ~ pct(6),
-      year ~ pct(3),
+      first_author ~ pct(7),
+      year ~ pct(4),
       design_restrictions ~ pct(9),
       sample_restrictions ~ pct(9),
       earliest_study_year ~ pct(6),
@@ -201,7 +201,7 @@ make_table_desc_gt <- function(tables_df) {
       outcomes_assessed ~ pct(13),
       exposures_assessed ~ pct(13),
       c(eligibility_criteria_predefined_and_specified:heterogeneity_assessed) ~
-        pct(4)
+        pct(3)
     ) %>%
     tab_options(
       heading.align = "left",
@@ -216,7 +216,7 @@ make_table_desc_gt <- function(tables_df) {
       footnotes.padding = px(0),
       column_labels.padding = px(3),
       data_row.padding = px(1),
-      table.font.size = pct(70)
+      table.font.size = pct(50)
     ) %>%
     tab_style(
       style = list(cell_text(weight = "bold", align = "left")),

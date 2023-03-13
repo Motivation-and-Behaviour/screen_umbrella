@@ -18,7 +18,9 @@ save_table <- function(table, filename) {
   gtsave(
     data = table,
     filename = filename,
-    zoom = 1
+    zoom = 1,
+    vwidth = 3440,
+    vheight = 2000,
   )
 
   return(filename)

@@ -290,6 +290,14 @@
         "stringr"
       ]
     },
+    "bigD": {
+      "Package": "bigD",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "93637e906f3fe962413912c956eb44db",
+      "Requirements": []
+    },
     "bit": {
       "Package": "bit",
       "Version": "4.0.5",
@@ -318,16 +326,10 @@
     },
     "bookdown": {
       "Package": "bookdown",
-      "Version": "0.32",
+      "Version": "0.33",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemoteType": "standard",
-      "RemotePkgRef": "bookdown",
-      "RemoteRef": "bookdown",
-      "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
-      "RemoteSha": "0.32",
-      "Hash": "3724d23586f877135f19c0cd91237a60",
+      "Hash": "948ba48e07aa772d3e5564ce8c0a7896",
       "Requirements": [
         "htmltools",
         "jquerylib",
@@ -459,16 +461,6 @@
       "Requirements": [
         "rematch",
         "tibble"
-      ]
-    },
-    "checkmate": {
-      "Package": "checkmate",
-      "Version": "2.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "147e4db6909d8814bb30f671b49d7e06",
-      "Requirements": [
-        "backports"
       ]
     },
     "cli": {
@@ -1175,25 +1167,26 @@
     },
     "gt": {
       "Package": "gt",
-      "Version": "0.6.0",
+      "Version": "0.8.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "842059d3f71b14e812500b23eeea765e",
+      "Hash": "d100be8d1f54dc589cc8d63366839287",
       "Requirements": [
         "base64enc",
+        "bigD",
         "bitops",
-        "checkmate",
+        "cli",
         "commonmark",
         "dplyr",
         "fs",
         "ggplot2",
         "glue",
         "htmltools",
+        "juicyjuice",
         "magrittr",
         "rlang",
         "sass",
         "scales",
-        "stringr",
         "tibble",
         "tidyselect"
       ]
@@ -1214,10 +1207,10 @@
     },
     "gtsummary": {
       "Package": "gtsummary",
-      "Version": "1.6.0",
+      "Version": "1.7.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "61e361591586b5c218ac36d266509659",
+      "Hash": "77c13378be1a9943e0df6cfc259d9a09",
       "Requirements": [
         "broom",
         "broom.helpers",
@@ -1232,7 +1225,8 @@
         "rlang",
         "stringr",
         "tibble",
-        "tidyr"
+        "tidyr",
+        "vctrs"
       ]
     },
     "haven": {
@@ -1466,6 +1460,16 @@
       "Repository": "CRAN",
       "Hash": "a4269a09a9b865579b2635c77e572374",
       "Requirements": []
+    },
+    "juicyjuice": {
+      "Package": "juicyjuice",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "3bcd11943da509341838da9399e18bce",
+      "Requirements": [
+        "V8"
+      ]
     },
     "kableExtra": {
       "Package": "kableExtra",
