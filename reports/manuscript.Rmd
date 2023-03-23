@@ -15,7 +15,7 @@ author:
   - name          : "Borja Del Pozo Cruz"
     affiliation   : "3"
   - name          : "Stuart Biddle"
-    affiliation   : "4"
+    affiliation   : "4, 13"
   - name          : "Rimante Ronto"
     affiliation   : "5"
   - name          : "Ryan Hulteen"
@@ -72,6 +72,8 @@ affiliation:
     institution   : "The Matilda Centre for Research in Mental Health and Substance Use, University of Sydney, Sydney, Australia"
   - id            : "12"
     institution   : "School of Education, Australian Catholic University, North Sydney, Australia"
+  - id            : "13"
+    institution   : "Faculty of Sport & Health Sciences, University of Jyväskylä, Finland"
 
 abstract: |
   The influence of electronic screens on children and adolescents’ health and education is not well understood.
