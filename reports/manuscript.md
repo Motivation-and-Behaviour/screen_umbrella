@@ -114,7 +114,7 @@ To facilitate comparisons, we converted effect sizes to Pearson’s *r* using es
 
 <span id="r3_8">After extracting data, we examined the combinations of exposure and outcomes and removed any effects that appeared multiple times (i.e., in multiple meta-analyses, or with multiple sub-groups in the same meta-analysis), keeping the effect with the largest total sample size. In instances where effect sizes from the same combination of exposure and outcome were drawn from different age-groups (e.g., children vs adolescents), or were drawn using different study designs (e.g., cross-sectional vs longitudinal) we retained both estimates in our dataset. </span>
 
-We descriptively present the remaining meta-analytic effect sizes. To remove the differences in approach to meta-analyses across the reviews, we reran the effect size estimate using a random effects meta-analysis via the metafor package<sup>54</sup> in R<sup>55</sup> (version 4.2.2) when the meta-analysis’s authors provided primary study data associated with these effects. When required, we imputed missing sample sizes using mean imputation from the other studies within that review. From our reanalysis we also extracted *I*<sup>2</sup> values. To test for publication bias, we conducted Egger’s test<sup>56</sup> when the number of studies within the review was ten or more,<sup>57</sup> and conducted a test of excess significance.<sup>58</sup> <span id="r2_32">We contacted authors who did not provide primary study data in their published article. Where authors did not provide data in a format that could be re-analysed, we used the published results of their original meta-analysis.</span>
+We descriptively present the remaining meta-analytic effect sizes. To remove the differences in approach to meta-analyses across the reviews, we reran the effect size estimate using a random effects meta-analysis via the metafor package<sup>54</sup> in R<sup>55</sup> (version 4.3.0) when the meta-analysis’s authors provided primary study data associated with these effects. When required, we imputed missing sample sizes using mean imputation from the other studies within that review. From our reanalysis we also extracted *I*<sup>2</sup> values. To test for publication bias, we conducted Egger’s test<sup>56</sup> when the number of studies within the review was ten or more,<sup>57</sup> and conducted a test of excess significance.<sup>58</sup> <span id="r2_32">We contacted authors who did not provide primary study data in their published article. Where authors did not provide data in a format that could be re-analysed, we used the published results of their original meta-analysis.</span>
 
 ### Evidence assessment criteria
 
@@ -251,7 +251,7 @@ References
 
 54\. Viechtbauer, W. *Metafor: Meta-analysis package for r*. (2022).
 
-55\. R Core Team. *R: A language and environment for statistical computing*. (R Foundation for Statistical Computing, 2022).
+55\. R Core Team. *R: A language and environment for statistical computing*. (R Foundation for Statistical Computing, 2023).
 
 56\. Egger, M., Smith, G. D., Schneider, M. & Minder, C. Bias in meta-analysis detected by a simple, graphical test. *BMJ* **315**, 629–634 (1997).
 
