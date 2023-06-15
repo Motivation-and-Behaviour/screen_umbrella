@@ -13,7 +13,7 @@ author:
   - name          : "Philip Parker"
     affiliation   : "1"
   - name          : "Borja Del Pozo Cruz"
-    affiliation   : "3"
+    affiliation   : "3, 14, 15"
   - name          : "Stuart Biddle"
     affiliation   : "4, 13"
   - name          : "Rimante Ronto"
@@ -74,6 +74,10 @@ affiliation:
     institution   : "School of Education, Australian Catholic University, North Sydney, Australia"
   - id            : "13"
     institution   : "Faculty of Sport & Health Sciences, University of Jyväskylä, Finland"
+  - id            : "14"
+    institution   : "Department of Physical Education, Faculty of Education, University of Cádiz, Cádiz, Spain"
+  - id            : "15"
+    institution   : "Biomedical Research and Innovation Institute of Cádiz (INiBICA) Research Unit, Puerta del Mar University Hospital, University of Cádiz, Cádiz, Spain"
 
 abstract: |
   The influence of electronic screens on children and adolescents’ health and education is not well understood.
