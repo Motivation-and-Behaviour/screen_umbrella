@@ -461,14 +461,6 @@ All data for this review are available from the authors' GitHub repository (http
 
 All code used in these analyses are available on the authors' GitHub repository (https://github.com/motivation-and-Behaviour/screen_umbrella).
 
-\newpage
-
-# References
-
-<div id = "refs"></div>
-
-\newpage
-
 # Acknowledgements
 
 The authors received no specific funding for this work.
@@ -483,6 +475,10 @@ All authors contributed to data extraction, interpretation, and editing of the m
 
 The authors declare no conflicts of interest.
 
+# Tables
+
+*Table 1: Review characteristics and quality assessment for meta-analyses providing unique effects*
+
 # Figure legends
 
 *Figure 1: PRISMA Diagram.*
@@ -491,6 +487,10 @@ The authors declare no conflicts of interest.
 
 *Figure 3: Health and health-related behaviour outcomes. Results for `r manuscript_info$health$n_certain` unique effect sizes related to health and health-related behaviour outcomes which met the criteria for statistical certainty. Findings are presented as correlations with both 95% and 99.9% confidence intervals.*
 
-# Tables
+\newpage
 
-*Table 1: Review characteristics and quality assessment for meta-analyses providing unique effects*
+# References
+
+<div id = "refs"></div>
+
+\newpage
