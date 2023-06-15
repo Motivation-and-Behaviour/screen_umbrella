@@ -51,3 +51,5 @@ _targets/
 scratch.R
 *.Identifier
 reports/*.log
+
+.venv/
