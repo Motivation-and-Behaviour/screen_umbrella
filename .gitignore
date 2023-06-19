@@ -2,7 +2,6 @@ library/
 local/
 cellar/
 lock/
-python/
 staging/
 # History files
 .Rhistory

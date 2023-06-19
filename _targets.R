@@ -221,12 +221,14 @@ list(
     )
   ),
   tar_target(other_supps_files, c(
-    "supplementary_files/Supplementary File 1 - Search Strategy.pdf",
-    "supplementary_files/Supplementary File 8 - Included Studies.pdf"
+    "supplementary_files/Supplementary File 1 - Search Strategy.pdf"
   ), format = "file"),
   tar_target(join_supp_py_script, "python/combine_pdfs.py", format = "file"),
   tar_target(joined_supps,
-    join_supps(other_supps_files, join_supp_py_script, table_effects_saved, supp_exposures, supp_effects),
+    join_supps(
+      other_supps_files, join_supp_py_script, table_effects_saved,
+      supp_exposures, supp_effects
+    ),
     format = "file"
   ),
   tar_render(

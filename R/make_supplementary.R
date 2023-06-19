@@ -140,12 +140,13 @@ make_supp_effects <- function(combined_effects) {
 #' @param table_effects_saved
 #' @param supp_exposures
 #' @param supp_effects
+#' @param references
 #' @return
 #' @author Taren Sanders
 #' @export
 join_supps <- function(
     other_supps_files, join_supp_py_script, table_effects_saved,
-    supp_exposures, supp_effects) {
+    supp_exposures, supp_effects, references) {
   reticulate::source_python(here::here("python", "combine_pdfs.py"))
 
   return("supplementary_files/Combined Supplementary Files.pdf")
