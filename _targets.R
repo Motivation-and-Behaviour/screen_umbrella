@@ -237,8 +237,8 @@ list(
   tar_target(join_supp_py_script, "python/combine_pdfs.py", format = "file"),
   tar_target(joined_supps,
     join_supps(
-      other_supps_files, join_supp_py_script, table_effects_saved,
-      supp_exposures, supp_effects, table_desc_saved
+      join_supp_py_script, other_supps_files, table_effects_saved,
+      supp_exposures, supp_effects, references, table_desc_saved
     ),
     format = "file"
   ),

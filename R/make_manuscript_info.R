@@ -380,6 +380,22 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
     filter(abs(r) < 0.2) %>%
     nrow()
 
+  # Abstract Results ---------------------------------------------
+  manuscript_info$abstract$social_media <-
+    report_effect(combined_effects, "53160_001", "short-none")
+
+  manuscript_info$abstract$edu <-
+    report_effect(combined_effects, "61452_004", "short-none")
+
+  manuscript_info$abstract$tv_body <-
+    report_effect(combined_effects, "8556_119", "short-brackets")
+
+  manuscript_info$abstract$tv_edu <-
+    report_effect(combined_effects, "47569_002", "short-brackets")
+
+  manuscript_info$abstract$coview <-
+    report_effect(combined_effects, "47783_022", "short-brackets")
+
   return(manuscript_info)
 }
 

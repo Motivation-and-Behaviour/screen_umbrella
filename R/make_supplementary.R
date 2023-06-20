@@ -135,8 +135,8 @@ make_supp_effects <- function(combined_effects) {
 #' .. content for \details{} ..
 #'
 #' @title
-#' @param other_supps_files
 #' @param join_supp_py_script
+#' @param other_supps_files
 #' @param table_effects_saved
 #' @param supp_exposures
 #' @param supp_effects
