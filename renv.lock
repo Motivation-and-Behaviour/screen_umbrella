@@ -14,6 +14,13 @@
     "Name": "./.venv"
   },
   "Packages": {
+    "AsioHeaders": {
+      "Package": "AsioHeaders",
+      "Version": "1.22.1-2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "85bf3bd8fa58da21a22d84fd4f4ef0a8"
+    },
     "BH": {
       "Package": "BH",
       "Version": "1.81.0-1",
@@ -346,6 +353,16 @@
       ],
       "Hash": "76eca4bfece4d94b7cf69145c89523e9"
     },
+    "bigD": {
+      "Package": "bigD",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "93637e906f3fe962413912c956eb44db"
+    },
     "bit": {
       "Package": "bit",
       "Version": "4.0.5",
@@ -524,17 +541,24 @@
       ],
       "Hash": "f61dbaec772ccd2e17705c1e872e9e7c"
     },
-    "checkmate": {
-      "Package": "checkmate",
-      "Version": "2.2.0",
+    "chromote": {
+      "Package": "chromote",
+      "Version": "0.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
-        "R",
-        "backports",
-        "utils"
+        "R6",
+        "curl",
+        "fastmap",
+        "jsonlite",
+        "later",
+        "magrittr",
+        "processx",
+        "promises",
+        "rlang",
+        "websocket"
       ],
-      "Hash": "ca9c113196136f4a9ca9ce6079c2c99e"
+      "Hash": "bb5817af24a2d8e6e33e758eb54978be"
     },
     "cli": {
       "Package": "cli",
@@ -1346,29 +1370,33 @@
     },
     "gt": {
       "Package": "gt",
-      "Version": "0.6.0",
+      "Version": "0.9.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "base64enc",
+        "bigD",
         "bitops",
-        "checkmate",
+        "cli",
         "commonmark",
         "dplyr",
         "fs",
-        "ggplot2",
         "glue",
         "htmltools",
+        "htmlwidgets",
+        "juicyjuice",
         "magrittr",
+        "markdown",
+        "reactable",
         "rlang",
         "sass",
         "scales",
-        "stringr",
         "tibble",
-        "tidyselect"
+        "tidyselect",
+        "xml2"
       ],
-      "Hash": "842059d3f71b14e812500b23eeea765e"
+      "Hash": "d55233a737e43e44987724e57dfec302"
     },
     "gtable": {
       "Package": "gtable",
@@ -1679,6 +1707,16 @@
         "methods"
       ],
       "Hash": "3ee4d9899e4db3e976fc82b98d24a31a"
+    },
+    "juicyjuice": {
+      "Package": "juicyjuice",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "V8"
+      ],
+      "Hash": "3bcd11943da509341838da9399e18bce"
     },
     "kableExtra": {
       "Package": "kableExtra",
@@ -2475,6 +2513,31 @@
         "xopen"
       ],
       "Hash": "8f25ebe2ec38b1f2aef3b0d2ef76f6c4"
+    },
+    "reactR": {
+      "Package": "reactR",
+      "Version": "0.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "htmltools"
+      ],
+      "Hash": "75389c8091eb14ee21c6bc87a88b3809"
+    },
+    "reactable": {
+      "Package": "reactable",
+      "Version": "0.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "digest",
+        "htmltools",
+        "htmlwidgets",
+        "jsonlite",
+        "reactR"
+      ],
+      "Hash": "6069eb2a6597963eae0605c1875ff14c"
     },
     "readr": {
       "Package": "readr",
@@ -3541,6 +3604,34 @@
         "magrittr"
       ],
       "Hash": "cfd9342c76693ae53108a474aafa1641"
+    },
+    "webshot2": {
+      "Package": "webshot2",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "callr",
+        "chromote",
+        "later",
+        "magrittr",
+        "promises"
+      ],
+      "Hash": "501f4bf937637caf4fc982d264bcc839"
+    },
+    "websocket": {
+      "Package": "websocket",
+      "Version": "1.4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "AsioHeaders",
+        "R6",
+        "cpp11",
+        "later"
+      ],
+      "Hash": "76e0d400757e318cca33def29ccebbc2"
     },
     "whisker": {
       "Package": "whisker",
