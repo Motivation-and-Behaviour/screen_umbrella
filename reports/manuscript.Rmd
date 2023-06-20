@@ -84,9 +84,9 @@ abstract: |
   In this review, we harmonised `r targets::tar_read(manuscript_info)$unique_effects` effects representing unique combinations of exposures and outcomes from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` meta-analyses (`r format(targets::tar_read(manuscript_info)$effects_sum$sum_k, big.mark=",")` primary studies; `r format(targets::tar_read(manuscript_info)$effects_sum$sum_n, big.mark=",")` participants).
   Some types of screen use, such as social media, were consistently correlated with risks to health.
   However, other forms of screen use showed associations with benefits.
-  For example, experimental evidence showed that video games improve aspects of cognitive function.
+  For example, educational screen use was generally associted with better learning outcomes.
   Some types of screen use have complex associations with outcomes.
-  For example, general screen use (i.e., content not indicated) showed correlations with harm for body composition, depression, and learning.
+  For example, television viewing showed harmful correlations with body composition and learning.
   However, when parents watched with their children or the content was educational, general screen use was associated with greater learning.
   More nuanced guidelines are needed to help parents, teachers, and practitioners ensure that youth benefit from their interactions with screens.
   
@@ -228,14 +228,13 @@ These `r manuscript_info$health$n_certain` effects came from `r manuscript_info$
 
 Digital advertising of unhealthy foods—both traditional advertising and video games developed by a brand for promotion—were associated with higher unhealthy food intake.
 Social media use and sexual content were positively associated with risky behaviors (e.g., sexual activity, risk taking, and substance abuse).
-General screen use was positively associated with depression, with stronger associations observed for adolescents than other groups.
-Television viewing was negatively correlated with sleep duration, but with stronger evidence only observed for younger children.
+Television viewing was negatively correlated with sleep duration, but with stronger evidence only observed for adolescents.
 All forms of screen use (general, television, and video games) were associated with body composition (e.g., higher BMI).
 Screen-based interventions which target health behaviours appeared mostly effective.
 
 Across the health outcomes, most (`r manuscript_info$health$n_p999` of `r manuscript_info$health$n_certain`) effects were statistically significant at the 99.9\% confidence interval level, with the remaining `r xfun::numbers_to_words(manuscript_info$health$n_p95)` significant at 95\% confidence.
 However, most of the credible effects exhibited high levels of heterogeneity, with all but two having $I^2 > 75\%$.
-Additionally, most effects were small, with the association between screen use and sleep duration the largest at $r = -0.37$ ($k = 10, N = 56,720$).
+Additionally, most effects were small, with the association between internet use and depression the largest at $r = 0.25$ ($k = 118, N = 527,696$).
 Most of the effect sizes (`r manuscript_info$health$n_r2`/`r manuscript_info$health$n_certain`) had an absolute value of $r < 0.2$.
 
 # Discussion
@@ -444,8 +443,8 @@ $I^2$ values of $> 50\%$ were taken to indicate an effect was potentially hetero
 
 Direction of Effect:
 Finally, we examined the extent to which significance testing suggested screen exposure was associated with benefit, harm, or no effect on outcomes.
-We used thresholds of $P < .05$ for weak evidence and $P < 10^{-3}$ for strong evidence.
-An effect with statistical credibility but with $P > .05$ was taken to indicate no association of interest.
+We used thresholds of $P < .05$ for weak evidence (i.e., 95% confidence intervals did not cross zero) and $P < 10^{-3}$ (i.e., 99.9% confidence intervals did not cross zero) for strong evidence.
+An effect with statistical credibility but with $P > .05$ (i.e., 95% confidence intervals included zero) was taken to indicate no association of interest.
 
 ### Deviations from protocol
 
