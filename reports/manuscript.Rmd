@@ -183,13 +183,13 @@ Of those, `r manuscript_info$prisma$included` met the inclusion criteria and we 
 Figure 1 presents the full results of the selection process.
 
 The most frequently reported exposures were `r manuscript_info$freq_exposures`.
-Supplementary File 5 provides a list of all exposures identified.
+Supplementary File 1 provides a list of all exposures identified.
 The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
 Of the `r manuscript_info$unique_combos` unique exposure/outcome combinations, `r manuscript_info$freq_combos$n1` occurred in only one review, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
-Full characteristics of the included studies are provided in Table 1.
+Full characteristics of the included studies are provided in Supplementary File 2.
 After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations (retaining multiple effects for different age groups or study designs) contributed from `r manuscript_info$prisma$unique_reviews` reviews.
 These effects represent the findings of `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies, involving `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
-The characteristics of the included effects are available in Supplementary File 9.
+The characteristics of the included effects are available in Supplementary File 3.
 
 **TABLE 1**
 
@@ -202,7 +202,7 @@ Overall, only `r manuscript_info$qual$all_low` meta-analyses were graded as low 
 
 There were `r manuscript_info$edu$n_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science.
 We removed `r manuscript_info$edu$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$edu$n_samplesize` effects with samples < 1,000, and `r manuscript_info$edu$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
-Effects not meeting one or more of these standards are presented in Supplementary File 6.
+Effects not meeting one or more of these standards are presented in Supplementary File 4.
 The remaining `r manuscript_info$edu$n_certain` effects met our criteria for statistical credibility and are described in Figure 2.
 These `r manuscript_info$edu$n_certain` effects came from `r manuscript_info$edu$n_unique` meta-analytic reviews analysing data from `r manuscript_info$edu$summary$studies_n` empirical studies with `r format(manuscript_info$edu$summary$total_n, big.mark=",")` individual participants.
 
@@ -222,7 +222,7 @@ Most effects showed high levels of heterogeneity (`r manuscript_info$edu$n_i2` o
 We identified `r manuscript_info$health$n_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
 We removed `r manuscript_info$health$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$health$n_samplesize` effects with samples < 1,000, and `r manuscript_info$health$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
 No remaining studies showed evidence of excessive significance.
-Effects not meeting one or more of these standards are presented in Supplementary File 7.
+Effects not meeting one or more of these standards are presented in Supplementary File 5.
 The remaining `r manuscript_info$health$n_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure 3).
 These `r manuscript_info$health$n_certain` effects came from `r manuscript_info$health$n_unique` meta-analytic reviews analysing data from `r manuscript_info$health$summary$studies_n` empirical studies with `r format(manuscript_info$health$summary$total_n, big.mark=",")` individual participants.
 
@@ -250,7 +250,7 @@ Thus, parents may play an important role in selecting content that is likely to 
 Similar nuanced findings were observed for video games.
 The credible evidence we identified showed that video game playing was associated with poorer body composition and learning [@adelantado-renauAssociationScreenMedia2019;@poorolajalBehavioralFactorsInfluencing2020].
 However, when the video game were designed specifically to teach numeracy, playing these games showed learning benefits [@byunDigitalGamebasedLearning2018].
-One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 6 & 7) therefore this hypothesis could not be addressed.
+One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 4 & 5) therefore this hypothesis could not be addressed.
 
 Social media was one type of exposure that showed consistent associations with poor health, with no indication of potential benefit.
 Social media showed strong evidence of harmful associations with risk taking in general, as well as unsafe sex and substance abuse [@vannucciSocialMediaUse2020].
@@ -264,7 +264,7 @@ The way that a young person interacts with digital screens may also be important
 We found evidence that touch screens had strong evidence for benefits on learning [@xieCanTouchscreenDevices2018], as did augmented reality [@tekedereExaminingEffectivenessAugmented2016].
 
 Largely owing to a small number of studies or missing individual study data, there were few age-based conclusions that could be drawn from reviews which met our criteria for statistical certainty.
-If we expand to include those reviews which did not meet this threshold, there remained no clear pattern although there were some age-specific differences in associations (data available in Supplementary Materials).
+If we expand to include those reviews which did not meet this threshold, there remained no clear pattern although there were some age-specific differences in associations (data available in Supplementary Files 4 & 5).
 For example, advertising of unhealthy food was associated with unhealthy food choice for young children, but was not statistically significant for other age groups [@sadeghiradInfluenceUnhealthyFood2016].
 Conversely, TV programs and movies were more strongly associated with lower physical activity for adolescents than for younger age groups [@marshallRelationshipsMediaUse2004].
 Given the differences in development across childhood and adolescence and the different ways children of various ages use screens, further examination of age-based differences is needed.
@@ -317,7 +317,7 @@ Thus, our assessment of evidence quality was restricted to statistical credibili
 As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics.
 In addition, when faced with duplicate outcome/exposure combinations we chose to keep the one with the largest pooled sample size, assuming that this would capture the most comprehensive and most recent review.
 Inspection of the excluded effect sizes suggests that this decision was not that impactful: our results would have been almost exactly the same has we used the number of included studies (*k*) or the most recent review by publication year.
-However, we provide the complete results in the supplementary material, along with the dataset for others to consider alternative criteria.
+However, we provide the complete results in Supplementary Files 4 & 5, along with the dataset (Supplementary File 6) for others to consider alternative criteria.
 
 Our high-level approach also means that we could not engage with the specific mechanisms behind each association, and as such, we cannot make strong claims on the directions of causality.
 These likely depend on the specific exposure and outcome.
@@ -384,7 +384,7 @@ We also searched PROSPERO to identify relevant protocols and contacted authors t
 
 ### Search strategy
 
-The search strategy associated with each of the 12 databases can be found in Supplementary File 1.
+The search strategy associated with each of the 12 databases can be found in Supplementary File 7.
 We hand searched reference lists from any relevant umbrella reviews to identify systematic meta-analyses that our search may have missed.
 
 ### Selection process
@@ -412,7 +412,7 @@ We also excluded effect size estimates when the authors did not provide a sample
 Where possible, we also extracted effect sizes from the primary studies included in each meta-analysis.
 
 To facilitate comparisons, we converted effect sizes to Pearson's $r$ using established formulae [@bowmanEffectSizesStatistical2012;@jacobsEstimationBiserialCorrelation2017].
-Effect sizes on the original metric are provided in Supplementary File 2.
+Effect sizes on the original metric are provided in Supplementary File 6.
 Throughout the results section we interpret the size of the effects using Funder and Ozer's guidelines [@funderEvaluatingEffectSize2019]: very small (0.05 < r <= 0.1), small (0.1 < r <= 0.2), medium (0.2 < r <= 0.2), large (0.3 < r <= 0.4), and very large (r >= 0.4).
 These are similar to other interpretations based on empirical data [@gignacEffectSizeGuidelines2016].
 
@@ -451,7 +451,7 @@ An effect with statistical credibility but with $P > .05$ (i.e., 95% confidence 
 As described above, we have summarised the meta-analytic findings from all included systematic reviews.
 In our protocol, we originally planned to also conduct a narrative synthesis of all systematic reviews, even those without meta-analyses.
 However, we determined that combining results from the meta-analyses alone allow readers to compare relative strength of associations more easily.
-Readers interested in the relevant systematic reviews (i.e., without meta-analysis) can consult the list of references in Supplementary File 4.
+Readers interested in the relevant systematic reviews (i.e., without meta-analysis) can consult the list of references in Supplementary File 8.
 
 We altered our evidence assessment plan when we identified that, as written, it could not classify precise evidence of null effects (i.e., from large reviews with low heterogeneity and low risk of publication bias) as 'credible' because a highly-significant *P*-value was a criteria.
 This would have significantly harmed knowledge gained from our review as it would have restricted our ability to show where the empirical evidence strongly indicated that there was no association between screen use and a given outcome.

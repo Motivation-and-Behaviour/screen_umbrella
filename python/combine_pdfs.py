@@ -9,29 +9,33 @@ from reportlab.pdfgen import canvas
 # list your pdf files here
 # now each value is a tuple with the title and a description
 pdfs = {
-    "supplementary_files/Supplementary File 1 - Search Strategy.pdf": (
-        "Supplementary File 1 - Search Strategy",
-        "The search strategies used in each database",
+    "supplementary_files/Supplementary File 2 - Review characteristics.pdf": (
+        "Supplementary File 2 - Review characteristics",
+        "Table of included meta-analyses and their characteristics.",
     ),
-    "supplementary_files/Supplementary File 3 - Effect Size Codebook.pdf": (
-        "Supplementary File 3 - Effect Size Codebook",
-        "Generated codebook for the dataset.",
+    "supplementary_files/Supplementary File 3 - Effect Characteristics.pdf": (
+        "Supplementary File 3 - Effect Characteristics",
+        "Descriptive table for the included effects.",
     ),
-    "supplementary_files/Supplementary File 6 - Education Outcomes.pdf": (
-        "Supplementary File 6 - Education Outcomes",
+    "supplementary_files/Supplementary File 4 - Education Outcomes.pdf": (
+        "Supplementary File 4 - Education Outcomes",
         "Additional education outcomes which did not meet certainty criteria.",
     ),
-    "supplementary_files/Supplementary File 7 - Health-related Outcomes.pdf": (
-        "Supplementary File 7 - Health-related Outcomes",
+    "supplementary_files/Supplementary File 5 - Health-related Outcomes.pdf": (
+        "Supplementary File 5 - Health-related Outcomes",
         "Additional health-related outcomes which did not meet certainty criteria.",
     ),
-    "supplementary_files/Supplementary File 8 - Included Studies.pdf": (
-        "Supplementary File 8 - Included Studies",
+    "supplementary_files/Supplementary File 7 - Search Strategy.pdf": (
+        "Supplementary File 7 - Search Strategy",
+        "The search strategies used in each database",
+    ),
+    "supplementary_files/Supplementary File 9 - Included Studies.pdf": (
+        "Supplementary File 9 - Included Studies",
         "References for the included studies.",
     ),
-    "supplementary_files/Supplementary File 9 - Effect Characteristics.pdf": (
-        "Supplementary File 9 - Effect Characteristics",
-        "Descriptive table for the included effects.",
+    "supplementary_files/Supplementary File 10 - Effect Size Codebook.pdf": (
+        "Supplementary File 10 - Effect Size Codebook",
+        "Generated codebook for the dataset.",
     ),
 }
 

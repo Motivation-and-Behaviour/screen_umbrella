@@ -31,7 +31,7 @@ edu_certain <- list(
 
 edu_uncertain <- list(
   filename =
-    "supplementary_files/Supplementary File 6 - Education Outcomes.pdf",
+    "supplementary_files/Supplementary File 4 - Education Outcomes.pdf",
   title = "Associations Between Exposures and Education Outcomes",
   categories = "Education",
   certain = FALSE,
@@ -90,7 +90,7 @@ nonedu_certain <- list(
 nonedu_uncertain <-
   list(
     filename =
-      "supplementary_files/Supplementary File 7 - Health-related Outcomes.pdf",
+      "supplementary_files/Supplementary File 5 - Health-related Outcomes.pdf",
     title = "Associations Between Exposures and Health-related Outcomes",
     categories = c("Psychology", "Health Behaviour", "Physical Health"),
     certain = FALSE,
