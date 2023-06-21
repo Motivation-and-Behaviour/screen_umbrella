@@ -40,7 +40,7 @@ age_codes_list <- list(
     "School-age Children",
     "Under 18"
   ),
-  adolescents_codes = c(
+  adolescents = c(
     "<=14", # lower bound is 11 in this study
     "11-18 years",
     "12-17 years",
@@ -65,7 +65,7 @@ age_codes_list <- list(
     "Secondary School",
     "Upper secondary education"
   ),
-  children_codes = c(
+  children = c(
     "Kindergarten",
     "12 or under",
     "12 or younger",
@@ -98,7 +98,7 @@ age_codes_list <- list(
     "Primary",
     "Primary education"
   ),
-  young_children_codes = c(
+  young_children = c(
     "0-5",
     "0-6",
     "1 month - 4.99 years old",
@@ -112,7 +112,9 @@ age_codes_list <- list(
     "Preschoolers",
     "Toddlers",
     "younger than 8",
-    "young_children"
+    "young_children",
+    "Young children",
+    "Young Children"
   )
 )
 

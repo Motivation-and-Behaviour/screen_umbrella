@@ -5,27 +5,15 @@ edu_certain <- list(
   title = "Associations Between Exposures and Education Outcomes",
   categories = "Education",
   certain = TRUE,
-  dims = c(9, 6),
+  dims = c(185, 210),
   moderators = FALSE,
   caption = FALSE,
   pos =
     list(
-      lims = c(-5.0, 0.5),
-      breaks = c(-0.4, -.2, 0, .2, 0.4),
-      esig = NULL,
-      eggers = NULL,
-      indiv_data = NULL,
-      n = -0.55,
-      k = -0.75,
-      i2 = -0.95,
-      rci = -1.3,
-      author_year = -2.2,
-      design = -2.85,
-      pop = -3.2,
-      mod = -3.6,
-      expo = -4.65,
-      outcome = -5.3,
-      tag = NA
+      lims = c(-5, 0.5), breaks = c(-0.2, 0, 0.2, 0.4), esig = NULL,
+      eggers = NULL, indiv_data = NULL, n = -0.5, k = -0.75, i2 = -0.95,
+      rci = -1.35, author_year = -2.2, design = -2.8, pop = -3.15,
+      mod = -3.5, expo = -4.71, outcome = -5.38, tag = NA
     )
 )
 
@@ -35,7 +23,7 @@ edu_uncertain <- list(
   title = "Associations Between Exposures and Education Outcomes",
   categories = "Education",
   certain = FALSE,
-  dims = c(17, 18.5),
+  dims = c(416.50, 453.25),
   moderators = FALSE,
   caption = TRUE,
   pos =
@@ -64,7 +52,7 @@ nonedu_certain <- list(
   title = "Associations Between Exposures and Health-related Outcomes",
   categories = c("Psychology", "Health Behaviour", "Physical Health"),
   certain = TRUE,
-  dims = c(12, 8),
+  dims = c(185, 140),
   moderators = FALSE,
   caption = FALSE,
   pos = list(
@@ -94,7 +82,7 @@ nonedu_uncertain <-
     title = "Associations Between Exposures and Health-related Outcomes",
     categories = c("Psychology", "Health Behaviour", "Physical Health"),
     certain = FALSE,
-    dims = c(17, 49.5),
+    dims = c(416.50, 1212.75),
     moderators = FALSE,
     caption = TRUE,
     pos = list(

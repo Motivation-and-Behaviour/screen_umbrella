@@ -5,10 +5,10 @@
 \documentclass[
   english,
   man]{apa6}
-\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{iftex}
-\ifPDFTeX
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -147,39 +147,18 @@
 \usepackage{makecell}
 \usepackage{booktabs}
 \usepackage{colortbl}
-\ifXeTeX
+\ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
   \setmainlanguage[]{english}
 \else
-  \usepackage[main=english]{babel}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
-\fi
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
+  \usepackage[shorthands=off,main=english]{babel}
 \fi
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
-  % set entry spacing
-  \ifnum #2 > 0
-  \setlength{\parskip}{#2\baselineskip}
-  \fi
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\newenvironment{cslreferences}%
+  {}%
+  {\par}
 
 \title{An umbrella review of the benefits and risks associated with youths' interactions with electronic screens}
 \author{Taren Sanders*\textsuperscript{1}, Michael Noetel\textsuperscript{2}, Philip Parker\textsuperscript{1}, Borja Del Pozo Cruz\textsuperscript{3, 14, 15}, Stuart Biddle\textsuperscript{4, 13}, Rimante Ronto\textsuperscript{5}, Ryan Hulteen\textsuperscript{6}, Rhiannon Parker\textsuperscript{7}, George Thomas\textsuperscript{8}, Katrien De Cocker\textsuperscript{9}, Jo Salmon\textsuperscript{10}, Kylie Hesketh\textsuperscript{10}, Nicole Weeks\textsuperscript{1}, Hugh Arnott\textsuperscript{1}, Emma Devine\textsuperscript{11}, Roberta Vasconcellos\textsuperscript{1}, Rebecca Pagano\textsuperscript{12}, Jamie Sherson\textsuperscript{12}, James Conigrave\textsuperscript{1}, \& Chris Lonsdale\textsuperscript{1}}
@@ -239,7 +218,7 @@ This evidence has led some researchers to argue that a more nuanced approach to 
 
 In 2016, the American Academy of Pediatrics used a narrative review to examine the benefits and risks of children and adolescents' electronic media\textsuperscript{20} as a basis for updating their guidelines about screen use.\textsuperscript{15}
 Since then, a large number of systematic reviews and meta-analyses have provided evidence about the potential benefits and risks of screen use.
-While there have been other overviews of reviews on screen use, these have tended to focus on a single domain (e.g., health),\textsuperscript{21} focus on a particular exposure (e.g., social media)\textsuperscript{22,23} or provide only a narrative summary of the literature.\textsuperscript{24}
+While there have been other overviews of reviews on screen use, these have tended to focus on a single domain (e.g., health\textsuperscript{21}), focus on a particular exposure (e.g., social media\textsuperscript{22,23}) or provide only a narrative summary of the literature.\textsuperscript{24}
 Focusing on a single domain or exposure makes it difficult to understand what trade-offs are involved in any guidelines around screen use.
 For example, prohibiting screen use might reduce exposure to advertising but may also thwart learning opportunities from interactive educational tools.
 Reviews on either of these exposures or outcomes would likely miss being able to quantify these trade-offs.
@@ -268,7 +247,7 @@ Supplementary File 1 provides a list of all exposures identified.
 The most frequently reported outcomes were body composition (\emph{n} = 30), general learning (\emph{n} = 24), depression (\emph{n} = 13), and general literacy (\emph{n} = 12).
 Of the 273 unique exposure/outcome combinations, 241 occurred in only one review, with 23 appearing twice, and 9 appearing three or more times.
 Full characteristics of the included studies are provided in Supplementary File 2.
-After removing reviews with duplicate exposure/outcome combinations, our process yielded 253 unique effect/outcome combinations (retaining multiple effects for different age groups or study designs) contributed from 102 reviews.
+After removing reviews with duplicate exposure/outcome combinations, our process yielded 252 unique effect/outcome combinations (retaining multiple effects for different age groups or study designs) contributed from 102 reviews.
 These effects represent the findings of 2,451 primary studies, involving 1,937,501 participants.
 The characteristics of the included effects are available in Supplementary File 3.
 
@@ -300,8 +279,8 @@ Screen-based interventions designed to influence an outcome (e.g., a computer ba
 The largest effect size observed was for augmented reality-based education interventions on general learning (\emph{r} = 0.33, 95\% CI 0.25 to 0.42, \emph{k} = 15, \emph{N} = 1,474).
 Most effects showed high levels of heterogeneity (17 of 22 with \(I^2 > 50\%\)).
 
-We identified 164 unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
-We removed 40 effects that did not provide individual study-level data, 50 effects with samples \textless{} 1,000, and 53 effects with a significant Egger's test or insufficient studies to conduct the test.
+We identified 163 unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
+We removed 39 effects that did not provide individual study-level data, 50 effects with samples \textless{} 1,000, and 53 effects with a significant Egger's test or insufficient studies to conduct the test.
 No remaining studies had statistically significant tests for excess significance.
 Effects not meeting one or more of these standards are presented in Supplementary File 5.
 The remaining 21 meta-analytic associations met our criteria for credible evidence and are described below (see also Figure 3).
@@ -382,7 +361,7 @@ In one systematic review on screen use and sleep,\textsuperscript{7} 66 of the 6
 It has been established that self-reported screen use data has questionable validity.
 In a meta-analysis of 47 studies comparing self-reported media use with logged measures, Parry et al\textsuperscript{41} found that the measures were only moderately correlated (\(r = 0.38\)), with self-reported problematic usage fairing worse (\(r = 0.25\)).
 Indeed, of 622 studies which measured the screen use of 0---6 year-olds, only 69 provided any sort of psychometric properties for their measure, with only 19 studies reporting validity.\textsuperscript{42}
-While some researchers have started using newer methods of capturing screen behaviours---such as wearable cameras\textsuperscript{43} or device-based loggers---\textsuperscript{44}these are still not widely adopted.
+While some researchers have started using newer methods of capturing screen behaviours---such as wearable cameras\textsuperscript{43} or device-based loggers\textsuperscript{44}---these are still not widely adopted.
 It may be that the field of screen use research cannot be sufficiently advanced until accurate, validated, and nuanced measures are more widely available and adopted.
 
 There were a number of strengths and limitations to our work.
@@ -392,7 +371,7 @@ To ensure findings could be compared on a common metric, we extracted and reanal
 
 Our high-level approach limits the feasibility of examining fine-grained details of the individual studies.
 For example, we did not examine moderators beyond age, nor did we rate the risk of bias for the individual studies.
-Thus, our assessment of evidence quality was restricted to statistical credibility, rather than a more complete assessment of quality (e.g., GRADE).\textsuperscript{45}
+Thus, our assessment of evidence quality was restricted to statistical credibility, rather than a more complete assessment of quality (e.g., GRADE\textsuperscript{45}).
 As such, we made decisions regarding the credibility of evidence, where others may have used different thresholds or metrics.
 In addition, when faced with duplicate outcome/exposure combinations we chose to keep the one with the largest pooled sample size, assuming that this would capture the most comprehensive and most recent review.
 Inspection of the excluded effect sizes suggests that this decision was not that impactful: our results would have been almost exactly the same has we used the number of included studies (\emph{k}) or the most recent review by publication year.
@@ -593,240 +572,181 @@ The authors declare no conflicts of interest.
 \section{References}\label{references}}
 
 \hypertarget{refs}{}
-\begin{CSLReferences}{0}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-blairReadingStrategiesCoping2003}{}}%
-\CSLLeftMargin{1. }
-\CSLRightInline{Blair, A. Reading {Strategies} for {Coping With Information Overload} ca.1550-1700. \emph{Journal of the History of Ideas} \textbf{64}, 11--28 (2003).}
+\begin{cslreferences}
+\leavevmode\hypertarget{ref-blairReadingStrategiesCoping2003}{}%
+1. Blair, A. Reading Strategies for Coping With Information Overload ca.1550-1700. \emph{Journal of the History of Ideas} \textbf{64}, 11--28 (2003).
 
-\leavevmode\vadjust pre{\hypertarget{ref-bell1883sanitarian}{}}%
-\CSLLeftMargin{2. }
-\CSLRightInline{Bell, A. N. \emph{The sanitarian}. vol. 11 ({AN Bell}, 1883).}
+\leavevmode\hypertarget{ref-bell1883sanitarian}{}%
+2. Bell, A. N. \emph{The sanitarian}. vol. 11 (AN Bell, 1883).
 
-\leavevmode\vadjust pre{\hypertarget{ref-dill2013oxford}{}}%
-\CSLLeftMargin{3. }
-\CSLRightInline{Dill, K. E. \emph{The {Oxford} handbook of media psychology}. ({Oxford University Press}, 2013).}
+\leavevmode\hypertarget{ref-dill2013oxford}{}%
+3. Dill, K. E. \emph{The Oxford handbook of media psychology}. (Oxford University Press, 2013).
 
-\leavevmode\vadjust pre{\hypertarget{ref-wartellaChildrenComputersNew2000}{}}%
-\CSLLeftMargin{4. }
-\CSLRightInline{Wartella, E. A. \& Jennings, N. Children and computers: {New} technology. {Old} concerns. \emph{The future of children} 31--43 (2000).}
+\leavevmode\hypertarget{ref-wartellaChildrenComputersNew2000}{}%
+4. Wartella, E. A. \& Jennings, N. Children and computers: New technology. Old concerns. \emph{The future of children} 31--43 (2000).
 
-\leavevmode\vadjust pre{\hypertarget{ref-rhodes2015top}{}}%
-\CSLLeftMargin{5. }
-\CSLRightInline{Rhodes, A. \emph{Top ten child health problems: {What} the public thinks}. (2015).}
+\leavevmode\hypertarget{ref-rhodes2015top}{}%
+5. Rhodes, A. \emph{Top ten child health problems: What the public thinks}. (2015).
 
-\leavevmode\vadjust pre{\hypertarget{ref-thelancetSocialMediaScreen2019}{}}%
-\CSLLeftMargin{6. }
-\CSLRightInline{The Lancet. Social media, screen time, and young people's mental health. \emph{The Lancet} \textbf{393}, 611 (2019).}
+\leavevmode\hypertarget{ref-thelancetSocialMediaScreen2019}{}%
+6. The Lancet. Social media, screen time, and young people's mental health. \emph{The Lancet} \textbf{393}, 611 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-haleScreenTimeSleep2015}{}}%
-\CSLLeftMargin{7. }
-\CSLRightInline{Hale, L. \& Guan, S. Screen time and sleep among school-aged children and adolescents: {A} systematic literature review. \emph{Sleep Medicine Reviews} \textbf{21}, 50--58 (2015).}
+\leavevmode\hypertarget{ref-haleScreenTimeSleep2015}{}%
+7. Hale, L. \& Guan, S. Screen time and sleep among school-aged children and adolescents: A systematic literature review. \emph{Sleep Medicine Reviews} \textbf{21}, 50--58 (2015).
 
-\leavevmode\vadjust pre{\hypertarget{ref-sweetserActivePassiveScreen2012}{}}%
-\CSLLeftMargin{8. }
-\CSLRightInline{Sweetser, P., Johnson, D., Ozdowska, A. \& Wyeth, P. Active versus passive screen time for young children. \emph{Australasian Journal of Early Childhood} \textbf{37}, 94--98 (2012).}
+\leavevmode\hypertarget{ref-sweetserActivePassiveScreen2012}{}%
+8. Sweetser, P., Johnson, D., Ozdowska, A. \& Wyeth, P. Active versus passive screen time for young children. \emph{Australasian Journal of Early Childhood} \textbf{37}, 94--98 (2012).
 
-\leavevmode\vadjust pre{\hypertarget{ref-liEarlyChildhoodComputer2004}{}}%
-\CSLLeftMargin{9. }
-\CSLRightInline{Li, X. \& Atkins, M. S. Early childhood computer experience and cognitive and motor development. \emph{Pediatrics} \textbf{113}, 1715--1722 (2004).}
+\leavevmode\hypertarget{ref-liEarlyChildhoodComputer2004}{}%
+9. Li, X. \& Atkins, M. S. Early childhood computer experience and cognitive and motor development. \emph{Pediatrics} \textbf{113}, 1715--1722 (2004).
 
-\leavevmode\vadjust pre{\hypertarget{ref-warburton2017children}{}}%
-\CSLLeftMargin{10. }
-\CSLRightInline{Warburton, W. \& Highfield, K. Children and technology in a smart device world. in \emph{Children, {Families} and {Communities}} 195--221 ({Oxford University Press}, 2017).}
+\leavevmode\hypertarget{ref-warburton2017children}{}%
+10. Warburton, W. \& Highfield, K. Children and technology in a smart device world. in \emph{Children, Families and Communities} 195--221 (Oxford University Press, 2017).
 
-\leavevmode\vadjust pre{\hypertarget{ref-naturehumanbehaviourScreenTimeHow2019}{}}%
-\CSLLeftMargin{11. }
-\CSLRightInline{Nature Human Behaviour. Screen time: How much is too much? \emph{Nature} \textbf{565}, 265--266 (2019).}
+\leavevmode\hypertarget{ref-naturehumanbehaviourScreenTimeHow2019}{}%
+11. Nature Human Behaviour. Screen time: How much is too much? \emph{Nature} \textbf{565}, 265--266 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-whoGuidelinesPhysicalActivity2019}{}}%
-\CSLLeftMargin{12. }
-\CSLRightInline{World Health Organization. \emph{Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age}. 33 p. ({World Health Organization}, 2019).}
+\leavevmode\hypertarget{ref-whoGuidelinesPhysicalActivity2019}{}%
+12. World Health Organization. \emph{Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age}. 33 p. (World Health Organization, 2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-australiangovernmentPhysicalActivityExercise2021}{}}%
-\CSLLeftMargin{13. }
-\CSLRightInline{Australian Government. \emph{Physical activity and exercise guidelines for all {Australians}}. (2021).}
+\leavevmode\hypertarget{ref-australiangovernmentPhysicalActivityExercise2021}{}%
+13. Australian Government. \emph{Physical activity and exercise guidelines for all Australians}. (2021).
 
-\leavevmode\vadjust pre{\hypertarget{ref-Canadian24HourMovement2016}{}}%
-\CSLLeftMargin{14. }
-\CSLRightInline{Canadian Society for Exercise Physiology. \emph{Canadian 24-{Hour Movement Guidelines} for {Children} and {Youth}: {An Integration} of {Physical Activity}, {Sedentary Behaviour}, and {Sleep}}. (2016).}
+\leavevmode\hypertarget{ref-Canadian24HourMovement2016}{}%
+14. Canadian Society for Exercise Physiology. \emph{Canadian 24-Hour Movement Guidelines for Children and Youth: An Integration of Physical Activity, Sedentary Behaviour, and Sleep}. (2016).
 
-\leavevmode\vadjust pre{\hypertarget{ref-AAPMediaUseSchoolAged2016}{}}%
-\CSLLeftMargin{15. }
-\CSLRightInline{Council On Communication and Media. Media {Use} in {School-Aged Children} and {Adolescents}. \emph{Pediatrics} \textbf{138}, e20162592 (2016).}
+\leavevmode\hypertarget{ref-AAPMediaUseSchoolAged2016}{}%
+15. Council On Communication and Media. Media Use in School-Aged Children and Adolescents. \emph{Pediatrics} \textbf{138}, e20162592 (2016).
 
-\leavevmode\vadjust pre{\hypertarget{ref-fergusonEverythingModerationModerate2017}{}}%
-\CSLLeftMargin{16. }
-\CSLRightInline{Ferguson, C. J. Everything in {Moderation}: {Moderate Use} of {Screens Unassociated} with {Child Behavior Problems}. \emph{Psychiatric Quarterly} \textbf{88}, 797--805 (2017).}
+\leavevmode\hypertarget{ref-fergusonEverythingModerationModerate2017}{}%
+16. Ferguson, C. J. Everything in Moderation: Moderate Use of Screens Unassociated with Child Behavior Problems. \emph{Psychiatric Quarterly} \textbf{88}, 797--805 (2017).
 
-\leavevmode\vadjust pre{\hypertarget{ref-przybylskiLargeScaleTestGoldilocks2017}{}}%
-\CSLLeftMargin{17. }
-\CSLRightInline{Przybylski, A. K. \& Weinstein, N. A {Large-Scale Test} of the {Goldilocks Hypothesis}: {Quantifying} the {Relations Between Digital-Screen Use} and the {Mental Well-Being} of {Adolescents}. \emph{Psychological Science} \textbf{28}, 204--215 (2017).}
+\leavevmode\hypertarget{ref-przybylskiLargeScaleTestGoldilocks2017}{}%
+17. Przybylski, A. K. \& Weinstein, N. A Large-Scale Test of the Goldilocks Hypothesis: Quantifying the Relations Between Digital-Screen Use and the Mental Well-Being of Adolescents. \emph{Psychological Science} \textbf{28}, 204--215 (2017).
 
-\leavevmode\vadjust pre{\hypertarget{ref-sandersTypeScreenTime2019}{}}%
-\CSLLeftMargin{18. }
-\CSLRightInline{Sanders, T., Parker, P. D., del Pozo-Cruz, B., Noetel, M. \& Lonsdale, C. Type of screen time moderates effects on outcomes in 4013 children: Evidence from the {Longitudinal Study} of {Australian Children}. \emph{International Journal of Behavioral Nutrition and Physical Activity} \textbf{16}, 117 (2019).}
+\leavevmode\hypertarget{ref-sandersTypeScreenTime2019}{}%
+18. Sanders, T., Parker, P. D., del Pozo-Cruz, B., Noetel, M. \& Lonsdale, C. Type of screen time moderates effects on outcomes in 4013 children: Evidence from the Longitudinal Study of Australian Children. \emph{International Journal of Behavioral Nutrition and Physical Activity} \textbf{16}, 117 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-kayeConceptualMethodologicalMayhem2020}{}}%
-\CSLLeftMargin{19. }
-\CSLRightInline{Kaye, L. K., Orben, A., Ellis, D. A., Hunter, S. C. \& Houghton, S. The {Conceptual} and {Methodological Mayhem} of {`{Screen Time}'}. \emph{International Journal of Environmental Research and Public Health} \textbf{17}, 3661 (2020).}
+\leavevmode\hypertarget{ref-kayeConceptualMethodologicalMayhem2020}{}%
+19. Kaye, L. K., Orben, A., Ellis, D. A., Hunter, S. C. \& Houghton, S. The Conceptual and Methodological Mayhem of `Screen Time'. \emph{International Journal of Environmental Research and Public Health} \textbf{17}, 3661 (2020).
 
-\leavevmode\vadjust pre{\hypertarget{ref-chassiakosChildrenAdolescentsDigital2016}{}}%
-\CSLLeftMargin{20. }
-\CSLRightInline{Chassiakos, Y. L. R. \emph{et al.} Children and {Adolescents} and {Digital Media}. \emph{Pediatrics} \textbf{138}, e20162593 (2016).}
+\leavevmode\hypertarget{ref-chassiakosChildrenAdolescentsDigital2016}{}%
+20. Chassiakos, Y. L. R. \emph{et al.} Children and Adolescents and Digital Media. \emph{Pediatrics} \textbf{138}, e20162593 (2016).
 
-\leavevmode\vadjust pre{\hypertarget{ref-stiglicEffectsScreentimeHealth2019}{}}%
-\CSLLeftMargin{21. }
-\CSLRightInline{Stiglic, N. \& Viner, R. M. Effects of screentime on the health and well-being of children and adolescents: A systematic review of reviews. \emph{BMJ Open} \textbf{9}, e023191 (2019).}
+\leavevmode\hypertarget{ref-stiglicEffectsScreentimeHealth2019}{}%
+21. Stiglic, N. \& Viner, R. M. Effects of screentime on the health and well-being of children and adolescents: A systematic review of reviews. \emph{BMJ Open} \textbf{9}, e023191 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-valkenburgSocialMediaUse2022}{}}%
-\CSLLeftMargin{22. }
-\CSLRightInline{Valkenburg, P. M., Meier, A. \& Beyens, I. Social media use and its impact on adolescent mental health: {An} umbrella review of the evidence. \emph{Current Opinion in Psychology} \textbf{44}, 58--68 (2022).}
+\leavevmode\hypertarget{ref-valkenburgSocialMediaUse2022}{}%
+22. Valkenburg, P. M., Meier, A. \& Beyens, I. Social media use and its impact on adolescent mental health: An umbrella review of the evidence. \emph{Current Opinion in Psychology} \textbf{44}, 58--68 (2022).
 
-\leavevmode\vadjust pre{\hypertarget{ref-arias-delatorreRelationshipDepressionUse2020}{}}%
-\CSLLeftMargin{23. }
-\CSLRightInline{Arias-de la Torre, J. \emph{et al.} Relationship {Between Depression} and the {Use} of {Mobile Technologies} and {Social Media Among Adolescents}: {Umbrella Review}. \emph{Journal of Medical Internet Research} \textbf{22}, e16388 (2020).}
+\leavevmode\hypertarget{ref-arias-delatorreRelationshipDepressionUse2020}{}%
+23. Arias-de la Torre, J. \emph{et al.} Relationship Between Depression and the Use of Mobile Technologies and Social Media Among Adolescents: Umbrella Review. \emph{Journal of Medical Internet Research} \textbf{22}, e16388 (2020).
 
-\leavevmode\vadjust pre{\hypertarget{ref-orbenTeenagersScreensSocial2020}{}}%
-\CSLLeftMargin{24. }
-\CSLRightInline{Orben, A. Teenagers, screens and social media: A narrative review of reviews and key studies. \emph{Social Psychiatry and Psychiatric Epidemiology} \textbf{55}, 407--414 (2020).}
+\leavevmode\hypertarget{ref-orbenTeenagersScreensSocial2020}{}%
+24. Orben, A. Teenagers, screens and social media: A narrative review of reviews and key studies. \emph{Social Psychiatry and Psychiatric Epidemiology} \textbf{55}, 407--414 (2020).
 
-\leavevmode\vadjust pre{\hypertarget{ref-pollockChapterOverviewsReviews2022}{}}%
-\CSLLeftMargin{25. }
-\CSLRightInline{Pollock, M., Fernandes, R., Becker, L., Pieper, D. \& Hartling, L. Chapter {V}: {Overviews} of {Reviews}. in \emph{Cochrane {Handbook} for {Systematic Reviews} of {Interventions}} (eds. Higgins, J. P. et al.) ({Cochrane}, 2022).}
+\leavevmode\hypertarget{ref-pollockChapterOverviewsReviews2022}{}%
+25. Pollock, M., Fernandes, R., Becker, L., Pieper, D. \& Hartling, L. Chapter V: Overviews of Reviews. in \emph{Cochrane Handbook for Systematic Reviews of Interventions} (eds. Higgins, J. P. et al.) (Cochrane, 2022).
 
-\leavevmode\vadjust pre{\hypertarget{ref-xieCanTouchscreenDevices2018}{}}%
-\CSLLeftMargin{26. }
-\CSLRightInline{Xie, H. \emph{et al.} Can {Touchscreen Devices} be {Used} to {Facilitate Young Children}'s {Learning}? {A Meta-Analysis} of {Touchscreen Learning Effect}. \emph{Frontiers in Psychology} \textbf{9}, 2580 (2018).}
+\leavevmode\hypertarget{ref-xieCanTouchscreenDevices2018}{}%
+26. Xie, H. \emph{et al.} Can Touchscreen Devices be Used to Facilitate Young Children's Learning? A Meta-Analysis of Touchscreen Learning Effect. \emph{Frontiers in Psychology} \textbf{9}, 2580 (2018).
 
-\leavevmode\vadjust pre{\hypertarget{ref-adelantado-renauAssociationScreenMedia2019}{}}%
-\CSLLeftMargin{27. }
-\CSLRightInline{Adelantado-Renau, M. \emph{et al.} Association {Between Screen Media Use} and {Academic Performance Among Children} and {Adolescents}: {A Systematic Review} and {Meta-analysis}. \emph{JAMA Pediatrics} \textbf{173}, 1058 (2019).}
+\leavevmode\hypertarget{ref-adelantado-renauAssociationScreenMedia2019}{}%
+27. Adelantado-Renau, M. \emph{et al.} Association Between Screen Media Use and Academic Performance Among Children and Adolescents: A Systematic Review and Meta-analysis. \emph{JAMA Pediatrics} \textbf{173}, 1058 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-madiganAssociationsScreenUse2020}{}}%
-\CSLLeftMargin{28. }
-\CSLRightInline{Madigan, S., McArthur, B. A., Anhorn, C., Eirich, R. \& Christakis, D. A. Associations {Between Screen Use} and {Child Language Skills}: {A Systematic Review} and {Meta-analysis}. \emph{JAMA Pediatrics} \textbf{174}, 665 (2020).}
+\leavevmode\hypertarget{ref-madiganAssociationsScreenUse2020}{}%
+28. Madigan, S., McArthur, B. A., Anhorn, C., Eirich, R. \& Christakis, D. A. Associations Between Screen Use and Child Language Skills: A Systematic Review and Meta-analysis. \emph{JAMA Pediatrics} \textbf{174}, 665 (2020).
 
-\leavevmode\vadjust pre{\hypertarget{ref-poorolajalBehavioralFactorsInfluencing2020}{}}%
-\CSLLeftMargin{29. }
-\CSLRightInline{Poorolajal, J., Sahraei, F., Mohamdadi, Y., Doosti-Irani, A. \& Moradi, L. Behavioral factors influencing childhood obesity: A systematic review and meta-analysis. \emph{Obesity Research \& Clinical Practice} \textbf{14}, 109--118 (2020).}
+\leavevmode\hypertarget{ref-poorolajalBehavioralFactorsInfluencing2020}{}%
+29. Poorolajal, J., Sahraei, F., Mohamdadi, Y., Doosti-Irani, A. \& Moradi, L. Behavioral factors influencing childhood obesity: A systematic review and meta-analysis. \emph{Obesity Research \& Clinical Practice} \textbf{14}, 109--118 (2020).
 
-\leavevmode\vadjust pre{\hypertarget{ref-byunDigitalGamebasedLearning2018}{}}%
-\CSLLeftMargin{30. }
-\CSLRightInline{Byun, J. \& Joung, E. Digital game-based learning for {K-12} mathematics education: {A} meta-analysis. \emph{School Science and Mathematics} \textbf{118}, 113--126 (2018).}
+\leavevmode\hypertarget{ref-byunDigitalGamebasedLearning2018}{}%
+30. Byun, J. \& Joung, E. Digital game-based learning for K-12 mathematics education: A meta-analysis. \emph{School Science and Mathematics} \textbf{118}, 113--126 (2018).
 
-\leavevmode\vadjust pre{\hypertarget{ref-vannucciSocialMediaUse2020}{}}%
-\CSLLeftMargin{31. }
-\CSLRightInline{Vannucci, A., Simpson, E. G., Gagnon, S. \& Ohannessian, C. M. Social media use and risky behaviors in adolescents: {A} meta-analysis. \emph{Journal of Adolescence} \textbf{79}, 258--274 (2020).}
+\leavevmode\hypertarget{ref-vannucciSocialMediaUse2020}{}%
+31. Vannucci, A., Simpson, E. G., Gagnon, S. \& Ohannessian, C. M. Social media use and risky behaviors in adolescents: A meta-analysis. \emph{Journal of Adolescence} \textbf{79}, 258--274 (2020).
 
-\leavevmode\vadjust pre{\hypertarget{ref-yoonSocialNetworkSite2019}{}}%
-\CSLLeftMargin{32. }
-\CSLRightInline{Yoon, S., Kleinman, M., Mertz, J. \& Brannick, M. Is social network site usage related to depression? {A} meta-analysis of {Facebook}\textendash depression relations. \emph{Journal of Affective Disorders} \textbf{248}, 65--72 (2019).}
+\leavevmode\hypertarget{ref-yoonSocialNetworkSite2019}{}%
+32. Yoon, S., Kleinman, M., Mertz, J. \& Brannick, M. Is social network site usage related to depression? A meta-analysis of FacebookDepression relations. \emph{Journal of Affective Disorders} \textbf{248}, 65--72 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-vahediAssociationSelfreportedDepressive2021}{}}%
-\CSLLeftMargin{33. }
-\CSLRightInline{Vahedi, Z. \& Zannella, L. The association between self-reported depressive symptoms and the use of social networking sites ({SNS}): {A} meta-analysis. \emph{Current Psychology} \textbf{40}, 2174--2189 (2021).}
+\leavevmode\hypertarget{ref-vahediAssociationSelfreportedDepressive2021}{}%
+33. Vahedi, Z. \& Zannella, L. The association between self-reported depressive symptoms and the use of social networking sites (SNS): A meta-analysis. \emph{Current Psychology} \textbf{40}, 2174--2189 (2021).
 
-\leavevmode\vadjust pre{\hypertarget{ref-seetharamanFacebookKnowsInstagram2021}{}}%
-\CSLLeftMargin{34. }
-\CSLRightInline{Seetharaman, G. W., Jeff Horwitz and Deepa. Facebook {Knows Instagram Is Toxic} for {Teen Girls}, {Company Documents Show}. \emph{Wall Street Journal} (2021).}
+\leavevmode\hypertarget{ref-seetharamanFacebookKnowsInstagram2021}{}%
+34. Seetharaman, G. W., Jeff Horwitz and Deepa. Facebook Knows Instagram Is Toxic for Teen Girls, Company Documents Show. \emph{Wall Street Journal} (2021).
 
-\leavevmode\vadjust pre{\hypertarget{ref-tekedereExaminingEffectivenessAugmented2016}{}}%
-\CSLLeftMargin{35. }
-\CSLRightInline{Tekedere, H. \& Göke, H. Examining the {Effectiveness} of {Augmented Reality Applications} in {Education}: {A Meta-Analysis}. \emph{International Journal of Environmental and Science Education} \textbf{11}, 9469--9481 (2016).}
+\leavevmode\hypertarget{ref-tekedereExaminingEffectivenessAugmented2016}{}%
+35. Tekedere, H. \& Göke, H. Examining the Effectiveness of Augmented Reality Applications in Education: A Meta-Analysis. \emph{International Journal of Environmental and Science Education} \textbf{11}, 9469--9481 (2016).
 
-\leavevmode\vadjust pre{\hypertarget{ref-elsonPolicyStatementsMedia2019}{}}%
-\CSLLeftMargin{36. }
-\CSLRightInline{Elson, M. \emph{et al.} Do policy statements on media effects faithfully represent the science? \emph{Advances in Methods and Practices in Psychological Science} \textbf{2}, 12--25 (2019).}
+\leavevmode\hypertarget{ref-elsonPolicyStatementsMedia2019}{}%
+36. Elson, M. \emph{et al.} Do policy statements on media effects faithfully represent the science? \emph{Advances in Methods and Practices in Psychological Science} \textbf{2}, 12--25 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-ashtonScreenTimeChildren2019}{}}%
-\CSLLeftMargin{37. }
-\CSLRightInline{Ashton, J. J. \& Beattie, R. M. Screen time in children and adolescents: Is there evidence to guide parents and policy? \emph{The Lancet Child \& Adolescent Health} \textbf{3}, 292--294 (2019).}
+\leavevmode\hypertarget{ref-ashtonScreenTimeChildren2019}{}%
+37. Ashton, J. J. \& Beattie, R. M. Screen time in children and adolescents: Is there evidence to guide parents and policy? \emph{The Lancet Child \& Adolescent Health} \textbf{3}, 292--294 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-royalcollegeofpaediatricsandchildhealthHealthImpactsScreen2019}{}}%
-\CSLLeftMargin{38. }
-\CSLRightInline{Royal College of Paediatrics and Child Health. \emph{The health impacts of screen time: {A} guide for clinicians and parents.} (2019).}
+\leavevmode\hypertarget{ref-royalcollegeofpaediatricsandchildhealthHealthImpactsScreen2019}{}%
+38. Royal College of Paediatrics and Child Health. \emph{The health impacts of screen time: A guide for clinicians and parents.} (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-markerExploringMythChubby2022}{}}%
-\CSLLeftMargin{39. }
-\CSLRightInline{Marker, C., Gnambs, T. \& Appel, M. Exploring the myth of the chubby gamer: {A} meta-analysis on sedentary video gaming and body mass. \emph{Social Science \& Medicine} \textbf{301}, 112325 (2022).}
+\leavevmode\hypertarget{ref-markerExploringMythChubby2022}{}%
+39. Marker, C., Gnambs, T. \& Appel, M. Exploring the myth of the chubby gamer: A meta-analysis on sedentary video gaming and body mass. \emph{Social Science \& Medicine} \textbf{301}, 112325 (2022).
 
-\leavevmode\vadjust pre{\hypertarget{ref-pagePRISMA2020Statement2020}{}}%
-\CSLLeftMargin{40. }
-\CSLRightInline{Page, M. J. \emph{et al.} \emph{The {PRISMA} 2020 statement: An updated guideline for reporting systematic reviews}. (2020) doi:\href{https://doi.org/10.31222/osf.io/v7gm2}{10.31222/osf.io/v7gm2}.}
+\leavevmode\hypertarget{ref-pagePRISMA2020Statement2020}{}%
+40. Page, M. J. \emph{et al.} \emph{The PRISMA 2020 statement: An updated guideline for reporting systematic reviews}. (2020) doi:\href{https://doi.org/10.31222/osf.io/v7gm2}{10.31222/osf.io/v7gm2}.
 
-\leavevmode\vadjust pre{\hypertarget{ref-parrySystematicReviewMetaanalysis2021}{}}%
-\CSLLeftMargin{41. }
-\CSLRightInline{Parry, D. A. \emph{et al.} A systematic review and meta-analysis of discrepancies between logged and self-reported digital media use. \emph{Nature Human Behaviour} \textbf{5}, 1535--1547 (2021).}
+\leavevmode\hypertarget{ref-parrySystematicReviewMetaanalysis2021}{}%
+41. Parry, D. A. \emph{et al.} A systematic review and meta-analysis of discrepancies between logged and self-reported digital media use. \emph{Nature Human Behaviour} \textbf{5}, 1535--1547 (2021).
 
-\leavevmode\vadjust pre{\hypertarget{ref-byrneMeasurementScreenTime2021}{}}%
-\CSLLeftMargin{42. }
-\CSLRightInline{Byrne, R., Terranova, C. O. \& Trost, S. G. Measurement of screen time among young children aged 0\textendash 6 years: {A} systematic review. \emph{Obesity Reviews} \textbf{22}, (2021).}
+\leavevmode\hypertarget{ref-byrneMeasurementScreenTime2021}{}%
+42. Byrne, R., Terranova, C. O. \& Trost, S. G. Measurement of screen time among young children aged 0 years: A systematic review. \emph{Obesity Reviews} \textbf{22}, (2021).
 
-\leavevmode\vadjust pre{\hypertarget{ref-smithFeasibilityAutomatedCameras2019}{}}%
-\CSLLeftMargin{43. }
-\CSLRightInline{Smith, C., Galland, B. C., de Bruin, W. E. \& Taylor, R. W. Feasibility of automated cameras to measure screen use in adolescents. \emph{American journal of preventive medicine} \textbf{57}, 417--424 (2019).}
+\leavevmode\hypertarget{ref-smithFeasibilityAutomatedCameras2019}{}%
+43. Smith, C., Galland, B. C., de Bruin, W. E. \& Taylor, R. W. Feasibility of automated cameras to measure screen use in adolescents. \emph{American journal of preventive medicine} \textbf{57}, 417--424 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-rydingPassiveObjectiveMeasures2020}{}}%
-\CSLLeftMargin{44. }
-\CSLRightInline{Ryding, F. C. \& Kuss, D. J. Passive objective measures in the assessment of problematic smartphone use: {A} systematic review. \emph{Addictive Behaviors Reports} \textbf{11}, 100257 (2020).}
+\leavevmode\hypertarget{ref-rydingPassiveObjectiveMeasures2020}{}%
+44. Ryding, F. C. \& Kuss, D. J. Passive objective measures in the assessment of problematic smartphone use: A systematic review. \emph{Addictive Behaviors Reports} \textbf{11}, 100257 (2020).
 
-\leavevmode\vadjust pre{\hypertarget{ref-guyattGRADEGuidelinesIntroduction2011}{}}%
-\CSLLeftMargin{45. }
-\CSLRightInline{Guyatt, G. \emph{et al.} {GRADE} guidelines: 1. {Introduction}\textemdash{{GRADE}} evidence profiles and summary of findings tables. \emph{Journal of Clinical Epidemiology} \textbf{64}, 383--394 (2011).}
+\leavevmode\hypertarget{ref-guyattGRADEGuidelinesIntroduction2011}{}%
+45. Guyatt, G. \emph{et al.} GRADE guidelines: 1. IntroductionGRADE evidence profiles and summary of findings tables. \emph{Journal of Clinical Epidemiology} \textbf{64}, 383--394 (2011).
 
-\leavevmode\vadjust pre{\hypertarget{ref-twengeMoreTimeTechnology2019}{}}%
-\CSLLeftMargin{46. }
-\CSLRightInline{Twenge, J. M. More {Time} on {Technology}, {Less Happiness}? {Associations Between Digital-Media Use} and {Psychological Well-Being}. \emph{Current Directions in Psychological Science} \textbf{28}, 372--379 (2019).}
+\leavevmode\hypertarget{ref-twengeMoreTimeTechnology2019}{}%
+46. Twenge, J. M. More Time on Technology, Less Happiness? Associations Between Digital-Media Use and Psychological Well-Being. \emph{Current Directions in Psychological Science} \textbf{28}, 372--379 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-kellySocialMediaUse2018}{}}%
-\CSLLeftMargin{47. }
-\CSLRightInline{Kelly, Y., Zilanawala, A., Booker, C. \& Sacker, A. Social {Media Use} and {Adolescent Mental Health}: {Findings From} the {UK Millennium Cohort Study}. \emph{EClinicalMedicine} \textbf{6}, 59--68 (2018).}
+\leavevmode\hypertarget{ref-kellySocialMediaUse2018}{}%
+47. Kelly, Y., Zilanawala, A., Booker, C. \& Sacker, A. Social Media Use and Adolescent Mental Health: Findings From the UK Millennium Cohort Study. \emph{EClinicalMedicine} \textbf{6}, 59--68 (2018).
 
-\leavevmode\vadjust pre{\hypertarget{ref-NHLBIQualityAssessmentSystematic2014}{}}%
-\CSLLeftMargin{48. }
-\CSLRightInline{National Health, Lung, and Blood Institute. \emph{Quality {Assessment} of {Systematic Reviews} and {Meta-Analyses}}. (2014).}
+\leavevmode\hypertarget{ref-NHLBIQualityAssessmentSystematic2014}{}%
+48. National Health, Lung, and Blood Institute. \emph{Quality Assessment of Systematic Reviews and Meta-Analyses}. (2014).
 
-\leavevmode\vadjust pre{\hypertarget{ref-bowmanEffectSizesStatistical2012}{}}%
-\CSLLeftMargin{49. }
-\CSLRightInline{Bowman, N. A. Effect {Sizes} and {Statistical Methods} for {Meta-Analysis} in {Higher Education}. \emph{Research in Higher Education} \textbf{53}, 375--382 (2012).}
+\leavevmode\hypertarget{ref-bowmanEffectSizesStatistical2012}{}%
+49. Bowman, N. A. Effect Sizes and Statistical Methods for Meta-Analysis in Higher Education. \emph{Research in Higher Education} \textbf{53}, 375--382 (2012).
 
-\leavevmode\vadjust pre{\hypertarget{ref-jacobsEstimationBiserialCorrelation2017}{}}%
-\CSLLeftMargin{50. }
-\CSLRightInline{Jacobs, P. \& Viechtbauer, W. Estimation of the biserial correlation and its sampling variance for use in meta-analysis: {Biserial Correlation}. \emph{Research Synthesis Methods} \textbf{8}, 161--180 (2017).}
+\leavevmode\hypertarget{ref-jacobsEstimationBiserialCorrelation2017}{}%
+50. Jacobs, P. \& Viechtbauer, W. Estimation of the biserial correlation and its sampling variance for use in meta-analysis: Biserial Correlation. \emph{Research Synthesis Methods} \textbf{8}, 161--180 (2017).
 
-\leavevmode\vadjust pre{\hypertarget{ref-funderEvaluatingEffectSize2019}{}}%
-\CSLLeftMargin{51. }
-\CSLRightInline{Funder, D. C. \& Ozer, D. J. Evaluating {Effect Size} in {Psychological Research}: {Sense} and {Nonsense}. \emph{Advances in Methods and Practices in Psychological Science} \textbf{2}, 156--168 (2019).}
+\leavevmode\hypertarget{ref-funderEvaluatingEffectSize2019}{}%
+51. Funder, D. C. \& Ozer, D. J. Evaluating Effect Size in Psychological Research: Sense and Nonsense. \emph{Advances in Methods and Practices in Psychological Science} \textbf{2}, 156--168 (2019).
 
-\leavevmode\vadjust pre{\hypertarget{ref-gignacEffectSizeGuidelines2016}{}}%
-\CSLLeftMargin{52. }
-\CSLRightInline{Gignac, G. E. \& Szodorai, E. T. Effect size guidelines for individual differences researchers. \emph{Personality and Individual Differences} \textbf{102}, 74--78 (2016).}
+\leavevmode\hypertarget{ref-gignacEffectSizeGuidelines2016}{}%
+52. Gignac, G. E. \& Szodorai, E. T. Effect size guidelines for individual differences researchers. \emph{Personality and Individual Differences} \textbf{102}, 74--78 (2016).
 
-\leavevmode\vadjust pre{\hypertarget{ref-R-metafor}{}}%
-\CSLLeftMargin{53. }
-\CSLRightInline{Viechtbauer, W. \emph{Metafor: Meta-analysis package for r}. (2023).}
+\leavevmode\hypertarget{ref-R-metafor}{}%
+53. Viechtbauer, W. \emph{Metafor: Meta-analysis package for r}. (2023).
 
-\leavevmode\vadjust pre{\hypertarget{ref-R-base}{}}%
-\CSLLeftMargin{54. }
-\CSLRightInline{R Core Team. \emph{R: A language and environment for statistical computing}. (R Foundation for Statistical Computing, 2023).}
+\leavevmode\hypertarget{ref-R-base}{}%
+54. R Core Team. \emph{R: A language and environment for statistical computing}. (R Foundation for Statistical Computing, 2023).
 
-\leavevmode\vadjust pre{\hypertarget{ref-eggerBiasMetaanalysisDetected1997}{}}%
-\CSLLeftMargin{55. }
-\CSLRightInline{Egger, M., Smith, G. D., Schneider, M. \& Minder, C. Bias in meta-analysis detected by a simple, graphical test. \emph{BMJ} \textbf{315}, 629--634 (1997).}
+\leavevmode\hypertarget{ref-eggerBiasMetaanalysisDetected1997}{}%
+55. Egger, M., Smith, G. D., Schneider, M. \& Minder, C. Bias in meta-analysis detected by a simple, graphical test. \emph{BMJ} \textbf{315}, 629--634 (1997).
 
-\leavevmode\vadjust pre{\hypertarget{ref-pageChapter13Assessing2021}{}}%
-\CSLLeftMargin{56. }
-\CSLRightInline{Page, M. J., Higgins, J. P. \& Sterne, J. A. Chapter 13: {Assessing} risk of bias due to missing results in a synthesis. in \emph{Cochrane {Handbook} for {Systematic Reviews} of {Interventions}} (eds. Higgins, J. P. et al.) ({Cochrane}, 2021).}
+\leavevmode\hypertarget{ref-pageChapter13Assessing2021}{}%
+56. Page, M. J., Higgins, J. P. \& Sterne, J. A. Chapter 13: Assessing risk of bias due to missing results in a synthesis. in \emph{Cochrane Handbook for Systematic Reviews of Interventions} (eds. Higgins, J. P. et al.) (Cochrane, 2021).
 
-\leavevmode\vadjust pre{\hypertarget{ref-ioannidisExploratoryTestExcess2007}{}}%
-\CSLLeftMargin{57. }
-\CSLRightInline{Ioannidis, J. P. \& Trikalinos, T. A. An exploratory test for an excess of significant findings. \emph{Clinical Trials} \textbf{4}, 245--253 (2007).}
+\leavevmode\hypertarget{ref-ioannidisExploratoryTestExcess2007}{}%
+57. Ioannidis, J. P. \& Trikalinos, T. A. An exploratory test for an excess of significant findings. \emph{Clinical Trials} \textbf{4}, 245--253 (2007).
 
-\leavevmode\vadjust pre{\hypertarget{ref-papadimitriouUmbrellaReviewEvidence2021}{}}%
-\CSLLeftMargin{58. }
-\CSLRightInline{Papadimitriou, N. \emph{et al.} An umbrella review of the evidence associating diet and cancer risk at 11 anatomical sites. \emph{Nature Communications} \textbf{12}, 4579 (2021).}
-
-\end{CSLReferences}
+\leavevmode\hypertarget{ref-papadimitriouUmbrellaReviewEvidence2021}{}%
+58. Papadimitriou, N. \emph{et al.} An umbrella review of the evidence associating diet and cancer risk at 11 anatomical sites. \emph{Nature Communications} \textbf{12}, 4579 (2021).
+\end{cslreferences}
 
 \newpage
 

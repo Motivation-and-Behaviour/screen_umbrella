@@ -9,8 +9,8 @@ t #' .. content for \description{} (no empty lines) ..
 #' @return
 #' @author Taren Sanders
 #' @export
-make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
-  if (debug) labsize <- 1 else labsize <- NA
+make_forest_plot <- function(combined_effects, plot_params, debug = TRUE) {
+  if (debug) labsize <- 0.1 else labsize <- NA
 
   plot_effects <-
     combined_effects %>%
@@ -29,13 +29,16 @@ make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
         "Screen-based intervention:"
       ),
       # Fix long labels
-      plain_language_outcome = trimmer(plain_language_outcome, 40),
-      plain_language_exposure = trimmer(plain_language_exposure, 40),
+      plain_language_outcome = trimmer(plain_language_outcome, 20),
+      plain_language_exposure = trimmer(plain_language_exposure, 26),
+      author_year = trimmer(author_year, 14),
+      study_design = trimmer(study_design, 8),
+      sample_type = trimmer(sample_type, 7),
       i2 = scales::percent(i2, 2, scale = 1),
       n = scales::label_comma(accuracy = 1)(n),
       k = as.character(k),
       rci = paste(format(round(r, 2), nsmall = 2),
-        " [", format(round(cilb95, 2), nsmall = 2), ", ",
+        "<br/> [", format(round(cilb95, 2), nsmall = 2), ", ",
         format(round(ciub95, 2), nsmall = 2), "]",
         sep = ""
       ),
@@ -54,7 +57,7 @@ make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
       ),
       font_fam = "fontawesome-webfont",
       age_group = factor(age_group,
-        levels = c("Mixed", "Young children", "Children", "Adolescents")
+        levels = c("Mixed", "Young", "Children", "Adolescents")
       )
     ) %>%
     arrange(
@@ -67,22 +70,22 @@ make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
     mutate(row_num = as.factor(row_number())) %>%
     add_row(
       outcome_lvl_1 = "**Outcome**",
-      plain_language_outcome = "**Specific Outcome**",
+      plain_language_outcome = "**Specific <br/>Outcome**",
       plain_language_exposure = "**Exposure**",
       n = "**N**",
       k = "**K**",
       i2 = "**I<sup>2</sup>**",
-      rci = "**<i>r</i> with 95% CI**",
-      author_year = "**Lead Author, Date**",
+      rci = "**<i>r</i> with <br/>95% CI**",
+      author_year = "**Lead Author, <br/>Date**",
       row_num = "NA",
       indiv_data = "**Indiv.<br/>Data**",
       eggers = "**Eggers**",
       esig = "**Excess<br/>Signif.**",
       outcome_category = "**Outcome Category**",
       font_fam = "sans",
-      age_group = "**Age Group**",
-      sample_type = "**Population**",
-      study_design = "**Study Design**"
+      age_group = "**Age <br/>Group**",
+      sample_type = "**Pop.**",
+      study_design = "**Study <br/>Design**"
     ) %>%
     mutate(
       outcome_lvl_1 = fct_expand(outcome_lvl_1, "**Outcome**") %>%
@@ -334,13 +337,15 @@ trimmer <- Vectorize(function(string, max_len) {
   # Deal with long labels
   if (str_length(string) > max_len) {
     # If there's a colon, always break there to keep it neat
-    if (str_detect(string, ":")) {
-      string <- gsub(":", ":<br/>", string)
-    } else {
-      string <- str_replace_all(str_wrap(string,
-        width = str_length(string) / 1.5
-      ), "\n", "<br/>")
-    }
+    # if (str_detect(string, ":")) {
+    #   string <- gsub(":", ":<br/>", string)
+    # } else {
+    string <- str_replace_all(str_wrap(string,
+      # width = str_length(string) / 1.5,
+      width = max_len,
+      whitespace_only = FALSE, exdent = 2
+    ), "\n", "<br/>")
+    # }
   }
 
   return(string)

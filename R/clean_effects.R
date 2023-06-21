@@ -60,7 +60,7 @@ clean_effects <- function(
         moderator_category %in% age_moderator_categories &
           moderator_level %in% age_codes$children ~ "Children",
         moderator_category %in% age_moderator_categories &
-          moderator_level %in% age_codes$young_children ~ "Young children",
+          moderator_level %in% age_codes$young_children ~ "Young",
         TRUE ~ moderator_age
       ),
       sample_type = if_else(
