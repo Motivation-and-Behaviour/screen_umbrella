@@ -36,7 +36,7 @@ make_table_rob <- function(tables_df) {
     gt(
       caption = "Quality assessment for studies providing unique effects"
     ) %>%
-    tab_header(html("<strong>Quality Assessment</strong>"),
+    tab_header(md("**Quality Assessment**"),
       subtitle = "Quality assessment for meta-analyses providing unique effects" # nolint
     ) %>%
     data_color(
@@ -86,7 +86,7 @@ make_table_rob <- function(tables_df) {
         )
     ) %>%
     tab_footnote(
-      footnote = "Dual independent screening & review",
+      footnote = "Dual independent screening and review",
       locations = cells_column_labels(dual_independent_screening_review)
     ) %>%
     tab_footnote(

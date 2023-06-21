@@ -127,6 +127,7 @@ targets::tar_load(
   c("manuscript_info", "combined_bib", "combined_effects"),
   store = here::here("_targets")
 )
+ce <- combined_effects
 ```
 
 # Introduction
@@ -203,35 +204,35 @@ Effects not meeting one or more of these standards are presented in Supplementar
 The remaining `r manuscript_info$edu$n_certain` effects met our criteria for statistical credibility and are described in Figure 2.
 These `r manuscript_info$edu$n_certain` effects came from `r manuscript_info$edu$n_unique` meta-analytic reviews analysing data from `r manuscript_info$edu$summary$studies_n` empirical studies with `r format(manuscript_info$edu$summary$total_n, big.mark=",")` individual participants.
 
-Among the statistically credible effects, general screen use, television viewing, and video games were all negatively associated with learning.
-E-books that included narration, as well as touch screen education interventions, and augmented reality education interventions were positively associated with learning.
-General screen use was negatively associated with literacy outcomes.
-However, if the screen use involved co-viewing (e.g., watching with a parent), or the content of television programs was educational, the association with literacy was positive and significant at the 95\% confidence level (weak evidence).
-Numeracy outcomes were positively associated with screen-based mathematics interventions and video games that contained numeracy content.
+Among the statistically credible effects, general screen use `r report_effect(ce, "47569_001", first = TRUE)`, television viewing `r report_effect(ce, "47569_002")`, and video games `r report_effect(ce, "47569_005")` were all negatively associated with learning.
+E-books that included narration `r report_effect(ce, "20223_015")`, as well as touch screen education interventions `r report_effect(ce, "50271_001")`, and augmented reality education interventions `r report_effect(ce, "42168_002")` were positively associated with learning.
+General screen use was negatively associated with literacy outcomes `r report_effect(ce, "47783_001")`.
+However, if the screen use involved co-viewing (e.g., watching with a parent; `r report_effect(ce, "47783_022", style = "none")`), or the content of television programs was educational `r report_effect(ce, "47783_015")`, the association with literacy was positive and significant at the 95\% confidence level (weak evidence).
+Numeracy outcomes were positively associated with screen-based mathematics interventions `r report_effect(ce, "37653_002")` and video games that contained numeracy content `r report_effect(ce, "41430_001")`.
 
 As shown in Figure 2, most of the credible results (`r manuscript_info$edu$n_p999` of `r manuscript_info$edu$n_certain` effects) showed statistically significant associations, with 99.9\% confidence intervals not encompassing zero (strong evidence).
 The remaining `r xfun::numbers_to_words(manuscript_info$edu$n_p95)` associations were significant at the 95% confidence level (weak evidence).
 All credible effects related to education outcomes were small-to-moderate.
-Screen-based interventions designed to influence an outcome (e.g., a computer based program designed to enhance learning [@xieCanTouchscreenDevices2018]) tended to have larger effect sizes than exposures that were not specifically intended to influence any of the measured outcomes (e.g., the association between television viewing and learning [@adelantado-renauAssociationScreenMedia2019]).
-The largest effect size observed was for augmented reality-based education interventions on general learning `r report_effect(combined_effects, "42168_002")`.
+Screen-based interventions designed to influence an outcome (e.g., a computer based program designed to enhance learning [@xieCanTouchscreenDevices2018]; `r report_effect(ce, "50271_001", style = "none")`) tended to have larger effect sizes than exposures that were not specifically intended to influence any of the measured outcomes (e.g., the association between television viewing and learning [@adelantado-renauAssociationScreenMedia2019]; `r report_effect(ce, "47569_002", style = "none")`).
+The largest effect size observed was for augmented reality-based education interventions on general learning `r report_effect(ce, "42168_002")`.
 Most effects showed high levels of heterogeneity (`r manuscript_info$edu$n_i2` of `r manuscript_info$edu$n_certain` with $I^2 > 50\%$).
 
 We identified `r manuscript_info$health$n_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
 We removed `r manuscript_info$health$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$health$n_samplesize` effects with samples < 1,000, and `r manuscript_info$health$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
-No remaining studies showed evidence of excessive significance.
+No remaining studies had statistically significant tests for excess significance.
 Effects not meeting one or more of these standards are presented in Supplementary File 5.
 The remaining `r manuscript_info$health$n_certain` meta-analytic associations met our criteria for credible evidence and are described below (see also Figure 3).
 These `r manuscript_info$health$n_certain` effects came from `r manuscript_info$health$n_unique` meta-analytic reviews analysing data from `r manuscript_info$health$summary$studies_n` empirical studies with `r format(manuscript_info$health$summary$total_n, big.mark=",")` individual participants.
 
-Digital advertising of unhealthy foods—both traditional advertising and video games developed by a brand for promotion—were associated with higher unhealthy food intake.
-Social media use and sexual content were positively associated with risky behaviors (e.g., sexual activity, risk taking, and substance abuse).
-Television viewing was negatively correlated with sleep duration, but with stronger evidence only observed for adolescents.
-All forms of screen use (general, television, and video games) were associated with body composition (e.g., higher BMI).
+Digital advertising of unhealthy foods—both traditional advertising `r report_effect(ce, "6739_002")` and video games developed by a brand for promotion `r report_effect(ce, "47594_001")`—were associated with higher unhealthy food intake.
+Social media use and sexual content were positively associated with risky behaviors (e.g., social media and risky sexual behaviour; `r report_effect(ce, "47429_003", style = "none")`).
+Television viewing was negatively correlated with sleep duration, but with stronger evidence only observed for adolescents `r report_effect(ce, "6524_005")`.
+Both television and video games were associated with body composition (e.g., television `r report_effect(ce, "8556_119", style = "none")`).
 Screen-based interventions which target health behaviours appeared mostly effective.
 
 Across the health outcomes, most (`r manuscript_info$health$n_p999` of `r manuscript_info$health$n_certain`) effects were statistically significant at the 99.9\% confidence interval level, with the remaining `r xfun::numbers_to_words(manuscript_info$health$n_p95)` significant at 95\% confidence.
 However, most of the credible effects exhibited high levels of heterogeneity, with all but two having $I^2 > 75\%$.
-Additionally, most effects were small, with the association between internet use and depression the largest at `r report_effect(combined_effects, "60496_003", "in-text")`.
+Additionally, most effects were small, with the association between internet use and depression the largest at `r report_effect(ce, "60496_003", "in-text")`.
 Most of the effect sizes (`r manuscript_info$health$n_r2`/`r manuscript_info$health$n_certain`) had an absolute value of $r < 0.2$.
 
 # Discussion
@@ -241,7 +242,7 @@ We found that when meta-analyses examined general screen use, and did not specif
 However, when meta-analyses included a more nuanced examination of exposures, a more complex picture appeared.
 
 As an example, consider children watching television programs---an often cited form of screen use harm.
-We found statistically robust evidence for a small association with poorer academic performance and literacy skills for general television watching[@adelantado-renauAssociationScreenMedia2019].
+We found evidence for a small association with poorer academic performance and literacy skills for general television watching[@adelantado-renauAssociationScreenMedia2019].
 However, we also found evidence that if the content of the program was educational, or the child was watching the program with a parent (i.e., co-viewing), this exposure was instead associated with better literacy [@madiganAssociationsScreenUse2020].
 Thus, parents may play an important role in selecting content that is likely to benefit their children or, perhaps, interact with their children in ways that may foster literacy (e.g., asking their children questions about the program).
 Similar nuanced findings were observed for video games.
@@ -261,9 +262,6 @@ The way that a young person interacts with digital screens may also be important
 We found evidence that touch screens had strong evidence for benefits on learning [@xieCanTouchscreenDevices2018], as did augmented reality [@tekedereExaminingEffectivenessAugmented2016].
 
 Largely owing to a small number of studies or missing individual study data, there were few age-based conclusions that could be drawn from reviews which met our criteria for statistical certainty.
-If we expand to include those reviews which did not meet this threshold, there remained no clear pattern although there were some age-specific differences in associations (data available in Supplementary Files 4 & 5).
-For example, advertising of unhealthy food was associated with unhealthy food choice for young children, but was not statistically significant for other age groups [@sadeghiradInfluenceUnhealthyFood2016].
-Conversely, TV programs and movies were more strongly associated with lower physical activity for adolescents than for younger age groups [@marshallRelationshipsMediaUse2004].
 Given the differences in development across childhood and adolescence and the different ways children of various ages use screens, further examination of age-based differences is needed.
 However, in the absence of this work, our study has shown how children are affected by screens in general.
 
@@ -277,9 +275,9 @@ Our findings suggest that screen use is a complex issue, with associations based
 Many current guidelines simplify this complex relationship as something that should be minimised [@australiangovernmentPhysicalActivityExercise2021;@whoGuidelinesPhysicalActivity2019].
 We suggest that future guidelines need to embrace the complexity of the issue, to give parents and clinicians specific information to weigh the pros and cons of interactions with screens.
 
-In particular, our results support the the continuing trend of guidelines moving away from recommendations to reduce 'screen use', and instead focusing on the type of screen use.
-For example, our findings suggest that guidelines should discourage high levels of social media and internet use.
-Guidelines may also consider adapting recommendations that promote the use of educational apps and video games, although these recommendations need to be balanced against the (very small) risks to adiposity.
+Given our results, we support the continuing trend of guidelines moving away from recommendations to reduce 'screen use', and instead focusing on the type of screen use.
+For example, we suggest that guidelines should discourage high levels of social media and internet use.
+Guidelines may also consider adapting recommendations that promote the use of educational apps and video games, although these recommendations need to be balanced against the (very small) risks to adiposity [@markerExploringMythChubby2022].
 
 Our results also have implications for future research.
 Screen use research is extensive, varied, and rapidly growing.
@@ -481,11 +479,11 @@ The authors declare no conflicts of interest.
 
 # Figure legends
 
-*Figure 1: PRISMA Diagram.*
+*Figure 1: PRISMA flow diagram.*
 
-*Figure 2: Education outcomes. Results for `r manuscript_info$edu$n_certain` unique effect sizes related to educational outcomes which met the criteria for statistical certainty. Findings are presented as correlations with both 95% and 99.9% confidence intervals.*
+*Figure 2: Education outcomes. Forest plot for `r manuscript_info$edu$n_certain` unique effect sizes related to educational outcomes which met the criteria for statistical certainty. Findings are presented as correlations (two-sided) with both 95% and 99.9% confidence intervals.*
 
-*Figure 3: Health and health-related behaviour outcomes. Results for `r manuscript_info$health$n_certain` unique effect sizes related to health and health-related behaviour outcomes which met the criteria for statistical certainty. Findings are presented as correlations with both 95% and 99.9% confidence intervals.*
+*Figure 3: Health and health-related behaviour outcomes. Forest plot for `r manuscript_info$health$n_certain` unique effect sizes related to health and health-related behaviour outcomes which met the criteria for statistical certainty. Findings are presented as correlations (two-sided) with both 95% and 99.9% confidence intervals.*
 
 \newpage
 

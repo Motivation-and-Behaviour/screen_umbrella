@@ -117,6 +117,13 @@ list(
     format = "file",
   ),
   tar_target(
+    table_rob_saved_docx,
+    save_table(table_rob_gt, "tables/Table 1 - Quality assessment.docx",
+      method = "webshot2"
+    ),
+    format = "file",
+  ),
+  tar_target(
     table_effects,
     make_table_effects(combined_effects)
   ),
