@@ -304,7 +304,8 @@ make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       strip.placement = "outside",
-      strip.background = element_rect(linetype = "solid")
+      strip.background = element_rect(linetype = "solid"),
+      plot.margin = unit(c(1, -5, 1, 1), "mm")
     )
 
   if (plot_params$caption) {

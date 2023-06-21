@@ -5,7 +5,7 @@ edu_certain <- list(
   title = "Associations Between Exposures and Education Outcomes",
   categories = "Education",
   certain = TRUE,
-  dims = c(12, 8),
+  dims = c(9, 6),
   moderators = FALSE,
   caption = FALSE,
   pos =

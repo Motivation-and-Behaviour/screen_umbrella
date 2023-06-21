@@ -72,16 +72,16 @@ clean_effects <- function(
       study_design = case_when(
         moderator_category %in% design_moderator_categories &
           moderator_level %in% design_codes$design_unspec ~
-          "Mixed or unspecified",
+          "Mixed or unclear",
         moderator_category %in% design_moderator_categories &
           moderator_level %in% design_codes$design_obs_mixed ~
-          "Observational - mixed",
+          "Observational",
         moderator_category %in% design_moderator_categories &
           moderator_level %in% design_codes$design_obs_cross ~
-          "Cross-sectional only",
+          "Cross-sectional",
         moderator_category %in% design_moderator_categories &
           moderator_level %in% design_codes$design_obs_long ~
-          "Longitudinal only",
+          "Longitudinal",
         moderator_category %in% design_moderator_categories &
           moderator_level %in% design_codes$design_exp ~
           "Experimental",
