@@ -20,7 +20,7 @@ make_supp_exposures <- function(combined_effects) {
 
   out_path <- here::here(
     "supplementary_files",
-    "Supplementary File 5 - List of Exposures.csv"
+    "Supplementary File 1 - List of Exposures.csv"
   )
   readr::write_csv(out, file = out_path, col_names = FALSE)
 
@@ -103,13 +103,13 @@ make_supp_effects <- function(combined_effects) {
 
   out_path_csv <- here::here(
     "supplementary_files",
-    "Supplementary File 2 - Complete Effects Data.csv"
+    "Supplementary File 6 - Complete Effects Data.csv"
   )
 
   readr::write_csv(out_effects, out_path_csv)
 
   codebook_filepath <-
-    "supplementary_files/Supplementary File 3 - Effect Size Codebook.pdf"
+    "supplementary_files/Supplementary File 10 - Effect Size Codebook.pdf"
 
   dataReporter::makeCodebook(
     out_effects,
@@ -128,4 +128,27 @@ make_supp_effects <- function(combined_effects) {
   file.rename("supplementary_files/codebook.pdf", codebook_filepath)
 
   return(c(out_path_csv, codebook_filepath))
+}
+
+#' .. content for \description{} (no empty lines) ..
+#'
+#' .. content for \details{} ..
+#'
+#' @title
+#' @param join_supp_py_script
+#' @param other_supps_files
+#' @param table_effects_saved
+#' @param supp_exposures
+#' @param supp_effects
+#' @param references
+#' @param table_desc_saved
+#' @return
+#' @author Taren Sanders
+#' @export
+join_supps <- function(
+    other_supps_files, join_supp_py_script, table_effects_saved,
+    supp_exposures, supp_effects, references, table_desc_saved) {
+  reticulate::source_python(here::here("python", "combine_pdfs.py"))
+
+  return("supplementary_files/Combined Supplementary Files.pdf")
 }

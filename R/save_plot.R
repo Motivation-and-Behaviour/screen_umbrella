@@ -15,7 +15,9 @@ save_plot <- function(plot, plot_params) {
     filename = file_name,
     plot = plot,
     width = plot_params$dims[[1]],
-    height = plot_params$dims[[2]]
+    height = plot_params$dims[[2]],
+    units = "mm",
+    dpi = 320
   )
 
   return(file_name)

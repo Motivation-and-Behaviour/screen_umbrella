@@ -3,7 +3,7 @@
 21974 studies screened against title and abstract
 	19417 studies excluded
 2557 studies assessed for full-text eligibility
-	2339 studies excluded
+	2340 studies excluded
 		659  Systematic review without meta-analysis
 		566  Not a systematic review
 		237  Wrong exposure - clinical health intervention 
@@ -13,7 +13,7 @@
 		126  Wrong exposure - other (explain)
 		101  Wrong population
 		59  Individual level data only
-		36  Duplicated reference
+		37  Duplicated reference
 		36  Not a review
 		14  Meta analysis that meets inclusion criteria, but youth results not presented and authors did not/could not provide individual study data when contacted.
 		12  Analysis not moderated by age
@@ -26,4 +26,4 @@
 		1  The sample includes adolescent groups, however the analysis are not moderated by age. Individual level data provided.
 	0 studies ongoing
 	0 studies awaiting classification
-218 studies included
+217 studies included

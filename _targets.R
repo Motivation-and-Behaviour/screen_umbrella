@@ -97,12 +97,30 @@ list(
     make_table_desc_gt(tables_df)
   ),
   tar_target(
-    table_desc_latex,
-    make_table_desc_latex(tables_df)
+    table_rob_gt,
+    make_table_rob(tables_df)
   ),
   tar_target(
     table_desc_saved,
-    save_table(table_desc_gt, "tables/Table 1 - Review characteristics.pdf"),
+    save_table(
+      table_desc_gt,
+      "supplementary_files/Supplementary File 2 - Review characteristics.pdf",
+      method = "webshot"
+    ),
+    format = "file",
+  ),
+  tar_target(
+    table_rob_saved,
+    save_table(table_rob_gt, "tables/Table 1 - Quality assessment.pdf",
+      method = "webshot"
+    ),
+    format = "file",
+  ),
+  tar_target(
+    table_rob_saved_docx,
+    save_table(table_rob_gt, "tables/Table 1 - Quality assessment.docx",
+      method = "webshot2"
+    ),
     format = "file",
   ),
   tar_target(
@@ -113,7 +131,7 @@ list(
     table_effects_saved,
     save_table(
       table_effects,
-      "supplementary_files/Supplementary File 9 - Effect Characteristics.pdf"
+      "supplementary_files/Supplementary File 3 - Effect Characteristics.pdf"
     ),
     format = "file",
   ),
@@ -220,14 +238,20 @@ list(
       effects_clean, prisma, tables_df, combined_effects, studies_clean
     )
   ),
+  tar_target(other_supps_files, c(
+    "supplementary_files/Supplementary File 7 - Search Strategy.pdf"
+  ), format = "file"),
+  tar_target(join_supp_py_script, "python/combine_pdfs.py", format = "file"),
+  tar_target(joined_supps,
+    join_supps(
+      join_supp_py_script, other_supps_files, table_effects_saved,
+      supp_exposures, supp_effects, references, table_desc_saved
+    ),
+    format = "file"
+  ),
   tar_render(
     manuscript,
     path = here::here("reports", "manuscript.Rmd")
-  ),
-  tar_render(
-    manuscript_md,
-    path = here::here("reports", "manuscript.Rmd"),
-    output_format = rmarkdown::md_document(pandoc_args = "--wrap=none")
   ),
   tar_render(
     manuscript_docx,
@@ -239,7 +263,7 @@ list(
     path = here::here("reports", "references.Rmd"),
     output_file = here::here(
       "supplementary_files",
-      "Supplementary File 8 - Included Studies.pdf"
+      "Supplementary File 9 - Included Studies.pdf"
     ),
     params = list(
       nocite_list =
@@ -248,14 +272,5 @@ list(
           paste(reviews_raw$bibtex_key, collapse = ", @")
         )
     )
-  ),
-  tar_render(
-    revision_letter,
-    path = here::here("reports", "revision_letter.Rmd")
-  ),
-  tar_render(
-    revision_letter_docx,
-    path = here::here("reports", "revision_letter.Rmd"),
-    output_format = revise::letter.docx()
   )
 )

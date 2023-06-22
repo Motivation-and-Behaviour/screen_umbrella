@@ -31,7 +31,7 @@ clean_reviews <- function(
         demographics %in% age_codes$mixed ~ "Mixed",
         demographics %in% age_codes$adolescents ~ "Adolescents",
         demographics %in% age_codes$children ~ "Children",
-        demographics %in% age_codes$young_children ~ "Young children",
+        demographics %in% age_codes$young_children ~ "Young",
         TRUE ~ demographics
       ),
       # Tidy up the sample age variables
@@ -58,7 +58,7 @@ clean_reviews <- function(
         sample_age_lowest_study_mean < 1 & sample_age_highest_study_mean > 10 ~
           "Mixed",
         sample_age_lowest_study_mean >= 12 ~ "Adolescents",
-        sample_age_highest_study_mean < 7 ~ "Young children",
+        sample_age_highest_study_mean < 7 ~ "Young",
         sample_age_lowest_study_mean >= 4 & sample_age_highest_study_mean < 13 ~
           "Children",
         TRUE ~ demographics_coded
@@ -125,10 +125,10 @@ clean_reviews <- function(
     # Add study design
     mutate(
       study_design = case_when( # nolint start
-        study_design_restrictions %in% design_codes$design_unspec ~ "Mixed or unspecified",
-        study_design_restrictions %in% design_codes$design_obs_mixed ~ "Observational - mixed",
-        study_design_restrictions %in% design_codes$design_obs_cross ~ "Cross-sectional only",
-        study_design_restrictions %in% design_codes$design_obs_long ~ "Longitudinal only",
+        study_design_restrictions %in% design_codes$design_unspec ~ "Mixed or unclear",
+        study_design_restrictions %in% design_codes$design_obs_mixed ~ "Observational",
+        study_design_restrictions %in% design_codes$design_obs_cross ~ "Cross-sectional",
+        study_design_restrictions %in% design_codes$design_obs_long ~ "Longitudinal",
         study_design_restrictions %in% design_codes$design_exp ~ "Experimental",
         TRUE ~ study_design_restrictions # nolint end
       )
