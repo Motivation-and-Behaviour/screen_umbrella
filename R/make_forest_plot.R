@@ -9,7 +9,7 @@ t #' .. content for \description{} (no empty lines) ..
 #' @return
 #' @author Taren Sanders
 #' @export
-make_forest_plot <- function(combined_effects, plot_params, debug = TRUE) {
+make_forest_plot <- function(combined_effects, plot_params, debug = FALSE) {
   if (debug) labsize <- 0.1 else labsize <- NA
 
   plot_effects <-
@@ -20,7 +20,8 @@ make_forest_plot <- function(combined_effects, plot_params, debug = TRUE) {
       cilb999 = if_else(cilb999 < -1, -1, cilb999),
       ciub999 = if_else(ciub999 > 1, 1, ciub999),
       # Overall outcome into a variable and remove that from the sub-variable
-      outcome_lvl_1 = factor(gsub(":.*", "", plain_language_outcome)),
+      outcome_lvl_1 = gsub(":.*", "", plain_language_outcome),
+      outcome_lvl_1 = factor(trimmer(outcome_lvl_1, 10)),
       plain_language_outcome = gsub(".*: ", "", plain_language_outcome),
       outcome_category = factor(str_to_title(outcome_category)),
       plain_language_exposure = str_replace(
@@ -29,11 +30,13 @@ make_forest_plot <- function(combined_effects, plot_params, debug = TRUE) {
         "Screen-based intervention:"
       ),
       # Fix long labels
-      plain_language_outcome = trimmer(plain_language_outcome, 20),
-      plain_language_exposure = trimmer(plain_language_exposure, 26),
-      author_year = trimmer(author_year, 14),
-      study_design = trimmer(study_design, 8),
-      sample_type = trimmer(sample_type, 7),
+      plain_language_outcome =
+        trimmer(plain_language_outcome, plot_params$trimmer$plo),
+      plain_language_exposure =
+        trimmer(plain_language_exposure, plot_params$trimmer$ple),
+      author_year = trimmer(author_year, plot_params$trimmer$auth),
+      study_design = trimmer(study_design, plot_params$trimmer$study),
+      sample_type = trimmer(sample_type, plot_params$trimmer$sample),
       i2 = scales::percent(i2, 2, scale = 1),
       n = scales::label_comma(accuracy = 1)(n),
       k = as.character(k),
@@ -159,70 +162,80 @@ make_forest_plot <- function(combined_effects, plot_params, debug = TRUE) {
       vjust = 0.5, hjust = 0.5,
       stat = "identity",
       size = 2.5,
-      label.size = labsize
+      label.size = labsize,
+      label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
     ) +
     geom_richtext(aes(label = k),
       y = plot_params$pos$k,
       vjust = 0.5, hjust = 0.5,
       stat = "identity",
       size = 2.5,
-      label.size = labsize
+      label.size = labsize,
+      label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
     ) +
     geom_richtext(aes(label = i2),
       y = plot_params$pos$i2,
       vjust = 0.5, hjust = 0.5,
       stat = "identity",
       size = 2.5,
-      label.size = labsize
+      label.size = labsize,
+      label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
     ) +
     geom_richtext(aes(label = rci),
       y = plot_params$pos$rci,
       vjust = 0.5, hjust = 0.5,
       stat = "identity",
       size = 2.5,
-      label.size = labsize
+      label.size = labsize,
+      label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
     ) +
     geom_richtext(aes(label = author_year),
       y = plot_params$pos$author_year,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
-      label.size = labsize
+      label.size = labsize,
+      label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
     ) +
     geom_richtext(aes(label = plain_language_exposure),
       y = plot_params$pos$expo,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
-      label.size = labsize
+      label.size = labsize,
+      label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
     ) +
     geom_richtext(aes(label = plain_language_outcome),
       y = plot_params$pos$outcome,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
-      label.size = labsize
+      label.size = labsize,
+      label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
     ) +
     geom_richtext(aes(label = age_group),
       y = plot_params$pos$mod,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
-      label.size = labsize
+      label.size = labsize,
+      label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
     ) +
     geom_richtext(aes(label = study_design),
       y = plot_params$pos$design,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
-      label.size = labsize
+      label.size = labsize,
+      label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
     ) +
     geom_richtext(aes(label = sample_type),
       y = plot_params$pos$pop,
       vjust = 0.5, hjust = 0,
       stat = "identity",
       size = 2.5,
-      label.size = labsize
+      label.size = labsize,
+      label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
     )
 
   if (!plot_params$certain) {
@@ -237,7 +250,8 @@ make_forest_plot <- function(combined_effects, plot_params, debug = TRUE) {
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
-        label.size = labsize
+        label.size = labsize,
+        label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
       ) +
       geom_richtext(
         aes(
@@ -248,7 +262,8 @@ make_forest_plot <- function(combined_effects, plot_params, debug = TRUE) {
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
-        label.size = labsize
+        label.size = labsize,
+        label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
       ) +
       geom_richtext(
         aes(
@@ -259,7 +274,8 @@ make_forest_plot <- function(combined_effects, plot_params, debug = TRUE) {
         vjust = 0.5, hjust = 0.5,
         stat = "identity",
         size = 2.5,
-        label.size = labsize
+        label.size = labsize,
+        label.padding = unit(c(0.1, 0.1, 0.1, 0.1), "lines")
       )
   }
 
@@ -304,6 +320,7 @@ make_forest_plot <- function(combined_effects, plot_params, debug = TRUE) {
       axis.text.y = element_blank(),
       plot.caption = element_markdown(hjust = 0.95, size = 10),
       plot.caption.position = "plot",
+      plot.title = element_text(size = 14),
       panel.grid.major.y = element_blank(),
       panel.grid.minor.y = element_blank(),
       strip.placement = "outside",

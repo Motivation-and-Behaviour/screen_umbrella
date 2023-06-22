@@ -198,6 +198,8 @@ Many papers also did not complete dual independent screening of abstracts and fu
 A similar trend was observed for dual independent quality assessment `r manuscript_info$qual$dualqualstr`.
 Overall, only `r manuscript_info$qual$all_low` meta-analyses were graded as low risk of bias on all criteria.
 
+## Education Outcomes
+
 There were `r manuscript_info$edu$n_effect` unique effects associated with education outcomes, including general learning outcomes, literacy, numeracy, and science.
 We removed `r manuscript_info$edu$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$edu$n_samplesize` effects with samples < 1,000, and `r manuscript_info$edu$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
 Effects not meeting one or more of these standards are presented in Supplementary File 4.
@@ -216,6 +218,8 @@ All credible effects related to education outcomes were small-to-moderate.
 Screen-based interventions designed to influence an outcome (e.g., a computer based program designed to enhance learning [@xieCanTouchscreenDevices2018]; `r report_effect(ce, "50271_001", style = "none")`) tended to have larger effect sizes than exposures that were not specifically intended to influence any of the measured outcomes (e.g., the association between television viewing and learning [@adelantado-renauAssociationScreenMedia2019]; `r report_effect(ce, "47569_002", style = "none")`).
 The largest effect size observed was for augmented reality-based education interventions on general learning `r report_effect(ce, "42168_002")`.
 Most effects showed high levels of heterogeneity (`r manuscript_info$edu$n_i2` of `r manuscript_info$edu$n_certain` with $I^2 > 50\%$).
+
+## Health-related Outcomes
 
 We identified `r manuscript_info$health$n_effect` unique outcome-exposure combinations associated with health or health-related behaviour outcomes.
 We removed `r manuscript_info$health$n_noindiv` effects that did not provide individual study-level data, `r manuscript_info$health$n_samplesize` effects with samples < 1,000, and `r manuscript_info$health$n_faileggers` effects with a significant Egger's test or insufficient studies to conduct the test.
