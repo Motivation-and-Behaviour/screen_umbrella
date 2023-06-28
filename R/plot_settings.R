@@ -120,3 +120,34 @@ nonedu_uncertain <-
     ),
     trimmer = list(plo = 12, ple = 26, auth = 12, study = 8, sample = 7)
   )
+
+researchbriefing <- list(
+  filename =
+    "figures/Research Briefing Figure 1 - Forest plot for Learning.pdf",
+  title = "Associations Between Exposures and Learning Outcomes",
+  categories = "Education",
+  certain = TRUE,
+  dims = c(185, 110),
+  moderators = FALSE,
+  caption = FALSE,
+  pos =
+    list(
+      lims = c(-5, 0.5),
+      breaks = c(-0.2, 0, 0.2, 0.4),
+      esig = NULL,
+      eggers = NULL,
+      indiv_data = NULL,
+      n = -0.5,
+      k = -0.75,
+      i2 = -0.95,
+      rci = -1.35,
+      author_year = -2.2,
+      design = -2.8,
+      pop = -3.18,
+      mod = -3.58,
+      expo = -4.71,
+      outcome = -5.36,
+      tag = NA
+    ),
+  trimmer = list(plo = 12, ple = 26, auth = 12, study = 8, sample = 7)
+)

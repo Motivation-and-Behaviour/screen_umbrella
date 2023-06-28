@@ -162,6 +162,10 @@ list(
     nonedu_uncertain,
   ),
   tar_target(
+    researchbriefing_params,
+    researchbriefing,
+  ),
+  tar_target(
     plot_edu_certain,
     make_forest_plot(combined_effects, edu_certain_params)
   ),
@@ -176,6 +180,14 @@ list(
   tar_target(
     plot_nonedu_uncertain,
     make_forest_plot(combined_effects, nonedu_uncertain_params)
+  ),
+  tar_target(
+    plot_researchbriefing,
+    make_forest_plot(
+      combined_effects %>%
+        filter(gsub(":.*", "", plain_language_outcome) == "Learning"),
+      researchbriefing_params
+    )
   ),
   tar_target(
     plot_edu_certain_saved,
@@ -195,6 +207,11 @@ list(
   tar_target(
     plot_nonedu_uncertain_saved,
     save_plot(plot_nonedu_uncertain, nonedu_uncertain_params),
+    format = "file",
+  ),
+  tar_target(
+    plot_researchbriefing_saved,
+    save_plot(plot_researchbriefing, researchbriefing_params),
     format = "file",
   ),
   # Create supplementary materials plots ------------------------------------
