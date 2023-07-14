@@ -138,7 +138,7 @@ list(
   # Make plots --------------------------------------------------------------
   tar_target(
     prisma,
-    make_prisma(prisma_path, effects_clean, reviews_clean)
+    make_prisma(prisma_path, effects_clean, reviews_clean, combined_effects)
   ),
   tar_target(
     prisma_saved,
