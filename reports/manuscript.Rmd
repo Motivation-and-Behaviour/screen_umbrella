@@ -81,7 +81,8 @@ affiliation:
 
 abstract: |
   The influence of electronic screens on children and adolescents’ health and education is not well understood.
-  In this prospectively registered umbrella review (PROSPERO; CRD42017076051), we harmonised effects from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` meta-analyses (`r format(targets::tar_read(manuscript_info)$effects_sum$sum_k, big.mark=",")` primary studies; `r format(targets::tar_read(manuscript_info)$effects_sum$sum_n, big.mark=",")` participants) on screen time and any outcome for youths.
+  In this prospectively registered umbrella review (PROSPERO; CRD42017076051), we harmonised effects from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` meta-analyses (`r targets::tar_read(manuscript_info)$effects_sum$sum_k` primary studies; `r targets::tar_read(manuscript_info)$effects_sum$sum_n` participants) on screen time and any outcome for youths.
+  Of these, `r targets::tar_read(manuscript_info)$effects_certain` effects from `r targets::tar_read(manuscript_info)$reviews_certain` met our criteria for statistical certainty.
   Some types of screen use, such as social media, were consistently correlated with risks (e.g., depression, `r targets::tar_read(manuscript_info)$abstract$social_media`) while others, such as educational screen use, showed associations with benefits (e.g., motivation for learning, `r targets::tar_read(manuscript_info)$abstract$edu`).
   Some types of screen use have complex associations with outcomes.
   For example, television viewing showed harmful correlations with learning `r targets::tar_read(manuscript_info)$abstract$tv_edu`.
@@ -186,7 +187,7 @@ The most frequently reported outcomes were `r manuscript_info$freq_outcomes`.
 Of the `r manuscript_info$unique_combos` unique exposure/outcome combinations, `r manuscript_info$freq_combos$n1` occurred in only one review, with `r manuscript_info$freq_combos$n2` appearing twice, and `r manuscript_info$freq_combos$ngt2` appearing three or more times.
 Full characteristics of the included studies are provided in Supplementary File 2.
 After removing reviews with duplicate exposure/outcome combinations, our process yielded `r manuscript_info$unique_effects` unique effect/outcome combinations (retaining multiple effects for different age groups or study designs) contributed from `r manuscript_info$prisma$unique_reviews` reviews.
-These effects represent the findings of `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies, involving `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
+These effects represent the findings of `r manuscript_info$effects_sum$sum_k` primary studies, involving `r manuscript_info$effects_sum$sum_n` participants.
 The characteristics of the included effects are available in Supplementary File 3.
 
 **TABLE 1**
@@ -307,7 +308,7 @@ It may be that the field of screen use research cannot be sufficiently advanced 
 
 There were a number of strengths and limitations to our work.
 Our primary goal for this umbrella review was to provide a high-level synthesis of screen use research, by examining a range of exposures and the associations with a broad scope of outcomes.
-Our results represent the findings from `r format(manuscript_info$effects_sum$sum_k, big.mark=",")` primary studies comprised of `r format(manuscript_info$effects_sum$sum_n, big.mark=",")` participants.
+Our results represent the findings from `r manuscript_info$effects_sum$sum_k` primary studies comprised of `r manuscript_info$effects_sum$sum_n` participants.
 To ensure findings could be compared on a common metric, we extracted and reanalysed individual study data where possible.
 
 Our high-level approach limits the feasibility of examining fine-grained details of the individual studies.
