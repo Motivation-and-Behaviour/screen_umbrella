@@ -10,13 +10,16 @@ report_effect <- function(
   ci_u <- format(round(row$ciub95, 2), nsmall = 2)
   k <- as.character(row$k)
   n <- scales::label_comma(accuracy = 1)(row$n)
+  p <- if_else(row$pval < 0.001,
+    "<0.001", format(round(row$pval, 3), nsmall = 3)
+  )
   ci_text <- if (first) "95% confidence interval [CI]" else "95% CI"
 
   if (style == "brackets") {
     outstring <-
       glue::glue(
         "(*r* = {r}, {ci_text} {ci_l} to {ci_u},",
-        " *k* = {k}, *N* = {n})"
+        " *p* = {p}, *k* = {k}, *N* = {n})"
       )
   }
 
@@ -24,7 +27,7 @@ report_effect <- function(
     outstring <-
       glue::glue(
         "*r* = {r} ({ci_text} {ci_l} to {ci_u},",
-        " *k* = {k}, *N* = {n})"
+        " *p* = {p}, *k* = {k}, *N* = {n})"
       )
   }
 
@@ -32,7 +35,7 @@ report_effect <- function(
     outstring <-
       glue::glue(
         "*r* = {r}, {ci_text} {ci_l} to {ci_u},",
-        " *k* = {k}, *N* = {n}"
+        " *p* = {p}, *k* = {k}, *N* = {n}"
       )
   }
 
