@@ -37,6 +37,14 @@ pdfs = {
         "Supplementary File 10 - Effect Size Codebook",
         "Generated codebook for the dataset.",
     ),
+    "supplementary_files/Supplementary File 11 - PRISMA 2020 checklist.pdf": (
+        "Supplementary File 11 - PRISMA Checklist",
+        "Completed PRISMA Checklist.",
+    ),
+    "supplementary_files/Supplementary File 12 - PRISMA 2020 abstract checklist.pdf": (
+        "Supplementary File 12 - PRISMA Abstract Checklist",
+        "Completed PRISMA Abstract Checklist.",
+    ),
 }
 
 tmp_output = PdfWriter()  # Temporarily store pages here
