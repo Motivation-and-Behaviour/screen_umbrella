@@ -39,14 +39,6 @@ make_table_rob <- function(tables_df) {
     tab_header(md("**Quality Assessment**"),
       subtitle = "Quality assessment for meta-analyses providing unique effects" # nolint
     ) %>%
-    data_color(
-      columns =
-        eligibility_criteria_predefined_and_specified:heterogeneity_assessed,
-      fn = scales::col_factor(
-        palette = rob_cols,
-        levels = c("L", "U", "H")
-      )
-    ) %>%
     tab_spanner(
       label = "Quality Assessment",
       columns =

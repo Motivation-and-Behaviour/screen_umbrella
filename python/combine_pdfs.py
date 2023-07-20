@@ -1,6 +1,6 @@
 import os
 
-from PyPDF2 import PdfReader, PdfWriter
+from pypdf import PdfReader, PdfWriter
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.pdfbase.pdfmetrics import getAscentDescent
@@ -36,6 +36,14 @@ pdfs = {
     "supplementary_files/Supplementary File 10 - Effect Size Codebook.pdf": (
         "Supplementary File 10 - Effect Size Codebook",
         "Generated codebook for the dataset.",
+    ),
+    "supplementary_files/Supplementary File 11 - PRISMA 2020 checklist.pdf": (
+        "Supplementary File 11 - PRISMA Checklist",
+        "Completed PRISMA Checklist.",
+    ),
+    "supplementary_files/Supplementary File 12 - PRISMA 2020 abstract checklist.pdf": (
+        "Supplementary File 12 - PRISMA Abstract Checklist",
+        "Completed PRISMA Abstract Checklist.",
     ),
 }
 

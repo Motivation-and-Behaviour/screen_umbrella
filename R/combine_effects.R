@@ -58,6 +58,7 @@ combine_effects <- function(effects_clean, studies_results) {
         reanalysis_conf.high_999,
         NA_real_
       ),
+      pval = reanalysis_p.value, # Only report p for reanalysis
       # Statistical certainty indicator
       certainty = case_when(
         # Use reported means unclear

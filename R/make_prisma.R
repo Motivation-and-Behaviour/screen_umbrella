@@ -9,7 +9,8 @@
 #' @return
 #' @author Taren Sanders
 #' @export
-make_prisma <- function(prisma_path, effects_clean, reviews_clean) {
+make_prisma <- function(
+    prisma_path, effects_clean, reviews_clean, combined_effects) {
   prisma_data <- readr::read_file(prisma_path)
 
   prisma_df_raw <-
@@ -104,6 +105,10 @@ make_prisma <- function(prisma_path, effects_clean, reviews_clean) {
   larger_avail <- reviews_clean %>%
     filter(!review_id %in% c(contributing_reviews, missing_key)) %>%
     pull(review_id)
+  credible_reviews <-
+    combined_effects %>%
+    filter(use_effect & certainty == "meets criteria") %>%
+    distinct(review_id)
 
   prisma_df_cleaned <-
     prisma_df %>%
@@ -127,7 +132,10 @@ make_prisma <- function(prisma_path, effects_clean, reviews_clean) {
       value = length(larger_avail)
     ) %>%
     add_row(
-      text = "studies contributed unique effects",
+      text = glue::glue(
+        "studies contributed unique effects\n",
+        "({nrow(credible_reviews)} provided statistically credible effects)"
+      ),
       type = "main",
       step = prisma_df$step[nrow(prisma_df)] + 1,
       value = length(contributing_reviews)

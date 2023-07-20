@@ -94,10 +94,19 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
     slice_max(original_n, with_ties = TRUE) %>%
     ungroup() %>%
     summarise(
-      sum_k = sum(original_k, na.rm = TRUE),
-      sum_n = sum(original_n)
+      sum_k = format(sum(original_k, na.rm = TRUE), big.mark = ","),
+      sum_n = format(sum(original_n), big.mark = ",")
     ) %>%
     as.list()
+
+  ## Number meeting statistical certainty
+  manuscript_info$effects_certain <- combined_effects %>%
+    filter(use_effect & certainty == "meets criteria") %>%
+    nrow()
+  manuscript_info$reviews_certain <- combined_effects %>%
+    filter(use_effect & certainty == "meets criteria") %>%
+    distinct(review_id) %>%
+    nrow()
 
   # PRISMA --------------------------------------------------
   manuscript_info$prisma$search <- prisma$data$value[1]
@@ -382,19 +391,19 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
 
   # Abstract Results ---------------------------------------------
   manuscript_info$abstract$social_media <-
-    report_effect(combined_effects, "53160_001", "short-none")
+    report_effect(combined_effects, "53160_001", "none", first = TRUE)
 
   manuscript_info$abstract$edu <-
-    report_effect(combined_effects, "61452_004", "short-none")
+    report_effect(combined_effects, "61452_004", "none")
 
   manuscript_info$abstract$tv_body <-
-    report_effect(combined_effects, "8556_119", "short-brackets")
+    report_effect(combined_effects, "8556_119", "brackets")
 
   manuscript_info$abstract$tv_edu <-
-    report_effect(combined_effects, "47569_002", "short-brackets")
+    report_effect(combined_effects, "47569_002", "brackets")
 
   manuscript_info$abstract$coview <-
-    report_effect(combined_effects, "47783_022", "short-brackets")
+    report_effect(combined_effects, "47783_022", "brackets")
 
   return(manuscript_info)
 }
