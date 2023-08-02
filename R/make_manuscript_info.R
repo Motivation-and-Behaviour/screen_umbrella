@@ -163,6 +163,9 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
     filter(count_high_unclear == 7) %>%
     nrow()
 
+  manuscript_info$qual$not_low <-
+    manuscript_info$prisma$unique_reviews - manuscript_info$qual$all_low
+
   reviews_summary <-
     reviews_count %>%
     select(
@@ -391,10 +394,13 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
 
   # Abstract Results ---------------------------------------------
   manuscript_info$abstract$social_media <-
-    report_effect(combined_effects, "53160_001", "none", first = TRUE)
+    report_effect(combined_effects, "53160_001", "brackets")
 
   manuscript_info$abstract$edu <-
     report_effect(combined_effects, "61452_004", "none")
+
+  manuscript_info$abstract$lit_gen <-
+    report_effect(combined_effects, "47783_001", "brackets", first = TRUE)
 
   manuscript_info$abstract$tv_body <-
     report_effect(combined_effects, "8556_119", "brackets")
@@ -404,6 +410,17 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
 
   manuscript_info$abstract$coview <-
     report_effect(combined_effects, "47783_022", "brackets")
+
+  range_df <- combined_effects %>%
+    filter(certainty == "meets criteria" & use_effect) %>%
+    summarise(min = round(min(r), 2), max = round(max(r), 2))
+
+  manuscript_info$abstract$range <- glue::glue(
+    "(range: *r* = {range_df['min']}-{range_df['max']})"
+  )
+
+  manuscript_info$abstract$rob <-
+    glue::glue("{manuscript_info$qual$not_low}/{manuscript_info$prisma$unique_reviews}") # nolint
 
   return(manuscript_info)
 }
