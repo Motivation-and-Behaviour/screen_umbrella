@@ -125,7 +125,7 @@ source(here::here("R", "utils_manuscript.R"))
 
 ```{r, load-targets}
 targets::tar_load(
-  c("manuscript_info", "combined_bib", "combined_effects"),
+  c("manuscript_info", "combined_bib", "combined_effects", "table_rob_latex"),
   store = here::here("_targets")
 )
 ce <- combined_effects
@@ -481,6 +481,12 @@ The authors declare no conflicts of interest.
 # Tables
 
 *Table 1: Review characteristics and quality assessment for meta-analyses providing unique effects*
+
+```{r table1, echo = FALSE}
+table_rob_latex
+```
+
+\newpage
 
 # Figure legends
 
