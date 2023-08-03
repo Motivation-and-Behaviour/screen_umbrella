@@ -81,13 +81,13 @@ affiliation:
 
 abstract: |
   The influence of electronic screens on children and adolescents’ health and education is not well understood.
-  In this prospectively registered umbrella review (PROSPERO; CRD42017076051), we harmonised effects from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` meta-analyses (`r targets::tar_read(manuscript_info)$effects_sum$sum_k` primary studies; `r targets::tar_read(manuscript_info)$effects_sum$sum_n` participants) on screen time and any outcome for youths.
-  Of these, `r targets::tar_read(manuscript_info)$effects_certain` effects from `r targets::tar_read(manuscript_info)$reviews_certain` met our criteria for statistical certainty.
-  Some types of screen use, such as social media, were consistently correlated with risks (e.g., depression, `r targets::tar_read(manuscript_info)$abstract$social_media`) while others, such as educational screen use, showed associations with benefits (e.g., motivation for learning, `r targets::tar_read(manuscript_info)$abstract$edu`).
-  Some types of screen use have complex associations with outcomes.
-  For example, television viewing showed harmful correlations with learning `r targets::tar_read(manuscript_info)$abstract$tv_edu`.
-  However, when parents watched with their children, general screen use was associated with greater literacy `r targets::tar_read(manuscript_info)$abstract$coview`.
-  These findings suggest that caregivers need to carefully weigh the pros and cons of each specific activity for potential harms and benefits.
+  In this prospectively registered umbrella review (PROSPERO; CRD42017076051), we harmonised effects from `r targets::tar_read(manuscript_info)$prisma$unique_reviews` meta-analyses (`r targets::tar_read(manuscript_info)$effects_sum$sum_k` primary studies; `r targets::tar_read(manuscript_info)$effects_sum$sum_n` participants) on screen time and outcomes.
+  `r targets::tar_read(manuscript_info)$effects_certain` effects from `r targets::tar_read(manuscript_info)$reviews_certain` meta-analyses met our criteria for statistical certainty.
+  Meta-analyses of associations between screen use and outcomes showed small-to-moderate effects `r targets::tar_read(manuscript_info)$abstract$range`.
+  In education, results were mixed; for example, screen use was negatively associated with literacy `r targets::tar_read(manuscript_info)$abstract$lit_gen`, but this effect was positive when parents watched with their children `r targets::tar_read(manuscript_info)$abstract$coview`.
+  In health, we found evidence for several small negative associations; for example, social media was associated with depression `r targets::tar_read(manuscript_info)$abstract$social_media`.
+  Limitations include a limited number of studies for each outcome, medium-to-high risk of bias in `r targets::tar_read(manuscript_info)$abstract$rob` included meta-analyses and high heterogeneity (`r manuscript_info$edu$n_i2`/`r manuscript_info$edu$n_certain` in education and `r manuscript_info$health$n_i2`/`r manuscript_info$health$n_certain` in health with $I^2 > 50\%$).
+  We recommend that caregivers carefully weigh the potential harms and benefits of specific types of screen use.
   
 wordcount         : "`r wordcountaddin::word_count(here::here('reports', 'manuscript.Rmd'))`"
 
@@ -125,7 +125,7 @@ source(here::here("R", "utils_manuscript.R"))
 
 ```{r, load-targets}
 targets::tar_load(
-  c("manuscript_info", "combined_bib", "combined_effects"),
+  c("manuscript_info", "combined_bib", "combined_effects", "table_rob_latex"),
   store = here::here("_targets")
 )
 ce <- combined_effects
@@ -168,7 +168,7 @@ By analogy, reading is a sedentary behaviour, and only by comparing the health r
 
 In order to synthesise the evidence and support further evidence-based guideline development and refinement, we reviewed published meta-analyses examining the effects of screen use on children and youth.
 This review synthesises evidence on any outcome of electronic media exposure.
-We deliberately did not pre-specify outcomes, in order to get a comprehensive list of areas where there is meta-analytical evidence.
+We deliberately did not pre-specify outcomes, in order to get a list of areas where there is meta-analytical evidence.
 Adopting this broad approach allowed us to provide a holistic perspective on the influence of screens on children's lives.
 By synthesising across life domains (e.g., school and home), this review provides evidence to inform guidelines and advice for parents, teachers, pediatricians and other professionals in order to maximise human functioning.
 
@@ -319,7 +319,7 @@ In addition, when faced with duplicate outcome/exposure combinations we chose to
 Inspection of the excluded effect sizes suggests that this decision was not that impactful: our results would have been almost exactly the same has we used the number of included studies (*k*) or the most recent review by publication year.
 However, we provide the complete results in Supplementary Files 4 & 5, along with the dataset (Supplementary File 6) for others to consider alternative criteria.
 
-Our high-level approach also means that we could not engage with the specific mechanisms behind each association, and as such, we cannot make strong claims on the directions of causality.
+Our high-level approach also means that we could not engage with the specific mechanisms behind each association, and as such, we cannot make claims on the directions of causality.
 These likely depend on the specific exposure and outcome.
 It is tempting to draw inferences that the associations are due to screen use causing these outcomes, but we cannot rule out reverse causality, a third variable, or some combination of influences.
 Many of the individual reviews go into more detail about the strength of the evidence for causal associations, but those judgements were difficult to synthesise across more than 200 reviews.
@@ -334,9 +334,9 @@ In addition, reviews provide only historical evidence which may not keep up with
 While our synthesis of the existing evidence provides information about how screens might have influenced children in the past, it is difficult to know if these findings will translate to new forms of technology in the future.
 
 Screen use is a topic of significant interest, as shown by the wide variety of academic domains involved, parents' concerns, and the growing pervasiveness into society.
-Our findings showed that the influence of screen use can be both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition).
-The interplay of these findings show that parents, teachers, and other caregivers need to carefully weigh the pros and cons of each specific activity for potential harms and benefits.
-However, our findings also suggest that in order to aid caregivers to make this judgement, researchers need to conduct more careful and nuanced measurement and analysis of screen use, with less emphasis on measures that aggregate screen use and instead focus on the content, context, and environment in which the exposure occurs.
+Our findings showed that screen use is associated with both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition) outcomes.
+Based on our findings, we recommend that parents, teachers, and other caregivers need to carefully weigh the pros and cons of each specific activity for potential harms and benefits.
+However, our findings also lead us to suggest that in order to aid caregivers to make this judgement, researchers need to conduct more careful and nuanced measurement and analysis of screen use, with less emphasis on measures that aggregate screen use and instead focus on the content, context, and environment in which the exposure occurs.
 
 # Methods
 
@@ -481,6 +481,12 @@ The authors declare no conflicts of interest.
 # Tables
 
 *Table 1: Review characteristics and quality assessment for meta-analyses providing unique effects*
+
+```{r table1, echo = FALSE}
+table_rob_latex
+```
+
+\newpage
 
 # Figure legends
 

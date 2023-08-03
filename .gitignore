@@ -52,3 +52,6 @@ scratch.R
 reports/*.log
 
 .venv/
+
+# Word temporary
+~$*.doc*

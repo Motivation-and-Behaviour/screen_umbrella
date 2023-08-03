@@ -98,7 +98,11 @@ list(
   ),
   tar_target(
     table_rob_gt,
-    make_table_rob(tables_df)
+    make_table_rob_gt(tables_df)
+  ),
+  tar_target(
+    table_rob_latex,
+    make_table_rob_latex(tables_df)
   ),
   tar_target(
     table_desc_saved,
