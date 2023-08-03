@@ -86,7 +86,7 @@ abstract: |
   Meta-analyses of associations between screen use and outcomes showed small-to-moderate effects `r targets::tar_read(manuscript_info)$abstract$range`.
   In education, results were mixed; for example, screen use was negatively associated with literacy `r targets::tar_read(manuscript_info)$abstract$lit_gen`, but this effect was positive when parents watched with their children `r targets::tar_read(manuscript_info)$abstract$coview`.
   In health, we found evidence for several small negative associations; for example, social media was associated with depression `r targets::tar_read(manuscript_info)$abstract$social_media`.
-  Limitations include a limited number of studies for each outcome, medium-to-high risk of bias in `r targets::tar_read(manuscript_info)$abstract$rob` included meta-analyses and high heterogeneity (`r manuscript_info$edu$n_i2`/`r manuscript_info$edu$n_certain` in education and `r manuscript_info$health$n_i2`/`r manuscript_info$health$n_certain` in health with $I^2 > 50\%$)
+  Limitations include a limited number of studies for each outcome, medium-to-high risk of bias in `r targets::tar_read(manuscript_info)$abstract$rob` included meta-analyses and high heterogeneity (`r manuscript_info$edu$n_i2`/`r manuscript_info$edu$n_certain` in education and `r manuscript_info$health$n_i2`/`r manuscript_info$health$n_certain` in health with $I^2 > 50\%$).
   We recommend that caregivers carefully weigh the potential harms and benefits of specific types of screen use.
   
 wordcount         : "`r wordcountaddin::word_count(here::here('reports', 'manuscript.Rmd'))`"
