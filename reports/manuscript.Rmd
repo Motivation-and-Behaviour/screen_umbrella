@@ -92,6 +92,9 @@ abstract: |
 wordcount         : "`r wordcountaddin::word_count(here::here('reports', 'manuscript.Rmd'))`"
 
 bibliography      : ["combined.bib"]
+params:
+    nocite_list: !r list()
+nocite            : "`r params$nocite_list`"
 
 floatsintext      : no
 figurelist        : no

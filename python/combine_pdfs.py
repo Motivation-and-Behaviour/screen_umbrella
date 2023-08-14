@@ -29,10 +29,6 @@ pdfs = {
         "Supplementary File 7 - Search Strategy",
         "The search strategies used in each database",
     ),
-    "supplementary_files/Supplementary File 9 - Included Studies.pdf": (
-        "Supplementary File 9 - Included Studies",
-        "References for the included studies.",
-    ),
     "supplementary_files/Supplementary File 10 - Effect Size Codebook.pdf": (
         "Supplementary File 10 - Effect Size Codebook",
         "Generated codebook for the dataset.",

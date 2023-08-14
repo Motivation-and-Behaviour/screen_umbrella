@@ -59,8 +59,7 @@ upload_all_files <- function(files = c(
         "supplementary_files/Supplementary File 5 - List of Exposures.csv",
         "supplementary_files/Supplementary File 6 - Education Outcomes.pdf",
         "supplementary_files/Supplementary File 7 - Health-related Outcomes.pdf",
-        "supplementary_files/Supplementary File 8 - Included Studies.pdf",
-        "supplementary_files/Supplementary File 9 - Effect Characteristics.pdf"
+        "supplementary_files/Supplementary File 8 - Included Studies.pdf"
       ), # nolint end
       type = "supp"
     ),
