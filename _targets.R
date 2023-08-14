@@ -261,8 +261,8 @@ list(
   ),
   tar_target(other_supps_files, c(
     "supplementary_files/Supplementary File 7 - Search Strategy.pdf",
-    "supplementary_files/Supplementary File 11 - PRISMA 2020 checklist.pdf",
-    "supplementary_files/Supplementary File 12 - PRISMA 2020 abstract checklist.pdf" # nolint
+    "supplementary_files/Supplementary File 10 - PRISMA 2020 checklist.pdf",
+    "supplementary_files/Supplementary File 11 - PRISMA 2020 abstract checklist.pdf" # nolint
   ), format = "file"),
   tar_target(join_supp_py_script, "python/combine_pdfs.py", format = "file"),
   tar_target(joined_supps,

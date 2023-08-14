@@ -29,16 +29,16 @@ pdfs = {
         "Supplementary File 7 - Search Strategy",
         "The search strategies used in each database",
     ),
-    "supplementary_files/Supplementary File 10 - Effect Size Codebook.pdf": (
-        "Supplementary File 10 - Effect Size Codebook",
+    "supplementary_files/Supplementary File 9 - Effect Size Codebook.pdf": (
+        "Supplementary File 9 - Effect Size Codebook",
         "Generated codebook for the dataset.",
     ),
-    "supplementary_files/Supplementary File 11 - PRISMA 2020 checklist.pdf": (
-        "Supplementary File 11 - PRISMA Checklist",
+    "supplementary_files/Supplementary File 10 - PRISMA 2020 checklist.pdf": (
+        "Supplementary File 10 - PRISMA Checklist",
         "Completed PRISMA Checklist.",
     ),
-    "supplementary_files/Supplementary File 12 - PRISMA 2020 abstract checklist.pdf": (
-        "Supplementary File 12 - PRISMA Abstract Checklist",
+    "supplementary_files/Supplementary File 11 - PRISMA 2020 abstract checklist.pdf": (
+        "Supplementary File 11 - PRISMA Abstract Checklist",
         "Completed PRISMA Abstract Checklist.",
     ),
 }

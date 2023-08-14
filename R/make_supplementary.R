@@ -109,7 +109,7 @@ make_supp_effects <- function(combined_effects) {
   readr::write_csv(out_effects, out_path_csv)
 
   codebook_filepath <-
-    "supplementary_files/Supplementary File 10 - Effect Size Codebook.pdf"
+    "supplementary_files/Supplementary File 9 - Effect Size Codebook.pdf"
 
   dataReporter::makeCodebook(
     out_effects,
