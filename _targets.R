@@ -261,8 +261,8 @@ list(
   ),
   tar_target(other_supps_files, c(
     "supplementary_files/Supplementary File 7 - Search Strategy.pdf",
-    "supplementary_files/Supplementary File 11 - PRISMA 2020 checklist.pdf",
-    "supplementary_files/Supplementary File 12 - PRISMA 2020 abstract checklist.pdf" # nolint
+    "supplementary_files/Supplementary File 10 - PRISMA 2020 checklist.pdf",
+    "supplementary_files/Supplementary File 11 - PRISMA 2020 abstract checklist.pdf" # nolint
   ), format = "file"),
   tar_target(join_supp_py_script, "python/combine_pdfs.py", format = "file"),
   tar_target(joined_supps,
@@ -274,26 +274,17 @@ list(
   ),
   tar_render(
     manuscript,
-    path = here::here("reports", "manuscript.Rmd")
+    path = here::here("reports", "manuscript.Rmd"),
+    params = list(
+      nocite_list = paste0("@", paste(reviews_raw$bibtex_key, collapse = ", @"))
+    )
   ),
   tar_render(
     manuscript_docx,
     path = here::here("reports", "manuscript.Rmd"),
-    output_format = papaja::apa6_docx()
-  ),
-  tar_render(
-    references,
-    path = here::here("reports", "references.Rmd"),
-    output_file = here::here(
-      "supplementary_files",
-      "Supplementary File 9 - Included Studies.pdf"
-    ),
     params = list(
-      nocite_list =
-        paste0(
-          "@",
-          paste(reviews_raw$bibtex_key, collapse = ", @")
-        )
-    )
+      nocite_list = paste0("@", paste(reviews_raw$bibtex_key, collapse = ", @"))
+    ),
+    output_format = papaja::apa6_docx()
   )
 )

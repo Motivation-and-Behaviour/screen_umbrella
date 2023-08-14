@@ -87,11 +87,14 @@ abstract: |
   In education, results were mixed; for example, screen use was negatively associated with literacy `r targets::tar_read(manuscript_info)$abstract$lit_gen`, but this effect was positive when parents watched with their children `r targets::tar_read(manuscript_info)$abstract$coview`.
   In health, we found evidence for several small negative associations; for example, social media was associated with depression `r targets::tar_read(manuscript_info)$abstract$social_media`.
   Limitations include a limited number of studies for each outcome, medium-to-high risk of bias in `r targets::tar_read(manuscript_info)$abstract$rob` included meta-analyses and high heterogeneity (`r manuscript_info$edu$n_i2`/`r manuscript_info$edu$n_certain` in education and `r manuscript_info$health$n_i2`/`r manuscript_info$health$n_certain` in health with $I^2 > 50\%$).
-  We recommend that caregivers carefully weigh the potential harms and benefits of specific types of screen use.
+  We recommend that caregivers and policymakers carefully weigh the evidence for potential harms and benefits of specific types of screen use.
   
 wordcount         : "`r wordcountaddin::word_count(here::here('reports', 'manuscript.Rmd'))`"
 
 bibliography      : ["combined.bib"]
+params:
+    nocite_list: !r list()
+nocite            : "`r params$nocite_list`"
 
 floatsintext      : no
 figurelist        : no
@@ -144,11 +147,11 @@ Excessive screen use is the number one concern parents in Western countries have
 Yet, the evidence to support parents' concerns is inadequate.
 A Lancet editorial [@thelancetSocialMediaScreen2019] suggested that, "Our understanding of the benefits, harms, and risks of our rapidly changing digital landscape is sorely lacking."
 
-While some forms of screen use (e.g., television viewing) may be detrimental to health and wellbeing [@haleScreenTimeSleep2015;@sweetserActivePassiveScreen2012], evidence for other forms of screen exposure (e.g., video games or online communication, such as Zoom&trade;) remains less certain and, in some cases, may even be beneficial [@liEarlyChildhoodComputer2004;@warburton2017children].
+While some forms of screen use (e.g., excessive television viewing) may be detrimental to health and wellbeing [@haleScreenTimeSleep2015;@sweetserActivePassiveScreen2012], evidence for other forms of screen exposure (e.g., video games or online communication, such as Zoom&trade;) remains less certain and, in some cases, may even be beneficial [@liEarlyChildhoodComputer2004;@warburton2017children].
 Thus, according to a Nature Human Behaviour editorial, research to determine the effect of screen exposure on youth is "a defining question of our age" [@naturehumanbehaviourScreenTimeHow2019].
 With concerns over the impact of screen use including education, health, social development, and psychological well-being, an overview that identifies potential benefits and risks is needed.
 
-Citing the negative effects of screens on health (e.g., increased risk of obesity) and health-related behaviours (e.g., sleep), guidelines from the World Health Organisation [@whoGuidelinesPhysicalActivity2019] and numerous government agencies [@australiangovernmentPhysicalActivityExercise2021;@Canadian24HourMovement2016] and statements by expert groups [@AAPMediaUseSchoolAged2016] have recommended that young people's time spent using electronic media devices for entertainment purposes should be limited.
+Citing the negative associations between screen use and health (e.g., increased risk of obesity) and health-related behaviours (e.g., sleep), guidelines from the World Health Organisation [@whoGuidelinesPhysicalActivity2019] and numerous government agencies [@australiangovernmentPhysicalActivityExercise2021;@Canadian24HourMovement2016] and statements by expert groups [@AAPMediaUseSchoolAged2016] have recommended that young people's time spent using electronic media devices for entertainment purposes should be limited.
 For example, the Australian Government guidelines regarding sedentary behaviour recommend that young children (under the age of two) should not spend any time watching screens.
 They also recommend that children aged 2-5 years should spend no more than one hour engaged in recreational sedentary screen use per day, while children aged 5-12 and adolescents should spend no more than two hours.
 However, recent evidence suggests that longer exposures may not have adverse effects on children's behaviour or mental health---and might, in fact, benefit their well-being---as long as exposure does not reach extreme levels (e.g., 7 hours per day)[@fergusonEverythingModerationModerate2017].
@@ -169,7 +172,7 @@ By analogy, reading is a sedentary behaviour, and only by comparing the health r
 In order to synthesise the evidence and support further evidence-based guideline development and refinement, we reviewed published meta-analyses examining the effects of screen use on children and youth.
 This review synthesises evidence on any outcome of electronic media exposure.
 We deliberately did not pre-specify outcomes, in order to get a list of areas where there is meta-analytical evidence.
-Adopting this broad approach allowed us to provide a holistic perspective on the influence of screens on children's lives.
+Adopting this broad approach allowed us to provide a holistic perspective on the associations between screen time and different aspects of children's lives.
 By synthesising across life domains (e.g., school and home), this review provides evidence to inform guidelines and advice for parents, teachers, pediatricians and other professionals in order to maximise human functioning.
 
 \newpage
@@ -242,7 +245,7 @@ Most of the effect sizes (`r manuscript_info$health$n_r2`/`r manuscript_info$hea
 
 # Discussion
 
-The primary goal of this review was to provide a holistic perspective on the influence of screens on children’s lives across a broad range of outcomes.
+The primary goal of this review was to provide a holistic perspective on the association between screen use and a broad range of health- and education-related aspects of children’s lives.
 We found that when meta-analyses examined general screen use, and did not specify the content, context or device, there was strong evidence showing potentially harmful associations with general learning, literacy, body composition, and depression.
 However, when meta-analyses included a more nuanced examination of exposures, a more complex picture appeared.
 
@@ -255,7 +258,7 @@ The credible evidence we identified showed that video game playing was associate
 However, when the video game were designed specifically to teach numeracy, playing these games showed learning benefits [@byunDigitalGamebasedLearning2018].
 One might expect that video games designed to be physically active could confer health benefits, but none of the meta-analyses examining this hypothesis met our thresholds for statistical credibility (see Supplementary Files 4 & 5) therefore this hypothesis could not be addressed.
 
-Social media was one type of exposure that showed consistent associations with poor health, with no indication of potential benefit.
+Social media was one type of exposure that showed consistent---albeit small---associations with poor health, with no indication of potential benefit.
 Social media showed strong evidence of harmful associations with risk taking in general, as well as unsafe sex and substance abuse [@vannucciSocialMediaUse2020].
 These results align with meta-analytic evidence from adults indicating that social media use is also associated with increased risk of depression [@yoonSocialNetworkSite2019;@vahediAssociationSelfreportedDepressive2021].
 Recent evidence from social media companies themselves suggest there may also be negative effects of social media on the mental health of young people, especially teenage girls [@seetharamanFacebookKnowsInstagram2021].
@@ -335,7 +338,7 @@ While our synthesis of the existing evidence provides information about how scre
 
 Screen use is a topic of significant interest, as shown by the wide variety of academic domains involved, parents' concerns, and the growing pervasiveness into society.
 Our findings showed that screen use is associated with both positive (e.g., educational video games were associated with improved literacy) and negative (e.g., general screen use was associated with poorer body composition) outcomes.
-Based on our findings, we recommend that parents, teachers, and other caregivers need to carefully weigh the pros and cons of each specific activity for potential harms and benefits.
+Based on our findings, we recommend that parents, teachers, and other caregivers need to carefully weigh the evidence for pros and cons of each specific activity for potential harms and benefits.
 However, our findings also lead us to suggest that in order to aid caregivers to make this judgement, researchers need to conduct more careful and nuanced measurement and analysis of screen use, with less emphasis on measures that aggregate screen use and instead focus on the content, context, and environment in which the exposure occurs.
 
 # Methods
