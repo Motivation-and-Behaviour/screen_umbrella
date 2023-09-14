@@ -12,7 +12,7 @@
 #' @author Taren Sanders
 #' @export
 make_manuscript_info <- function(effects_clean, prisma, tables_df,
-                                 combined_effects, studies_clean) {
+                                 combined_effects, studies_clean, reviews_raw) {
   manuscript_info <- list()
 
   # Results --------------------------------------------------
@@ -421,6 +421,9 @@ make_manuscript_info <- function(effects_clean, prisma, tables_df,
 
   manuscript_info$abstract$rob <-
     glue::glue("{manuscript_info$qual$not_low}/{manuscript_info$prisma$unique_reviews}") # nolint
+
+  manuscript_info$cite_list <-
+    paste0("@", paste(reviews_raw$bibtex_key, collapse = ";@"))
 
   return(manuscript_info)
 }
