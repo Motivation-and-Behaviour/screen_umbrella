@@ -92,9 +92,6 @@ abstract: |
 wordcount         : "`r wordcountaddin::word_count(here::here('reports', 'manuscript.Rmd'))`"
 
 bibliography      : ["combined.bib"]
-params:
-    nocite_list: !r list()
-nocite            : "`r params$nocite_list`"
 
 floatsintext      : no
 figurelist        : no
@@ -181,7 +178,7 @@ By synthesising across life domains (e.g., school and home), this review provide
 
 The searches yielded `r format(manuscript_info$prisma$search, big.mark=",")` results, of which `r format(manuscript_info$prisma$duplicates, big.mark=",")` were duplicates.
 After screening titles and abstracts, we assessed `r format(manuscript_info$prisma$full_text, big.mark=",")` full-texts for inclusion.
-Of those, `r manuscript_info$prisma$included` met the inclusion criteria and we extracted the data from all of these meta-analyses.
+Of those, `r manuscript_info$prisma$included` met the inclusion criteria [`r manuscript_info$cite_list`] and we extracted the data from all of these meta-analyses.
 Figure 1 presents the full results of the selection process.
 
 The most frequently reported exposures were `r manuscript_info$freq_exposures`.

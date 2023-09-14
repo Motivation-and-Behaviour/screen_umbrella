@@ -256,7 +256,8 @@ list(
   tar_target(
     manuscript_info,
     make_manuscript_info(
-      effects_clean, prisma, tables_df, combined_effects, studies_clean
+      effects_clean, prisma, tables_df, combined_effects, studies_clean,
+      reviews_raw
     )
   ),
   tar_target(other_supps_files, c(
@@ -274,17 +275,11 @@ list(
   ),
   tar_render(
     manuscript,
-    path = here::here("reports", "manuscript.Rmd"),
-    params = list(
-      nocite_list = paste0("@", paste(reviews_raw$bibtex_key, collapse = ", @"))
-    )
+    path = here::here("reports", "manuscript.Rmd")
   ),
   tar_render(
     manuscript_docx,
     path = here::here("reports", "manuscript.Rmd"),
-    params = list(
-      nocite_list = paste0("@", paste(reviews_raw$bibtex_key, collapse = ", @"))
-    ),
     output_format = papaja::apa6_docx()
   )
 )
